@@ -1,0 +1,105 @@
+<div class="w-100 p-2" style="max-height: 99vh !important; overflow: auto;">
+  <div class="w-100 p-2 modal-body box-shadow p-0 bg-white" style="border-radius: 7px !important;">
+    <div class="">
+      <span (click)="modalRef.hide()" class="material-icons text-link text-grey w-100 text-right bold">
+        close
+      </span>
+      <div class="d-flex justify-content-center mb-2">
+        <img
+          src="{{ isLogin?'../../../assets/login2.jpg': isRegistration ?'../../../assets/register.jpg': isForgotPassword ? '../../../assets/forgotpassword.jpg':''}}"
+          class="img-fluid" alt="" style="height: 190px; width: 240px;">
+      </div>
+    </div>
+    <div class="vertical-center w-100 justify-content-center mb-2">
+      <span
+        class="material-icons text-grey semi-bold text-md mr-2">{{ isLogin?'login': isRegistration ?'person_add_alt_1': isForgotPassword ? 'cached':''}}</span>
+      <span
+        class="text-md text-grey semi-bold">{{ isLogin?'Login': isRegistration ?'Registraion': isForgotPassword ? 'Forgot Password':''}}</span>
+    </div>
+    <form [formGroup]="loginForm" class="p-3" *ngIf="isLogin">
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field mb-2">
+        <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
+        <input matInput class="text-sm m-0" type="email" placeholder="Enter email" formControlName='email'>
+        <mat-error class="text-xs">Enter valid email*</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field mb-2">
+        <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
+        <input matInput class="text-sm m-0" [(ngModel)]='password' [type]="!isPasswordVisible ? 'password': 'text'"
+          placeholder="Enter password" formControlName='password'>
+        <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+          class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+        </span>
+        <mat-error class="text-xs">Password must be greater than 6 digits*</mat-error>
+      </mat-form-field>
+      <div class="d-flex justify-content-center mb-5">
+        <button type='submit' class="w-75 btn btn-primary p-2 text-smd bold"
+          style="border-radius: 60px; border-color: 0px !important;">LOGIN</button>
+      </div>
+    </form>
+    <div class="w-100 text-center" *ngIf="isLogin">
+      <a class="text-sm text-link semi-bold text-warning text-yellow" (click)="forgotPasswordVisible()">Forgot
+        Password</a>
+      <span class="text-grey text-md mx-2">|</span>
+      <span class="text-grey text-sm mr-1">Not registered yet?</span>
+      <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)="registrationVisible()">Create an
+        Account</a>
+    </div>
+    <form class="p-3" [formGroup]="signupForm" *ngIf="isRegistration">
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field mb-2">
+        <mat-label class="semi-bold text-grey text-smd m-0">Full name</mat-label>
+        <input matInput class="text-sm m-0" placeholder="Enter name" formControlName='name'>
+        <mat-error class="text-xs">Enter valid name*</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field mb-2">
+        <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
+        <input matInput class="text-sm m-0" type="email" placeholder="Enter email" formControlName='email'>
+        <mat-error class="text-xs">Enter valid email*</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field mb-2">
+        <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
+        <input matInput class="text-sm m-0" [(ngModel)]='password' [type]="!isPasswordVisible ? 'password': 'text'"
+          placeholder="Enter password" formControlName='password'>
+        <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+          class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+        </span>
+        <mat-error class="text-xs">Password must be greater than 6 digits*</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+        <mat-label class="semi-bold text-grey text-smd m-0">Confirm password</mat-label>
+        <input matInput class="text-sm m-0" [type]="!isConfirmPasswordVisible ? 'password': 'text'"
+          placeholder="Confirm password" formControlName="confirmPassword">
+        <span matSuffix (click)="isConfirmPasswordVisible = !isConfirmPasswordVisible"
+          class="text-link material-icons text-grey">{{!isConfirmPasswordVisible ? 'visibility_off': 'visibility'}}
+        </span>
+        <mat-error class="text-xs">Retype password*</mat-error>
+      </mat-form-field>
+
+      <div class="d-flex justify-content-center my-4">
+        <button type="submit" class="w-75 btn btn-primary p-2 text-smd bold"
+          style="border-radius: 60px; border-color: 0px !important;">Register</button>
+      </div>
+    </form>
+    <div class="w-100 text-center" *ngIf="isRegistration">
+      <span class="text-grey text-sm mr-1">Already a member? </span>
+      <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)='loginVisible()'>Login</a>
+    </div>
+    <div class="p-3" *ngIf="isForgotPassword">
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="Enter email" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">Enter valid email*</mat-error>
+      </mat-form-field>
+      <div class="d-flex justify-content-center mb-5">
+        <button class="w-75 btn btn-primary p-2 text-smd bold"
+          style="border-radius: 60px; border-color: 0px !important;">Proceed</button>
+      </div>
+    </div>
+    <div class="w-100 text-center" *ngIf="isForgotPassword">
+      <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)='loginVisible()'>Login here.</a>
+    </div>
+  </div>
+</div>

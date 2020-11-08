@@ -1,20 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<div class="w-100 h-100" style="overflow: auto;">
+<img src="../../assets/Instajob banner landing page.png" class="w-100 h-100 img1 img-fluid" alt="">
+  <div class="row p-4 mt-3 mx-2 vertical-center">
+    <div class="col-sm-7">
+      <ion-text class="text-xlg semi-bold text-link" color="primary">Insta</ion-text>
+      <span class="text-xlg semi-bold text-link"> Jobs</span>
+    </div>
+    <div class="col-sm-5 d-flex justify-content-between vertical-center">
+      <a class="text-light semi-bold text-smd align-bottom text-link">Find a job</a>
+      <a class="text-light semi-bold text-smd align-bottom text-link">Upload your Resume</a>
+      <a class="text-light semi-bold text-smd align-bottom text-link">Post a job</a>
+      <ion-button color="primary" type="button" class="" (click)="openLoginPage()">Sign in</ion-button>
+    </div>
+    <div class="my-5 col-sm-12"></div>
+    <div class="col-sm-5 mt-5 pt-5">
+      <span class="text-dark bold text-xxlg d-block mb-2">Find your job favourite and immediate</span>
+      <span class="text-grey semi-bold d-block mb-2">Search for your dream job while on the go witn the best job-search web platform available.</span>
+      <div class="w-100 d-flex mt-5 justify-content-between p-1 box-shadow bg-white vertical-center" style="border-radius: 30px;">
+        <div class="vertical-center">
+          <span class="material-icons text-md mx-2">search</span>
+        <input type="text" class="text-smd w-100" style="border: 0px !important;" placeholder="Search jobs">
+        </div>
+        <button class="btn btn-primary" style="border-radius: 30px;">Search</button>
+      </div>
+      <div class="w-100 d-flex mt-5 justify-content-between p-1 box-shadow bg-white vertical-center" style="border-radius: 30px;">
+        <div class="vertical-center">
+          <span class="material-icons text-md mx-2">search</span>
+        <input type="text" class="text-smd w-100" style="border: 0px !important;" placeholder="Search jobs">
+        </div>
+        
+        <button class="btn btn-primary" style="border-radius: 30px;">Search</button>
+      </div>
+      
+    </div>
   </div>
-</ion-content>
+  
+</div>

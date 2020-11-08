@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { SigninComponent } from '../login/signin/signin.component';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -7,6 +11,14 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  modalRef: BsModalRef;
+
+  constructor(
+    private modalService: BsModalService,
+  ) { }
+
+  openLoginPage() {
+    this.modalRef = this.modalService.show(SigninComponent, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
+  }
 
 }

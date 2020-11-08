@@ -11,6 +11,7 @@
 
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 /* Basic CSS for apps built with Ionic */
 @import "~@ionic/angular/css/normalize.css";
@@ -24,3 +25,292 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.w-80{
+    width: 80% !important;
+  }
+  
+  .center-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .head{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 42px;
+  }
+  
+  .bg-yellow{
+    background-color: #fdbf5a;
+  }
+  
+  .bg-light-grey{
+    background-color: #f7f7f7;
+  }
+  
+  .bg-light-yellow{
+    background-color: #fef3e4;
+  }
+  
+  .back-white{
+    background-color: #FFFFFF !important;
+  }
+  
+  .bg-trans {
+    background-color: transparent!important;
+  }
+  
+  
+  .box-shadow{
+    box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+  }
+  
+  .box-shadow-none{
+    box-shadow: 0px 0px 0px 0px rgba(238, 238, 238, 0.75) !important;
+  }
+  
+  .btn-disable {
+    background-color: #c8c8c8 !important;
+    border: 0px;
+  }
+  
+  .d-wrap{
+    display: flex;  
+    flex-wrap: wrap;
+  }
+  
+  .img-control {
+    height: 45px;
+    object-fit: cover;
+  }
+  
+  .img-fix {
+    height: 55px;
+    object-fit: cover;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+  }
+  
+  
+  .modal-body {
+    background-color: white;
+    overflow-y: auto;
+  }
+  
+  .modal-content {
+    background-color: transparent!important;
+    border: 0px!important;
+    width: 100%;
+  }
+  
+  .modal-dialog {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-header {
+    background-color: #323334;
+    color: white;
+  }
+  
+  .modal-footer {
+    background-color: #FFFFFF;
+  }
+  
+  .overlay {
+    z-index: 1000;
+  }
+  
+  .iti { width: 100%; display:block }
+  
+  .semi-bold{
+    font-weight: 550 !important;
+  }
+  
+  .rounded-border-menu-item{
+    border-bottom-left-radius: 30px !important;
+    border-top-left-radius: 30px !important;
+  }
+  
+  .bold{
+    font-weight: 1000;
+  }
+  
+  .half-modal {
+    margin: auto !important;
+    min-width: 40%;
+    animation: fall;
+    animation-duration: 500ms;
+    overflow: hidden;
+  }
+  
+  .full-modal .modal-content {
+    width: 100% !important;
+    overflow-y: auto;
+    background-color: #f7f7f7;
+  }
+  
+  .full-modal .modal-dialog {
+    border-radius: 0px !important;
+  }
+  
+  .text-yellow{
+    color: #fdbf5a;
+  }
+  
+  .text-grey{
+    color: #7e7e7e !important;
+  }
+  
+  .text-light-grey{
+    color: #c8c8c8 !important;
+  }
+  
+  .text-segoe{
+    font-family: 'Segoe UI' !important;
+  }
+  
+  .text-link {
+    cursor: pointer;
+  }
+  
+  .text-fluid {
+    font-size: 10px;
+  }
+  
+  .text-small {
+    font-size: 90%;
+  }
+  .text-xs {
+    font-size: 12px!important;
+  }
+  
+  .text-sm {
+    font-size: 14px !important;
+  }
+  
+  .text-md {
+    font-size: 24px !important;
+  }
+  
+  .text-smd {
+    font-size: 16px !important;
+  }
+  
+  .text-xmd {
+    font-size: 28px !important;
+  }
+  
+  .text-lg {
+    font-size: 30px !important;
+  }
+  
+  .text-xlg {
+    font-size: 36px !important;
+  }
+
+  .text-xxlg {
+    font-size: 46px !important;
+  }
+  
+  .vertical-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .paddingDiv:focus {
+    outline: none;
+  }
+  
+  select::-ms-expand {
+    display: none;
+    border: 0px !important; 
+  }
+  
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 1px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: white;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: black;
+  }
+  
+  .input-file {
+    z-index: 1;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .border-right-radius{
+      border-top-right-radius: 6px !important;
+      border-bottom-right-radius: 6px !important;
+  }
+
+  .text-violet{
+    color:rgb(149, 60, 233) !important;
+  }
+
+  .text-dark-blue{
+    color: #193BD0;
+  }
+
+  .text-light-blue{
+    color: #ACBEE0;
+  }
+
+  .bg-dark-blue{
+    background-color: #193BD0;
+  }
+
+  .bg-light-blue{
+    background-color: #ACBEE0;
+  }
+  
+
+  
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f7f7f7; }
+  
+  @keyframes fall {
+    from {
+        bottom: 100%;
+    }
+    to {
+        bottom: 0%;
+    }
+  }
+
+  .floating {  
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+@keyframes floating {
+    from { transform: translate(0,  0px); }
+    65%  { transform: translate(0, 15px); }
+    to   { transform: translate(0, -0px); }    
+}
+  
