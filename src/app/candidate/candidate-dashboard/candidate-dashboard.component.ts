@@ -9,7 +9,7 @@ export class CandidateDashboardComponent implements OnInit {
 
   constructor() { }
 
-  id = window.atob(window.localStorage.getItem('id'));
+  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
 
   ngOnInit() {}
 

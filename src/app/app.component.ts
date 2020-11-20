@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { UserRole } from './shared/models/enums';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  role = UserRole;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -19,7 +22,15 @@ export class AppComponent {
   ) {
     this.initializeApp();
     if (window.localStorage.getItem('id')){
-      this.router.navigateByUrl('/candidate');
+      if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
+        this.router.navigateByUrl('/candidate');
+      }
+      else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.EMPLOYER) {
+        this.router.navigateByUrl('/employer');
+      }
+      else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {
+        this.router.navigateByUrl('/admin');
+      }
     }
     else { this.router.navigateByUrl('/home'); }
   }

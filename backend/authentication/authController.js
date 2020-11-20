@@ -104,16 +104,21 @@ module.exports.login = (req, res) => {
     const data = req.body;
     mongoUtil.collection("users").findOne({ 'email': data.email }, function (err, result) {
         if (err) throw err;
-        if (result.email) {
-            if (data.password === result.password) {
-                return res.status(200).json(result);
+        if(result == null){
+            return res.status(200).json({ 'error': 'Invalid details' });
+        }
+        else {
+            if (result.email) {
+                if (data.password === result.password) {
+                    return res.status(200).json(result);
+                }
+                else {
+                    return res.status(200).json({ 'error': 'Invalid details' });
+                }
             }
             else {
                 return res.status(200).json({ 'error': 'Invalid details' });
             }
-        }
-        else {
-            return res.status(200).json({ 'error': 'Invalid details' });
         }
     });
 }

@@ -8,7 +8,7 @@ export class AuthService {
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
-  public baseUrl = window.location.host.includes('8084') ? '' : 'http://localhost:8084';
+  public baseUrl = window.location.host.includes('instajobapp.herokuapp') ? '' : 'http://localhost:8084';
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   login(data: any) {
+    console.log(this.baseUrl);
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/login`, body, { headers: this.headers }).toPromise();
   }

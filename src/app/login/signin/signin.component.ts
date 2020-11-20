@@ -81,6 +81,7 @@ export class SigninComponent implements OnInit {
     this.isRegistration = false;
     this.isForgotPassword = false;
     this.isVerifyOTP = false;
+    this.message = '';
   }
 
   initializeSignupForm() {
@@ -175,7 +176,7 @@ export class SigninComponent implements OnInit {
           else if (data.email) {
             this.modalRef.hide();
             this.router.navigateByUrl('/candidate');
-            window.localStorage.setItem('id', window.btoa(data.email));
+            window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
           }
           this.isServiceRunning = false;
         });
