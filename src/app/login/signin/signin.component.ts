@@ -107,7 +107,7 @@ export class SigninComponent implements OnInit {
           user: {
             cId: new Date().getTime(),
             name: this.signupForm.get('name').value,
-            email: this.signupForm.get('email').value,
+            email: (this.signupForm.get('email').value).toLowerCase(),
             password: this.signupForm.get('password').value,
             role: UserRole.CANDIDATE,
             verified: false,
@@ -164,8 +164,8 @@ export class SigninComponent implements OnInit {
     if (this.loginForm.valid) {
       this.isServiceRunning = true;
       this.authService.login({
-        email: this.loginForm.get('emailLogin')
-          .value, password: this.loginForm.get('passwordLogin').value
+        email: (this.loginForm.get('emailLogin')
+          .value).toLowerCase(), password: this.loginForm.get('passwordLogin').value
       })
         .then((data: any) => {
           console.log(data);
