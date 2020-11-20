@@ -115,7 +115,7 @@
           <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
               class="text-secondary">Resend Code </span> 00 :
             {{timer > 9 ? timer : '0'+timer}}</a>
-          <a (click)="sendOTP()" class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2"
+          <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2"
             *ngIf='timer <= 0'>Resend Code</a>
         </div>
       </div>
