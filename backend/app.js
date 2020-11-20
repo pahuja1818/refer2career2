@@ -1,12 +1,21 @@
 const express = require('express');
-const bodyparser = require('body-parser');
+var mongoUtil = require('./db');
 
+mongoUtil.connectToServer(function (err, client) {
+    if (err) console.log(err);
+    console.log('stargjsgdj');
+    // start the rest of your app here
+    const AuthRoutes = require('./authentication/authRoute');
+    app.use('/api', AuthRoutes);
+    
+});
+
+
+const bodyparser = require('body-parser');
 const app = express();
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
-const AuthRoutes = require('./authentication/authRoute');
-
-
+const { start } = require('repl');
 
 
 
@@ -31,8 +40,7 @@ app.use((req, res, next) => {
         next();
     }
 });
-app.use('/api', AuthRoutes);
 const router = express.Router();
-module.exports = router ;
+module.exports = router;
 
 module.exports = app;

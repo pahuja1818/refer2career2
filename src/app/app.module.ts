@@ -57,6 +57,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SigninComponent } from './login/signin/signin.component';
+import { SharedModule } from './shared/shared.module';
+import { NgOtpInputModule } from  'ng-otp-input';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
@@ -68,6 +71,8 @@ import { SigninComponent } from './login/signin/signin.component';
     SigninComponent,
   ],
   imports: [
+    AlertModule.forRoot(),
+    NgOtpInputModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -119,6 +124,7 @@ import { SigninComponent } from './login/signin/signin.component';
     IonicModule.forRoot(),
     AppRoutingModule,
     ModalModule.forRoot(),
+    SharedModule
   ],
   providers: [
     StatusBar,

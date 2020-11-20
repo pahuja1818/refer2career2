@@ -2,7 +2,11 @@ var env = 'development';
 var express = require('express');
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
-module.exports = router;
 
-const { registerUser } = require('./authController.js');
-router.post("/register/user", registerUser);
+const { registerUser, verifyOTP, login } = require('./authController.js');
+
+router.post("/register/candidate", registerUser);
+router.post("/verify/candidate", verifyOTP);
+router.post("/login", login);
+
+module.exports = router;
