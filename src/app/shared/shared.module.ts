@@ -11,7 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule
   ]
 })
-export class SharedModule { 
+export class SharedModule {
   constructor(){
     console.log('shjkh');
   }

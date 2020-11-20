@@ -18,10 +18,10 @@ export class AppComponent {
     private router: Router,
   ) {
     this.initializeApp();
-    if(window.localStorage.getItem('id')){
+    if (window.localStorage.getItem('id')){
       this.router.navigateByUrl('/candidate');
     }
-    else this.router.navigateByUrl('/home');
+    else { this.router.navigateByUrl('/home'); }
   }
 
   initializeApp() {

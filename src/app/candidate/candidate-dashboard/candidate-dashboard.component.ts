@@ -9,9 +9,9 @@ export class CandidateDashboardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
-
   id = window.atob(window.localStorage.getItem('id'));
+
+  ngOnInit() {}
 
   logout(){
     window.localStorage.removeItem('id');

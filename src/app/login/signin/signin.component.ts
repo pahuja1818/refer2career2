@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
-  otp: string = '';
+  otp = '';
   isOTPCorrect = true;
   timer: number;
   isVerified = false;
@@ -47,8 +47,8 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
     this.initializeSignupForm();
     this.loginForm = new FormGroup({
-      'emailLogin': new FormControl(null, [Validators.required, Validators.email]),
-      'passwordLogin': new FormControl(null, [Validators.required, Validators.minLength(7)]),
+      emailLogin: new FormControl(null, [Validators.required, Validators.email]),
+      passwordLogin: new FormControl(null, [Validators.required, Validators.minLength(7)]),
     });
   }
 
@@ -57,7 +57,7 @@ export class SigninComponent implements OnInit {
   }
 
   onOtpChange($event) {
-    this.otp = $event
+    this.otp = $event;
   }
 
   forgotPasswordVisible() {
@@ -85,32 +85,33 @@ export class SigninComponent implements OnInit {
 
   initializeSignupForm() {
     this.signupForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(7)]),
-      'confirmPassword': new FormControl(null, Validators.required),
+      name: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(7)]),
+      confirmPassword: new FormControl(null, Validators.required),
     });
   }
 
   isConfirmPasswordMatches() {
-    if (this.signupForm.get('password').value === this.signupForm.get('confirmPassword').value)
+    if (this.signupForm.get('password').value === this.signupForm.get('confirmPassword').value) {
       return true;
-    return null
+    }
+    return null;
   }
 
   registerCandidate() {
     if (this.signupForm.valid) {
       if (this.signupForm.get('password').value === this.signupForm.get('confirmPassword').value) {
         this.isServiceRunning = true;
-        let candidate: any = {
+        const candidate: any = {
           user: {
-            'cId': new Date().getTime(),
-            'name': this.signupForm.get('name').value,
-            'email': this.signupForm.get('email').value,
-            'password': this.signupForm.get('password').value,
-            'role': UserRole.CANDIDATE,
-            'verified': false,
-            'time': new Date(),
+            cId: new Date().getTime(),
+            name: this.signupForm.get('name').value,
+            email: this.signupForm.get('email').value,
+            password: this.signupForm.get('password').value,
+            role: UserRole.CANDIDATE,
+            verified: false,
+            time: new Date(),
           },
         };
         this.authService.registerCandidate(candidate).subscribe((data: any) => {
@@ -132,26 +133,26 @@ export class SigninComponent implements OnInit {
               });
           }
           this.isServiceRunning = false;
-        })
+        });
       }
     }
   }
 
   verifyOTP() {
     this.isServiceRunning = true;
-    let data = {
-      'email': this.signupForm.get('email').value,
-      'otp': this.otp
-    }
-    this.authService.verifyOTP(data).then((data: any) => {
-      if (data.data === true) {
+    const data = {
+      email: this.signupForm.get('email').value,
+      otp: this.otp
+    };
+    this.authService.verifyOTP(data).then((res: any) => {
+      if (res.data === true) {
         this.isVerified = true;
         this.hideAll();
         this.isLogin = true;
       }
-      else this.isOTPCorrect = true;
+      else { this.isOTPCorrect = true; }
       this.isServiceRunning = false;
-    })
+    });
   }
 
   back() {
@@ -162,18 +163,22 @@ export class SigninComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.isServiceRunning = true;
-      this.authService.login({ 'email': this.loginForm.get('emailLogin').value, 'password': this.loginForm.get('passwordLogin').value }).then((data: any) => {
-        console.log(data);
-        if (data.error) {
-          this.message = data.error;
-        }
-        else if (data.email) {
-          this.modalRef.hide();
-          this.router.navigateByUrl('/candidate');
-          window.localStorage.setItem('id', window.btoa(data.email));
-        }
-        this.isServiceRunning = false;
-      });
+      this.authService.login({
+        email: this.loginForm.get('emailLogin')
+          .value, password: this.loginForm.get('passwordLogin').value
+      })
+        .then((data: any) => {
+          console.log(data);
+          if (data.error) {
+            this.message = data.error;
+          }
+          else if (data.email) {
+            this.modalRef.hide();
+            this.router.navigateByUrl('/candidate');
+            window.localStorage.setItem('id', window.btoa(data.email));
+          }
+          this.isServiceRunning = false;
+        });
     }
   }
 

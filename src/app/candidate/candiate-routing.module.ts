@@ -7,11 +7,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CandidateDashboardComponent } from './candidate-dashboard/candidate-dashboard.component';
 const routes: Routes = [
  {
-   path:'dashboard',
+   path: 'dashboard',
    component: CandidateDashboardComponent
  },
  {
-  path:'',
+  path: '',
   redirectTo: 'dashboard',
   pathMatch: 'full'
 }
