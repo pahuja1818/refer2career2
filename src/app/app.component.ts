@@ -25,7 +25,7 @@ export class AppComponent {
     this.initializeApp();
     if (window.localStorage.getItem('id')){
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
-        this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/candidate');
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.EMPLOYER) {
         this.router.navigateByUrl('/employer');

@@ -13,10 +13,12 @@ export class AuthService {
   public baseUrl = window.location.host.includes('instajobapp.herokuapp') ? '' : 'http://localhost:8084';
 
   constructor(private http: HttpClient) {
-    this.getDetails({ 'email': JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
-      .subscribe((data: any) => {
-        this.currentUser = data.data;
-      })
+    if (window.localStorage.getItem('id')) {
+      this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
+        .subscribe((data: any) => {
+          this.currentUser = data.data;
+        });
+    }
   }
 
   registerCandidate(data: any) {

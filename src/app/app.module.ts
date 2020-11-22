@@ -133,7 +133,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
-  
- 
+
+
 })
 export class AppModule {}

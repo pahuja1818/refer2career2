@@ -29,20 +29,25 @@ export class AdminProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authService.currentUser;
-    if (!this.user.organizationDetails) this.user.organizationDetails = {};
+    if (!this.user.organizationDetails) { this.user.organizationDetails = {}; }
     this.detailForm = new FormGroup({
       name: new FormControl({ value: this.user.name, disabled: true }, [Validators.required]),
       email: new FormControl({ value: this.user.email, disabled: true }, [Validators.required, Validators.email]),
-      mobile: new FormControl({ value: this.user.mobile, disabled: true }, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      mobile: new FormControl({ value: this.user.mobile, disabled: true },
+         [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       alternateNumber: new FormControl({ value: this.user.alternateNumber, disabled: true }, [Validators.required]),
       organizationName: new FormControl(this.user.organizationDetails.organizationName, [Validators.required]),
-      organizationEmail: new FormControl(this.user.organizationDetails.organizationEmail, [Validators.required, Validators.email]),
-      organizationMobile: new FormControl(this.user.organizationDetails.organizationMobile, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      organizationEmail: new FormControl(this.user.organizationDetails.organizationEmail,
+         [Validators.required, Validators.email]),
+      organizationMobile: new FormControl(this.user.organizationDetails.organizationMobile,
+        [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       field: new FormControl(this.user.organizationDetails.organizationField, [Validators.required]),
       addressLineOne: new FormControl(this.user.organizationDetails.addressLineOne, [Validators.required]),
-      addressLineTwo: new FormControl(this.user.organizationDetails.addressLineTwo, [Validators.required]),
+      addressLineTwo: new FormControl(this.user.organizationDetails.addressLineTwo,
+         [Validators.required]),
       city: new FormControl(this.user.organizationDetails.city, [Validators.required]),
-      pincode: new FormControl(this.user.organizationDetails.pincode, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
+      pincode: new FormControl(this.user.organizationDetails.pincode,
+        [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
     });
     this.detailForm.disable();
     this.userPhoto = this.user.photo;
@@ -52,8 +57,8 @@ export class AdminProfileComponent implements OnInit {
   onEnableEditing() {
     this.isEditing = true;
     this.detailForm.enable();
-    this.detailForm.controls['name'].disable();
-    this.detailForm.controls['email'].disable();
+    this.detailForm.controls.name.disable();
+    this.detailForm.controls.email.disable();
   }
 
 
@@ -79,23 +84,23 @@ export class AdminProfileComponent implements OnInit {
   save() {
     this.detailForm.markAllAsTouched();
     if (this.detailForm.valid) {
-      let details: any = {
-        'email': this.user.email,
-        'mobile': this.detailForm.get('mobile').value,
-        'alternateNumber': this.detailForm.get('alternateNumber').value,
-        'photo': this.userPhoto,
-        'organizationDetails': {
-          'organizationName': this.detailForm.get('name').value,
-          'organizationField': this.detailForm.get('field').value,
-          'organizationEmail': this.detailForm.get('email').value,
-          'organizationMobile': this.detailForm.get('mobile').value,
-          'addressLineOne': this.detailForm.get('addressLineOne').value,
-          'addressLineTwo': this.detailForm.get('addressLineTwo').value,
-          'city': this.detailForm.get('city').value,
-          'pincode': this.detailForm.get('pincode').value,
-          'logo': this.organizationLogo
+      const details: any = {
+        email: this.user.email,
+        mobile: this.detailForm.get('mobile').value,
+        alternateNumber: this.detailForm.get('alternateNumber').value,
+        photo: this.userPhoto,
+        organizationDetails: {
+          organizationName: this.detailForm.get('name').value,
+          organizationField: this.detailForm.get('field').value,
+          organizationEmail: this.detailForm.get('email').value,
+          organizationMobile: this.detailForm.get('mobile').value,
+          addressLineOne: this.detailForm.get('addressLineOne').value,
+          addressLineTwo: this.detailForm.get('addressLineTwo').value,
+          city: this.detailForm.get('city').value,
+          pincode: this.detailForm.get('pincode').value,
+          logo: this.organizationLogo
         }
-      }
+      };
       this.authService.updateAdminDetails(details).then(data => {
         if (data) {
           console.log('true');
@@ -103,24 +108,24 @@ export class AdminProfileComponent implements OnInit {
           this.detailForm.disable();
           this.toastService.showToast('Details Updated Successfully!');
         }
-        else this.toastService.showToast('Something went wrong!', 'bg-danger');
-      })
+        else { this.toastService.showToast('Something went wrong!', 'bg-danger'); }
+      });
     }
   }
 
   cancel() {
     this.detailForm.patchValue({
-      'mobile': this.user.mobile,
-      'alternateNumber': this.user.alternateNumber,
-      'organizationName': this.user.organizationDetails.organizationName,
-      'organizationEmail': this.user.organizationDetails.organizationEmail,
-      'field': this.user.organizationDetails.organizationField,
-      'organizationMobile': this.user.organizationDetails.organizationMobile,
-      'addressLineOne': this.user.organizationDetails.addressLineOne,
-      'addressLineTwo': this.user.organizationDetails.addressLineTwo,
-      'city': this.user.organizationDetails.city,
-      'pincode': this.user.organizationDetails.pincode,
-    })
+      mobile: this.user.mobile,
+      alternateNumber: this.user.alternateNumber,
+      organizationName: this.user.organizationDetails.organizationName,
+      organizationEmail: this.user.organizationDetails.organizationEmail,
+      field: this.user.organizationDetails.organizationField,
+      organizationMobile: this.user.organizationDetails.organizationMobile,
+      addressLineOne: this.user.organizationDetails.addressLineOne,
+      addressLineTwo: this.user.organizationDetails.addressLineTwo,
+      city: this.user.organizationDetails.city,
+      pincode: this.user.organizationDetails.pincode,
+    });
     this.isEditing = false;
   }
 
