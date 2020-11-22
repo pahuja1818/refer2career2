@@ -10,7 +10,7 @@ export class AuthService {
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
-  public baseUrl = window.location.host.includes('instajobapp.herokuapp') ? '' : 'http://localhost:8084';
+  public baseUrl = window.location.host.includes('instajob') ? 'https://instajobapp.herokuapp.com' : 'http://localhost:8084';
 
   constructor(private http: HttpClient) {
     if (window.localStorage.getItem('id')) {
