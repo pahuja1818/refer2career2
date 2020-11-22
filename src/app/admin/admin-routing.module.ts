@@ -2,16 +2,33 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { MessagesComponent } from './messages/messages.component';
+import { JobPostsComponent } from './job-posts/job-posts.component';
+import { EmployerPageComponent } from './employer-page/employer-page.component';
+import { AdminmenuComponent } from './adminmenu/adminmenu.component';
+
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: AdminDashboardComponent
+    path: '', component: AdminDashboardComponent, children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'dashboard', component: AdminmenuComponent
+      },
+      {
+        path: 'profile', component: AdminProfileComponent
+      },
+      {
+        path: 'organizations', component: EmployerPageComponent
+      },
+      {
+        path: 'jobs', component: JobPostsComponent
+      },
+      {
+        path: 'messages', component: MessagesComponent
+      },
+    ]
   },
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({
@@ -21,5 +38,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class CandiateRoutingModule { }
 export class AdminRoutingModule { }

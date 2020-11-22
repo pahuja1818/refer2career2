@@ -104,7 +104,7 @@ module.exports.login = (req, res) => {
     const data = req.body;
     mongoUtil.collection("users").findOne({ 'email': data.email }, function (err, result) {
         if (err) throw err;
-        if(result == null){
+        if (result == null) {
             return res.status(200).json({ 'error': 'Invalid details' });
         }
         else {
@@ -120,5 +120,21 @@ module.exports.login = (req, res) => {
                 return res.status(200).json({ 'error': 'Invalid details' });
             }
         }
+    });
+}
+
+module.exports.updateAdminDetails = (req, res) => {
+    const data = req.body;
+    mongoUtil.collection("users").updateOne({ 'email': data.email }, { $set: { mobile: data.mobile, alternateNumber: data.alternateNumber, photo: data.photo, organizationDetails: data.organizationDetails } }, function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });;
+        return res.status(200).json({ 'data': true });
+    });
+}
+
+module.exports.getDetails = (req, res) => {
+    const data = req.body;
+    mongoUtil.collection("users").findOne({ 'email': data.email }, function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });
+        return res.status(200).json({ 'data': result });
     });
 }

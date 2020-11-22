@@ -6,11 +6,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthService {
 
+  currentUser: any = {};
+
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
   public baseUrl = window.location.host.includes('instajobapp.herokuapp') ? '' : 'http://localhost:8084';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getDetails({ 'email': JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
+      .subscribe((data: any) => {
+        this.currentUser = data.data;
+      })
+  }
 
   registerCandidate(data: any) {
     const body = JSON.stringify(data);
@@ -23,10 +30,18 @@ export class AuthService {
   }
 
   login(data: any) {
-    console.log(this.baseUrl);
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/login`, body, { headers: this.headers }).toPromise();
   }
 
+  updateAdminDetails(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/updateAdminDetails`, body, { headers: this.headers }).toPromise();
+  }
+
+  getDetails(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/getDetails`, body, { headers: this.headers });
+  }
 
 }

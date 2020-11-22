@@ -175,7 +175,7 @@ export class SigninComponent implements OnInit {
           }
           else if (data.email) {
             this.modalRef.hide();
-            this.router.navigateByUrl('/candidate');
+            window.location.reload();
             window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
           }
           this.isServiceRunning = false;

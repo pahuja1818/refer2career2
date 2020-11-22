@@ -1,3 +1,36 @@
-<p>
-  admin-dashboard works!
-</p>
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" class="custom" type="overlay">
+      <ion-content>
+        <div class="menu-header-bg"></div>
+        <div class="header-content">
+          <img src="../../../assets/kacxk1.jpg" alt="logo">
+          <ion-label>
+            <h2>Insta-jobs</h2>
+            <p>Find Your Dream job Here</p>
+          </ion-label>
+        </div>
+        <ion-list class="menu-items" lines="none">
+          <ion-item routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggle()"
+            [routerLinkActiveOptions]="{exact: true}">
+            <ion-icon name="grid" routerLinkActive='icon-active'></ion-icon>Dashboard
+          </ion-item>
+          <ion-item routerLink="/admin/profile" routerLinkActive="active" (click)="toggle()">
+            <ion-icon name="person" routerLinkActive='icon-active'></ion-icon>My Profile
+          </ion-item>
+          <ion-item routerLink="/admin/organizations" routerLinkActive="active" (click)="toggle()">
+            <ion-icon name="business" routerLinkActive='icon-active'></ion-icon>Organizations
+          </ion-item>
+          <ion-item routerLink="/admin/jobs" routerLinkActive='active' (click)="toggle()">
+            <ion-icon name="briefcase" routerLinkActive='icon-active'></ion-icon>Job Posts
+          </ion-item>
+          <ion-item routerLink="/admin/messages" routerLinkActive='active' (click)="toggle()">
+            <ion-icon name="chatbubble-ellipses" routerLinkActive='icon-active'></ion-icon>Messages
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content">
+    </ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -284,6 +284,10 @@
   .bg-light-blue{
     background-color: #ACBEE0;
   }
+
+  .bg-violet{
+    background-color: rgb(140, 151, 245);
+  }
   
 
   
@@ -312,5 +316,10 @@
     from { transform: translate(0,  0px); }
     65%  { transform: translate(0, 15px); }
     to   { transform: translate(0, -0px); }    
+}
+
+mat-form-field.mat-form-field {
+  padding: 0%;
+  font-size: 14px;
 }
   

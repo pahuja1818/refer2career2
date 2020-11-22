@@ -73,7 +73,6 @@
         </span>
         <mat-error class="text-xs">Password must be greater than 6 digits*</mat-error>
       </mat-form-field>
-
       <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
         <mat-label class="semi-bold text-grey text-smd m-0">Confirm password</mat-label>
         <input matInput class="text-sm m-0" [type]="!isConfirmPasswordVisible ? 'password': 'text'"
@@ -115,15 +114,13 @@
           <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
               class="text-secondary">Resend Code </span> 00 :
             {{timer > 9 ? timer : '0'+timer}}</a>
-          <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2"
-            *ngIf='timer <= 0'>Resend Code</a>
+          <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2" *ngIf='timer <= 0'>Resend Code</a>
         </div>
       </div>
       <div class="w-100 text-center">
         <a class="text-warning text-yelllow text-sm text-link" (click)='back()'>{{'<<'}} Back</a>
       </div>
     </div>
-
     <div class="p-3" *ngIf="isForgotPassword">
       <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
         <mat-label>Enter your email</mat-label>
