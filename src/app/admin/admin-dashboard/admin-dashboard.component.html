@@ -27,7 +27,7 @@
           <ion-item routerLink="/admin/messages" routerLinkActive='active' (click)="toggle()">
             <ion-icon name="chatbubble-ellipses" routerLinkActive='icon-active'></ion-icon>Messages
           </ion-item>
-          <ion-item (click)="toggle()">
+          <ion-item (click)="openModal(logout)" class="text-link">
             <ion-icon name="log-out"></ion-icon>Logout
           </ion-item>
         </ion-list>
@@ -37,3 +37,13 @@
     </ion-router-outlet>
   </ion-split-pane>
 </ion-app>
+
+<ng-template #logout>
+  <div class="bg-white box-shadow p-3 m-3" style="border-radius: 10px;">
+    Are you sure you want to logout?
+    <div class="d-flex justify-content-end px-2 mt-2">
+      <button class="btn btn-primary p-0 text-smd bg-violet px-2 mr-3" (click)="loggedOut()">Yes</button>
+      <button class="btn btn-secondary text-smd px-2 p-0" (click)="cancel()">No</button>
+    </div>
+  </div>
+</ng-template>

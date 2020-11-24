@@ -127,6 +127,7 @@ export class AdminProfileComponent implements OnInit {
       pincode: this.user.organizationDetails.pincode,
     });
     this.isEditing = false;
+    this.detailForm.disable();
   }
 
 }
