@@ -1,4 +1,6 @@
+import { AddJobPostComponent } from './../../shared/components/add-job-post/add-job-post.component';
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-job-posts',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobPostsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public modalRef: BsModalRef,
+    private modalService: BsModalService,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  addJobPost() {
+    this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+  }
 
 }

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  currentUser: any = {};
+  currentUser = new Subject<any>();
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
@@ -16,7 +17,8 @@ export class AuthService {
     if (window.localStorage.getItem('id')) {
       this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
         .subscribe((data: any) => {
-          this.currentUser = data.data;
+          this.currentUser.next(data.data);
+          console.log(data);
         });
     }
   }

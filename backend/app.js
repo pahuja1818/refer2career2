@@ -1,5 +1,7 @@
 const express = require('express');
 var mongoUtil = require('./db');
+var nodemailer = require('nodemailer');
+
 
 mongoUtil.connectToServer(function (err, client) {
     if (err) console.log(err);
@@ -9,27 +11,25 @@ mongoUtil.connectToServer(function (err, client) {
     const OrganizationRoutes = require('./addOrganizations/addOrganizationsRoute');
     app.use('/api', AuthRoutes);
     app.use('/api', OrganizationRoutes)
+    
 });
 
 
 const bodyparser = require('body-parser');
 const app = express();
+
+
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const { start } = require('repl');
 
-
-
-app.use(bodyparser.json());
-
-app.use(bodyparser.urlencoded({
-    extended: true
-}));
 app.use(bodyparser.text({ limit: '200mb' }));
 app.use(cors());
 app.use(fileUpload({
     createParentPath: true
 }));
+app.use(bodyparser.json({limit: '50mb'}));
+app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static("docs"));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

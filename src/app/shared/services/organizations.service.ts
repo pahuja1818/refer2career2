@@ -17,21 +17,20 @@ export class OrganizationsService {
 
   addOrganization(data: any) {
     const body = JSON.stringify(data);
-    return this.http.post(this.baseUrl + `/add/organization`, body, { headers: this.headers }).toPromise();
+    return this.http.post(this.baseUrl + `/api/add/organization`, body, { headers: this.headers }).toPromise();
   }
 
   updateOrganization(data: any) {
     const body = JSON.stringify(data);
-    return this.http.post(this.baseUrl + `/update/organization`, body, { headers: this.headers }).toPromise();
+    return this.http.post(this.baseUrl + `/api/update/organization`, body, { headers: this.headers }).toPromise();
   }
 
   getOrganization(data: any) {
     const body = JSON.stringify(data);
-    return this.http.post(this.baseUrl + `/get/orgination`, body, { headers: this.headers });
+    return this.http.post(this.baseUrl + `/api/get/orgination`, body, { headers: this.headers });
   }
 
-  getAllOrganizations(data: any) {
-    const body = JSON.stringify(data);
-    return this.http.post(this.baseUrl + `/getAll/orginations`, body, { headers: this.headers });
+  getAllOrganizations() {
+    return this.http.post(this.baseUrl + `/api/getAll/orginations`, { headers: this.headers });
   }
 }

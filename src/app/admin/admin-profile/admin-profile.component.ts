@@ -28,30 +28,54 @@ export class AdminProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.authService.currentUser;
+    this.authService.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email }).subscribe((data: any) => {
+      this.user = data.data;
+      console.log(data.data);
+      this.detailForm.patchValue({
+        name: this.user.name,
+        email: this.user.email,
+        mobile: this.user.mobile,
+        alternateNumber: this.user.alternateNumber,
+        organizationName: this.user.organizationDetails.organizationName,
+        organizationEmail: this.user.organizationDetails.organizationEmail,
+        organizationMobile: this.user.organizationDetails.organizationMobile,
+        field: this.user.organizationDetails.organizationField,
+        addressLineOne: this.user.organizationDetails.addressLineOne,
+        addressLineTwo: this.user.organizationDetails.addressLineTwo,
+        pincode: this.user.organizationDetails.pincode,
+        city: this.user.organizationDetails.city,
+      });
+      this.userPhoto = this.user.photo;
+      this.organizationLogo = this.user.organizationDetails.logo;
+    },
+      err => console.log(err.message)
+    );
+    this.initializeForm();
+  }
+
+  initializeForm() {
+    console.log(this.user);
     if (!this.user.organizationDetails) { this.user.organizationDetails = {}; }
     this.detailForm = new FormGroup({
       name: new FormControl({ value: this.user.name, disabled: true }, [Validators.required]),
       email: new FormControl({ value: this.user.email, disabled: true }, [Validators.required, Validators.email]),
       mobile: new FormControl({ value: this.user.mobile, disabled: true },
-         [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+        [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       alternateNumber: new FormControl({ value: this.user.alternateNumber, disabled: true }, [Validators.required]),
       organizationName: new FormControl(this.user.organizationDetails.organizationName, [Validators.required]),
       organizationEmail: new FormControl(this.user.organizationDetails.organizationEmail,
-         [Validators.required, Validators.email]),
+        [Validators.required, Validators.email]),
       organizationMobile: new FormControl(this.user.organizationDetails.organizationMobile,
         [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       field: new FormControl(this.user.organizationDetails.organizationField, [Validators.required]),
       addressLineOne: new FormControl(this.user.organizationDetails.addressLineOne, [Validators.required]),
       addressLineTwo: new FormControl(this.user.organizationDetails.addressLineTwo,
-         [Validators.required]),
+        [Validators.required]),
       city: new FormControl(this.user.organizationDetails.city, [Validators.required]),
       pincode: new FormControl(this.user.organizationDetails.pincode,
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
     });
     this.detailForm.disable();
-    this.userPhoto = this.user.photo;
-    this.organizationLogo = this.user.organizationDetails.logo;
   }
 
   onEnableEditing() {
@@ -90,10 +114,10 @@ export class AdminProfileComponent implements OnInit {
         alternateNumber: this.detailForm.get('alternateNumber').value,
         photo: this.userPhoto,
         organizationDetails: {
-          organizationName: this.detailForm.get('name').value,
+          organizationName: this.detailForm.get('organizationName').value,
           organizationField: this.detailForm.get('field').value,
-          organizationEmail: this.detailForm.get('email').value,
-          organizationMobile: this.detailForm.get('mobile').value,
+          organizationEmail: this.detailForm.get('organizationEmail').value,
+          organizationMobile: this.detailForm.get('organizationMobile').value,
           addressLineOne: this.detailForm.get('addressLineOne').value,
           addressLineTwo: this.detailForm.get('addressLineTwo').value,
           city: this.detailForm.get('city').value,

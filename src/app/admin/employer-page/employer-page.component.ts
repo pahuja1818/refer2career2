@@ -1,3 +1,4 @@
+import { OrganizationsService } from './../../shared/services/organizations.service';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddOrganizationComponent } from '../add-organization/add-organization.component';
@@ -9,13 +10,20 @@ import { AddOrganizationComponent } from '../add-organization/add-organization.c
 })
 export class EmployerPageComponent implements OnInit {
 
+  allOrganizations: any[] = [];
+
   constructor(
     public modalRef: BsModalRef,
     private modalService: BsModalService,
-
+    private orgService: OrganizationsService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.orgService.getAllOrganizations().subscribe((data: any) => {
+      this.allOrganizations = data.data;
+      console.log(data);
+    })
+  }
 
   addOrganization() {
     this.modalRef = this.modalService.show(AddOrganizationComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })

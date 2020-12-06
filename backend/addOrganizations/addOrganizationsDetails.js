@@ -11,16 +11,44 @@ var mongoUtil = require('../db.js').getDb();
 
 module.exports.registerOrganization = (req, res) => {
     const organization = req.body;
-    mongoUtil.collection("users").findOne({ 'email': user.email }, function (err, result) {
+    mongoUtil.collection("users").findOne({ 'email': organization.email }, function (err, result) {
         if (err) throw err;
-        console.log(result);
         if (result !== null && result.verified === true) {
             return res.status(200).json({ 'error': 'Email already registered' });
         }
         else {
-            mongoUtil.collection("users").insertOne(organization, function (err, res) {
-                if (err) return res.status(200).json({ 'data': false });
-                return res.status(200).json({ 'data': true });
+            mongoUtil.collection("users").insertOne(organization, function (err, result) {
+                if (err) res.status(200).json({ 'data': false });
+                else {
+                    res.status(201).json({ 'data': true });
+                    var smtpTransport = nodemailer.createTransport({
+                        service: 'gmail',//smtp.gmail.com  //in place of service use host...
+                        secure: false,//true
+                        port: 25,//465
+                        auth: {
+                            user: 'tusharpahuja824@gmail.com',
+                            pass: '1357902468@Aa'
+                        }, tls: {
+                            rejectUnauthorized: false
+                        }
+                    });
+
+                    var mailOptions = {
+                        from: 'tusharpahuja824@gmail.com',
+                        to: organization.email,
+                        subject: 'Login Credentials of Insta jobs',
+                        html: '<p>Hello' + organization.organizationalDetails.organizationName + '</p><p><b>Welcome</b>, below find your login credentials for <a class="text-primary" href="instajob.ml">Insta jobs</a><br><br>' + '<p>Email : ' + organization.email + '<br>Password : ' + organization.password + '<p>><br><br><br><br><br>Thanks and regards! <br>Inta jobs support'
+                    };
+
+                    smtpTransport.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            res.status(200).json({ 'data': true });
+                        }
+                    });
+                }
             });
         }
     });

@@ -25,7 +25,7 @@ export class AppComponent {
     private authService: AuthService
   ) {
     this.initializeApp();
-    if (window.localStorage.getItem('id')){
+    if (window.localStorage.getItem('id')) {
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
         this.router.navigateByUrl('/candidate');
       }
@@ -35,7 +35,7 @@ export class AppComponent {
         }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.EMPLOYER) {
-        this.router.navigateByUrl('/employer');
+        this.router.navigateByUrl('/candidate');
       }
     }
     else { this.router.navigateByUrl('/home'); }

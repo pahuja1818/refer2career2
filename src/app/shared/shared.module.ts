@@ -1,3 +1,4 @@
+import { AddJobPostComponent } from './components/add-job-post/add-job-post.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -59,7 +60,12 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AddJobPostComponent,
+  ],
+  entryComponents: [
+    AddJobPostComponent
+  ],
   imports: [
     AlertModule.forRoot(),
     NgOtpInputModule,

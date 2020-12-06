@@ -105,7 +105,7 @@ module.exports.login = (req, res) => {
         }
         else {
             if (result.email) {
-                if (data.password === result.password) {
+                if (data.password === result.password && verified) {
                     return res.status(200).json(result);
                 }
                 else {
