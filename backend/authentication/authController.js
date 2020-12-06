@@ -82,18 +82,14 @@ module.exports.verifyOTP = (req, res) => {
                 });
                 mongoUtil.collection("users").updateOne({ 'email': data.email }, { $set: { verified: true } }, function (err, res) {
                     if (err) throw err;
-                    console.log("1 document updated");
                 });
-                console.log('yes');
                 return res.status(200).json({ 'data': true });
             }
             else {
-                console.log('yes');
                 return res.status(200).json({ 'data': false });
             }
         }
         else {
-            console.log('yes');
             return res.status(200).json({ 'error': 'Invalid passcode' });
         }
     });

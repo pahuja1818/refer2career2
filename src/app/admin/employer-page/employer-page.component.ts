@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AddOrganizationComponent } from '../add-organization/add-organization.component';
 
 @Component({
   selector: 'app-employer-page',
@@ -7,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployerPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public modalRef: BsModalRef,
+    private modalService: BsModalService,
 
-  ngOnInit() {}
+  ) { }
+
+  ngOnInit() { }
+
+  addOrganization() {
+    this.modalRef = this.modalService.show(AddOrganizationComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+  }
 
 }

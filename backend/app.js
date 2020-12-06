@@ -6,8 +6,9 @@ mongoUtil.connectToServer(function (err, client) {
     console.log('stargjsgdj');
     // start the rest of your app here
     const AuthRoutes = require('./authentication/authRoute');
+    const OrganizationRoutes = require('./addOrganizations/addOrganizationsRoute');
     app.use('/api', AuthRoutes);
-    
+    app.use('/api', OrganizationRoutes)
 });
 
 

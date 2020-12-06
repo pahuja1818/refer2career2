@@ -150,6 +150,15 @@
     overflow: hidden;
   }
   
+  .full-modal {
+    margin: 0px 0 0 0px;
+    margin: 0!important;
+    min-width: 100%;
+    animation: fall;
+    animation-duration: 500ms;
+    overflow: hidden;
+  }
+  
   .full-modal .modal-content {
     width: 100% !important;
     overflow-y: auto;
