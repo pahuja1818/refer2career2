@@ -120,6 +120,9 @@ export class AddOrganizationComponent implements OnInit {
           this.organizationLogo = undefined;
           this.documentsArray = [];
           this.toastService.showToast('Organization Added Successfully!');
+          setTimeout(time => {
+            window.location.reload();
+          }, 3000);
         }
         else if (data.error) {
           this.message = data.error;

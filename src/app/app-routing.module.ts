@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'candidate',
-    loadChildren: () => import('./candidate/candidate.module').then( m => m.CandidateModule)
+    loadChildren: () => import('./user/user.module').then( m => m.UserModule)
   },
   {
     path: 'admin',

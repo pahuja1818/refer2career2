@@ -1,7 +1,7 @@
 export enum UserRole {
-    ADMIN,
-    EMPLOYER,
-    CANDIDATE
+  ADMIN,
+  EMPLOYER,
+  CANDIDATE
 }
 
 export enum JobType {

@@ -10,3 +10,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  ::ng-deep .mat-select-content{
+    width: 100%;
+  }

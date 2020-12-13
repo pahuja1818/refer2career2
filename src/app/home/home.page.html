@@ -1,35 +1,150 @@
-<div class="w-100 h-100" style="overflow: auto;">
-<img src="../../assets/Instajob banner landing page.png" class="w-100 h-100 img1 img-fluid" alt="">
+<div class="w-100 h-100 bg-color" style="overflow: auto;">
+  <!-- <img src="../../assets/Instajob banner landing page.png" class="w-100 h-100 img1 img-fluid" alt=""> -->
+
   <div class="row p-4 mt-3 mx-2 vertical-center">
     <div class="col-sm-7">
       <ion-text class="text-xlg semi-bold text-link" color="primary">Insta</ion-text>
       <span class="text-xlg semi-bold text-link"> Jobs</span>
     </div>
     <div class="col-sm-5 d-flex justify-content-between vertical-center">
-      <a class="text-light semi-bold text-smd align-bottom text-link">Find a job</a>
-      <a class="text-light semi-bold text-smd align-bottom text-link">Upload your Resume</a>
-      <a class="text-light semi-bold text-smd align-bottom text-link">Post a job</a>
+      <a href="#findjobs" class="text-light semi-bold text-smd align-bottom text-link">Find a job</a>
+      <a  class="text-light semi-bold text-smd align-bottom text-link">Upload your Resume</a>
+      <a  class="text-light semi-bold text-smd align-bottom text-link">Post a job</a>
       <ion-button color="primary" type="button" class="" (click)="openLoginPage()">Sign in</ion-button>
     </div>
-    <div class="my-5 col-sm-12"></div>
-    <div class="col-sm-5 mt-5 pt-5">
-      <span class="text-dark bold text-xxlg d-block mb-2">Find your job favourite and immediate</span>
-      <span class="text-grey semi-bold d-block mb-2">Search for your dream job while on the go witn the best job-search web platform available.</span>
-      <div class="w-100 d-flex mt-5 justify-content-between p-1 box-shadow bg-white vertical-center" style="border-radius: 30px;">
-        <div class="vertical-center">
-          <span class="material-icons text-md mx-2">search</span>
-        <input type="text" class="text-smd w-100" style="border: 0px !important;" placeholder="Search jobs">
+
+    <carousel id="carousel-arrange">
+      <slide>
+        <img src="../../assets/img1.jpg" alt="first slide" style="display: block; width: 700px; height: 450px;">
+        
+      </slide>
+      <slide>
+        <img src="../../assets/img2.jpg" alt="second slide" style="display: block; width: 700px; height: 450px;">
+       
+      </slide>
+      <slide>
+        <img src="../../assets/img3.jpg" alt="third slide" style="display: block; width: 700px; height: 450px;">
+        
+      </slide>
+    </carousel>
+    <div id="text-arrange">
+      <p class="text-sm-left" id="new-font">Searching For A
+        Job?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Get Your Dream Job Here!</p>
+
+    </div>
+    <div id="cards-arrange">
+      <div class="card card-arrange text-grey shadow-lg p-3 mb-4" style="width: 18rem; border-style: inherit;">
+        <img src="https://source.unsplash.com/500x300/?code,technology" class="card-img-top img-size" alt="...">
+        <div class="card-body">
+          <h5 style="font-weight: bold;color: black;  text-shadow: 2px 2px 10px rgb(7, 241, 7);" class="card-title ">Insta Jobs</h5>
+          <p style=" text-shadow: 2px 2px 15px black;" class="card-text">Searching for your Dream Job!,Register on Instajob and get Your Dream job </p>
+          <a href="#" class="btn btn-primary">More about InstaJobs</a>
         </div>
-        <button class="btn btn-primary" style="border-radius: 30px;">Search</button>
       </div>
-      <div class="w-100 d-flex mt-5 justify-content-between p-1 box-shadow bg-white vertical-center" style="border-radius: 30px;">
-        <div class="vertical-center">
-          <span class="material-icons text-md mx-2">search</span>
-        <input type="text" class="text-smd w-100" style="border: 0px !important;" placeholder="Search jobs">
-        </div>  
-        <button class="btn btn-primary" style="border-radius: 30px;">Search</button>
+      <div class="card card-arrange text-grey shadow-lg p-3  mb-4" style="width: 18rem; border-style: inherit;">
+        <img src="https://source.unsplash.com/500x300/?code,technicalgirl" class="card-img-top img-size" alt="...">
+        <div class="card-body">
+          <h5 style="font-weight: bold; color: black;" class="card-title">Register Here</h5>
+          <p class="card-text">Register here to get your Dream job.<br>Click Here to Register</p>
+          <a style="color: white;" class="btn btn-primary" (click)="openLoginPage()">Register</a>
+        </div>
+      </div>
+      <div class="card card-arrange text-grey shadow-lg p-3 mb-4" style="width: 18rem; border-style: inherit;">
+        <img src="https://source.unsplash.com/500x300/?code,dreamjob" class="card-img-top img-size" alt="...">
+        <div class="card-body">
+          <h5 style="font-weight: bold;color: black;" class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class="card card-arrange text-grey shadow-lg p-3 mb-4"
+        style="width: 18rem; border-style: inherit; border-style:hidden">
+        <img src="https://source.unsplash.com/500x300/?code,office" class="card-img-top img-size" alt="...">
+        <div class="card-body">
+          <h5 style="font-weight: bold;color: black;" class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class="card card-arrange text-grey shadow-lg p-3 mb-4" style="width: 18rem; border-style: inherit;">
+        <img src="https://source.unsplash.com/500x300/?code,bossgirl" class="card-img-top img-size" alt="...">
+        <div class="card-body">
+          <h5 style="font-weight: bold;color: black;" class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class="card card-arrange text-grey shadow-lg p-3 mb-4" id="findjobs"
+        style="width: 18rem; border-style: inherit;">
+        <img src="https://source.unsplash.com/500x300/?code,laptop" class="card-img-top img-size" alt="...">
+        <div class="card-body">
+          <h5 style="font-weight: bold;color: black;" class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
       </div>
     </div>
   </div>
-  
 </div>
+
+
+<!-- 
+ <footer class="page-footer bg-dark ">
+  <div class="bg-success">
+    <div class="container">
+      <div class="row py-4 d-flex align-items-center">
+        <div class="col-md-12 text-center">
+          <a href="#"><i class="fab fa-facebook-f text-white mr-4"></i></a>
+          <a href="#"><i class="fab fa-twitter text-white mr-4"></i></a>
+          <a href="#"><i class="fab fa-google-plus-g text-white mr-4"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in text-white mr-4"></i></a>
+          <a href="#"><i class="fab fa-instagram text-white"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center text-md-left mt-5">
+    <div class="row">
+      <div class="col-md-3 mx-auto mb-4">
+        <h6 class="text-uppercase font-weight-bold"></h6>
+        <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 125px; height: 20px;">
+        <p style="font-size: 25px; font-family:Georgia, 'Times New Roman', Times, serif;" class="mt-2">InstaJobs is a platform which helps you to get your dream job. Register with us, create your profile and get your job. </p>
+      </div>
+      <div class="col-md-3 mx-auto mb-4">
+        <h6 class="text-uppercase font-weight-bold">useful links</h6>
+        <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 110px; height: 2px;">
+        <ul class="list-unstyled">
+          <li class="my-2"><a href="#">HOME</a></li>
+          <li class="my-2"><a href="#">ABOUT</a></li>
+          <li class="my-2"><a href="#">SERVICES</a></li>
+          <li class="my-2"><a href="#">CONTACT</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mx-auto mb-4">
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 75px; height: 2px;">
+        <ul class="list-unstyled">
+          <li class="my-2"><i class="fas fa-home mr-3"></i></li>
+          <li class="my-2"><i class="fas fa-envelope mr-3"></i></li>
+          <li class="my-2"><i class="fas fa-phone mr-3"></i></li>
+          <li class="my-2"><i class="fas fa-print mr-3"></i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright text-center py-3">
+    <p>&copy; Copyright
+      <a href="#">theprovider.com</a>
+    </p>
+    <p>Designed By the providers</p>
+  </div>
+</footer>  
+
+
+
+ -->
+

@@ -1,0 +1,37 @@
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { UserRoutingModule } from './user-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { IonicModule } from '@ionic/angular';
+import { UsermenuComponent } from './usermenu/usermenu.component';
+import { UserMessagesComponent } from './user-messages/user-messages.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { UserJobsComponent } from './user-jobs/user-jobs.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+
+
+
+
+@NgModule({
+  declarations: [
+    UserDashboardComponent,
+    UserProfileComponent,
+    UsermenuComponent,
+    UserMessagesComponent,
+    UserPageComponent,
+    UserJobsComponent,
+    
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    UserRoutingModule,
+    IonicModule,
+    PopoverModule.forRoot()
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class UserModule { }

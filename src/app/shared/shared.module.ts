@@ -58,6 +58,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { AlertModule } from 'ngx-bootstrap/alert';
 
+import { BrowserModule } from '@angular/platform-browser'
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +70,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     AddJobPostComponent
   ],
   imports: [
+    CommonModule,
     AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgOtpInputModule,
     ReactiveFormsModule,
     FormsModule,
@@ -122,6 +127,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
   exports: [
     AlertModule,
     NgOtpInputModule,
+    BsDatepickerModule,
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,

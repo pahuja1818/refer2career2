@@ -6,10 +6,13 @@ import { SigninComponent } from './login/signin/signin.component';
 import { SharedModule } from './shared/shared.module';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicRouteStrategy } from '@ionic/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -62,6 +65,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { NgOtpInputModule } from 'ng-otp-input';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -78,6 +82,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     AppRoutingModule,
     SharedModule,
     AlertModule.forRoot(),
+    ButtonsModule.forRoot(),
+   
+    CarouselModule.forRoot(),
     NgOtpInputModule,
     ReactiveFormsModule,
     FormsModule,
@@ -128,6 +135,11 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     HttpClientModule,
     IonicModule.forRoot(),
     ModalModule.forRoot(),
+    CarouselModule.forRoot(),
+    AppRoutingModule,
+    SharedModule,
+    NgbModule,
+   
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
@@ -137,3 +149,4 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 
 })
 export class AppModule {}
+

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+// import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { SigninComponent } from '../login/signin/signin.component';
 
 

@@ -27,7 +27,9 @@ export class AppComponent {
     this.initializeApp();
     if (window.localStorage.getItem('id')) {
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
-        this.router.navigateByUrl('/candidate');
+        if (!(this._location.path()).includes('candidate')) {
+          this.router.navigateByUrl('/candidate');
+        }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {
         if (!(this._location.path()).includes('admin')) {
@@ -35,7 +37,6 @@ export class AppComponent {
         }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.EMPLOYER) {
-        this.router.navigateByUrl('/candidate');
       }
     }
     else { this.router.navigateByUrl('/home'); }

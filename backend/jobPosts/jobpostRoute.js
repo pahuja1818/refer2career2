@@ -9,5 +9,6 @@ router.post("/add/jobpost", addJobPost);
 router.post("/update/jobpost", updateJobPost);
 router.post("/getAll/jobposts", getAllJobPosts);
 router.post("/get/jobpost", getJobPosts);
+router.post("/delete/jobpost", deleteJobPost);
 
 module.exports = router;
