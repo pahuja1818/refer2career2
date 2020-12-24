@@ -60,14 +60,16 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { BrowserModule } from '@angular/platform-browser'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { JobDetailsComponent } from './components/add-job-post/job-details/job-details.component';
 
 
 @NgModule({
   declarations: [
     AddJobPostComponent,
+    JobDetailsComponent,
   ],
   entryComponents: [
-    AddJobPostComponent
+    AddJobPostComponent,
   ],
   imports: [
     CommonModule,
@@ -177,6 +179,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     IonicModule,
     ModalModule,
     HttpClientModule,
+    JobDetailsComponent
   ],
   providers: [
     StatusBar,

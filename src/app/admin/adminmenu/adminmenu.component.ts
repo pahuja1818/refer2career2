@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-adminmenu',
   templateUrl: './adminmenu.component.html',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminmenuComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {}
+  constructor() {
+    
+  }
+
+  ngOnInit() { }
 
 }

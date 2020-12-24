@@ -1,6 +1,7 @@
 const express = require('express');
 var mongoUtil = require('./db');
 var nodemailer = require('nodemailer');
+const ResumeParser = require('resume-parser');
 
 
 mongoUtil.connectToServer(function (err, client) {
@@ -13,7 +14,7 @@ mongoUtil.connectToServer(function (err, client) {
     app.use('/api', AuthRoutes);
     app.use('/api', OrganizationRoutes);
     app.use('/api', JobPostRoutes);
-    
+
 });
 
 
@@ -30,10 +31,24 @@ app.use(cors());
 app.use(fileUpload({
     createParentPath: true
 }));
-app.use(bodyparser.json({limit: '50mb'}));
-app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyparser.json({ limit: '50mb' }));
+app.use(bodyparser.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static("docs"));
+
+ResumeParser
+    .parseResumeUrl('/docs.res.doc') // url
+    .then(data => {
+        console.log('Yay! ');
+
+        console.log('Yay! ', data);
+    })
+    .catch(error => {
+        console.log('Yay! ');
+
+        console.error(error);
+    });
 app.use((req, res, next) => {
+
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,PUT,OPTIONS');
@@ -42,6 +57,7 @@ app.use((req, res, next) => {
     } else {
         next();
     }
+
 });
 const router = express.Router();
 module.exports = router;

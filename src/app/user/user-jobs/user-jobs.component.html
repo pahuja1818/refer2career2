@@ -7,38 +7,46 @@
   </ion-toolbar>
 </ion-header>
 <div class="row justify-content-center" style="overflow: auto;">
-  <div class="col-sm-5 m-3 pt-4" *ngFor="let post of allJobPost" (click)="seeDetails(post._id, post)">
+  <div class="col-sm-5 m-3 pt-4" *ngFor="let jobPost of allJobPost" (click)="seeDetails(jobPost)">
     <div class="card box-shadow w-100 p-3 btn btn-light">
-      <div class="d-flex justify-content-between vertical-center">
+      <div class="d-flex justify-content-between vertical-center mb-3">
         <div class="text-left">
-          <span class="text-grey semi-bold d-block text-md">{{post.jobPost.title}}</span>
-          <span class="text-light-grey semi-bold d-block w-100 text-left">{{post.jobPost.companyName}}</span>
+          <span class="text-dark semi-bold d-block text-md">{{jobPost.jobPost.title}}</span>
+          <span class="text-light-grey semi-bold d-block w-100 text-left">{{jobPost.jobPost.companyName}}</span>
         </div>
-        <img class="card-img-top rounded-circle" src="{{post.jobPost.companyLogo}}" style="height: 80px; width: 80px;">
+        <img class="card-img-top rounded-circle" src="{{jobPost.jobPost.companyLogo}}"
+          style="height: 80px; width: 80px;">
       </div>
-      <div class="card-body text-left">
-        <div class="row">
-          <div class="col-sm-6">
-            <span class="text-sm text-grey">{{post.jobPost.jobInternship}}</span>
-          </div>
-          <div class="col-sm-6">
-            <span class="text-sm text-grey vertical-center text-sm"> <span class="material-icons">
-                account_balance_wallet
-              </span>&nbsp; &#8377; {{post.jobPost.salary}} {{post.jobPost.saalaryType}}</span>
-          </div>
-          <div class="col-sm-6">
-            <span class="text-sm text-grey">{{post.jobPost.jobType}}</span>
-          </div>
-          <div class="col-sm-6">
-            <span class="text-sm text-grey">Last date to apply :
-              {{post.jobPost.lastDateToApply | date: 'dd/MMMM/yyyy'}}</span>
-          </div>
-          <div class="col-sm-6" *ngIf="post.jobPost.jobType === 'In office'">
-            <span class="text-sm text-grey vertical-center text-sm"><span class="material-icons">
-                location_on
-              </span>{{post.jobPost.location}}</span>
-          </div>
-        </div>
+      <div class="w-100 vertical-center my-2 mb-3">
+        <span class="material-icons-outlined text-grey mr-2">{{jobPost.jobPost.jobType === 'In office' ? 'business' :
+          'home'}}</span>
+        <span class="text-dark text-grey text-slmd">{{jobPost.jobPost.jobType}}</span>
+      </div>
+      <div class="my-2 vertical-center justify-content-start">
+        <span class="material-icons-outlined text-grey mr-2">hourglass_top</span>
+        <span class="text-grey semi-bold  d-inline">Apply by : </span>
+        <span class="text-grey">&nbsp; {{jobPost.jobPost.lastDateToApply | date: 'dd MMMM yyyy'}}</span>
+      </div>
+      <div *ngIf="jobPost.jobPost.jobType === 'In office'" class="my-2 vertical-center justify-content-start">
+        <span class="material-icons-outlined text-grey mr-2">location_on</span>
+        <span class="text-grey semi-bold  d-inline">City : </span>
+        <span class="text-grey">&nbsp; {{jobPost.jobPost.location}}</span>
+      </div>
+      <div class="my-2 vertical-center justify-content-start">
+        <span class="material-icons-outlined text-grey mr-2">payments</span>
+        <span class="text-grey semi-bold  d-inline">{{jobPost.jobPost.jobInternship === 'Job' ? 'Salary' : 'Stipend'}}
+          :
+        </span>
+        <span class="text-grey">&nbsp; &#8377; {{jobPost.jobPost.salary}} {{jobPost.jobPost.salaryType}}</span>
+      </div>
+      <div class="my-2 vertical-center">
+        <span class="material-icons-outlined text-grey mr-2">play_arrow</span>
+        <span class="text-grey semi-bold  d-inline">Start Date : </span>
+        <span class="text-grey">&nbsp; Immediatly</span>
+      </div>
+      <div class="d-block pt-2">
+        <span class="text-slmd text-grey px-3 py-2 bg-light-grey"
+          style="border-radius: 20px;">{{jobPost.jobPost.jobInternship}}</span>
       </div>
     </div>
   </div>

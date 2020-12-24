@@ -10,9 +10,6 @@ import {ErrorStateMatcher} from '@angular/material/core';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-
-
-
   
 export class UserProfileComponent implements OnInit {
 
@@ -61,8 +58,6 @@ export class UserProfileComponent implements OnInit {
       postgraduationpercent: new FormControl(this.user.organizationDetails.postgraduationpercent,
         [Validators.required]),
       postgraduationinstitution: new FormControl(this.user.organizationDetails.postgraduationinstitution, [Validators.required]),
-     
-     
       graduationfield: new FormControl(this.user.organizationDetails.graduationfield, [Validators.required]),
       graduationinstitution: new FormControl(this.user.organizationDetails.graduationinstitution, [Validators.required]),
       graduationpercent: new FormControl(this.user.organizationDetails.graduationpercent, [Validators.required]),
@@ -73,9 +68,6 @@ export class UserProfileComponent implements OnInit {
       highschoolboard: new FormControl(this.user.organizationDetails.highschoolboard, [Validators.required]),
       highschoolpassing: new FormControl(this.user.organizationDetails.highschoolpassing, [Validators.required]),
       highschoolcity: new FormControl(this.user.organizationDetails.highschoolcity, [Validators.required]),
-      
-      
-    
     });
     this.detailForm.disable();
     this.userPhoto = this.user.photo;

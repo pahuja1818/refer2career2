@@ -37,6 +37,9 @@ export class AppComponent {
         }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.EMPLOYER) {
+        if (!(this._location.path()).includes('recruiter')) {
+          this.router.navigateByUrl('/recruiter');
+        }
       }
     }
     else { this.router.navigateByUrl('/home'); }

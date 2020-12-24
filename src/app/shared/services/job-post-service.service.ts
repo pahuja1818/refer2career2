@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,9 +13,36 @@ export class JobPostServiceService {
   public baseUrl = window.location.host.includes('instajob') ? 'https://instajobapp.herokuapp.com' : 'http://localhost:8084';
 
   post: any = undefined;
-  postDetail: any = {}; 
-  
-  constructor(private http: HttpClient) { }
+  jobPosts: Subject<any> = new Subject<any>();
+  postDetail: any = {};
+
+  myApplications: Subject<any> = new Subject<any>();
+
+  constructor(private http: HttpClient) {
+    this.getPosts();
+  }
+
+  getMyApplications() {
+    this.appliedJobPost({ candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }).subscribe((data: any) => {
+      if (data.data) {
+        console.log(data.data);
+        this.myApplications.next(data.data);
+      }
+    })
+  }
+
+  getPosts() {
+    if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === 1) {
+      this.getJobPostsByEmployer({ _id: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }).subscribe((data: any) => {
+        this.jobPosts.next(data.data);
+      });
+    }
+    else {
+      this.getAllJobPosts().subscribe((data: any) => {
+        this.jobPosts.next(data.data);
+      })
+    }
+  }
 
   addJobPost(data: any) {
     const body = JSON.stringify(data);
@@ -31,12 +59,27 @@ export class JobPostServiceService {
     return this.http.post(this.baseUrl + `/api/delete/jobpost`, body, { headers: this.headers });
   }
 
-  getAllJobPosts(){
+  getAllJobPosts() {
     return this.http.post(this.baseUrl + `/api/getAll/jobposts`, { headers: this.headers });
   }
 
-  getJobPost(data: any){
+  getJobPost(data: any) {
     const body = JSON.stringify(data);
-    return this.http.post(this.baseUrl + `/api/get/jobpost`, { headers: this.headers });
+    return this.http.post(this.baseUrl + `/api/get/jobpost`, body, { headers: this.headers });
+  }
+
+  applyJobPost(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/apply/jobpost`, body, { headers: this.headers });
+  }
+
+  appliedJobPost(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/applied/jobposts`, body, { headers: this.headers });
+  }
+
+  getJobPostsByEmployer(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/employer/jobposts`, body, { headers: this.headers });
   }
 }

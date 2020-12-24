@@ -14,6 +14,10 @@ export class AuthService {
   public baseUrl = window.location.host.includes('instajob') ? 'https://instajobapp.herokuapp.com' : 'http://localhost:8084';
 
   constructor(private http: HttpClient) {
+   this.getCurrentUser();
+  }
+
+  getCurrentUser(){
     if (window.localStorage.getItem('id')) {
       this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
         .subscribe((data: any) => {
@@ -21,7 +25,7 @@ export class AuthService {
           console.log(data);
         });
     }
-  }
+   }
 
   registerCandidate(data: any) {
     const body = JSON.stringify(data);

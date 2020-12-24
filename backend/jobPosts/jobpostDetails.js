@@ -46,15 +46,39 @@ module.exports.getAllJobPosts = (req, res) => {
 
 module.exports.getJobPosts = (req, res) => {
     const data = req.body;
-    mongoUtil.collection("jobposts").find().toArray(function(err, result) {
+    mongoUtil.collection("jobposts").findOne({ '_id': new ObjectId(req.body.id) }, function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': result });
     });
+}
 
+module.exports.getJobPostsByEmployer = (req, res) => {
+    const data = req.body;
+    console.log(data);
+    mongoUtil.collection("jobposts").find({'jobPost.createdBy': data._id }).toArray(function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });
+        return res.status(200).json({ 'data': result });
+    });
 }
 
 module.exports.getRecomendedJobPost = (req, res) => {
     const jobPost = req.body;
 
+}
+
+module.exports.applyJobPost = (req, res) => {
+    const data = req.body;
+    mongoUtil.collection("applyJob").insertOne(data, function (err, result) {
+        if (err) res.status(200).json({ 'data': false });
+        else res.status(201).json({ 'data': true });
+    });
+}
+
+module.exports.appliedJobPosts = (req, res) => {
+    const data = req.body;
+    mongoUtil.collection("applyJob").find({ candidateId: data.candidateId }).toArray(function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });
+        return res.status(200).json({ 'data': result });
+    });
 }
 

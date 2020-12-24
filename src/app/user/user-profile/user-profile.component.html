@@ -76,12 +76,11 @@
     </div>
     <div class="col-sm-4 mx-3 mb-2">
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label formControlName='DOB'>Date Of Birth</mat-label>
-        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+        <mat-label>Date Of Birth</mat-label>
+        <input formControlName='DOB' matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-
     </div>
 
     <div class="col-sm-4 mx-3 mb-2">
@@ -112,41 +111,24 @@
     <div class=" col-sm-4 mx-3 mb-2">
       <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
         <mat-label class="p-0">Select me</mat-label>
-
         <mat-select formControlName='postgraduationfield'>
-
           <mat-option value="option">International Postgraduate Diploma in Advertising, Design and Digital
             Communication.</mat-option>
-
           <mat-option value="option">Post Graduate Diploma in Banking and Finance.</mat-option>
-
           <mat-option value="option">Postgraduate Diploma in Art & Design. - PGDP</mat-option>
-
           <mat-option value="option">Postgraduate Diploma in Management – Agribusiness and Plantation Management.
           </mat-option>
-
           <mat-option value="option">PGDM in Management. (Equivalent to MBA)</mat-option>
-
           <mat-option value="option">PGDM General. (equivalent to MBA)</mat-option>
-
           <mat-option value="option">PDGM in Banking and Financial Services.</mat-option>
-
           <mat-option value="option">Post-Graduate Diploma in Management. (equivalent to MBA)</mat-option>
-
           <mat-option value="option">Post Graduate Diploma in Project Management.</mat-option>
-
           <mat-option value="option">Post Graduate Diploma in Strategic Human Resource Management.</mat-option>
-
           <mat-option value="option">Post Graduate Diploma in Supply Chain Management.</mat-option>
-
           <mat-option value="option">Post Graduate Extended Diploma in Banking and Finance</mat-option>
-
           <mat-option value="option">PGDM Finance. (equivalent to MBA)</mat-option>
-
           <mat-option value="option">PGDM International Business. (equivalent to MBA)</mat-option>
-
           <mat-option value="option">Executive PGDM in Business Analytics. (equivalent to EMBA)</mat-option>
-
           <mat-option value="option">PGDM for Working Professionals. (equivalent to MBA)</mat-option>
 
           <mat-option value="option">PGDM in Management. </mat-option>

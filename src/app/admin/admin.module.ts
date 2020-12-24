@@ -1,3 +1,4 @@
+import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -20,7 +21,8 @@ import { AddOrganizationComponent } from './add-organization/add-organization.co
     MessagesComponent,
     EmployerPageComponent,
     JobPostsComponent,
-    AddOrganizationComponent
+    AddOrganizationComponent,
+    JobDetailsAdminComponent
   ],
   imports: [
     CommonModule,

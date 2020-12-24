@@ -1,3 +1,4 @@
+import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +24,9 @@ const routes: Routes = [
       },
       {
         path: 'jobs', component: JobPostsComponent
+      },
+      {
+        path: 'jobs/detail/:id', component: JobDetailsAdminComponent
       },
       {
         path: 'messages', component: MessagesComponent

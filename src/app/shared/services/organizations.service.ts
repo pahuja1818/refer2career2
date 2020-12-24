@@ -9,6 +9,8 @@ export class OrganizationsService {
 
   currentUser: any = {};
 
+  organization: any = undefined;
+
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
   public baseUrl = window.location.host.includes('instajob') ? 'https://instajobapp.herokuapp.com' : 'http://localhost:8084';

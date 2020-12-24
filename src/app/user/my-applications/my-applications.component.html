@@ -1,0 +1,59 @@
+<div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
+  <ion-header style="position: fixed">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>My applications</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="row justify-content-center" style=" margin-top: 70px !important;">
+    <div class="col-sm-5 m-3 pt-4" *ngFor="let jobPost of allAppliedPosts" (click)="seeDetails(jobPost.data._id)">
+      <div class="card box-shadow w-100 p-3 btn btn-light">
+        <span class="badge badge-info p-2" style="width: max-content;">Applied on {{jobPost.appliedDate | date: 'dd MMMM yyyy'}}</span>
+        <div class="d-flex justify-content-between vertical-center mb-3">
+          <div class="text-left">
+            <span class="text-dark semi-bold d-block text-md">{{jobPost.data.jobPost.title}}</span>
+            <span class="text-light-grey semi-bold d-block w-100 text-left">{{jobPost.data.jobPost.companyName}}</span>
+          </div>
+          <img class="card-img-top rounded-circle" src="{{jobPost.data.jobPost.companyLogo}}"
+            style="height: 80px; width: 80px;">
+        </div>
+        <div class="w-100 vertical-center my-2 mb-3">
+          <span class="material-icons-outlined text-grey mr-2">{{jobPost.data.jobPost.jobType === 'In office' ?
+            'business' :
+            'home'}}</span>
+          <span class="text-dark text-grey text-slmd">{{jobPost.data.jobPost.jobType}}</span>
+        </div>
+        <div class="my-2 vertical-center justify-content-start">
+          <span class="material-icons-outlined text-grey mr-2">hourglass_top</span>
+          <span class="text-grey semi-bold  d-inline">Apply by : </span>
+          <span class="text-grey">&nbsp; {{jobPost.data.jobPost.lastDateToApply | date: 'dd MMMM yyyy'}}</span>
+        </div>
+        <div *ngIf="jobPost.data.jobPost.jobType === 'In office'" class="my-2 vertical-center justify-content-start">
+          <span class="material-icons-outlined text-grey mr-2">location_on</span>
+          <span class="text-grey semi-bold  d-inline">City : </span>
+          <span class="text-grey">&nbsp; {{jobPost.data.jobPost.location}}</span>
+        </div>
+        <div class="my-2 vertical-center justify-content-start">
+          <span class="material-icons-outlined text-grey mr-2">payments</span>
+          <span class="text-grey semi-bold  d-inline">{{jobPost.data.jobPost.jobInternship === 'Job' ? 'Salary' :
+            'Stipend'}}
+            :
+          </span>
+          <span class="text-grey">&nbsp; &#8377; {{jobPost.data.jobPost.salary}}
+            {{jobPost.data.jobPost.salaryType}}</span>
+        </div>
+        <div class="my-2 vertical-center">
+          <span class="material-icons-outlined text-grey mr-2">play_arrow</span>
+          <span class="text-grey semi-bold  d-inline">Start Date : </span>
+          <span class="text-grey">&nbsp; Immediatly</span>
+        </div>
+        <div class="d-block pt-2">
+          <span class="text-slmd text-grey px-3 py-2 bg-light-grey"
+            style="border-radius: 20px;">{{jobPost.data.jobPost.jobInternship}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

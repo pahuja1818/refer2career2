@@ -18,7 +18,7 @@ export class EmployerPageComponent implements OnInit {
     private orgService: OrganizationsService
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.orgService.getAllOrganizations().subscribe((data: any) => {
       this.allOrganizations = data.data;
       console.log(data);
@@ -26,6 +26,14 @@ export class EmployerPageComponent implements OnInit {
   }
 
   addOrganization() {
+    this.orgService.organization = undefined;
+    this.modalRef = this.modalService.show(AddOrganizationComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+  }
+
+  seeDetails(organization: any) {
+    console.log(organization);
+    this.orgService.organization = undefined;
+    this.orgService.organization = organization;
     this.modalRef = this.modalService.show(AddOrganizationComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
   }
 

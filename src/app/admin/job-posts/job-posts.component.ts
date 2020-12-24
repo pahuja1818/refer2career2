@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { JobPostServiceService } from './../../shared/services/job-post-service.service';
 import { AddJobPostComponent } from './../../shared/components/add-job-post/add-job-post.component';
 import { Component, OnInit } from '@angular/core';
@@ -15,12 +16,14 @@ export class JobPostsComponent implements OnInit {
   constructor(
     public modalRef: BsModalRef,
     private modalService: BsModalService,
-    private jobPostService: JobPostServiceService
+    private jobPostService: JobPostServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() { 
-    this.jobPostService.getAllJobPosts().subscribe((data: any) => {
-      this.allJobPost = data.data;
+    this.jobPostService.getPosts();
+    this.jobPostService.jobPosts.subscribe((data: any) => {
+      this.allJobPost = data;
       console.log(data);
     })
   }
@@ -30,10 +33,11 @@ export class JobPostsComponent implements OnInit {
     this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
   }
 
-  editJobPost(post: any){
-    this.jobPostService.post = undefined;
-    this.jobPostService.post = post;
-    this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+  
+
+  seeDetails(data: any) {
+    this.jobPostService.postDetail = data;
+    this.router.navigateByUrl(`/admin/jobs/detail/${data._id}`);
   }
 
 }

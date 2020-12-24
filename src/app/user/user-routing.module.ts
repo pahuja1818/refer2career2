@@ -1,3 +1,4 @@
+import { MyApplicationsComponent } from './my-applications/my-applications.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,7 +28,10 @@ const routes: Routes = [
         path: 'jobs', component: UserJobsComponent
       },
       {
-        path: 'job/job-detail/:id', component: JobDetailComponent
+        path: 'jobs/job-detail/:id', component: JobDetailComponent
+      },
+      {
+        path: 'my-applications', component: MyApplicationsComponent
       },
       {
         path: 'messages', component: UserMessagesComponent

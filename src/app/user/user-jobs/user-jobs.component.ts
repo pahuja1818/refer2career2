@@ -17,14 +17,15 @@ export class UserJobsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.jobPostService.getAllJobPosts().subscribe((data: any) => {
-      this.allJobPost = data.data;
+    this.jobPostService.getPosts();
+    this.jobPostService.jobPosts.subscribe((data: any) => {
+      this.allJobPost = data;
     })
   }
 
-  seeDetails(_id: any, data: any) {
+  seeDetails(data: any) {
     this.jobPostService.postDetail = data;
-    this.router.navigateByUrl(`/candidate/job/job-detail/${_id}`);
+    this.router.navigateByUrl(`/candidate/jobs/job-detail/${data._id}`);
   }
 
 }

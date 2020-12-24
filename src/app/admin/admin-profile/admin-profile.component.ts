@@ -32,29 +32,33 @@ export class AdminProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initializeForm();
+    this.user.personalDetails = {};
     this.authService.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email }).subscribe((data: any) => {
       this.user = data.data;
-      console.log(data.data);
-      this.detailForm.patchValue({
-        name: this.user.name,
-        email: this.user.email,
-        mobile: this.user.mobile,
-        alternateNumber: this.user.alternateNumber,
-        organizationName: this.user.organizationDetails.organizationName,
-        organizationEmail: this.user.organizationDetails.organizationEmail,
-        organizationMobile: this.user.organizationDetails.organizationMobile,
-        field: this.user.organizationDetails.organizationField,
-        addressLineOne: this.user.organizationDetails.addressLineOne,
-        addressLineTwo: this.user.organizationDetails.addressLineTwo,
-        pincode: this.user.organizationDetails.pincode,
-        city: this.user.organizationDetails.city,
-      });
-      this.userPhoto = this.user.photo;
-      this.organizationLogo = this.user.organizationDetails.logo;
+      this.initializeDetails();
     },
       err => console.log(err.message)
     );
-    this.initializeForm();
+  }
+
+  initializeDetails() {
+    this.detailForm.patchValue({
+      name: this.user.name,
+      email: this.user.email,
+      mobile: this.user.mobile,
+      alternateNumber: this.user.alternateNumber,
+      organizationName: this.user.organizationDetails.organizationName,
+      organizationEmail: this.user.organizationDetails.organizationEmail,
+      organizationMobile: this.user.organizationDetails.organizationMobile,
+      field: this.user.organizationDetails.organizationField,
+      addressLineOne: this.user.organizationDetails.addressLineOne,
+      addressLineTwo: this.user.organizationDetails.addressLineTwo,
+      pincode: this.user.organizationDetails.pincode,
+      city: this.user.organizationDetails.city,
+    });
+    this.userPhoto = this.user.photo;
+    this.organizationLogo = this.user.organizationDetails.logo;
   }
 
   initializeForm() {

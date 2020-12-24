@@ -1,0 +1,100 @@
+<div class="wh-100" style="overflow: auto; ">
+  <ion-header style="position: fixed; ">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Job Detail</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="m-3 mt-5 p-2 bg-white"
+    style="margin-top: 70px !important; border-radius: 7px; overflow-y: auto !important; border: 1px solid #cccccc;">
+    <span *ngIf="role !== 2" class="d-block text-right material-icons text-grey my-2 text-link" (click)="editJobPost()">edit</span>
+    <div class="d-flex justify-content-between vertical-center mb-3">
+      <div class="text-left">
+        <span class="text-dark semi-bold d-block text-md">{{jobPost.jobPost.title}}</span>
+        <span class="text-light-grey semi-bold d-block w-100 text-left">{{jobPost.jobPost.companyName}}</span>
+      </div>
+      <img class="card-img-top rounded-circle" src="{{jobPost.jobPost.companyLogo}}" style="height: 80px; width: 80px;">
+    </div>
+    <div class="w-100 vertical-center my-2 mb-3">
+      <span class="material-icons-outlined text-grey mr-2">{{jobPost.jobPost.jobType === 'In office' ? 'business' :
+        'home'}}</span>
+      <span class="text-dark text-grey text-slmd">{{jobPost.jobPost.jobType}}</span>
+    </div>
+    <div class="row my-2 justify-content-start">
+      <div class="col-sm-4 my-2 vertical-center justify-content-start">
+        <span class="material-icons-outlined text-grey mr-2">hourglass_top</span>
+        <span class="text-grey semi-bold  d-inline">Apply by : </span>
+        <span class="text-grey">&nbsp; {{jobPost.jobPost.lastDateToApply | date: 'dd MMMM yyyy'}}</span>
+      </div>
+      <div *ngIf="jobPost.jobPost.jobType === 'In office'" class="col-sm-4 my-2 vertical-center justify-content-start">
+        <span class="material-icons-outlined text-grey mr-2">location_on</span>
+        <span class="text-grey semi-bold  d-inline">City : </span>
+        <span class="text-grey">&nbsp; {{jobPost.jobPost.location}}</span>
+      </div>
+    </div>
+    <div class="row vertical-center mb-2">
+      <div class="col-sm-4 my-2 vertical-center justify-content-start">
+        <span class="material-icons-outlined text-grey mr-2">payments</span>
+        <span class="text-grey semi-bold  d-inline">{{jobPost.jobPost.jobInternship === 'Job' ? 'Salary' : 'Stipend'}} :
+        </span>
+        <span class="text-grey">&nbsp; &#8377; {{jobPost.jobPost.salary}} {{jobPost.jobPost.salaryType}}</span>
+      </div>
+      <div class="col-sm-4 my-2 vertical-center">
+        <span class="material-icons-outlined text-grey mr-2">play_arrow</span>
+        <span class="text-grey semi-bold  d-inline">Start Date : </span>
+        <span class="text-grey">&nbsp; Immediatly</span>
+      </div>
+    </div>
+    <div class="d-block pt-2">
+      <span class="text-slmd text-grey px-3 py-2 bg-light-grey"
+        style="border-radius: 20px;">{{jobPost.jobPost.jobInternship}}</span>
+    </div>
+    <hr>
+    <div>
+      <span class="text-dark text-ssmd semi-bold d-block mt-3">About {{jobPost.jobPost.companyName}}</span>
+      <span class="text-break text-grey">{{jobPost.jobPost.aboutUs}}</span>
+    </div>
+    <div>
+      <span class="text-dark text-ssmd semi-bold d-block my-3">Skill(s) required</span>
+      <div class="d-inline m-2" style="display: inline-block !important;" *ngFor="let skill of skills">
+        <span class="text-ssmd text-grey px-3 py-2 m-2 bg-light-grey"
+          style="border-radius: 20px; margin: 10px;">{{skill.skillName}}</span>
+      </div>
+    </div>
+    <div>
+      <span class="text-dark text-ssmd semi-bold d-block my-3">Job Details</span>
+      <span *ngFor="let detail of jobPost.jobPost.details"
+        class="vertical-center text-ssmd text-grey px-3 py-2  m-2 bg-light"> <span
+          class="material-icons-outlined text-sm text-grey mr-2">circle</span> &nbsp; {{detail.detail}}</span>
+    </div>
+    <div class="pt-2">
+      <span class="text-dark text-ssmd semi-bold d-block mt-3">Number of openings</span>
+      <span class="text-break text-grey">{{jobPost.jobPost.vacancy}}</span>
+    </div>
+    <div class="w-100 d-flex justify-content-center my-4 pt-5" *ngIf="role === 2">
+      <button class="btn btn-primary px-4 py-2"
+        [ngClass]="appliedDate !== undefined ? 'bg-light text-dark' : 'bg-violet'"
+        [disabled]="appliedDate !== undefined" (click)="applyJobModal(applyModal)">{{appliedDate !== undefined ?
+        'Applied on ' : 'Apply now'}} {{appliedDate
+        | date: 'dd MMMM yyyy'}}</button>
+    </div>
+    <div class="w-100 d-flex justify-content-center my-4 pt-5" *ngIf="role !== 2">
+      <button class="btn btn-primary bg-light text-dark px-4 py-2" disabled>Posted on {{jobPost.jobPost.createdAt
+        | date: 'dd MMMM yyyy'}}</button>
+    </div>
+  </div>
+</div>
+<ng-template class="p-2" #applyModal>
+  <div class="bg-white p-3" style="border-radius: 5px;">
+    <span class="d-block material-icons text-grey text-link text-right" (click)="closeModal()">close</span>
+    <span class="d-block text-grey bold mb-2">Read before you apply - </span>
+    <span class="d-block text-dark">Make sure that you have entered correct details in your profile.</span>
+    <span class="d-block text-dark">Your profile data and resume will be shared with the
+      {{jobPost.jobPost.companyName}}</span>
+    <div class="w-100 d-flex justify-content-center my-4 pt-5">
+      <button class="btn btn-primary bg-violet px-4 py-2" (click)="applyJob()">Apply now</button>
+    </div>
+  </div>
+</ng-template>

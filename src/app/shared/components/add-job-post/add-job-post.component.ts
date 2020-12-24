@@ -108,7 +108,7 @@ export class AddJobPostComponent implements OnInit {
           active: true,
           companyName: this.companyName,
           companyLogo: this.companyLogo,
-          createdBy: '',
+          createdBy: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
           createdAt: new Date(),
           title: this.jobPostForm.get('title').value,
           vacancy: this.jobPostForm.get('vacancy').value,
@@ -129,9 +129,7 @@ export class AddJobPostComponent implements OnInit {
           if (data.data === true) this.toastService.showToast("Job Post Added Successfully !");
           this.isServiceRunning = false;
           this.modalRef.hide();
-          setTimeout(time => {
-            window.location.reload();
-          }, 3000);
+         this.jobPostService.getPosts();
         })
       }
       else {
@@ -143,9 +141,7 @@ export class AddJobPostComponent implements OnInit {
           this.jobPostService.post = undefined;
           this.isServiceRunning = false;
           this.modalRef.hide();
-          setTimeout(time => {
-            window.location.reload();
-          }, 3000);
+          this.jobPostService.getPosts();
         })
       }
     }

@@ -15,6 +15,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 export class AddOrganizationComponent implements OnInit {
 
   user: any = {};
+  organization: any = {};
   currrentDocIndex: any = undefined;
 
   documentsArray: any[] = [];
@@ -48,6 +49,14 @@ export class AddOrganizationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initializeForm();
+    if(this.organizationService.organization !== undefined){
+      this.organization = this.organizationService.organization;
+      this.initializeDetail();
+    }
+  }
+
+  initializeForm(){
     this.detailForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -69,6 +78,18 @@ export class AddOrganizationComponent implements OnInit {
     });
   }
 
+  initializeDetail(){
+    this.detailForm.patchValue({
+      'name': this.organization.personalDetails.name,
+      'mobile': this.organization.personalDetails.mobile,
+      'email': this.organization.personalDetails.email,
+      'alternateNumber': this.organization.personalDetails.alternateNumber,
+    });
+    this.documentsArray = this.organization.organizationDetails.docs;
+    this.organizationLogo = this.organization.organizationDetails.logo;
+    this.userPhoto = this.organization.personalDetails.photo;
+  }
+
 
   close() {
     this.modalRef.hide()
@@ -87,7 +108,6 @@ export class AddOrganizationComponent implements OnInit {
         email: this.detailForm.get('organizationEmail').value,
         password: this.detailForm.get('organizationMobile').value,
         role: UserRole.EMPLOYER,
-        eId: new Date().getTime(),
         verified: true,
         time: new Date(),
         personalDetails: {
