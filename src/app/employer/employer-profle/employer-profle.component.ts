@@ -26,7 +26,7 @@ export class EmployerProfleComponent implements OnInit {
       this.user = data;
       console.log(this.user);
       this.initializeDetails();
-    })
+    });
   }
 
   initializeDetails() {

@@ -32,7 +32,7 @@ export class AddOrganizationComponent implements OnInit {
 
   modal2: BsModalRef;
 
-  documentType: string = '';
+  documentType = '';
   frontPhoto: any;
   frontPhotoData: any;
   backPhoto: any;
@@ -50,13 +50,13 @@ export class AddOrganizationComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
-    if(this.organizationService.organization !== undefined){
+    if (this.organizationService.organization !== undefined) {
       this.organization = this.organizationService.organization;
       this.initializeDetail();
     }
   }
 
-  initializeForm(){
+  initializeForm() {
     this.detailForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -78,12 +78,12 @@ export class AddOrganizationComponent implements OnInit {
     });
   }
 
-  initializeDetail(){
+  initializeDetail() {
     this.detailForm.patchValue({
-      'name': this.organization.personalDetails.name,
-      'mobile': this.organization.personalDetails.mobile,
-      'email': this.organization.personalDetails.email,
-      'alternateNumber': this.organization.personalDetails.alternateNumber,
+      name: this.organization.personalDetails.name,
+      mobile: this.organization.personalDetails.mobile,
+      email: this.organization.personalDetails.email,
+      alternateNumber: this.organization.personalDetails.alternateNumber,
     });
     this.documentsArray = this.organization.organizationDetails.docs;
     this.organizationLogo = this.organization.organizationDetails.logo;
@@ -92,11 +92,14 @@ export class AddOrganizationComponent implements OnInit {
 
 
   close() {
-    this.modalRef.hide()
+    this.modalRef.hide();
   }
 
   addDocument(template: any) {
-    this.modal2 = this.modalService.show(template, { id: 2, class: "fit-width modal-dialog-centered", ignoreBackdropClick: true, animated: true })
+    this.modal2 = this.modalService.show(template, {
+      id: 2, class: 'fit-width modal-dialog-centered'
+      , ignoreBackdropClick: true, animated: true
+    });
   }
 
   save() {
@@ -195,11 +198,11 @@ export class AddOrganizationComponent implements OnInit {
   addDoc() {
     this.documentFormSubmitted = true;
     if (this.documentType && this.frontPhoto) {
-      let doc = {
-        'type': this.documentType,
-        'frontPhoto': this.frontPhoto,
-        'backPhoto': this.backPhoto
-      }
+      const doc = {
+        type: this.documentType,
+        frontPhoto: this.frontPhoto,
+        backPhoto: this.backPhoto
+      };
       if (this.currrentDocIndex === undefined) {
         this.documentsArray.push(doc);
       }

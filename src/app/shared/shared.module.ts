@@ -58,7 +58,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { AlertModule } from 'ngx-bootstrap/alert';
 
-import { BrowserModule } from '@angular/platform-browser'
+import { BrowserModule } from '@angular/platform-browser';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { JobDetailsComponent } from './components/add-job-post/job-details/job-details.component';
 

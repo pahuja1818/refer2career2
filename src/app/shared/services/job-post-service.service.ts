@@ -28,7 +28,7 @@ export class JobPostServiceService {
         console.log(data.data);
         this.myApplications.next(data.data);
       }
-    })
+    });
   }
 
   getPosts() {
@@ -40,7 +40,7 @@ export class JobPostServiceService {
     else {
       this.getAllJobPosts().subscribe((data: any) => {
         this.jobPosts.next(data.data);
-      })
+      });
     }
   }
 

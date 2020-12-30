@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastService } from './../../shared/services/toast.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { JobPostServiceService } from './../../shared/services/job-post-service.service';
@@ -10,11 +11,6 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./job-detail.component.scss'],
 })
 export class JobDetailComponent implements OnInit, AfterViewInit {
-  jobPost: any = {};
-  post: any = {};
-  skills: any[] = [];
-
-  appliedDate: any = undefined;
 
   constructor(
     private jobPostService: JobPostServiceService,
@@ -22,6 +18,15 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService,
     private toastService: ToastService
   ) { }
+  jobPost: any = {};
+  post: any = {};
+  skills: any[] = [];
+
+  appliedDate: any = undefined;
+
+  referJobPostForm: FormGroup;
+
+  modalRef: BsModalRef;
 
   ngOnInit() {
     this.jobPostService.getMyApplications();
@@ -33,11 +38,11 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
             if (post.jobPostId === params.id) {
               this.appliedDate = post.date;
               console.log(post);
-            };
+            }
           });
         });
         console.log(params.id);
-        this.jobPostService.getJobPost({ 'id': params.id }).subscribe((data: any) => {
+        this.jobPostService.getJobPost({ id: params.id }).subscribe((data: any) => {
           this.jobPost = data.data;
           this.skills = this.jobPost.jobPost.skills;
         });
@@ -48,29 +53,40 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log(this.jobPost);
   }
-
-  modalRef: BsModalRef;
   applyJobModal(template: any) {
-    this.modalRef = this.modalService.show(template, { class: "half-modal", ignoreBackdropClick: true, animated: true });
+    this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
+  }
+
+  referJobModal(template: any) {
+    this.referJobPostForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      mobile: new FormControl(null, Validators.required),
+      resume: new FormControl(null, Validators.required),
+    });
+    this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
   }
 
   applyJob() {
-    let data = {
+    const obj = {
       candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
       jobPostId: this.jobPost._id,
       date: new Date()
-    }
-    this.jobPostService.applyJobPost(data).subscribe((data: any) => {
+    };
+    this.jobPostService.applyJobPost(obj).subscribe((data: any) => {
       if (data.data) {
         this.toastService.showToast('Applied successfully!');
         this.jobPostService.getMyApplications();
         this.modalRef.hide();
       }
-    })
+    });
   }
 
   closeModal() {
     this.modalRef.hide();
+  }
+
+  referJobPost() {
+    console.log(this.referJobPostForm.value);
   }
 
 }

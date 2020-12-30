@@ -12,7 +12,7 @@ import { UsermenuComponent } from './usermenu/usermenu.component';
 import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { UserJobsComponent } from './user-jobs/user-jobs.component';
-import { PopoverModule } from 'ngx-bootstrap/popover';  
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 
 

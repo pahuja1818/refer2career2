@@ -1,35 +1,34 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" class="custom" type="overlay">
-      <ion-content>
-        <div class="menu-header-bg vertical-center" style="text-align: center;">
-          <img src="../../../assets/logo.png" class="img-fluid mx-auto pt-2 pr-2" style="width: 150px; height: 100px;" alt="logo">
-        </div>
-        <ion-list class="menu-items" lines="none">
-          <ion-item routerLink="/candidate/dashboard" routerLinkActive="active" (click)="toggle()">
-            <ion-icon name="grid" routerLinkActive='icon-active'></ion-icon>Dashboard
-          </ion-item>
-          <ion-item routerLink="/candidate/profile" routerLinkActive="active" (click)="toggle()">
-            <ion-icon name="person" routerLinkActive='icon-active'></ion-icon>My Profile
-          </ion-item>
-          <ion-item routerLink="/candidate/jobs" routerLinkActive='active' (click)="toggle()">
-            <ion-icon name="briefcase" routerLinkActive='icon-active'></ion-icon>Job Posts
-          </ion-item>
-          <ion-item routerLink="/candidate/my-applications" routerLinkActive='active' (click)="toggle()">
-            <ion-icon name="albums" routerLinkActive='icon-active'></ion-icon>My applications
-          </ion-item>
-          <ion-item routerLink="/candidate/messages" routerLinkActive='active' (click)="toggle()">
-            <ion-icon name="chatbubble-ellipses" routerLinkActive='icon-active'></ion-icon>Messages
-          </ion-item>
-          <ion-item (click)="openModal(logout)" class="text-link">
-            <ion-icon name="log-out"></ion-icon>Logout
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content" style="overflow: auto;">
-    </ion-router-outlet>
-  </ion-split-pane>
+  <ion-menu contentId="main-content" class="custom" type="overlay">
+    <ion-content>
+      <div class="menu-header-bg vertical-center" style="text-align: center;">
+        <img src="../../../assets/logo.png" class="img-fluid mx-auto pt-2 pr-2" style="width: 150px; height: 100px;"
+          alt="logo">
+      </div>
+      <ion-list class="menu-items" lines="none">
+        <ion-item routerLink="/candidate/dashboard" routerLinkActive="active" (click)="toggle()">
+          <ion-icon name="grid" routerLinkActive='icon-active'></ion-icon>Dashboard
+        </ion-item>
+        <ion-item routerLink="/candidate/profile" routerLinkActive="active" (click)="toggle()">
+          <ion-icon name="person" routerLinkActive='icon-active'></ion-icon>My Profile
+        </ion-item>
+        <ion-item routerLink="/candidate/jobs" routerLinkActive='active' (click)="toggle()">
+          <ion-icon name="briefcase" routerLinkActive='icon-active'></ion-icon>Job Posts
+        </ion-item>
+        <ion-item routerLink="/candidate/my-applications" routerLinkActive='active' (click)="toggle()">
+          <ion-icon name="albums" routerLinkActive='icon-active'></ion-icon>My applications
+        </ion-item>
+        <ion-item routerLink="/candidate/messages" routerLinkActive='active' (click)="toggle()">
+          <ion-icon name="chatbubble-ellipses" routerLinkActive='icon-active'></ion-icon>Messages
+        </ion-item>
+        <ion-item (click)="openModal(logout)" class="text-link">
+          <ion-icon name="log-out"></ion-icon>Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content" style="overflow: auto;">
+  </ion-router-outlet>
 </ion-app>
 
 <ng-template #logout>

@@ -12,6 +12,15 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class JobDetailsComponent implements OnInit {
 
+  constructor(
+    private jobPostService: JobPostServiceService,
+    private route: ActivatedRoute,
+    private modalService: BsModalService,
+    private toastService: ToastService,
+  ) {
+    console.log('i called');
+  }
+
   jobPost: any = {};
   post: any = {};
   skills: any[] = [];
@@ -19,14 +28,7 @@ export class JobDetailsComponent implements OnInit {
 
   appliedDate: any = undefined;
 
-  constructor(
-    private jobPostService: JobPostServiceService,
-    private route: ActivatedRoute,
-    private modalService: BsModalService,
-    private toastService: ToastService,
-  ) { 
-    console.log('i called');
-  }
+  modalRef: BsModalRef;
 
   ngOnInit() {
     this.role = JSON.parse(window.atob(window.localStorage.getItem('id'))).role;
@@ -39,11 +41,11 @@ export class JobDetailsComponent implements OnInit {
             if (post.jobPostId === params.id) {
               this.appliedDate = post.date;
               console.log(post);
-            };
+            }
           });
         });
         console.log(params.id);
-        this.jobPostService.getJobPost({ 'id': params.id }).subscribe((data: any) => {
+        this.jobPostService.getJobPost({ id: params.id }).subscribe((data: any) => {
           this.jobPost = data.data;
           this.skills = this.jobPost.jobPost.skills;
         });
@@ -51,37 +53,34 @@ export class JobDetailsComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit() {
-    console.log(this.jobPost);
-  }
-
-  modalRef: BsModalRef;
   applyJobModal(template: any) {
-    this.modalRef = this.modalService.show(template, { class: "half-modal", ignoreBackdropClick: true, animated: true });
+    this.modalRef = this.modalService.show(template,
+      { class: 'half-modal', ignoreBackdropClick: true, animated: true });
   }
 
   applyJob() {
-    let data = {
+    const obj = {
       candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
       jobPostId: this.jobPost._id,
       date: new Date()
-    }
-    this.jobPostService.applyJobPost(data).subscribe((data: any) => {
+    };
+    this.jobPostService.applyJobPost(obj).subscribe((data: any) => {
       if (data.data) {
         this.toastService.showToast('Applied successfully!');
         this.jobPostService.getMyApplications();
         this.modalRef.hide();
       }
-    })
+    });
   }
 
   closeModal() {
     this.modalRef.hide();
   }
 
-  editJobPost(){
+  editJobPost() {
     this.jobPostService.post = undefined;
     this.jobPostService.post = this.jobPost;
-    this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+    this.modalRef = this.modalService.show(AddJobPostComponent,
+      { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
   }
 }

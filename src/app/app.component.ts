@@ -17,7 +17,7 @@ export class AppComponent {
   role = UserRole;
 
   constructor(
-    private _location: Location,
+    private location: Location,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -27,17 +27,17 @@ export class AppComponent {
     this.initializeApp();
     if (window.localStorage.getItem('id')) {
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
-        if (!(this._location.path()).includes('candidate')) {
+        if (!(this.location.path()).includes('candidate')) {
           this.router.navigateByUrl('/candidate');
         }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {
-        if (!(this._location.path()).includes('admin')) {
+        if (!(this.location.path()).includes('admin')) {
           this.router.navigateByUrl('/admin');
         }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.EMPLOYER) {
-        if (!(this._location.path()).includes('recruiter')) {
+        if (!(this.location.path()).includes('recruiter')) {
           this.router.navigateByUrl('/recruiter');
         }
       }

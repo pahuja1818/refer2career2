@@ -10,7 +10,7 @@ export class AdminmenuComponent implements OnInit {
 
 
   constructor() {
-    
+
   }
 
   ngOnInit() { }

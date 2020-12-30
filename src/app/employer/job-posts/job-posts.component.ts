@@ -25,18 +25,20 @@ export class JobPostsComponent implements OnInit {
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.allJobPost = data;
       console.log(data);
-    })
+    });
   }
 
   addJobPost() {
     this.jobPostService.post = undefined;
-    this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+    this.modalRef = this.modalService.show(AddJobPostComponent,
+      { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
   }
 
   editJobPost(post: any) {
     this.jobPostService.post = undefined;
     this.jobPostService.post = post;
-    this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+    this.modalRef = this.modalService.show(AddJobPostComponent,
+      { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
   }
 
   seeDetails(data: any) {

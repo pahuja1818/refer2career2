@@ -11,9 +11,11 @@ mongoUtil.connectToServer(function (err, client) {
     const AuthRoutes = require('./authentication/authRoute');
     const OrganizationRoutes = require('./addOrganizations/addOrganizationsRoute');
     const JobPostRoutes = require('./jobPosts/jobpostRoute');
+    const ReferJobPostRoutes = require('./referPost/referPostRoute');
     app.use('/api', AuthRoutes);
     app.use('/api', OrganizationRoutes);
     app.use('/api', JobPostRoutes);
+    app.use('/api', ReferJobPostRoutes);
 
 });
 

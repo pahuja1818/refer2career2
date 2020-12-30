@@ -10,20 +10,18 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class UserDashboardComponent implements OnInit {
   modalRef: BsModalRef;
-  
+
 
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  
+
   toggle() {
-    if (window.screen.width < 990) {
-      this.menu.toggle();
-    }
+    this.menu.toggle();
   }
 
   openModal(template: any) {
@@ -32,11 +30,11 @@ export class UserDashboardComponent implements OnInit {
 
   }
 
-  cancel(){
+  cancel() {
     this.modalRef.hide();
   }
 
-  loggedOut(){
+  loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
     window.location.reload();

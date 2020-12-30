@@ -83,7 +83,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
-   
+
     CarouselModule.forRoot(),
     NgOtpInputModule,
     ReactiveFormsModule,
@@ -139,7 +139,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     SharedModule,
     NgbModule,
-   
+
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

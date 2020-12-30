@@ -1,53 +1,76 @@
-<ion-header [translucent]="true" class="bg-primary">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-
-<div id="main-card">
-  <div  routerLink="/user/dashboard" class="card-style" style="width: 18rem;" popover="Go To DashBoard"
-  triggers="mouseenter:mouseleave">
-    <img src="../../../assets/icon/DASHBOARDICON.png" class="card-img-top" alt="...">
-   
-  </div>
-  <div  routerLink="/user/profile" class="card-style" style="width: 18rem; border-style: initial;"popover="Go To My Profile"
-  triggers="mouseenter:mouseleave">
-    <img src="../../../assets/icon/profileicon.png" class="card-img-top" alt="...">
-  </div>
-  
-  <div  routerLink="/user/organizations" class="card-style" style="width: 18rem;"popover="Go To Organization Details"
-  triggers="mouseenter:mouseleave">
-    <img src="../../../assets/icon/ORGANIZATIONICON.png" class="card-img-top" alt="...">
-   
-  </div>
-  <div  routerLink="/user/jobs" class=" card-style" style="width: 18rem;"popover="Go To Jobs Posts"
-  triggers="mouseenter:mouseleave">
-    <img src="../../../assets/icon/jobsicon.webp" class="card-img-top" alt="...">
-   
-  </div>
-  <div  routerLink="/user/messages" class="card-style" style="width: 18rem;"popover="Go To Messages"
-  triggers="mouseenter:mouseleave">
-    <img src="../../../assets/icon/MESSAGEICONNNN.jpg" class="card-img-top" alt="...">
-   
-  </div>
-  <div (click)="openModal(logout)" class=" card-style" style="width: 18rem;"popover="Are You Sure You Want To Log Out"
-  triggers="mouseenter:mouseleave">
-    <img src="../../../assets/icon/logouticon.png" class="card-img-top" alt="...">
-   
-  </div>
-</div>
-
-
-<ng-template #logout>
-  <div class="bg-white box-shadow p-3 m-3" style="border-radius: 10px;">
-    Are you sure you want to logout?
-    <div class="d-flex justify-content-end px-2 mt-2">
-      <button class="btn btn-primary p-0 text-smd bg-violet px-2 mr-3" (click)="loggedOut()">Yes</button>
-      <button class="btn btn-secondary text-smd px-2 p-0" (click)="cancel()">No</button>
+<div class="h-100 w-100" style="overflow-y: auto;">
+  <div class="dash-bg w-100 text-white"
+    style="min-height: 290px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
+    <div class="d-flex justify-content-between p-2">
+      <span class="text-white semi-bold text-lg">instajob.ml</span>
+      <div class="d-flex justify-content-end vertical-center">
+        <ion-icon name="notifications-outline" class="mr-2 text-md"></ion-icon>
+        <ion-menu-button class="text-white"></ion-menu-button>
+      </div>
+    </div>
+    <div class="row justify-content-between mt-5 pb-2 pt-5">
+      <div class="col-sm-4 d-flex justify-content-center mt-3">
+        <span class="text-white text-lg mx-auto">Hello, Tushar!</span>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-center mt-3">
+        <button class="btn btn-info bg-coloured py-1 px-5" style="border: 0px; border-radius: 30px;">Earnings
+          $10</button>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-center mt-3">
+        <button class="btn btn-outline-light py-1 px-5" routerLink="/candidate/profile" style="border-radius: 30px;">My Profile</button>
+      </div>
     </div>
   </div>
-</ng-template>
+  <div class="mt-4 pt-4">
+    <div class="row p-0 m-0 justify-content-between">
+      <div class="row p-2 m-0 col-sm-4">
+        <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
+          style="border: 1px solid #bfc2f7; border-radius: 10px;">
+          <div class="rounded-circle bg-violet vertical-center mx-auto"
+            style="margin-top: -30px; width: 90px; height: 90px;">
+            <span class="material-icons text-lg text-white mx-auto">search</span>
+          </div>
+          <div class="w-100 text-center my-3">
+            <span class="d-block text-dark semi-bold text-lg">Find Jobs</span>
+            <span class="d-block text-dark">Refer friends & colleagues and get rewarded</span>
+          </div>
+          <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
+            <button routerLink="/candidate/jobs" class="btn btn-outline-info py-1 px-5" style="border-radius: 30px;">View</button>
+          </div>
+        </div>
+      </div>
+      <div class="row p-2 m-0 col-sm-4">
+        <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
+          style="border: 1px solid #bfc2f7; border-radius: 10px;">
+          <div class="rounded-circle bg-violet vertical-center mx-auto"
+            style="margin-top: -30px; width: 90px; height: 90px;">
+            <span class="material-icons text-xlg text-white mx-auto">recent_actors</span>
+          </div>
+          <div class="w-100 text-center my-3">
+            <span class="d-block text-dark semi-bold text-lg">Referred Profiles</span>
+            <span class="d-block text-dark">Check the status of referred candidates</span>
+          </div>
+          <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
+            <button class="btn btn-outline-info py-1 px-5" style="border-radius: 30px;">View</button>
+          </div>
+        </div>
+      </div>
+      <div class="row p-2 m-0 col-sm-4">
+        <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
+          style="border: 1px solid #bfc2f7; border-radius: 10px;">
+          <div class="rounded-circle bg-violet vertical-center mx-auto"
+            style="margin-top: -30px; width: 90px; height: 90px;">
+            <span class="material-icons text-lg text-white mx-auto">monetization_on</span>
+          </div>
+          <div class="w-100 text-center my-3">
+            <span class="d-block text-dark semi-bold text-lg">Encashments</span>
+            <span class="d-block text-dark">Have you funds encashed</span>
+          </div>
+          <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
+            <button class="btn btn-outline-info py-1 px-5" style="border-radius: 30px;">View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

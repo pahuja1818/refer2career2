@@ -18,7 +18,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     HomePageRoutingModule,
     BsDatepickerModule.forRoot(),
     CarouselModule.forRoot()
-    
+
   ],
   declarations: [HomePage]
 })

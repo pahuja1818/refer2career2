@@ -1,396 +1,269 @@
-<ion-header [translucent]="true" class="bg-primary">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>My Profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<div class="bg-white" style="overflow: auto;">
-  <span class="d-block text-right bold material-icons mt-3 mr-3 text-link"
-    [ngClass]="isEditing ? 'text-primary' : 'text-grey'" (click)="onEnableEditing()">editing</span>
-  <br>
-  <br>
-  <div class="w-100 d-flex justify-content-center">
-    <div class="vertical-center">
-      <div class="">
-        <div class="w-100 d-flex justify-content-center">
-          <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
-            class="position-absolute w-25 h-25" style="opacity: 0 !important;" />
-          <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md" *ngIf="!userPhoto"
-            style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
-          <img *ngIf="userPhoto" class="img-fulid rounded-circle"
-            style="height: 70px !important; width: 70px !important;" src="{{userPhoto}}" alt="">
+<div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
+  <ion-header style="position: fixed">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>My Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="row justify-content-center" style="overflow: auto;">
+    <div class="col-sm-12 m-2 d-flex justify-content-end">
+      <button class="btn btn-primary m-2 position-fixed bg-violet text-sm px-3 py-1 material-icons-outlined"
+        style="z-index: 99;" (click)="addJobPost()">edit</button>
+    </div>
+  </div>
+  <div class="m-3 mt-5 p-2 bg-white"
+    style="margin-top: 70px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+    <div class="mt-2 row d-flex justify-content-center">
+      <span class="text-grey text-md col-sm-12 ml-4">Upload resume : </span>
+      <div class="row justify-content-center">
+        <div class="col-sm-6">
+          <span class="material-icons display-1 text-danger mx-auto">backup</span>
+          <div class="form-group">
+            <input type="file" accept=".pdf,.docx" class="form-control-file" id="exampleFormControlFile1">
+          </div>
         </div>
       </div>
-      <div class="ml-3">
-        <div class="w-100 text-grey semi-bold text-smd">{{user.name}}</div>
-        <div class="w-100 text-grey semi-bold text-smd">{{user.email}}</div>
-        <span class="badge badge-primary">Candidate</span>
+      <div class="row justify-content-center my-2">
       </div>
     </div>
   </div>
-  <div class="mt-4 row d-flex justify-content-center" [formGroup]="detailForm">
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Name</mat-label>
-        <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
-        <mat-error>Enter valid name</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Phone number</mat-label>
-        <span matPrefix>+91 &nbsp;</span>
-        <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-        <mat-error>Enter valid mobile number</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Email</mat-label>
-        <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Alternate contact number</mat-label>
-        <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
-        <mat-error>Enter valid mobile number*</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Address line one</mat-label>
-        <input formControlName='addressLineOne' matInput placeholder="Enter Address line one" class="p-0" value='psj'>
-        <mat-error *ngIf="false">Enter valid details</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Address line two</mat-label>
-        <input formControlName='addressLineTwo' matInput placeholder="Address line two" class="p-0">
-        <mat-error>Enter valid details</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Date Of Birth</mat-label>
-        <input formControlName='DOB' matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">City</mat-label>
-        <input formControlName='city' matInput placeholder="Enter city" class="p-0">
-        <mat-error>Enter valid city</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Pincode</mat-label>
-        <input formControlName='pincode' matInput type="number" placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid pincode</mat-error>
-      </mat-form-field>
-    </div>
-    <!-- proffessional details -->
-    <div class="col-sm-4 mx-3 mb-2">
-    </div>
-    <div class="col-sm-12 my-3 text-bold">
-      <h3 class="text-center">Professional Details</h3>
-    </div>
-
-    <!-- post graduation details -->
-    <div class="col-sm-12 my-3 text-grey">
-      <h5 class="text-center">Post Graduation Details</h5>
-    </div>
-    <div class=" col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Select me</mat-label>
-        <mat-select formControlName='postgraduationfield'>
-          <mat-option value="option">International Postgraduate Diploma in Advertising, Design and Digital
-            Communication.</mat-option>
-          <mat-option value="option">Post Graduate Diploma in Banking and Finance.</mat-option>
-          <mat-option value="option">Postgraduate Diploma in Art & Design. - PGDP</mat-option>
-          <mat-option value="option">Postgraduate Diploma in Management – Agribusiness and Plantation Management.
-          </mat-option>
-          <mat-option value="option">PGDM in Management. (Equivalent to MBA)</mat-option>
-          <mat-option value="option">PGDM General. (equivalent to MBA)</mat-option>
-          <mat-option value="option">PDGM in Banking and Financial Services.</mat-option>
-          <mat-option value="option">Post-Graduate Diploma in Management. (equivalent to MBA)</mat-option>
-          <mat-option value="option">Post Graduate Diploma in Project Management.</mat-option>
-          <mat-option value="option">Post Graduate Diploma in Strategic Human Resource Management.</mat-option>
-          <mat-option value="option">Post Graduate Diploma in Supply Chain Management.</mat-option>
-          <mat-option value="option">Post Graduate Extended Diploma in Banking and Finance</mat-option>
-          <mat-option value="option">PGDM Finance. (equivalent to MBA)</mat-option>
-          <mat-option value="option">PGDM International Business. (equivalent to MBA)</mat-option>
-          <mat-option value="option">Executive PGDM in Business Analytics. (equivalent to EMBA)</mat-option>
-          <mat-option value="option">PGDM for Working Professionals. (equivalent to MBA)</mat-option>
-
-          <mat-option value="option">PGDM in Management. </mat-option>
-
-          <mat-option value="option">Post-Graduate Diploma in Human Resource Management. (equivalent to MBA HR)
-          </mat-option>
-
-          <mat-option value="option">Post Graduate Diploma in Management Banking & Financial Services. (equivalent to
-            MBA Banking & Financial Services)</mat-option>
-
-          <mat-option value="option">Master Of Business Administration. [MBA] (Pharmaceutical Management)</mat-option>
-
-          <mat-option value="option">Master Of Business Administration. [MBA] (Hospital Management)</mat-option>
-
-          <mat-option value="option">Post Graduate Diploma In Management. [PGDM] (International Business)</mat-option>
-
-          <mat-option value="option">Post Graduate Diploma In Finance.</mat-option>
-
-          <mat-option value="option">Master Of   Technology [M.Tech] (Construction Engineering And Management)
-          </mat-option>
-
-          <mat-option value="option">Master Of Technology. [M.Tech] (Communication Engineering)</mat-option>
-
-          <mat-option value="option">Master Of Technology. [M.Tech] (Aerodynamics)</mat-option>
-
-          <mat-option value="option">Master Of Technology. [M.Tech] (Computer Science & Technology)</mat-option>
-
-          <mat-option value="option">Master Of Engineering. [ME] (Software Engineering)</mat-option>
-
-          <mat-option value="option">Master Of Science. [M.Sc] (Nutrition And Dietetics)</mat-option>
-
-            <mat-option value="option">Master Of Fisheries Science. [MFSc] (Aquaculture)</mat-option>
-
-          <mat-option value="option">aster Of Science. [M.Sc] (Operational Research)</mat-option>
-
-          <mat-option value="option">aster Of Science. [M.Sc.] (Computer Science & Technology)</mat-option>
-
-          <mat-option value="option">aster Of Arts. [MA]</mat-option>
-
-          <mat-option value="option">aster Of Divinity. [M.Div]</mat-option>
-
-          <mat-option value="option">aster Of Fine Arts. [MFA]</mat-option>
-
-          <mat-option value="option">aster Of Arts. [MA] (Home Science)</mat-option>
-
-          <mat-option value="option">M.A. (Public Policy)</mat-option>
-          <mat-option value="option">Other</mat-option>
-
-
-        </mat-select>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Name of Institution </mat-label>
-        <input formControlName='postgraduationinstitution' matInput placeholder="Enter Organization field" class="p-0">
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Percentage</mat-label>
-        <input formControlName='postgraduationpercent' matInput placeholder="Enter contact number" type="tel"
-          class="p-0" value='psj'>
-        <mat-error>Enter valid field*</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Year Of Passing</mat-label>
-        <input formControlName='postgraduationpassing' matInput placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid field</mat-error>
-      </mat-form-field>
-    </div>
-
-    <!-- graduation -->
-
-    <div class="col-sm-12 my-3 text-grey">
-      <h5 class="text-center">Graduation Details</h5>
-    </div>
-
-    <div class=" col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Select me</mat-label>
-
-        <mat-select formControlName='graduationfield'>
-
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc] (Physics)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science h [B.Sc] (Chemistry)</mat-option>
-
-          <mat-option value="option">Bachelor Of Science [B.Sc] (Computer Science)</mat-option>
-
-          <mat-option value="option">Bachelor Of Science [B.Sc] (Mathematics)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc] (Zoology)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc] (Botany)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc] (Biotechnology)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc] (Microbiology)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc] (Information Technology)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Science [B.Sc].</mat-option>
-
-          <mat-option value="option">Bachelor Of Technology [B.Tech] (Mechanical Engineering)</mat-option>
-
-          <mat-option value="option">Bachelor Of Technology [B.Tech] (Computer Science And Engineering)</mat-option>
-
-          <mat-option value="option">Bachelor Of Technology [B.Tech] (Civil Engineering)</mat-option>
-
-          <mat-option value="option">Bachelor Of Technology [B.Tech] (Electronics & Communication Engineering)
-          </mat-option>
-
-          <mat-option value="option"> Bachelor Of Business Administration [BBA].</mat-option>
-
-          <mat-option value="option"> Bachelor Of Business Management [BBM]</mat-option>
-
-          <mat-option value="option">Bachelor Of Business Administration [BBA] (Marketing)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Business Administration [BBA] (Human Resource Management)</mat-option>
-          <mat-option value="option">Bachelor Of Management Studies [BMS]</mat-option>
-
-          <mat-option value="option"> Bachelor Of Business Administration [BBA] (Finance)</mat-option>
-
-          <mat-option value="option">Bachelor Of Business Administration [BBA] (Hons.)</mat-option>
-          <mat-option value="option">Bachelor Of Business Administration [BBA] (International Business)</mat-option>
-
-          <mat-option value="option"> Bachelor Of Tourism And Travel Management [BTTM]</mat-option>
-
-          <mat-option value="option">Other</mat-option>
-        </mat-select>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Name of Institution </mat-label>
-        <input formControlName='graduationinstitution' matInput placeholder="Enter Organization field" class="p-0">
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Percentage</mat-label>
-        <input formControlName='graduationpercent' matInput placeholder="Enter contact number" type="tel" class="p-0"
-          value='psj'>
-        <mat-error>Enter valid field*</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Year Of Passing</mat-label>
-        <input formControlName='graduationpassing' matInput placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid field</mat-error>
-      </mat-form-field>
-    </div>
-
-
-
-    <!-- high secondary details -->
-
-
-    <div class="col-sm-12 my-3 text-grey">
-      <h5 class="text-center">High Secondary Details</h5>
-    </div>
-
-    <div class=" col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Select me</mat-label>
-
-        <mat-select formControlName='highschoolstream'>
-
-          <mat-option value="option"> Diploma In Computer Science And Engineering.</mat-option>
-
-          <mat-option value="option"> Diploma In Automobile Engineering.</mat-option>
-
-          <mat-option value="option">Diploma In Information Technology.</mat-option>
-
-          <mat-option value="option"> Diploma In Electronics Engineering.</mat-option>
-
-          <mat-option value="option"> Diploma In Chemical Engineering.</mat-option>
-
-          <mat-option value="option"> Diploma In Electrical & Communication Engineering.</mat-option>
-
-          <mat-option value="option">Diploma In Production Engineering.</mat-option>
-
-          <mat-option value="option">Diploma In Mining Engineering.</mat-option>
-
-          <mat-option value="option">Diploma In Architecture</mat-option>
-
-          <mat-option value="option">Diploma In Civil Engineering.</mat-option>
-
-          <mat-option value="option"> Diploma In Electrical Engineering.</mat-option>
-
-          <mat-option value="option">Diploma In Electronics And Communication Engineering.</mat-option>
-
-          <mat-option value="option"> Diploma In Electrical & Electronics Engineering.</mat-option>
-
-          <mat-option value="option"> Diploma In Computer Engineering.</mat-option>
-
-          <mat-option value="option">Diploma In Mechanical Engineering.</mat-option>
-          <mat-option value="option">Other</mat-option>
-        </mat-select>
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Name of Institution </mat-label>
-        <input formControlName='highschoolinstitution' matInput placeholder="Enter Organization field" class="p-0">
-        <mat-error>This field is required</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Percentage</mat-label>
-        <input formControlName='highschoolpercent' matInput placeholder="Enter contact number" type="tel" class="p-0"
-          value='psj'>
-        <mat-error>Enter valid field*</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Education Board</mat-label>
-        <input formControlName='highschoolboard' matInput placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid field</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Year Of Passing</mat-label>
-        <input formControlName='highschoolpassing' matInput placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid field</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">City</mat-label>
-        <input formControlName='highschoolcity' matInput placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid field</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 my-2">
-      <div style="display: block;" class="w-100 d-flex justify-content-center">
-        <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event)' class="position-absolute w-25 h-25"
-          style="opacity: 0 !important; display: block;" />
-        <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md" *ngIf="!organizationLogo"
-          style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
-        <img *ngIf="organizationLogo" class="img-fulid rounded-circle"
-          style="height: 70px !important; width: 70px !important;" src="{{organizationLogo}}" alt="">
+  <div class="m-3 mt-5 p-2 bg-white"
+    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+    <div class="d-flex justify-content-between vertical-center mb-3">
+      <div class="mt-2 row d-flex justify-content-center" [formGroup]="profileForm">
+        <span class="text-grey text-md col-sm-12 ml-4 mb-3">Basic Info : </span>
+        <div class="row col-sm-9 d-flex justify-content-between">
+          <div class="col-sm-5 mx-3 mb-2">
+            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+              <mat-label class="p-0">Name</mat-label>
+              <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
+              <mat-error>Enter valid name</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5 mx-3 mb-2">
+            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+              <mat-label class="p-0">Phone number</mat-label>
+              <span matPrefix>+91 &nbsp;</span>
+              <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
+              <mat-error>Enter valid mobile number</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5 mx-3 mb-2">
+            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+              <mat-label class="p-0">Email</mat-label>
+              <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
+              <mat-error>Enter valid email</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5 mx-3 mb-2">
+            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+              <mat-label class="p-0">Alternate contact number</mat-label>
+              <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
+              <mat-error>Enter contact number</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5 mx-3 mb-2">
+            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput readonly [matDatepicker]="picker1" formControlName='dob'>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+              <mat-error>Enter valid DOB</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
       </div>
-      <span class="d-block text-smd text-bold text-center mt-2">LOGO</span>
     </div>
-    <div class="col-sm-11 d-flex justify-content-end mb-4 mt-3" *ngIf="isEditing">
-      <button type="submit" class="btn btn-primary p-0 text-smd bg-violet px-4 mr-2" (click)="save()">Save</button>
-      <button class="btn btn-secondary text-smd px-4 p-0" (click)="cancel()">Cancel</button>
+  </div>
+  <div class="m-3 mt-5 p-2 bg-white"
+    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+    <div class="mt-2 row d-flex justify-content-center">
+      <span class="text-grey text-md col-sm-12 ml-4 mb-3">Skills : </span>
+      <div class="row col-sm-9 d-flex justify-content-center">
+        <div class="col-sm-9" style="border-radius: 7px;">
+          <label class="bold text-grey text-sm mt-2">Skill name</label>
+          <div class="row vertical-center">
+            <div class="col-sm-9">
+              <input type="text" autocomplete="nope" [(ngModel)]='skillName'
+                class="form-control mb-2 text-grey semi-bold">
+            </div>
+            <div class="col-sm-3">
+              <button class="btn btn-primary w-100 h-100 bg-violet px-1 mb-2 py-1" (click)="addSkill()">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 my-4">
+          <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
+            style="display: inline-block; border-radius: 7px; width: max-content; margin: 3px !important; white-space:nowrap;">
+            <span class="text-md text-grey mr-3">{{data}}</span>
+            <span class="material-icons text-sm text-link" (click)="removeTag(i)">close</span>
+          </div>
+        </div>
+      </div>
+      <span class="text-sm text-light-grey w-100 mx-3 mt-4">Skills plays a major role to match a Job profile.</span>
+    </div>
+  </div>
+  <div class="m-3 mt-5 p-2 bg-white"
+    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+    <div class="mt-2 row d-flex justify-content-center">
+      <span class="text-grey text-md col-sm-12 ml-4 mb-3">Work experience : </span>
+      <div class="w-100">
+        <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openWorkExpModal(workExp)">Add
+          experience</button>
+      </div>
+      <div class="row w-100 d-flex justify-content-start">
+        <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
+          <div *ngFor="let data of workExpArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
+            style="border-radius: 7px; margin: 3px !important;">
+            <div class="d-flex justify-content-end">
+              <span class="material-icons text-grey mr-2 text-link" (click)="editWorkExp(data, workExp, i)">edit</span>
+              <span class="material-icons text-grey text-link" (click)="deleteWorkExp(i)">delete</span>
+            </div>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>Job Title : </b>{{data.title}}</span>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>Company name : </b>{{data.companyName}}</span>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>Start date: </b>{{data.startDate | date : 'dd MMMM
+              yyyy'}}</span>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>End Date : </b>{{data.endDate | date : 'dd MMMM
+              yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="m-3 mt-5 p-2 bg-white"
+    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+    <div class="mt-2 row d-flex justify-content-center">
+      <span class="text-grey text-md col-sm-12 ml-4 mb-3">Education : </span>
+      <div class="w-100">
+        <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openEducationModal(education)">Add
+          Education</button>
+      </div>
+      <div class="row w-100 d-flex justify-content-start">
+        <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
+          <div *ngFor="let data of educationArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
+            style="border-radius: 7px; margin: 3px !important;">
+            <div class="d-flex justify-content-end">
+              <span class="material-icons text-grey mr-2 text-link"
+                (click)="editEducation(data, education, i)">edit</span>
+              <span class="material-icons text-grey text-link" (click)="deleteEducation(i)">delete</span>
+            </div>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>Degree/Standard : </b>{{data.degree}}</span>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>School : </b>{{data.school}}</span>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>Field: </b>{{data.field}}</span>
+            <span class="text-sm d-block m-2 text-grey mr-3"><b>Completion date : </b>{{data.completionDate | date : 'dd
+              MMMM
+              yyyy'}}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<ng-template #workExp>
+  <div class="bg-white p-3" style="border-radius: 7px;">
+    <div class="d-block text-right">
+      <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
+    </div>
+    <span class="text-grey semi-bold d-block text-center my-2">{{workExpToUpdate !== undefined ? 'Update' : 'Add'}}
+      experience
+      details</span>
+    <div class="row p-0 m-3">
+      <div class="col-sm-12">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate readonly formControlName="start" placeholder="Start date">
+            <input matEndDate readonly formControlName="end" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error>Invalid start date</mat-error>
+          <mat-error>Invalid end date</mat-error>
+          <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Job title</mat-label>
+          <input matInput placeholder="Enter name" class="p-0" [formControl]='title'>
+          <mat-error>Enter valid title</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Java developer</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Company Name</mat-label>
+          <input matInput placeholder="Enter company name" class="p-0" [formControl]='companyName'>
+          <mat-error>Enter valid company Name</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Google</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center mt-4">
+      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addWorkExp()">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #education>
+  <div class="bg-white p-3" style="border-radius: 7px;">
+    <div class="d-block text-right">
+      <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
+    </div>
+    <span class="text-grey semi-bold d-block text-center my-2">{{educationToUpdate !== undefined ? 'Update' : 'Add'}}
+      education
+      details</span>
+    <div class="row p-0 m-3" [formGroup]="educationDetailsForm">
+      <div class="col-sm-12">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label>Completion date</mat-label>
+          <input matInput readonly [matDatepicker]="picker1" formControlName='completionDate'>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+          <mat-error>Enter valid date</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Degree/standard</mat-label>
+          <input matInput placeholder="Enter degree/standard" class="p-0" formControlName='degree'>
+          <mat-error>Enter valid detail</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - B.Tech</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Field/Stream</mat-label>
+          <input matInput placeholder="Enter field" class="p-0" formControlName='field'>
+          <mat-error>Enter valid field</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Computer Science</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">School</mat-label>
+          <input matInput placeholder="Enter name" class="p-0" formControlName='school'>
+          <mat-error>Enter valid School</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Oxford university</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">GPA</mat-label>
+          <input matInput type="number" placeholder="Enter GPA" class="p-0" formControlName='gpa'>
+          <mat-error>Enter valid gpa</mat-error>
+          <mat-suffix>/ 10</mat-suffix>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center mt-4">
+      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addEducation()">Save</button>
+    </div>
+  </div>
+</ng-template>

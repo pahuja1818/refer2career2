@@ -20,24 +20,24 @@ export class JobPostsComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.jobPostService.getPosts();
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.allJobPost = data;
       console.log(data);
-    })
+    });
   }
 
   addJobPost() {
     this.jobPostService.post = undefined;
-    this.modalRef = this.modalService.show(AddJobPostComponent, { class: "full-modal bg-light-grey", ignoreBackdropClick: true, animated: true })
+    this.modalRef = this.modalService.show(AddJobPostComponent,
+      { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
   }
-
-  
 
   seeDetails(data: any) {
     this.jobPostService.postDetail = data;
-    this.router.navigateByUrl(`/admin/jobs/detail/${data._id}`);
+    this.router.navigateByUrl
+      (`/admin/jobs/detail/${data._id}`);
   }
 
 }

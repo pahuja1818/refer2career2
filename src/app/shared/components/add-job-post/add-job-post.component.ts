@@ -17,7 +17,7 @@ export class AddJobPostComponent implements OnInit {
   lastDateToAppply: Date;
 
   jobPostForm: FormGroup;
-  aboutUs: string = '';
+  aboutUs = '';
 
   companyName = JSON.parse(window.atob(window.localStorage.getItem('id'))).organizationDetails.organizationName;
   companyLogo = JSON.parse(window.atob(window.localStorage.getItem('id'))).organizationDetails.logo;
@@ -43,8 +43,8 @@ export class AddJobPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.skillArray.push({ 'skillName': '' });
-    this.jobDetailsArray.push({ 'detail': '' });
+    this.skillArray.push({ skillName: '' });
+    this.jobDetailsArray.push({ detail: '' });
     this.jobPostForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       vacancy: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -61,15 +61,15 @@ export class AddJobPostComponent implements OnInit {
       console.log(this.jobPostService.post);
       this.jobPost = this.jobPostService.post;
       this.jobPostForm.patchValue({
-        'title': this.jobPost.jobPost.title,
-        'vacancy': this.jobPost.jobPost.vacancy,
-        'salary': this.jobPost.jobPost.salary,
-        'location': this.jobPost.jobPost.location,
-        'jobType': this.jobPost.jobPost.jobType,
-        'jobInternship': this.jobPost.jobPost.jobInternship,
-        'salaryType': this.jobPost.jobPost.salaryType,
-        'partTime': this.jobPost.jobPost.partTime,
-        'lastDateToApply': new Date(this.jobPost.jobPost.lastDateToApply),
+        title: this.jobPost.jobPost.title,
+        vacancy: this.jobPost.jobPost.vacancy,
+        salary: this.jobPost.jobPost.salary,
+        location: this.jobPost.jobPost.location,
+        jobType: this.jobPost.jobPost.jobType,
+        jobInternship: this.jobPost.jobPost.jobInternship,
+        salaryType: this.jobPost.jobPost.salaryType,
+        partTime: this.jobPost.jobPost.partTime,
+        lastDateToApply: new Date(this.jobPost.jobPost.lastDateToApply),
       });
       this.skillArray = this.jobPost.jobPost.skills;
       this.jobDetailsArray = this.jobPost.jobPost.details;
@@ -78,20 +78,21 @@ export class AddJobPostComponent implements OnInit {
   }
 
   addFieldValueToSkillArray() {
-    this.skillArray.push({ 'skillName': '' });
+    this.skillArray.push({ skillName: '' });
   }
 
   deleteFieldValueToSkillArray(index) {
-    if (this.skillArray.length > 1) this.skillArray.splice(index, 1);
+    if (this.skillArray.length > 1) { this.skillArray.splice(index, 1); }
   }
 
   addFieldValueToJobDetailsArray() {
-    this.jobDetailsArray.push({ 'detail': '' });
+    this.jobDetailsArray.push({ detail: '' });
   }
 
   deleteFieldValueJobDetailsArray(index) {
-    if (this.skillArray.length > 1)
+    if (this.skillArray.length > 1) {
       this.jobDetailsArray.splice(index, 1);
+    }
   }
 
   onEditCloseItems() {
@@ -103,8 +104,8 @@ export class AddJobPostComponent implements OnInit {
     this.jobPostForm.markAllAsTouched();
     if (this.jobPostForm.valid) {
       this.isServiceRunning = true;
-      let post: any = {
-        'jobPost': {
+      const post: any = {
+        jobPost: {
           active: true,
           companyName: this.companyName,
           companyLogo: this.companyLogo,
@@ -123,48 +124,48 @@ export class AddJobPostComponent implements OnInit {
           details: this.jobDetailsArray,
           aboutUs: this.aboutUs,
         }
-      }
+      };
       if (!this.jobPost) {
         this.jobPostService.addJobPost(post).subscribe((data: any) => {
-          if (data.data === true) this.toastService.showToast("Job Post Added Successfully !");
+          if (data.data === true) { this.toastService.showToast('Job Post Added Successfully !'); }
           this.isServiceRunning = false;
           this.modalRef.hide();
-         this.jobPostService.getPosts();
-        })
+          this.jobPostService.getPosts();
+        });
       }
       else {
         console.log(post);
         post._id = this.jobPost._id;
-        console.log(post)
+        console.log(post);
         this.jobPostService.updateJobPost(post).subscribe((data: any) => {
-          if (data.data === true) this.toastService.showToast("Job Post Updated Successfully !");
+          if (data.data === true) { this.toastService.showToast('Job Post Updated Successfully !'); }
           this.jobPostService.post = undefined;
           this.isServiceRunning = false;
           this.modalRef.hide();
           this.jobPostService.getPosts();
-        })
+        });
       }
     }
   }
 
   deletePost() {
     this.jobPostService.deleteJobPost({ _id: this.jobPost._id }).subscribe((data: any) => {
-      if (data.data === true) this.toastService.showToast('Job post deleted successully!');
+      if (data.data === true) { this.toastService.showToast('Job post deleted successully!'); }
       this.jobPostService.post = undefined;
       this.isServiceRunning = false;
       this.modalRef.hide();
       setTimeout(time => {
         window.location.reload();
       }, 3000);
-    })
+    });
   }
 
   delete(template: any, row) {
-    this.modalRef = this.modalService.show(template, { id: 2, class: "delete-modal", ignoreBackdropClick: true, animated: true })
+    this.modalRef = this.modalService.show(template, { id: 2, class: 'delete-modal', ignoreBackdropClick: true, animated: true });
   }
 
   close(id = 1) {
-    if (id === 2) this.modalService.hide(2);
+    if (id === 2) { this.modalService.hide(2); }
     this.modalRef.hide();
   }
 

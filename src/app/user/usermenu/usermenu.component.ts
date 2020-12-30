@@ -30,24 +30,4 @@ export class UsermenuComponent implements OnInit {
 
 
 
-
-  openModal(template: any) {
-    this.toggle();
-    this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
-
-  }
-
-
-  cancel() {
-    this.modalRef.hide();
-  }
-
-  loggedOut() {
-    this.modalRef.hide();
-    window.localStorage.removeItem('id');
-    window.location.reload();
-  }
-
-
-
 }

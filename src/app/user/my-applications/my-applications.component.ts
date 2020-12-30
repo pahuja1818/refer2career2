@@ -23,7 +23,7 @@ export class MyApplicationsComponent implements OnInit {
         this.allAppliedPosts = [];
         this.getAllAppliedPosts(data);
       }
-    })
+    });
   }
 
   getAllAppliedPosts(data: any) {
@@ -35,8 +35,8 @@ export class MyApplicationsComponent implements OnInit {
         jobPost.appliedDate = post.date;
         this.allAppliedPosts.push(jobPost);
         console.log(this.allAppliedPosts);
-      })
-    })
+      });
+    });
   }
 
   seeDetails(id: any){
