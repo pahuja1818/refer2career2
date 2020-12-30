@@ -160,7 +160,7 @@ export class AddJobPostComponent implements OnInit {
     });
   }
 
-  delete(template: any, row) {
+  delete(template: any) {
     this.modalRef = this.modalService.show(template, { id: 2, class: 'delete-modal', ignoreBackdropClick: true, animated: true });
   }
 

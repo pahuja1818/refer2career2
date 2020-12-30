@@ -13,8 +13,6 @@
     <div class="vertical-center">
       <div class="">
         <div class="w-100 d-flex justify-content-center">
-          <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
-            class="position-absolute w-25 h-25" style="opacity: 0 !important;" />
           <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md" *ngIf="!userPhoto"
             style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
           <img *ngIf="userPhoto" class="img-fulid rounded-circle"
@@ -121,7 +119,7 @@
     </div>
     <div class="col-sm-4 my-2">
       <div class="w-100 d-flex justify-content-center">
-        <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event)' class="position-absolute w-25 h-25"
+        <input type="file" accept=".png, .jpg, .jpeg" class="position-absolute w-25 h-25"
           style="opacity: 0 !important;" />
         <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md" *ngIf="!organizationLogo"
           style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
@@ -130,9 +128,9 @@
       </div>
       <span class="d-block text-smd text-bold text-center mt-2">LOGO</span>
     </div>
-    <div class="col-sm-11 d-flex justify-content-end mb-4 mt-3" *ngIf="isEditing">
-      <button type="submit" class="btn btn-primary p-0 text-smd bg-violet px-4 mr-2" (click)="save()">Save</button>
-      <button class="btn btn-secondary text-smd px-4 p-0" (click)="cancel()">Cancel</button>
+    <div class="col-sm-11 d-flex justify-content-end mb-4 mt-3">
+      <button type="submit" class="btn btn-primary p-0 text-smd bg-violet px-4 mr-2">Save</button>
+      <button class="btn btn-secondary text-smd px-4 p-0">Cancel</button>
     </div>
   </div>
 </div>
