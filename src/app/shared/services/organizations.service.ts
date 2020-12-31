@@ -13,7 +13,7 @@ export class OrganizationsService {
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
-  public baseUrl = window.location.host.includes('instajob') ? 'https://instajobapp.herokuapp.com' : 'http://localhost:8084';
+  public baseUrl = window.location.host.includes('localhost') ?  'http://localhost:8084' :  'https://instajobapp.herokuapp.com' ;
 
   constructor(private http: HttpClient) { }
 
