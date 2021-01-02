@@ -112,9 +112,11 @@
       <div class="row justify-content-center">
         <div class="col-sm-6">
           <span class="material-icons display-1 text-danger mx-auto">backup</span>
-          <input type="file" accept=".pdf,.docx" formControlName='resume' class="form-control-file"
-            id="exampleFormControlFile1">
-          <mat-error *ngIf="!referJobPostForm.get('resume').valid && referJobPostForm.get('resume').touched">Select resume of candidate</mat-error>
+          <div class="form-group">
+            <input type="file" accept=".pdf,.docx" formControlName = 'resume' (change)="uploadResume($event)" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+          <mat-error *ngIf="!referJobPostForm.get('resume').valid && referJobPostForm.get('resume').touched">Select
+            resume of candidate</mat-error>
           <div class="form-group">
           </div>
         </div>
@@ -123,14 +125,7 @@
       </div>
     </div>
     <div class="row p-0 m-3">
-      <div class="col-sm-12">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Phone number</mat-label>
-          <span matPrefix>+91 &nbsp;</span>
-          <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-          <mat-error>Enter valid mobile number</mat-error>
-        </mat-form-field>
-      </div>
+    
       <div class="col-sm-12">
         <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
           <mat-label class="p-0">Email</mat-label>

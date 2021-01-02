@@ -13,6 +13,7 @@ import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { UserJobsComponent } from './user-jobs/user-jobs.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { ReferedProfilesComponent } from './refered-profiles/refered-profiles.component';
 
 
 
@@ -26,7 +27,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     UserMessagesComponent,
     UserPageComponent,
     UserJobsComponent,
-    MyApplicationsComponent
+    MyApplicationsComponent,
+    ReferedProfilesComponent
   ],
   imports: [
     CommonModule,

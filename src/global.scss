@@ -570,3 +570,13 @@ color: rgb(140, 151, 245) !important;
   background: rgb(2,0,36);
 background:  linear-gradient(90deg, rgba(116,109,241,1) 0%, rgb(101, 197, 214) 0%);
 }
+
+.overlay{
+  z-index: 10000 !important;
+}
+
+.min-overlay{
+  z-index: 9999 !important;
+
+
+}

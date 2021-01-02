@@ -16,7 +16,6 @@ mongoUtil.connectToServer(function (err, client) {
     app.use('/api', OrganizationRoutes);
     app.use('/api', JobPostRoutes);
     app.use('/api', ReferJobPostRoutes);
-
 });
 
 
@@ -34,21 +33,11 @@ app.use(fileUpload({
     createParentPath: true
 }));
 app.use(bodyparser.json({ limit: '50mb' }));
-app.use(bodyparser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
 app.use(express.static("docs"));
 
-ResumeParser
-    .parseResumeUrl('/docs.res.doc') // url
-    .then(data => {
-        console.log('Yay! ');
-
-        console.log('Yay! ', data);
-    })
-    .catch(error => {
-        console.log('Yay! ');
-
-        console.error(error);
-    });
 app.use((req, res, next) => {
 
     res.setHeader('Access-Control-Allow-Origin', '*');

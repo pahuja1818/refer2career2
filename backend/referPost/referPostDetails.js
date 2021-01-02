@@ -10,6 +10,14 @@ var mongoUtil = require('../db.js').getDb();
 
 var ObjectId = require('mongodb').ObjectId;
 
+module.exports.checkProfile = (req, res) => {
+    const data = req.body;
+    mongoUtil.collection("referedProfiles").findOne({ jobId: data.JobId, email: data.email }, function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });
+        return res.status(200).json({ 'data': result });
+    });
+}
+
 module.exports.referJobPost = (req, res) => {
     const jobPost = req.body;
     mongoUtil.collection("referedProfiles").insertOne(jobPost, function (err, result) {
@@ -20,11 +28,28 @@ module.exports.referJobPost = (req, res) => {
 
 module.exports.getReferedJobPosts = (req, res) => {
     const data = req.body;
-    mongoUtil.collection("referedProfiles").findOne({ '_id': new ObjectId(req.body.id) }, function (err, result) {
+    mongoUtil.collection("referedProfiles").find({ 'referedBy': data.email }).toArray(function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': result });
     });
 }
+
+exports.uploadResume = (req, res) => {
+    console.log(res.files);
+    if (!req.files) {
+        res.status(200).json({ error: "no file found" });
+    }
+    let name1 = req.body.name;
+    var docs = {};
+    if (req.files[name1]) {
+        let ext = req.files[name1].name.split(".")[1];
+        req.files[name1].mv(
+            `./docs/resumes/${req.body.random}/${name1}.${ext}`
+        );
+        docs[name1] = `/resumes/${req.body.random}/${name1}.${ext}`;
+    }
+    res.status(200).json(docs[name1]);
+};
 
 
 

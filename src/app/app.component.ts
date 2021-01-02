@@ -27,7 +27,7 @@ export class AppComponent {
     this.initializeApp();
     if (window.localStorage.getItem('id')) {
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
-        if (!(this.location.path()).includes('candidate')) {
+        if (!(this.location.path()).includes('referer')) {
           this.router.navigateByUrl('/referer');
         }
       }

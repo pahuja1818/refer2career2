@@ -9,6 +9,7 @@ import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserJobsComponent } from './user-jobs/user-jobs.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { UsermenuComponent } from './usermenu/usermenu.component';
+import { ReferedProfilesComponent } from './refered-profiles/refered-profiles.component';
 
 
 const routes: Routes = [
@@ -27,11 +28,15 @@ const routes: Routes = [
       {
         path: 'jobs', component: UserJobsComponent
       },
+      
       {
         path: 'jobs/job-detail/:id', component: JobDetailComponent
       },
       {
         path: 'my-applications', component: MyApplicationsComponent
+      },
+      {
+        path: 'my-applications/refered', component: ReferedProfilesComponent
       },
       {
         path: 'messages', component: UserMessagesComponent

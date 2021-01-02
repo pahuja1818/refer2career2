@@ -15,3 +15,12 @@ export enum salaryType {
     Yearly
 }
 
+export enum Status {
+  Submitted,
+  Shortlisted,
+  Selected,
+  Hired,
+  Rejected,
+  Terminated
+}
+

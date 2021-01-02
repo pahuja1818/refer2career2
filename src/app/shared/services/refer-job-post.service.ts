@@ -10,7 +10,7 @@ export class ReferJobPostService {
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
-  public baseUrl = window.location.host.includes('localhost') ?  'http://localhost:8084' :  'https://instajobapp.herokuapp.com' ;
+  public baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
 
   post: any = undefined;
   jobPosts: Subject<any> = new Subject<any>();
@@ -21,11 +21,6 @@ export class ReferJobPostService {
   constructor(private http: HttpClient) {
   }
 
-  getPosts() {
-    if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === 1) {
-    }
-  }
-
   referJobPost(data: any) {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/referJobPost`, body, { headers: this.headers });
@@ -34,5 +29,14 @@ export class ReferJobPostService {
   getReferedJobPosts(data: any) {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/getReferedJobPosts`, body, { headers: this.headers });
+  }
+
+  uploadResume(data: any) {
+    return this.http.post(this.baseUrl + `/api/upload-resume`, data).toPromise();
+  }
+
+  checkReferedProfile(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/check-refered-profile`, body, { headers: this.headers });
   }
 }
