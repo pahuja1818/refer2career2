@@ -36,6 +36,8 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
 
   jobId: any;
 
+  public baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
+
   ngOnInit() {
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
@@ -93,15 +95,13 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   closeModal() {
     this.modalRef.hide();
   }
-
-  public baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
   async referJobPost() {
     console.log(this.referJobPostForm.value);
     let file: any;
     this.referJobPostForm.markAllAsTouched();
     if (this.referJobPostForm.valid) {
-      let name = this.referJobPostForm.get('email').value;
-      let files = new FormData();
+      const name = this.referJobPostForm.get('email').value;
+      const files = new FormData();
       files.append(`${name}`, this.fileData);
       files.append('random', Date.now().toString());
       files.append('name', `${name}`);
@@ -111,7 +111,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
       });
     }
     if (file && this.fileData === undefined) {
-      let refer: any = {
+      const refer: any = {
         resume: file,
         jobTitle: this.jobPost.jobPost.title,
         email: this.referJobPostForm.get('email').value,
@@ -120,17 +120,19 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
         createdAt: new Date(),
         status: 0,
         statusUpdatedAt: new Date(),
-      }
-      this.referService.checkReferedProfile({ 'jobId': this.jobPost.jobPostId, 'email': this.referJobPostForm.get('email').value }).subscribe((data: any) => {
-        console.log(data.data);
+      };
+      this.referService.checkReferedProfile({
+        jobId: this.jobPost.jobPostId,
+        email: this.referJobPostForm.get('email').value
+      }).subscribe((data: any) => {
         if (data.data === null) {
-          this.referService.referJobPost(refer).subscribe((data: any) => {
+          this.referService.referJobPost(refer).subscribe((ele: any) => {
             this.toastService.showToast('Refered successfully');
             this.modalRef.hide();
-          })
+          });
         }
-        else this.toastService.showToast('This profile already refered!', 'bg-danger');
-      })
+        else { this.toastService.showToast('This profile already refered!', 'bg-danger'); }
+      });
     }
   }
 

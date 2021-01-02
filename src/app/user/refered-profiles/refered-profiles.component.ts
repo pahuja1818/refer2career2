@@ -17,14 +17,17 @@ export class ReferedProfilesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.referService.getReferedJobPosts({ 'email': (JSON.parse(window.atob(window.localStorage.getItem('id')))).email }).subscribe((data: any) => {
+    this.referService.getReferedJobPosts({
+      email:
+        (JSON.parse(window.atob(window.localStorage.getItem('id')))).email
+    }).subscribe((data: any) => {
       this.allReferedProfiles = data.data;
       console.log(data.data);
-    })
+    });
   }
 
   seeDetails(id: any) {
-    this.router.navigateByUrl(`/referer/jobs/job-detail/${id}`)
+    this.router.navigateByUrl(`/referer/jobs/job-detail/${id}`);
   }
 
   openResume(resume: any) {
