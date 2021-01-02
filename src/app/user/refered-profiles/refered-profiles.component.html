@@ -8,7 +8,7 @@
     </ion-toolbar>
   </ion-header>
   <div class="row justify-content-center" style=" margin-top: 70px !important;">
-    <div class="col-sm-5 m-3 pt-4" *ngFor="let profile of allReferedProfiles" (click)="seeDetails(jobPost.data._id)">
+    <div class="col-sm-5 m-3 pt-4" *ngFor="let profile of allReferedProfiles">
       <div class="card box-shadow w-100 p-3 btn btn-light">
         <span class="badge badge-success p-2 mb-3" style="width: max-content;">Submitted
         </span>
@@ -27,7 +27,7 @@
           <button class="btn btn-info text-sm bg-violet py-1 px-2" (click)="seeDetails(profile.jobId)">See job
             details</button>
           <button class="btn btn-warning text-sm py-1 px-2 text-white bg-yellow" (click)="openResume(profile.resume)">See
-            job details</button>
+            Resume</button>
         </div>
       </div>
     </div>
