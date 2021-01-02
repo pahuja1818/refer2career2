@@ -1,3 +1,4 @@
+import { SpinnerComponent } from './spinner/spinner.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -71,7 +72,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent
+    SigninComponent,
+    SpinnerComponent
   ],
   entryComponents: [
     SigninComponent,
@@ -83,7 +85,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
-
     CarouselModule.forRoot(),
     NgOtpInputModule,
     ReactiveFormsModule,
@@ -139,7 +140,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     SharedModule,
     NgbModule,
-
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

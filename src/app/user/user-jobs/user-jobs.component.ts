@@ -42,8 +42,7 @@ export class UserJobsComponent implements OnInit {
   }
 
   seeDetails(data: any) {
-    this.jobPostService.postDetail = data;
-    this.router.navigateByUrl(`/candidate/jobs/job-detail/${data._id}`);
+    this.router.navigateByUrl(`/referer/jobs/job-detail/${data._id}`);
   }
 
   private _filter(name: string): any[] {

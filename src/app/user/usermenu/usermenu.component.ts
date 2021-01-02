@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { MenuController } from '@ionic/angular';
@@ -9,16 +10,22 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./usermenu.component.scss'],
 })
 export class UsermenuComponent implements OnInit {
+
   modalRef: BsModalRef;
+  user: any = {};
+
 
 
 
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
+    private authService: AuthService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+  }
 
 
 

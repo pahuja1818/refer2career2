@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployerMenuComponent implements OnInit {
 
+  user: any = {};
+
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+    console.log(this.user);
+  }
 
 }

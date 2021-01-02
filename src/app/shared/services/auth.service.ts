@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class AuthService {
 
-  currentUser = new Subject<any>();
+  currentUser: any = {};
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
@@ -21,7 +21,7 @@ export class AuthService {
     if (window.localStorage.getItem('id')) {
       this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
         .subscribe((data: any) => {
-          this.currentUser.next(data.data);
+          this.currentUser  = data.data;
           console.log(data);
         });
     }

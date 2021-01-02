@@ -18,22 +18,19 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() { }
 
   toggle() {
-    if (window.screen.width < 990) {
-      this.menu.toggle();
-    }
+    this.menu.toggle();
   }
 
   openModal(template: any) {
     this.toggle();
     this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
-
   }
 
-  cancel(){
+  cancel() {
     this.modalRef.hide();
   }
 
-  loggedOut(){
+  loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
     window.location.reload();

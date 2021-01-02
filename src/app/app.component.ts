@@ -28,7 +28,7 @@ export class AppComponent {
     if (window.localStorage.getItem('id')) {
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
         if (!(this.location.path()).includes('candidate')) {
-          this.router.navigateByUrl('/candidate');
+          this.router.navigateByUrl('/referer');
         }
       }
       else if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {

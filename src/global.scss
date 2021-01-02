@@ -10,8 +10,13 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
+
+@import '~bootstrap/scss/bootstrap';
+
+
 @import "~@ionic/angular/css/core.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 /* Basic CSS for apps built with Ionic */
 @import "~@ionic/angular/css/normalize.css";
@@ -559,4 +564,9 @@ color: rgb(140, 151, 245) !important;
 .dash-bg{
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%,rgba(140,151,245,1) 0%, rgba(140,151,245,1) 100%);
+}
+
+.bg-coloured{
+  background: rgb(2,0,36);
+background:  linear-gradient(90deg, rgba(116,109,241,1) 0%, rgb(101, 197, 214) 0%);
 }

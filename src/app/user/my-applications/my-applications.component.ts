@@ -40,7 +40,7 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   seeDetails(id: any){
-    this.router.navigateByUrl(`/candidate/jobs/job-detail/${id}`);
+    this.router.navigateByUrl(`/referer/jobs/job-detail/${id}`);
   }
 
 }

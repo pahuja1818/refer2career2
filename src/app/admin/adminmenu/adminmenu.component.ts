@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -8,11 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminmenuComponent implements OnInit {
 
-
-  constructor() {
+  user: any = {};
+  constructor(
+    private authService: AuthService,
+  ) {
 
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+  }
 
 }

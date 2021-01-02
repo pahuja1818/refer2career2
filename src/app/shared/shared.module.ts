@@ -1,3 +1,4 @@
+import { SpinnerComponent } from './../spinner/spinner.component';
 import { AddJobPostComponent } from './components/add-job-post/add-job-post.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -179,7 +180,7 @@ import { JobDetailsComponent } from './components/add-job-post/job-details/job-d
     IonicModule,
     ModalModule,
     HttpClientModule,
-    JobDetailsComponent
+    JobDetailsComponent,
   ],
   providers: [
     StatusBar,

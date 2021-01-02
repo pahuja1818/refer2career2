@@ -12,7 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'candidate',
+    path: 'referer',
     loadChildren: () => import('./user/user.module').then( m => m.UserModule)
   },
   {
