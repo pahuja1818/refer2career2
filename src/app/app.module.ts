@@ -68,6 +68,8 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    IvyCarouselModule,
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
     CarouselModule.forRoot(),
@@ -145,7 +148,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
-
+  
 
 })
 export class AppModule {}
