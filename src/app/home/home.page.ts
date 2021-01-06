@@ -36,8 +36,8 @@ export class HomePage implements OnInit {
 
 }
 
-$(document).ready(function () {
-  (<any>$('.customer-logos')).slick({
+$(document).ready(() => {
+  ($('.customer-logos') as any).slick({
     slidesToShow: 6,
     slidesToScroll: 1,
     autoplay: true,
@@ -61,4 +61,4 @@ $(document).ready(function () {
 
 
 
-  
+
