@@ -68,7 +68,10 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+
+import * as $ from 'jquery';
+import * as AOS from 'aos';
 
 
 @NgModule({
@@ -148,8 +151,12 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
-  
+
 
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    AOS.init();
+  }
+}
 
