@@ -68,6 +68,11 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+
+import * as $ from 'jquery';
+
+
 
 @NgModule({
   declarations: [
@@ -83,6 +88,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    IvyCarouselModule,
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
     CarouselModule.forRoot(),
@@ -148,5 +154,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+  }
+}
 

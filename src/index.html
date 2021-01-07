@@ -2,6 +2,23 @@
 <html lang="en">
 
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Important Owl stylesheet -->
+  <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+
+  <!-- Default Theme -->
+  <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <!--  jQuery 1.7+  -->
+  <script src="jquery-1.9.1.min.js"></script>
+
+  <!-- Include js plugin -->
+  <script src="assets/owl-carousel/owl.carousel.js"></script>
   <meta charset="utf-8" />
   <title>Refer2Career</title>
 
@@ -23,7 +40,7 @@
   <!-- Initialize Firebase -->
   <script src="/__/firebase/init.js"></script>
 
-  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="icon" type="image/png" href="./assets/logo.png" />
   <link
     href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
     rel="stylesheet" />
@@ -37,25 +54,50 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+
+
+
+
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body>
-  <app-root>
-    <div class="container">
-      <div class="row">
-        <div id="loader">
-            <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="loading"></div>
+  <div id="loader">
+    <style>
+      .application-loading-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .application-loading-box {
+        width: 300px;
+        margin: 5px;
+        text-align: center;
+      }
+    </style>
+    <div class="application-loading-container">
+      <div class="application-loading-box">
+        <div class="spinner-border text-violet" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-violet" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
       </div>
     </div>
+  </div>
+  <app-root>
   </app-root>
 </body>
 
