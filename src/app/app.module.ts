@@ -71,7 +71,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 import * as $ from 'jquery';
-import * as AOS from 'aos';
 
 
 @NgModule({
@@ -156,7 +155,6 @@ import * as AOS from 'aos';
 })
 export class AppModule {
   constructor() {
-    AOS.init();
   }
 }
 

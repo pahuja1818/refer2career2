@@ -34,7 +34,6 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "angular-responsive-carousel": "^2.0.2",
     "angularfire2": "^5.4.2",
-    "aos": "^2.3.4",
     "bcrypt": "^5.0.0",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
