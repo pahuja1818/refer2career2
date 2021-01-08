@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
     private modalService: BsModalService,
   ) {
     console.log(AOS);
-   }
+  }
 
   ngOnInit() {
     AOS.init();
@@ -36,9 +36,6 @@ export class HomePage implements OnInit {
       behavior: 'smooth'
     });
   }
-
-
-
 }
 
 $(document).ready(() => {

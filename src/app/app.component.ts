@@ -7,10 +7,6 @@ import { UserRole } from './shared/models/enums';
 import { AuthService } from './shared/services/auth.service';
 import { Location } from '@angular/common';
 
-import * as AOS from 'aos'; 
-
-
-
 
 
 @Component({
@@ -29,7 +25,6 @@ export class AppComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
-    console.log(AOS);
     this.initializeApp();
     if (window.localStorage.getItem('id')) {
       if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.CANDIDATE) {
@@ -59,6 +54,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+
   }
 }
