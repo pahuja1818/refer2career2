@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
     AOS.init();
   }
 
+
   openLoginPage() {
     this.modalRef = this.modalService.show(SigninComponent, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
   }
