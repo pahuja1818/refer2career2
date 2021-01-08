@@ -1,5 +1,5 @@
 .curved-rectangle{
-  height: 75vh;
+  height: 60vh;
   width: 100vw;
   background-size: cover;
   background-position: center;
@@ -469,20 +469,35 @@ i {
 
 
 ///services
-* {
-  box-sizing: border-box;
-  line-height: 1.5;
-  font-family: 'Open Sans', sans-serif;
+
+.image-wrapper{
+  max-width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+.image-wrapper:hover img {
+  transform: scale(1.2);
+}
+.card-hover{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
 }
 
+.card-service:hover .card-hover{
+  opacity: 1;
+}
 .img-service {
+  display: block;
   max-width: 100%;
   height: 60%;
   background-image: linear-gradient(rgba(160, 109, 238, 0.7), rgba(119, 82, 153, 0.7)), url('../../assets/pexels-photo.jpg');
-
-}
-
-.container-service {
 
 }
 
@@ -492,6 +507,7 @@ i {
   border-radius: 6px;
   padding: 2rem;
   color: rgb(0, 0, 0);
+  z-index: 999;
   
   overflow: hidden;
   
