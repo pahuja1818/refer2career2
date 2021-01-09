@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -7,8 +8,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HomePageRoutingModule } from './home-routing.module';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -16,10 +15,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule,
     BsDatepickerModule.forRoot(),
-    CarouselModule.forRoot()
-
+    CarouselModule.forRoot(),
+    SharedModule,
   ],
   declarations: [HomePage]
 })
 export class HomePageModule {}
-export class DemoCarouseBasicComponent {}

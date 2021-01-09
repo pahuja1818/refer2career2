@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
+
   otp = '';
   isOTPCorrect = true;
   timer: number;

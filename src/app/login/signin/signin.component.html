@@ -41,7 +41,6 @@
       </div>
       <button *ngIf="!isServiceRunning" class="btn btn-primary d-block p-1 px-4  text-sm"
         (click)="login()">Login</button>
-      <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
     </form>
     <div class="w-100 text-center" *ngIf="isLogin">
       <a class="text-sm text-link semi-bold text-warning text-yellow" (click)="forgotPasswordVisible()">Forgot
@@ -89,7 +88,6 @@
       </div>
       <button *ngIf="!isServiceRunning" class="btn btn-primary d-block p-1 px-4 text-sm mt-2"
         (click)="registerCandidate()">Register</button>
-      <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
     </form>
     <div class="w-100 text-center" *ngIf="isRegistration">
       <span class="text-grey text-sm mr-1">Already a member? </span>
@@ -137,3 +135,4 @@
     </div>
   </div>
 </div>
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

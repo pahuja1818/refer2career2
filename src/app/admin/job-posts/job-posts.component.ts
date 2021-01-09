@@ -12,6 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class JobPostsComponent implements OnInit {
 
   allJobPost: any[] = [];
+  isServiceRunning = false;
 
   constructor(
     public modalRef: BsModalRef,
@@ -22,9 +23,10 @@ export class JobPostsComponent implements OnInit {
 
   ngOnInit() {
     this.jobPostService.getPosts();
+    this.isServiceRunning = true;
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.allJobPost = data;
-      console.log(data);
+      this.isServiceRunning = false;
     });
   }
 

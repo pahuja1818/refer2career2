@@ -1,4 +1,3 @@
-import { SpinnerComponent } from './../spinner/spinner.component';
 import { AddJobPostComponent } from './components/add-job-post/add-job-post.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -62,10 +61,12 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { BrowserModule } from '@angular/platform-browser';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { JobDetailsComponent } from './components/add-job-post/job-details/job-details.component';
+import { SpinnerComponentComponent } from './components/spinner-component/spinner-component.component';
 
 
 @NgModule({
   declarations: [
+    SpinnerComponentComponent,
     AddJobPostComponent,
     JobDetailsComponent,
   ],
@@ -78,6 +79,7 @@ import { JobDetailsComponent } from './components/add-job-post/job-details/job-d
     BsDatepickerModule.forRoot(),
     NgOtpInputModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
     FormsModule,
     MatFormFieldModule,
     ClipboardModule,
@@ -128,6 +130,8 @@ import { JobDetailsComponent } from './components/add-job-post/job-details/job-d
     ModalModule.forRoot(),
   ],
   exports: [
+    SpinnerComponentComponent,
+    MatProgressSpinnerModule,
     AlertModule,
     NgOtpInputModule,
     BsDatepickerModule,

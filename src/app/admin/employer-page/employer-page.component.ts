@@ -11,6 +11,7 @@ import { AddOrganizationComponent } from '../add-organization/add-organization.c
 export class EmployerPageComponent implements OnInit {
 
   allOrganizations: any[] = [];
+  isServiceRunning = false;
 
   constructor(
     public modalRef: BsModalRef,
@@ -19,9 +20,10 @@ export class EmployerPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isServiceRunning = true;
     this.orgService.getAllOrganizations().subscribe((data: any) => {
       this.allOrganizations = data.data;
-      console.log(data);
+      this.isServiceRunning = false;
     });
   }
 
