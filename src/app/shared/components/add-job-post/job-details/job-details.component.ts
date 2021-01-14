@@ -83,4 +83,17 @@ export class JobDetailsComponent implements OnInit {
     this.modalRef = this.modalService.show(AddJobPostComponent,
       { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
   }
+
+
+  getExperience(value: number) {
+    return `${value} - ${value + 1}`
+  }
+
+  getStartDate(date: any) {
+    const date1: any = new Date();
+    const date2: any = new Date(date);
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays >= 7;
+  }
 }

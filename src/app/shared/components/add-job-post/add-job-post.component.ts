@@ -1,10 +1,10 @@
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastService } from './../../services/toast.service';
 import { JobPostServiceService } from './../../services/job-post-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-add-job-post',
@@ -33,13 +33,17 @@ export class AddJobPostComponent implements OnInit {
   firstFieldName = 'First Item name';
   isEditItems: boolean;
 
-
+  formatLabel(value: number) {
+    if (value === 10) return "10+"
+    return `${value}-${value + 1}`;
+  }
 
   constructor(
     private jobPostService: JobPostServiceService,
     private toastService: ToastService,
     public modalRef: BsModalRef,
     private modalService: BsModalService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -51,10 +55,12 @@ export class AddJobPostComponent implements OnInit {
       salary: new FormControl('', [Validators.required, Validators.minLength(1)]),
       location: new FormControl('Banglore', [Validators.required]),
       lastDateToApply: new FormControl(null, [Validators.required]),
+      startDate: new FormControl(null, [Validators.required]),
       jobType: new FormControl('In office', [Validators.required]),
       jobInternship: new FormControl('Job', [Validators.required]),
       salaryType: new FormControl('0', [Validators.required]),
       partTime: new FormControl(false),
+      experience: new FormControl(6),
     });
 
     if (this.jobPostService.post) {
@@ -70,6 +76,8 @@ export class AddJobPostComponent implements OnInit {
         salaryType: this.jobPost.jobPost.salaryType,
         partTime: this.jobPost.jobPost.partTime,
         lastDateToApply: new Date(this.jobPost.jobPost.lastDateToApply),
+        startDate: new Date(this.jobPost.jobPost.startDate),
+        experience: this.jobPost.jobPost.experience,
       });
       this.skillArray = this.jobPost.jobPost.skills;
       this.jobDetailsArray = this.jobPost.jobPost.details;
@@ -120,6 +128,8 @@ export class AddJobPostComponent implements OnInit {
           salaryType: this.jobPostForm.get('salaryType').value,
           partTime: this.jobPostForm.get('partTime').value,
           lastDateToApply: this.jobPostForm.get('lastDateToApply').value,
+          experience: this.jobPostForm.get('experience').value,
+          startDate: this.jobPostForm.get('startDate').value,
           skills: this.skillArray,
           details: this.jobDetailsArray,
           aboutUs: this.aboutUs,
@@ -134,14 +144,14 @@ export class AddJobPostComponent implements OnInit {
         });
       }
       else {
-        console.log(post);
         post._id = this.jobPost._id;
         console.log(post);
         this.jobPostService.updateJobPost(post).subscribe((data: any) => {
           if (data.data === true) { this.toastService.showToast('Job Post Updated Successfully !'); }
           this.jobPostService.post = undefined;
           this.isServiceRunning = false;
-          this.modalRef.hide();
+          this.modalService.hide();
+          window.history.back();
           this.jobPostService.getPosts();
         });
       }
@@ -149,15 +159,16 @@ export class AddJobPostComponent implements OnInit {
   }
 
   deletePost() {
+    this.isServiceRunning = true;
     this.jobPostService.deleteJobPost({ _id: this.jobPost._id }).subscribe((data: any) => {
       if (data.data === true) { this.toastService.showToast('Job post deleted successully!'); }
       this.jobPostService.post = undefined;
       this.isServiceRunning = false;
-      this.modalRef.hide();
-      setTimeout(time => {
-        window.location.reload();
-      }, 3000);
-    });
+      this.modalService.hide();
+      window.history.back();
+    },
+      err => this.isServiceRunning = false
+    );
   }
 
   delete(template: any) {
@@ -166,7 +177,7 @@ export class AddJobPostComponent implements OnInit {
 
   close(id = 1) {
     if (id === 2) { this.modalService.hide(2); }
-    this.modalRef.hide();
+    else this.modalService.hide();
   }
 
 }

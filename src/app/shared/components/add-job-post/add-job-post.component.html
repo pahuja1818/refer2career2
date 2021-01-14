@@ -1,126 +1,148 @@
 <div class="bg-light-grey">
-  <div class="p-3">
+  <div class="p-2 py-3">
     <span class="material-icons d-block text-right text-lg text-link text-grey semi-bold" (click)="close()">close</span>
     <div class="d-block">
       <div class="ml-4">
-        <img class="img-fluid" src="../../../assets/logo.png" alt="" style="width: 180px; height: 120px;">
+        <img class="img-fluid" src="../../../assets/logo.png" alt="" style="width: 120px; height: 90px;">
       </div>
     </div>
-    <span class="d-block mb-5 text-grey text-center bold mt-2">Add Job Post</span>
-    <div class="row px-3 justify-content-center">
+    <span class="d-block text-grey text-center bold mt-2">Add Job Post</span>
+    <div class="row px-2 justify-content-center">
       <span class="col-sm-11 d-block text-right material-icons text-grey text-link" *ngIf="jobPost"
         (click)="delete(deletePopup)">delete</span>
-
-      <div class="col-sm-9 mx-3">
-        <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
-          <div class="col-sm-4 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Job Title</mat-label>
-              <input matInput placeholder="ex Software Developer" class="p-0" formControlName='title'>
-              <mat-error>Enter valid title</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Total Vacancies</mat-label>
-              <input matInput type="number" placeholder="ex Software Developer" class="p-0" formControlName='vacancy'>
-              <mat-error>Enter valid number</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2">
-            <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
-              <mat-label>Job/Internship</mat-label>
-              <mat-select formControlName='jobInternship'>
-                <mat-option value="Job">Job</mat-option>
-                <mat-option value="Internship">Internship</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2">
-            <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
-              <mat-label>Job Type</mat-label>
-              <mat-select formControlName='jobType'>
-                <mat-option value="In office">In office</mat-option>
-                <mat-option value="Work from home">Work from home</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2">
-            <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
-              <mat-label>Salary</mat-label>
-              <input matInput formControlName='salary' type="number" class="p-0">
-              <span matPrefix>&#8377;&nbsp;</span>
-              <span matSuffix>.00</span>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2">
-            <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
-              <mat-label>Salary type</mat-label>
-              <mat-select formControlName='salaryType'>
-                <mat-option value="per week">per week</mat-option>
-                <mat-option value="per month">per month</mat-option>
-                <mat-option value="per annum">per annum</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2" *ngIf="jobPostForm.get('jobType').value === 'In office'">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Job Location</mat-label>
-              <input matInput placeholder="ex Bengaluru" class="p-0" formControlName='location'>
-              <mat-error>Enter valid location</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4 mx-3 mb-2">
-            <section class="p-0 w-100 mat-form-field">
-              <mat-checkbox formControlName='partTime'>Part time allowed</mat-checkbox>
-            </section>
-          </div>
-          <div class="col-sm-9 m-4">
-            <label class="text-grey semi-bold d-block text-center mb-3">Skills required</label>
-            <div class="input-group m-2" *ngFor="let field of skillArray; let i = index">
-              <input type="text" class="form-control" [(ngModel)]="field.skillName"
-                [ngModelOptions]="{standalone: true}" placeholder="Skill name">
-              <div class="input-group-prepend">
-                <div class="input-group-text material-icons bg-white text-link"
-                  (click)="deleteFieldValueToSkillArray(i)">delete
-                </div>
+      <div class="row justify-content-center px-2">
+        <div class="col-sm-6 mx-2 bg-white"
+          style="border-radius: 7px; overflow-y: auto !important; border: 1px solid #cccccc;">
+          <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
+            <div class="col-sm-6 mb-2">
+              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                <mat-label class="p-0">Job Title</mat-label>
+                <input matInput placeholder="ex Software Developer" class="p-0" formControlName='title'>
+                <mat-error>Enter valid title</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2">
+              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                <mat-label class="p-0">Total Vacancies</mat-label>
+                <input matInput type="number" placeholder="ex 10" class="p-0" formControlName='vacancy'>
+                <mat-error>Enter valid number</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2">
+              <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
+                <mat-label>Job/Internship</mat-label>
+                <mat-select formControlName='jobInternship'>
+                  <mat-option value="Job">Job</mat-option>
+                  <mat-option value="Internship">Internship</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2">
+              <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
+                <mat-label>Job Type</mat-label>
+                <mat-select formControlName='jobType'>
+                  <mat-option value="In office">In office</mat-option>
+                  <mat-option value="Work from home">Work from home</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2">
+              <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
+                <mat-label>{{ jobPostForm.get('jobInternship').value === "Job" ? 'Salary' : 'Stipend'}}</mat-label>
+                <input matInput formControlName='salary' type="number" class="p-0">
+                <span matPrefix>&#8377;&nbsp;</span>
+                <span matSuffix>.00</span>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2">
+              <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
+                <mat-label>Salary type</mat-label>
+                <mat-select formControlName='salaryType'>
+                  <mat-option value="per week">per week</mat-option>
+                  <mat-option value="per month">per month</mat-option>
+                  <mat-option value="per annum">per annum</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2" *ngIf="jobPostForm.get('jobType').value === 'In office'">
+              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                <mat-label class="p-0">Job Location</mat-label>
+                <input matInput placeholder="ex Bengaluru" class="p-0" formControlName='location'>
+                <mat-error>Enter valid location</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 mb-2">
+              <section class="p-0 w-100 mat-form-field">
+                <mat-checkbox formControlName='partTime'>Part time allowed</mat-checkbox>
+              </section>
+            </div>
+            <div class="col-sm-12 row mx-0 p-0">
+              <div class="col-sm-6">
+                <mat-label class="p-0">Experience (in years)</mat-label>
+                <mat-slider class="w-100" formControlName="experience" thumbLabel [displayWith]="formatLabel"
+                  tickInterval="0.5" min="0" max="10">
+                </mat-slider>
               </div>
             </div>
-            <button class="btn btn-primary bg-violet text-sm ml-2 p-1 d-flex justify-content-center"
-              (click)="addFieldValueToSkillArray()">Add skill</button>
-          </div>
-          <div class="col-sm-9 m-4">
-            <label class="text-grey semi-bold d-block text-center mb-3">Job Details</label>
-            <div class="input-group m-2" *ngFor="let field of jobDetailsArray; let i = index">
-              <input type="text" class="form-control" [(ngModel)]="field.detail" [ngModelOptions]="{standalone: true}"
-                placeholder="Detail">
-              <div class="input-group-prepend">
-                <div class="input-group-text material-icons bg-white text-link"
-                  (click)="deleteFieldValueJobDetailsArray(i)">delete
+            <div class="col-sm-12">
+              <label class="text-grey semi-bold d-block text-center mb-3">Skills required</label>
+              <div class="input-group my-2" *ngFor="let field of skillArray; let i = index">
+                <input type="text" class="form-control" [(ngModel)]="field.skillName"
+                  [ngModelOptions]="{standalone: true}" placeholder="Skill name">
+                <div class="input-group-prepend">
+                  <div class="input-group-text material-icons bg-white text-link"
+                    (click)="deleteFieldValueToSkillArray(i)">delete
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="w-100">
               <button class="btn btn-primary bg-violet text-sm ml-2 p-1 d-flex justify-content-center"
-                (click)="addFieldValueToJobDetailsArray()">Add Detail</button>
+                (click)="addFieldValueToSkillArray()">Add skill</button>
             </div>
-          </div>
-          <div class="col-sm-9 m-4">
-            <label class="text-grey semi-bold d-block  mb-3">Last date to apply</label>
-            <div class="input-group mb-2 col-sm-8">
-              <div class="input-group-prepend bg-white">
-                <span class="material-icons input-group-text text-secondary bg-white">date_range
-                </span>
+            <div class="col-sm-12">
+              <label class="text-grey semi-bold d-block text-center mb-3">Job Details</label>
+              <div class="input-group my-2" *ngFor="let field of jobDetailsArray; let i = index">
+                <input type="text" class="form-control" [(ngModel)]="field.detail" [ngModelOptions]="{standalone: true}"
+                  placeholder="Detail">
+                <div class="input-group-prepend">
+                  <div class="input-group-text material-icons bg-white text-link"
+                    (click)="deleteFieldValueJobDetailsArray(i)">delete
+                  </div>
+                </div>
               </div>
-              <input type="text" formControlName="lastDateToApply" autocomplete="nope" placeholder="Choose Date"
-                class="form-control semi-bold text-grey bg-white" bsDatepicker readonly
-                [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
+              <div class="w-100">
+                <button class="btn btn-primary bg-violet text-sm ml-2 p-1 d-flex justify-content-center"
+                  (click)="addFieldValueToJobDetailsArray()">Add Detail</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group col-sm-9 m-4">
-            <label for="exampleFormControlTextarea1">About us</label>
-            <textarea class="form-control" [(ngModel)]="aboutUs" [ngModelOptions]="{standalone: true}"
-              id="exampleFormControlTextarea1" rows="5"></textarea>
+            <div class="col-sm-6 my-3">
+              <label class="text-grey semi-bold d-block mb-3">Last date to apply</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend bg-white">
+                  <span class="material-icons input-group-text text-secondary bg-white">date_range
+                  </span>
+                </div>
+                <input type="text" formControlName="lastDateToApply" autocomplete="nope" placeholder="Choose Date"
+                  class="form-control semi-bold text-grey bg-white" bsDatepicker readonly
+                  [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
+              </div>
+            </div>
+            <div class="col-sm-6 my-3">
+              <label class="text-grey semi-bold d-block mb-3">Start date</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend bg-white">
+                  <span class="material-icons input-group-text text-secondary bg-white">date_range
+                  </span>
+                </div>
+                <input type="text" formControlName="startDate" autocomplete="nope" placeholder="Choose Date"
+                  class="form-control semi-bold text-grey bg-white" bsDatepicker readonly
+                  [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
+              </div>
+            </div>
+            <div class="form-group col-sm-12 my-3">
+              <label for="exampleFormControlTextarea1">About us</label>
+              <textarea class="form-control" [(ngModel)]="aboutUs" [ngModelOptions]="{standalone: true}"
+                id="exampleFormControlTextarea1" rows="5"></textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -134,6 +156,9 @@
   </div>
 </div>
 
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>
+
+
 <ng-template #deletePopup>
   <div class="modal-body p-3 box-shadow text-smd text-center" style="border-radius: 8px;">
     Delete Job Post ?
@@ -141,8 +166,8 @@
     <br>
     <br>
     <div class="d-flex justify-content-between mt-3">
-      <button type="button" class="btn btn-secondary btn-sm bg-grey px-3 py-1" (click)="deletePost()">Yes</button>
-      <button type="button" class="btn btn-warning btn-sm bg-violet px-3 py-1" (click)="close(2)">No</button>
+      <button type="button" class="btn btn-secondary bg-grey px-3 py-1" (click)="deletePost()">Yes</button>
+      <button type="button" class="btn btn-prmary bg-violet px-3 py-1" (click)="close(2)">No</button>
     </div>
   </div>
 </ng-template>

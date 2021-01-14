@@ -24,7 +24,6 @@ export class SigninComponent implements OnInit {
 
   isServiceRunning = false;
 
-
   role = UserRole;
   isVerifyOTP = false;
   isLogin = true;
@@ -49,7 +48,7 @@ export class SigninComponent implements OnInit {
     this.initializeSignupForm();
     this.loginForm = new FormGroup({
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
-      passwordLogin: new FormControl(null, [Validators.required, Validators.minLength(7)]),
+      passwordLogin: new FormControl(null, [Validators.required]),
     });
   }
 
@@ -90,53 +89,44 @@ export class SigninComponent implements OnInit {
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(7)]),
-      confirmPassword: new FormControl(null, Validators.required),
     });
   }
 
-  isConfirmPasswordMatches() {
-    if (this.signupForm.get('password').value === this.signupForm.get('confirmPassword').value) {
-      return true;
-    }
-    return null;
-  }
-
   registerCandidate() {
+    this.signupForm.markAllAsTouched();
     if (this.signupForm.valid) {
-      if (this.signupForm.get('password').value === this.signupForm.get('confirmPassword').value) {
-        this.isServiceRunning = true;
-        const candidate: any = {
-          user: {
-            cId: new Date().getTime(),
-            name: this.signupForm.get('name').value,
-            email: (this.signupForm.get('email').value).toLowerCase(),
-            password: this.signupForm.get('password').value,
-            role: UserRole.CANDIDATE,
-            verified: false,
-            time: new Date(),
-          },
-        };
-        this.authService.registerCandidate(candidate).subscribe((data: any) => {
-          console.log('yes');
-          if (data.error) {
-            this.message = data.error;
-          }
-          else {
-            this.hideAll();
-            this.isVerifyOTP = true;
-            let counter = 30;
-            timer(1000, 1000)
-              .pipe(
-                takeWhile(() => counter > 0),
-                tap(() => counter--)
-              )
-              .subscribe(() => {
-                this.timer = counter;
-              });
-          }
-          this.isServiceRunning = false;
-        });
-      }
+      this.isServiceRunning = true;
+      const candidate: any = {
+        user: {
+          cId: new Date().getTime(),
+          name: this.signupForm.get('name').value,
+          email: (this.signupForm.get('email').value).toLowerCase(),
+          password: this.signupForm.get('password').value,
+          role: UserRole.CANDIDATE,
+          verified: false,
+          time: new Date(),
+        },
+      };
+      this.authService.registerCandidate(candidate).subscribe((data: any) => {
+        console.log('yes');
+        if (data.error) {
+          this.message = data.error;
+        }
+        else {
+          this.hideAll();
+          this.isVerifyOTP = true;
+          let counter = 30;
+          timer(1000, 1000)
+            .pipe(
+              takeWhile(() => counter > 0),
+              tap(() => counter--)
+            )
+            .subscribe(() => {
+              this.timer = counter;
+            });
+        }
+        this.isServiceRunning = false;
+      });
     }
   }
 
@@ -172,7 +162,7 @@ export class SigninComponent implements OnInit {
         .then((data: any) => {
           console.log(data);
           if (data.error) {
-            this.message = data.error;
+            this.message = "Invalid email or password!";
           }
           else if (data.email) {
             this.modalRef.hide();

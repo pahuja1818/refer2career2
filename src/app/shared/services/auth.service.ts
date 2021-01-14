@@ -7,25 +7,25 @@ import { Subject } from 'rxjs';
 })
 export class AuthService {
 
-  currentUser: any = {};
+  currentUser: Subject<any> = new Subject<any>();
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
-  public baseUrl = window.location.host.includes('localhost') ?  'http://localhost:8084' :  'https://instajobapp.herokuapp.com' ;
+  public baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
 
   constructor(private http: HttpClient) {
-   this.getCurrentUser();
+    this.getCurrentUser();
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     if (window.localStorage.getItem('id')) {
       this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
         .subscribe((data: any) => {
-          this.currentUser  = data.data;
+          this.currentUser.next(data.data);
           console.log(data);
         });
     }
-   }
+  }
 
   registerCandidate(data: any) {
     const body = JSON.stringify(data);

@@ -4,13 +4,14 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>My applications</ion-title>
+      <ion-title>Applied Jobs</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="row justify-content-center" style=" margin-top: 70px !important;">
-    <div class="col-sm-5 m-3 pt-4" *ngFor="let jobPost of allAppliedPosts" (click)="seeDetails(jobPost.data._id)">
-      <div class="card box-shadow w-100 p-3 btn btn-light">
-        <span class="badge badge-info p-2" style="width: max-content;">Applied on {{jobPost.appliedDate | date: 'dd MMMM yyyy'}}</span>
+  <div class="row justify-content-center p-2 bg-white" style=" margin-top: 70px !important;">
+    <div class="" [ngClass]="jobPost.data && jobPost.data.jobPost ? 'm-3 pt-4 col-12 col-sm-4' : ''"
+      [ngStyle]="jobPost.data && jobPost.data.jobPost ? 'min-width: 350px' : ''"
+      *ngFor="let jobPost of allAppliedPosts" (click)="seeDetails(jobPost.data._id)">
+      <div class="card box-shadow w-100 h-100 p-3 btn btn-light" *ngIf="jobPost.data && jobPost.data.jobPost">
         <div class="d-flex justify-content-between vertical-center mb-3">
           <div class="text-left">
             <span class="text-dark semi-bold d-block text-md">{{jobPost.data.jobPost.title}}</span>
@@ -21,7 +22,8 @@
         </div>
         <div class="w-100 vertical-center my-2 mb-3">
           <span class="material-icons-outlined text-grey mr-2">{{jobPost.data.jobPost.jobType === 'In office' ?
-            'business' :
+            'business'
+            :
             'home'}}</span>
           <span class="text-dark text-grey text-slmd">{{jobPost.data.jobPost.jobType}}</span>
         </div>
@@ -45,9 +47,19 @@
             {{jobPost.data.jobPost.salaryType}}</span>
         </div>
         <div class="my-2 vertical-center">
+          <span class="material-icons-outlined text-grey mr-2">work</span>
+          <span class="text-grey semi-bold  d-inline">Experience : </span>
+          <span class="text-grey">&nbsp; {{ jobPost.data.jobPost ? getExperience(jobPost.data.jobPost.experience) : ''
+            }}
+            years</span>
+        </div>
+        <div class="my-2 vertical-center">
           <span class="material-icons-outlined text-grey mr-2">play_arrow</span>
           <span class="text-grey semi-bold  d-inline">Start Date : </span>
-          <span class="text-grey">&nbsp; Immediatly</span>
+          <span class="text-grey">&nbsp; {{getStartDate(jobPost.data.jobPost.startDate) ?
+            (jobPost.data.jobPost.startDate |
+            date:
+            'dd MMMM yyyy' ) : 'Immediately'}}</span>
         </div>
         <div class="d-block pt-2">
           <span class="text-slmd text-grey px-3 py-2 bg-light-grey"

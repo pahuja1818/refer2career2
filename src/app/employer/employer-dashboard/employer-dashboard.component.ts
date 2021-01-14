@@ -10,8 +10,6 @@ import { Component, OnInit } from '@angular/core';
 export class EmployerDashboardComponent implements OnInit {
 
   modalRef: BsModalRef;
-
-
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
@@ -21,9 +19,7 @@ export class EmployerDashboardComponent implements OnInit {
 
 
   toggle() {
-    if (window.screen.width < 990) {
-      this.menu.toggle();
-    }
+    this.menu.toggle();
   }
 
   openModal(template: any) {
