@@ -27,7 +27,8 @@ export class JobPostsComponent implements OnInit {
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.allJobPost = data;
       this.isServiceRunning = false;
-    });
+    },
+      err => this.isServiceRunning = false);
   }
 
   addJobPost() {
