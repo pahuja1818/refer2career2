@@ -86,7 +86,7 @@ export class JobDetailsComponent implements OnInit {
 
 
   getExperience(value: number) {
-    return `${value} - ${value + 1}`
+    return `${value} - ${value + 1}`;
   }
 
   getStartDate(date: any) {

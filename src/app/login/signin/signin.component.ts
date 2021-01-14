@@ -162,7 +162,7 @@ export class SigninComponent implements OnInit {
         .then((data: any) => {
           console.log(data);
           if (data.error) {
-            this.message = "Invalid email or password!";
+            this.message = 'Invalid email or password!';
           }
           else if (data.email) {
             this.modalRef.hide();

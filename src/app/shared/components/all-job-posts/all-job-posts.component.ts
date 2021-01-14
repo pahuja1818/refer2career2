@@ -43,14 +43,17 @@ export class AllJobPostsComponent implements OnInit {
   }
 
   seeDetails(data: any) {
-    if (this.role == 2)
+    if (this.role === 2) {
       this.router.navigateByUrl(`/referer/jobs/job-detail/${data._id}`);
+    }
 
-    else if (this.role == 0)
+    else if (this.role === 0) {
       this.router.navigateByUrl(`/admin/jobs/detail/${data._id}`);
+ }
 
-    else if (this.role == 1)
+    else if (this.role === 1) {
       this.router.navigateByUrl(`/recruiter/job-posts/detail/${data._id}`);
+ }
   }
 
   private _filter(name: string): any[] {
@@ -81,7 +84,7 @@ export class AllJobPostsComponent implements OnInit {
   }
 
   getExperience(value: number) {
-    return `${value} - ${value + 1}`
+    return `${value} - ${value + 1}`;
   }
 
   getStartDate(date: any) {

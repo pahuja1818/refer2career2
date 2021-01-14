@@ -34,7 +34,7 @@ export class AddJobPostComponent implements OnInit {
   isEditItems: boolean;
 
   formatLabel(value: number) {
-    if (value === 10) return "10+"
+    if (value === 10) { return '10+'; }
     return `${value}-${value + 1}`;
   }
 
@@ -177,7 +177,7 @@ export class AddJobPostComponent implements OnInit {
 
   close(id = 1) {
     if (id === 2) { this.modalService.hide(2); }
-    else this.modalService.hide();
+    else { this.modalService.hide(); }
   }
 
 }
