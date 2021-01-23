@@ -7,9 +7,12 @@ var MongoClient = require('mongodb').MongoClient;
 var uri = "mongodb://pahuja_ji:1357902468@cluster0-shard-00-00.j00fc.mongodb.net:27017,cluster0-shard-00-01.j00fc.mongodb.net:27017,cluster0-shard-00-02.j00fc.mongodb.net:27017/insta-jobs?ssl=true&replicaSet=atlas-2a4jen-shard-0&authSource=admin&retryWrites=true&w=majority";
 var mongoUtil = require('../db.js').getDb();
 //var mdb = mongoUtil.getDb();
+var ObjectId = require('mongodb').ObjectId;
+
+var global;
 
 module.exports.registerUser = (req, res) => {
-    const user = req.body.user;
+    user = req.body.user;
     mongoUtil.collection("users").findOne({ 'email': user.email }, function (err, result) {
         if (err) throw err;
         console.log(result);
@@ -24,7 +27,6 @@ module.exports.registerUser = (req, res) => {
                 console.log(obj.result.n + " document(s) deleted");
                 mongoUtil.collection("verify").insertOne({ 'email': user.email, 'otp': otp, 'time': new Date() }, function (err, res) {
                     if (err) throw err;
-                    console.log("1 otp inserted");
                     mongoUtil.collection("users").deleteMany({ 'email': user.email }, function (err, obj) {
                         if (err) throw err;
                         mongoUtil.collection("users").insertOne(user, function (err, res) {
@@ -64,7 +66,6 @@ module.exports.registerUser = (req, res) => {
     });
 }
 
-
 module.exports.verifyOTP = (req, res) => {
     const data = req.body;
     mongoUtil.collection("verify").findOne({ 'email': data.email }, function (err, result) {
@@ -94,7 +95,6 @@ module.exports.verifyOTP = (req, res) => {
     });
 }
 
-
 module.exports.login = (req, res) => {
     const data = req.body;
     mongoUtil.collection("users").findOne({ 'email': data.email }, function (err, result) {
@@ -118,10 +118,36 @@ module.exports.login = (req, res) => {
     });
 }
 
+
+
 module.exports.updateAdminDetails = (req, res) => {
     const data = req.body;
     mongoUtil.collection("users").updateOne({ 'email': data.email }, { $set: { mobile: data.mobile, alternateNumber: data.alternateNumber, photo: data.photo, organizationDetails: data.organizationDetails } }, function (err, result) {
         if (err) return res.status(200).json({ 'data': false });;
+        return res.status(200).json({ 'data': true });
+    });
+}
+
+module.exports.find = (req, res) => {
+    const data = req.body;
+    const collection = req.body.collection;
+    mongoUtil.collection(collection).findOne({ _id: new ObjectId(data._id) }, function (err, result) {
+        if (err) return res.status(200).json({ 'error': false });;
+        return res.status(200).json({ 'data': result });
+    });
+}
+
+module.exports.update = (req, res) => {
+    const data = req.body.data;
+    const collection = req.body.collection;
+    console.log(req.body);
+    const query = req.body.query ? req.body.query : {};
+    console.log(query);
+    if (query._id) {
+        query._id = new ObjectId(query._id)
+    }
+    mongoUtil.collection(collection).updateOne(query, { $set: data }, function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': true });
     });
 }
@@ -131,5 +157,69 @@ module.exports.getDetails = (req, res) => {
     mongoUtil.collection("users").findOne({ 'email': data.email }, function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': result });
+    });
+}
+
+module.exports.insertOTP = (req, res) => {
+    let user = req.body
+    let otp = Math.floor(100000 + Math.random() * 900000);
+    mongoUtil.collection("verify").deleteMany({ 'email': user.email }, function (err, obj) {
+        if (err) throw err;
+        mongoUtil.collection("verify").insertOne({ 'email': user.email, 'otp': otp, 'time': new Date() }, function (err, result) {
+            if (err) throw err;
+            var smtpTransport = nodemailer.createTransport({
+                service: 'gmail',//smtp.gmail.com  //in place of service use host...
+                secure: false,//true
+                port: 25,//465
+                auth: {
+                    user: 'tusharpahuja824@gmail.com',
+                    pass: '1357902468@Aa'
+                }, tls: {
+                    rejectUnauthorized: false
+                }
+            });
+
+            var mailOptions = {
+                from: 'tusharpahuja824@gmail.com',
+                to: user.email,
+                subject: 'Verification code for Insta Jobs',
+                html: `<p>Hello` + '</p><p>Here is your verification code for Insta jobs<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!'
+            };
+
+            smtpTransport.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    res.status(200).json({ 'data': true });
+                }
+            });
+        });
+    });
+}
+
+module.exports.verify = (req, res) => {
+    const data = req.body;
+    mongoUtil.collection("verify").findOne({ 'email': data.email }, function (err, result) {
+        console.log(data);
+        if (err) throw err;
+        let date = new Date();
+        let time = result.time;
+        let msDifference = date - time;
+        let minutes = Math.floor(msDifference / 1000 / 60);
+        if (+data.otp === +result.otp) {
+            if (minutes < 16) {
+                mongoUtil.collection("verify").deleteOne({ 'email': data.email }, function (err, obj) {
+                    if (err) throw err;
+                    return res.status(200).json({ 'data': true });
+                });
+            }
+            else {
+                return res.status(200).json({ 'data': false });
+            }
+        }
+        else {
+            return res.status(200).json({ 'error': 'Invalid passcode' });
+        }
     });
 }

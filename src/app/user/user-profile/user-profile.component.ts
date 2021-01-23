@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Template } from '@angular/compiler/src/render3/r3_ast';
+import { ObjectId } from 'mongodb';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,6 +22,8 @@ export class UserProfileComponent implements OnInit {
   isEditing = false;
   skillName = '';
   skillsArray: any[] = [];
+
+  isServiceRunning = false;
 
   profileForm: FormGroup;
 
@@ -40,6 +43,8 @@ export class UserProfileComponent implements OnInit {
   educationDetailsForm: FormGroup;
   educationArray: any[] = [];
 
+  cvHeadLine: string = '8 year experienced full stack Java developer.';
+  isCVHeadEditing = false;
 
 
 
@@ -52,6 +57,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+    this.getUser();
+    if (this.user.cvHead) {
+      this.cvHeadLine = this.user.cvHead;
+    }
     this.initializeProfileForm();
     this.initializeEducationForm();
   }
@@ -175,6 +185,50 @@ export class UserProfileComponent implements OnInit {
       field: education.field,
     });
     this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
+  }
+
+
+  uploadImage(event: any, id = 0) {
+    const reader: FileReader = new FileReader();
+    reader.onload = (file: any) => {
+      this.user.photo = file.target.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+
+
+  saveCVHeadLine() {
+    if (this.isCVHeadEditing) {
+      this.isServiceRunning = true;
+      this.authService.update({ collection: 'users', data: { 'cvHead': this.cvHeadLine }, query: { _id: this.user._id } }).then((data: any) => {
+        if (data.data === true) {
+          this.getUser();
+          this.user.cvHead = this.cvHeadLine;
+          this.isCVHeadEditing = false;
+          this.isServiceRunning = false;
+        }
+        else {
+          console.log(data)
+          this.isServiceRunning = false;
+        }
+      },
+        err => console.log(err))
+    }
+  }
+
+  getUser() {
+    this.authService.find({ collection: 'users', _id: this.user._id }).subscribe((data: any) => {
+      if (data.data) {
+        this.user = data.data;
+        console.log(data.data)
+        window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
+      }
+    })
+  }
+
+  otpRequest() {
+
   }
 
 

@@ -6,15 +6,15 @@
       </span>
       <div class="d-flex justify-content-center mb-2">
         <img *ngIf="!isVerifyOTP" data-aos="fade-up"
-          src="{{ isLogin?'../../../assets/login2.jpg': isRegistration ?'../../../assets/register.jpg': isForgotPassword ? '../../../assets/forgotpassword.jpg':''}}"
+          src="{{ isLogin?'../../../assets/login2.jpg': isRegistration ?'../../../assets/register.jpg': '../../../assets/forgotpassword.jpg'}}"
           class="img-fluid" alt="" style="height: 140px; width: 180px;">
       </div>
     </div>
     <div class="vertical-center w-100 justify-content-center mb-2">
       <span class="material-icons text-grey semi-bold text-md mr-2">{{ isLogin?'login': isRegistration
-        ?'person_add_alt_1': isForgotPassword ? 'cached':''}}</span>
+        ?'person_add_alt_1': isForgotPassword ? 'cached': isResetPassword ? 'autorenew' : ''}}</span>
       <span class="text-grey text-ssmd semi-bold">{{ isLogin?'Login': isRegistration ?'Registration': isForgotPassword ?
-        'Forgot Password':''}}</span>
+        'Forgot Password' : isResetPassword ? 'Reset Password' : ''}}</span>
     </div>
     <form [formGroup]="loginForm" class="p-3" *ngIf="isLogin">
       <alert type="success" class="text-sm m-2" *ngIf="isVerified">
@@ -87,7 +87,8 @@
     </div>
     <div *ngIf="isVerifyOTP" class="w-100">
       <alert type="success" class="text-sm">
-        We have sent a 6 digit passcode at {{ signupForm.get('email').value }} kindly enter the code here.
+        We have sent a 6 digit passcode at {{ signupForm.get('email').value }} {{email.value}} kindly enter the code
+        here.
       </alert>
       <div class="p-3">
         <label class="semi-bold mt-2">Enter a 6-digit passcode</label>
@@ -119,7 +120,22 @@
       </mat-form-field>
       <div class="d-flex justify-content-center mb-5">
         <button class="w-75 btn btn-primary p-2 text-smd bold"
-          style="border-radius: 60px; border-color: 0px !important;">Proceed</button>
+          style="border-radius: 60px; border-color: 0px !important;" (click)="forgotPassword()">Proceed</button>
+      </div>
+    </div>
+    <div class="p-3" *ngIf="isResetPassword">
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+        <mat-label class="semi-bold text-grey text-smd m-0">New Password</mat-label>
+        <input matInput class="text-sm m-0" [type]="!isPasswordVisible ? 'password': 'text'"
+          placeholder="Enter password" [formControl]='resetPassword'>
+        <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+          class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+        </span>
+        <mat-error class="text-xs">Password required*</mat-error>
+      </mat-form-field>
+      <div class="d-flex justify-content-center mb-5">
+        <button class="w-75 btn btn-primary p-2 text-smd bold"
+          style="border-radius: 60px; border-color: 0px !important;" (click)="restPassword()">Reset</button>
       </div>
     </div>
     <div class="w-100 text-center" *ngIf="isForgotPassword">

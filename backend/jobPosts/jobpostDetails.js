@@ -20,11 +20,12 @@ module.exports.addJobPost = (req, res) => {
 
 module.exports.updateJobPost = (req, res) => {
     const data = req.body;
-    mongoUtil.collection("jobposts").update({ '_id': new ObjectId(data._id) }, { $set: { 'jobPost': data.jobPost } }, function (err, result) {
+    console.log(data);
+    let d = { 'jobPost': data.jobPost };
+    mongoUtil.collection("jobposts").update({ '_id': new ObjectId(data._id) }, { $set: d }, function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': true });
     });
-
 }
 
 module.exports.deleteJobPost = (req, res) => {
@@ -54,7 +55,7 @@ module.exports.getJobPosts = (req, res) => {
 module.exports.getJobPostsByEmployer = (req, res) => {
     const data = req.body;
     console.log(data);
-    mongoUtil.collection("jobposts").find({'jobPost.createdBy': data._id }).toArray(function (err, result) {
+    mongoUtil.collection("jobposts").find({ 'jobPost.createdBy': data._id }).toArray(function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': result });
     });

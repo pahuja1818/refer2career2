@@ -46,6 +46,17 @@ export class AuthService {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/updateAdminDetails`, body, { headers: this.headers }).toPromise();
   }
+
+  update(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/update`, body, { headers: this.headers }).toPromise();
+  }
+
+  find(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/find`, body, { headers: this.headers });
+  }
+
   updateUserDetails(data: any) {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/updateUserDetails`, body, { headers: this.headers }).toPromise();
@@ -54,6 +65,16 @@ export class AuthService {
   getDetails(data: any) {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/getDetails`, body, { headers: this.headers });
+  }
+
+  getOTP(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/otpRequest`, body, { headers: this.headers });
+  }
+
+  verify(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/verifyOTP`, body, { headers: this.headers });
   }
 
 }

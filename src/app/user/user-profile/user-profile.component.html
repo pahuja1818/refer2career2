@@ -13,149 +13,190 @@
         style="z-index: 99;">edit</button>
     </div>
   </div>
-  <div class="m-3 mt-5 p-2 bg-white"
-    style="margin-top: 70px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
-    <div class="mt-2 row d-flex justify-content-center">
-      <span class="text-grey text-md col-sm-12 ml-4">Upload resume : </span>
-      <div class="row justify-content-center">
-        <div class="col-sm-6">
-          <span class="material-icons display-1 text-danger mx-auto">backup</span>
-          <div class="form-group">
-            <input type="file" accept=".pdf,.docx" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center my-2">
-      </div>
-    </div>
-  </div>
-  <div class="m-3 mt-5 p-2 bg-white"
-    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
-    <div class="d-flex justify-content-between vertical-center mb-3">
-      <div class="mt-2 row d-flex justify-content-center" [formGroup]="profileForm">
-        <span class="text-grey text-md col-sm-12 ml-4 mb-3">Basic Info : </span>
-        <div class="row col-sm-9 d-flex justify-content-between">
-          <div class="col-sm-5 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Name</mat-label>
-              <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
-              <mat-error>Enter valid name</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-5 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Phone number</mat-label>
-              <span matPrefix>+91 &nbsp;</span>
-              <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-              <mat-error>Enter valid mobile number</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-5 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Email</mat-label>
-              <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
-              <mat-error>Enter valid email</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-5 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label class="p-0">Alternate contact number</mat-label>
-              <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
-              <mat-error>Enter contact number</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-5 mx-3 mb-2">
-            <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-              <mat-label>Date of Birth</mat-label>
-              <input matInput readonly [matDatepicker]="picker1" formControlName='dob'>
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-              <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
-              <mat-error>Enter valid DOB</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="m-3 mt-5 p-2 bg-white"
-    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
-    <div class="mt-2 row d-flex justify-content-center">
-      <span class="text-grey text-md col-sm-12 ml-4 mb-3">Skills : </span>
-      <div class="row col-sm-9 d-flex justify-content-center">
-        <div class="col-sm-9" style="border-radius: 7px;">
-          <label class="bold text-grey text-sm mt-2">Skill name</label>
-          <div class="row vertical-center">
-            <div class="col-sm-9">
-              <input type="text" autocomplete="nope" [(ngModel)]='skillName'
-                class="form-control mb-2 text-grey semi-bold">
-            </div>
-            <div class="col-sm-3">
-              <button class="btn btn-primary w-100 h-100 bg-violet px-1 mb-2 py-1" (click)="addSkill()">Add</button>
+  <div class="row px-2 justify-content-center">
+    <div class="col-sm-6 px-0 mt-5 bg bg-white"
+      style="margin-top: 45px !important; border-radius: 5px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+      <div class="bg-violet">
+        <div class="row">
+          <div class="col align-self-center">
+            <div class="p-3 m-3 vertical-center justify-content-between">
+              <div>
+                <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
+                  class="position-absolute w-25 h-25" style="opacity: 0 !important;" />
+                <span class="rounded-circle bg-white mx-auto text-center material-icons pt-3 text-grey text-lg"
+                  *ngIf="!user.photo"
+                  style="border-width: 2px; height: 70px !important; width: 70px !important; border: 2px solid rgb(255, 255, 255);">{{user.name[0]}}</span>
+                <img *ngIf="user.photo" class="img-fulid rounded-circle"
+                  style="height: 70px !important; width: 70px !important; border: 2px solid white;" src="{{user.photo}}"
+                  alt="">
+              </div>
+              <div class="text-white">
+                <div class="w-100 semi-bold text-sm">Tushar Pahuja</div>
+                <div class="w-100 semi-bold text-sm">pahuja@instajob.com</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-sm-9 my-4">
-          <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
-            style="display: inline-block; border-radius: 7px; width: max-content; margin: 3px !important; white-space:nowrap;">
-            <span class="text-md text-grey mr-3">{{data}}</span>
-            <span class="material-icons text-sm text-link" (click)="removeTag(i)">close</span>
+      </div>
+      <div class="p-2 m-4 bg-white box-shadow" style="border-radius: 4px;">
+        <div class="vertical-center justify-content-between">
+          <span class="bold text-dark text-ssmd">CV Headline</span>
+          <span class="material-icons-outlined text-link" (click)="isCVHeadEditing = !isCVHeadEditing">{{isCVHeadEditing
+            ? 'close' :
+            'edit'}}</span>
+        </div>
+        <span class="text-smd my-4" *ngIf="!isCVHeadEditing">{{cvHeadLine}}</span>
+        <input class="form-control my-3" *ngIf="isCVHeadEditing" type="text" placeholder="" [(ngModel)]="cvHeadLine">
+        <div class="d-flex justify-content-end" *ngIf="isCVHeadEditing">
+          <button class="btn btn-primary bg-violet" (click)='saveCVHeadLine()'>Save</button>
+        </div>
+        <hr>
+        <small class="text-grey text-xs">Keep it updated for better job opportunities.</small>
+      </div>
+      <hr style="height:0.2px; border-width:0;color: #cccccc; background-color:#cccccc">
+
+      <div class="p-2 bg-white">
+        <div class="d-flex justify-content-between vertical-center mb-3">
+          <div class="mt-2 row d-flex justify-content-center" [formGroup]="profileForm">
+            <span class="text-grey text-md col-sm-12 ml-4 mb-3">Basic Info : </span>
+            <div class="row col-sm-9 d-flex justify-content-between">
+              <div class="col-sm-5 mx-3 mb-2">
+                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                  <mat-label class="p-0">Name</mat-label>
+                  <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
+                  <mat-error>Enter valid name</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-5 mx-3 mb-2">
+                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                  <mat-label class="p-0">Phone number</mat-label>
+                  <span matPrefix>+91 &nbsp;</span>
+                  <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
+                  <mat-error>Enter valid mobile number</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-5 mx-3 mb-2">
+                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                  <mat-label class="p-0">Email</mat-label>
+                  <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
+                  <mat-error>Enter valid email</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-5 mx-3 mb-2">
+                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                  <mat-label class="p-0">Alternate contact number</mat-label>
+                  <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
+                  <mat-error>Enter contact number</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-5 mx-3 mb-2">
+                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                  <mat-label>Date of Birth</mat-label>
+                  <input matInput readonly [matDatepicker]="picker1" formControlName='dob'>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+                  <mat-error>Enter valid DOB</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <span class="text-sm text-light-grey w-100 mx-3 mt-4">Skills plays a major role to match a Job profile.</span>
-    </div>
-  </div>
-  <div class="m-3 mt-5 p-2 bg-white"
-    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
-    <div class="mt-2 row d-flex justify-content-center">
-      <span class="text-grey text-md col-sm-12 ml-4 mb-3">Work experience : </span>
-      <div class="w-100">
-        <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openWorkExpModal(workExp)">Add
-          experience</button>
-      </div>
-      <div class="row w-100 d-flex justify-content-start">
-        <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
-          <div *ngFor="let data of workExpArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
-            style="border-radius: 7px; margin: 3px !important;">
-            <div class="d-flex justify-content-end">
-              <span class="material-icons text-grey mr-2 text-link" (click)="editWorkExp(data, workExp, i)">edit</span>
-              <span class="material-icons text-grey text-link" (click)="deleteWorkExp(i)">delete</span>
+      <div class="p-2 bg-white">
+        <div class="mt-2 row d-flex justify-content-center">
+          <span class="text-grey text-md col-sm-12 ml-4 mb-3">Skills : </span>
+          <div class="row col-sm-9 d-flex justify-content-center">
+            <div class="col-sm-9" style="border-radius: 7px;">
+              <label class="bold text-grey text-sm mt-2">Skill name</label>
+              <div class="row vertical-center">
+                <div class="col-sm-9">
+                  <input type="text" autocomplete="nope" [(ngModel)]='skillName'
+                    class="form-control mb-2 text-grey semi-bold">
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-primary w-100 h-100 bg-violet px-1 mb-2 py-1" (click)="addSkill()">Add</button>
+                </div>
+              </div>
             </div>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>Job Title : </b>{{data.title}}</span>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>Company name : </b>{{data.companyName}}</span>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>Start date: </b>{{data.startDate | date : 'dd MMMM
-              yyyy'}}</span>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>End Date : </b>{{data.endDate | date : 'dd MMMM
-              yyyy'}}</span>
+            <div class="col-sm-9 my-4">
+              <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
+                style="display: inline-block; border-radius: 7px; width: max-content; margin: 3px !important; white-space:nowrap;">
+                <span class="text-md text-grey mr-3">{{data}}</span>
+                <span class="material-icons text-sm text-link" (click)="removeTag(i)">close</span>
+              </div>
+            </div>
+          </div>
+          <span class="text-sm text-light-grey w-100 mx-3 mt-4">Skills plays a major role to match a Job profile.</span>
+        </div>
+      </div>
+      <div class="p-2 bg-white">
+        <div class="mt-2 row d-flex justify-content-center">
+          <span class="text-grey text-md col-sm-12 ml-4 mb-3">Work experience : </span>
+          <div class="w-100">
+            <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openWorkExpModal(workExp)">Add
+              experience</button>
+          </div>
+          <div class="row w-100 d-flex justify-content-start">
+            <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
+              <div *ngFor="let data of workExpArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
+                style="border-radius: 7px; margin: 3px !important;">
+                <div class="d-flex justify-content-end">
+                  <span class="material-icons text-grey mr-2 text-link"
+                    (click)="editWorkExp(data, workExp, i)">edit</span>
+                  <span class="material-icons text-grey text-link" (click)="deleteWorkExp(i)">delete</span>
+                </div>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>Job Title : </b>{{data.title}}</span>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>Company name : </b>{{data.companyName}}</span>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>Start date: </b>{{data.startDate | date : 'dd MMMM
+                  yyyy'}}</span>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>End Date : </b>{{data.endDate | date : 'dd MMMM
+                  yyyy'}}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="m-3 mt-5 p-2 bg-white"
-    style="margin-top: 40px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
-    <div class="mt-2 row d-flex justify-content-center">
-      <span class="text-grey text-md col-sm-12 ml-4 mb-3">Education : </span>
-      <div class="w-100">
-        <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openEducationModal(education)">Add
-          Education</button>
-      </div>
-      <div class="row w-100 d-flex justify-content-start">
-        <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
-          <div *ngFor="let data of educationArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
-            style="border-radius: 7px; margin: 3px !important;">
-            <div class="d-flex justify-content-end">
-              <span class="material-icons text-grey mr-2 text-link"
-                (click)="editEducation(data, education, i)">edit</span>
-              <span class="material-icons text-grey text-link" (click)="deleteEducation(i)">delete</span>
+      <div class="p-2 bg-white">
+        <div class="mt-2 row d-flex justify-content-center">
+          <span class="text-grey text-md col-sm-12 ml-4 mb-3">Education : </span>
+          <div class="w-100">
+            <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openEducationModal(education)">Add
+              Education</button>
+          </div>
+          <div class="row w-100 d-flex justify-content-start">
+            <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
+              <div *ngFor="let data of educationArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
+                style="border-radius: 7px; margin: 3px !important;">
+                <div class="d-flex justify-content-end">
+                  <span class="material-icons text-grey mr-2 text-link"
+                    (click)="editEducation(data, education, i)">edit</span>
+                  <span class="material-icons text-grey text-link" (click)="deleteEducation(i)">delete</span>
+                </div>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>Degree/Standard : </b>{{data.degree}}</span>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>School : </b>{{data.school}}</span>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>Field: </b>{{data.field}}</span>
+                <span class="text-sm d-block m-2 text-grey mr-3"><b>Completion date : </b>{{data.completionDate | date :
+                  'dd
+                  MMMM
+                  yyyy'}}</span>
+              </div>
             </div>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>Degree/Standard : </b>{{data.degree}}</span>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>School : </b>{{data.school}}</span>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>Field: </b>{{data.field}}</span>
-            <span class="text-sm d-block m-2 text-grey mr-3"><b>Completion date : </b>{{data.completionDate | date : 'dd
-              MMMM
-              yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-2 bg-white">
+        <div class="mt-2 row d-flex justify-content-center">
+          <span class="text-grey text-md col-sm-12 ml-4">Upload resume : </span>
+          <div class="row justify-content-center">
+            <div class="col-sm-6">
+              <span class="material-icons display-1 text-danger mx-auto">backup</span>
+              <div class="form-group">
+                <input type="file" accept=".pdf,.docx" class="form-control-file" id="exampleFormControlFile1">
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center my-2">
           </div>
         </div>
       </div>
@@ -267,3 +308,5 @@
     </div>
   </div>
 </ng-template>
+
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

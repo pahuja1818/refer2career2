@@ -1,3 +1,5 @@
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { DbOperation } from './../../shared/models/dbOperation';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -22,6 +24,10 @@ export class SigninComponent implements OnInit {
   timer: number;
   isVerified = false;
 
+  isForgotPassOTP = false;
+
+  isResetPassword = false;
+
   isServiceRunning = false;
 
   role = UserRole;
@@ -35,13 +41,17 @@ export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   password = '';
   email = new FormControl('', [Validators.required, Validators.email]);
+  resetPassword = new FormControl('', [Validators.required, Validators.minLength(7)]);
 
   message = '';
+
+  isPasswordReset = false;
 
   constructor(
     public modalRef: BsModalRef,
     private authService: AuthService,
     private router: Router,
+    private toast: ToastService,
   ) { }
 
   ngOnInit() {
@@ -77,10 +87,12 @@ export class SigninComponent implements OnInit {
   }
 
   hideAll() {
+    this.isResetPassword = false
     this.isLogin = false;
     this.isRegistration = false;
     this.isForgotPassword = false;
     this.isVerifyOTP = false;
+    this.isPasswordReset = false;
     this.message = '';
   }
 
@@ -132,19 +144,36 @@ export class SigninComponent implements OnInit {
 
   verifyOTP() {
     this.isServiceRunning = true;
-    const data = {
-      email: this.signupForm.get('email').value,
-      otp: this.otp
-    };
-    this.authService.verifyOTP(data).then((res: any) => {
-      if (res.data === true) {
-        this.isVerified = true;
-        this.hideAll();
-        this.isLogin = true;
-      }
-      else { this.isOTPCorrect = true; }
-      this.isServiceRunning = false;
-    });
+    if (this.isForgotPassOTP) {
+      const data = {
+        email: this.email.value,
+        otp: this.otp
+      };
+      this.authService.verify(data).subscribe((res: any) => {
+        if (res.data === true) {
+          this.isVerified = true;
+          this.hideAll();
+          this.isResetPassword = true;
+        }
+        else { this.isOTPCorrect = false; }
+        this.isServiceRunning = false;
+      });
+    }
+    else {
+      const data = {
+        email: this.signupForm.get('email').value,
+        otp: this.otp
+      };
+      this.authService.verifyOTP(data).then((res: any) => {
+        if (res.data === true) {
+          this.isVerified = true;
+          this.hideAll();
+          this.isLogin = true;
+        }
+        else { this.isOTPCorrect = true; }
+        this.isServiceRunning = false;
+      });
+    }
   }
 
   back() {
@@ -175,6 +204,48 @@ export class SigninComponent implements OnInit {
   }
 
 
+  forgotPassword() {
+    if (this.email.valid) {
+      this.isServiceRunning = true;
+      this.authService.getOTP({ email: this.email.value }).subscribe((data: any) => {
+        console.log(data.data);
+        if (data.data === true) {
+          this.hideAll();
+          this.isVerifyOTP = true;
+          let counter = 30;
+          timer(1000, 1000)
+            .pipe(
+              takeWhile(() => counter > 0),
+              tap(() => counter--)
+            )
+            .subscribe(() => {
+              this.timer = counter;
+            });
+          this.isForgotPassOTP = true;
+        }
+        this.isServiceRunning = false;
+      });
+    }
+  }
 
+  restPassword() {
+    this.resetPassword.markAsTouched();
+    console.log('yay')
+    if (this.resetPassword.value) {
+      let dbopeartion: DbOperation = {
+        collection: 'users',
+        data: { password: this.resetPassword.value },
+        query: { email: this.email.value }
+      }
+      this.authService.update(dbopeartion).then((data: any) => {
+        if (data.data === true) {
+          this.hideAll();
+          this.toast.showToast("Password Reseted!");
+          this.isLogin = true;
+          this.isServiceRunning = false;
+        }
+      });
+    }
+  }
 
 }
