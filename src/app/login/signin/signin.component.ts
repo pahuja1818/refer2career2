@@ -87,7 +87,7 @@ export class SigninComponent implements OnInit {
   }
 
   hideAll() {
-    this.isResetPassword = false
+    this.isResetPassword = false;
     this.isLogin = false;
     this.isRegistration = false;
     this.isForgotPassword = false;
@@ -230,17 +230,17 @@ export class SigninComponent implements OnInit {
 
   restPassword() {
     this.resetPassword.markAsTouched();
-    console.log('yay')
+    console.log('yay');
     if (this.resetPassword.value) {
-      let dbopeartion: DbOperation = {
+      const dbopeartion: DbOperation = {
         collection: 'users',
         data: { password: this.resetPassword.value },
         query: { email: this.email.value }
-      }
+      };
       this.authService.update(dbopeartion).then((data: any) => {
         if (data.data === true) {
           this.hideAll();
-          this.toast.showToast("Password Reseted!");
+          this.toast.showToast('Password Reseted!');
           this.isLogin = true;
           this.isServiceRunning = false;
         }

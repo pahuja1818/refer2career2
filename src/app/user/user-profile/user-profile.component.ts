@@ -43,7 +43,7 @@ export class UserProfileComponent implements OnInit {
   educationDetailsForm: FormGroup;
   educationArray: any[] = [];
 
-  cvHeadLine: string = '8 year experienced full stack Java developer.';
+  cvHeadLine = '8 year experienced full stack Java developer.';
   isCVHeadEditing = false;
 
 
@@ -201,7 +201,10 @@ export class UserProfileComponent implements OnInit {
   saveCVHeadLine() {
     if (this.isCVHeadEditing) {
       this.isServiceRunning = true;
-      this.authService.update({ collection: 'users', data: { 'cvHead': this.cvHeadLine }, query: { _id: this.user._id } }).then((data: any) => {
+      this.authService.update({
+        collection: 'users', data: { cvHead: this.cvHeadLine },
+        query: { _id: this.user._id }
+      }).then((data: any) => {
         if (data.data === true) {
           this.getUser();
           this.user.cvHead = this.cvHeadLine;
@@ -209,11 +212,11 @@ export class UserProfileComponent implements OnInit {
           this.isServiceRunning = false;
         }
         else {
-          console.log(data)
+          console.log(data);
           this.isServiceRunning = false;
         }
       },
-        err => console.log(err))
+        err => console.log(err));
     }
   }
 
@@ -221,10 +224,10 @@ export class UserProfileComponent implements OnInit {
     this.authService.find({ collection: 'users', _id: this.user._id }).subscribe((data: any) => {
       if (data.data) {
         this.user = data.data;
-        console.log(data.data)
+        console.log(data.data);
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }
-    })
+    });
   }
 
   otpRequest() {
