@@ -1,0 +1,42 @@
+<div class="w-100 p-2" style="max-height: 90vh !important; overflow: auto;">
+  <div class="w-100 p-2 modal-body box-shadow p-0 bg-white" style="border-radius: 7px !important;">
+    <div class="">
+      <span (click)="modalRef.hide()" class="material-icons text-link text-grey w-100 text-right bold">
+        close
+      </span>
+      <div class="d-flex justify-content-center mb-2">
+        <img *ngIf="!isVerifyOTP" data-aos="fade-up" src="../../../assets/login2.jpg" class="img-fluid" alt=""
+          style="height: 140px; width: 180px;">
+      </div>
+    </div>
+    <div class="vertical-center w-100 justify-content-center mb-2">
+      <span class="material-icons text-grey semi-bold text-md mr-2">login</span>
+      <span class="text-grey text-ssmd semi-bold">Employer Login</span>
+    </div>
+    <form [formGroup]="loginForm" class="p-3">
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+        <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
+        <input matInput class="text-sm m-0" type="email" placeholder="Enter email" formControlName='emailLogin'>
+        <mat-error class="text-xs">Enter valid email*</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+        <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
+        <input matInput class="text-sm m-0" [type]="!isPasswordVisible ? 'password': 'text'"
+          placeholder="Enter password" formControlName='passwordLogin'>
+        <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+          class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+        </span>
+        <mat-error class="text-xs">Password required*</mat-error>
+      </mat-form-field>
+      <div class="text-right mb-2">
+        <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button *ngIf="!isServiceRunning" class="btn btn-primary p-1 px-4" style="border-radius: 20px;"
+          (click)="login()">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

@@ -7,15 +7,9 @@
       <ion-title>My Profile</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="row justify-content-center" style="overflow: auto;">
-    <div class="col-sm-12 m-2 d-flex justify-content-end">
-      <button class="btn btn-primary m-2 position-fixed bg-violet text-sm px-3 py-1 material-icons-outlined"
-        style="z-index: 99;">edit</button>
-    </div>
-  </div>
   <div class="row px-2 justify-content-center">
     <div class="col-sm-6 px-0 mt-5 bg bg-white"
-      style="margin-top: 45px !important; border-radius: 5px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
+      style="margin-top: 60px !important; border-radius: 5px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
       <div class="bg-violet">
         <div class="row">
           <div class="col align-self-center">
@@ -31,8 +25,8 @@
                   alt="">
               </div>
               <div class="text-white">
-                <div class="w-100 semi-bold text-sm">Tushar Pahuja</div>
-                <div class="w-100 semi-bold text-sm">pahuja@instajob.com</div>
+                <div class="w-100 semi-bold text-sm">{{user.name}}</div>
+                <div class="w-100 semi-bold text-sm">{{user.email}}</div>
               </div>
             </div>
           </div>
@@ -41,7 +35,7 @@
       <div class="p-2 m-4 bg-white box-shadow" style="border-radius: 4px;">
         <div class="vertical-center justify-content-between">
           <span class="bold text-dark text-ssmd">CV Headline</span>
-          <span class="material-icons-outlined text-link" (click)="isCVHeadEditing = !isCVHeadEditing">{{isCVHeadEditing
+          <span class="material-icons-outlined text-link" (click)="editCVHead()">{{isCVHeadEditing
             ? 'close' :
             'edit'}}</span>
         </div>
@@ -55,123 +49,155 @@
       </div>
       <hr style="height:0.2px; border-width:0;color: #cccccc; background-color:#cccccc">
 
-      <div class="p-2 bg-white">
-        <div class="d-flex justify-content-between vertical-center mb-3">
-          <div class="mt-2 row d-flex justify-content-center" [formGroup]="profileForm">
-            <span class="text-grey text-md col-sm-12 ml-4 mb-3">Basic Info : </span>
-            <div class="row col-sm-9 d-flex justify-content-between">
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Name</mat-label>
-                  <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
-                  <mat-error>Enter valid name</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Phone number</mat-label>
-                  <span matPrefix>+91 &nbsp;</span>
-                  <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-                  <mat-error>Enter valid mobile number</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Email</mat-label>
-                  <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
-                  <mat-error>Enter valid email</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Alternate contact number</mat-label>
-                  <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
-                  <mat-error>Enter contact number</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-                  <mat-label>Date of Birth</mat-label>
-                  <input matInput readonly [matDatepicker]="picker1" formControlName='dob'>
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                  <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
-                  <mat-error>Enter valid DOB</mat-error>
-                </mat-form-field>
-              </div>
+      <div class="p-2 bg-white w-100" [formGroup]="profileForm">
+        <div class="mt-2 w-100">
+          <div class="ml-4 mb-3 d-flex justify-content-between">
+            <span class="bold text-dark text-ssmd">Basic Info </span>
+            <span class="material-icons-outlined bold text-dark text-xxl text-link"
+              (click)="basicInfoEdit()">{{isBasiDetailEditing ? 'close' : 'edit'}}</span>
+          </div>
+          <div class="row col-sm-10 mx-auto d-flex justify-content-between">
+            <div class="col-sm-5 mb-2">
+              <mat-form-field class="p-0 w-100 mat-form-field">
+                <mat-label class="p-0">Phone number</mat-label>
+                <span matPrefix>+91 &nbsp;</span>
+                <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
+                <mat-error>Enter valid mobile number</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-5 mb-2">
+              <mat-form-field class="p-0 w-100 mat-form-field">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName='gender'>
+                  <mat-option value="Female">
+                    Female
+                  </mat-option>
+                  <mat-option value="Male">
+                    Male
+                  </mat-option>
+                  <mat-option value="Others">
+                    Others
+                  </mat-option>
+                </mat-select>
+                <mat-error>Enter valid detail</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-5 mb-2">
+              <mat-form-field class="p-0 w-100 mat-form-field">
+                <mat-label>Martial Status</mat-label>
+                <mat-select formControlName='martialStatus'>
+                  <mat-option value="Single">
+                    Single
+                  </mat-option>
+                  <mat-option value="Married">
+                    Married
+                  </mat-option>
+                  <mat-option value="Divorced">
+                    Divorced
+                  </mat-option>
+                  <mat-option value="Widowed">
+                    Widowed
+                  </mat-option>
+                  <mat-option value="Prefer not to say!">
+                    Prefer not to say!
+                  </mat-option>
+                </mat-select>
+                <mat-error>Enter valid detail</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-5 mb-2">
+              <mat-form-field class="p-0 w-100 mat-form-field">
+                <mat-label class="p-0">Nationality</mat-label>
+                <input matInput placeholder="Enter nationality" class="p-0" formControlName='nationality'>
+                <mat-error>Enter valid detail</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-5 mb-2">
+              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput readonly [matDatepicker]="picker1" formControlName='dob'>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+                <mat-error>Enter valid DOB</mat-error>
+              </mat-form-field>
             </div>
           </div>
         </div>
+        <div class="d-flex justify-content-end" *ngIf="isBasiDetailEditing">
+          <button class="btn btn-primary bg-violet" (click)='saveBasicInfo()'>Save</button>
+        </div>
       </div>
-      <div class="p-2 bg-white">
-        <div class="mt-2 row d-flex justify-content-center">
-          <span class="text-grey text-md col-sm-12 ml-4 mb-3">Skills : </span>
-          <div class="row col-sm-9 d-flex justify-content-center">
-            <div class="col-sm-9" style="border-radius: 7px;">
-              <label class="bold text-grey text-sm mt-2">Skill name</label>
-              <div class="row vertical-center">
-                <div class="col-sm-9">
-                  <input type="text" autocomplete="nope" [(ngModel)]='skillName'
-                    class="form-control mb-2 text-grey semi-bold">
-                </div>
-                <div class="col-sm-3">
-                  <button class="btn btn-primary w-100 h-100 bg-violet px-1 mb-2 py-1" (click)="addSkill()">Add</button>
-                </div>
-              </div>
-            </div>
+      <hr>
+      <div class="p-2 bg-white w-100">
+        <div class="mt-2 w-100">
+          <div class="ml-4 mb-3 d-flex justify-content-between">
+            <span class="bold text-dark text-ssmd">Skills </span>
+            <span class="material-icons bold text-dark text-xxl text-link"
+              (click)="openSkillModal(skillModal)">add</span>
+          </div>
+          <div class="row col-sm-9 d-flex justify-content-start">
             <div class="col-sm-9 my-4">
               <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
-                style="display: inline-block; border-radius: 7px; width: max-content; margin: 3px !important; white-space:nowrap;">
-                <span class="text-md text-grey mr-3">{{data}}</span>
-                <span class="material-icons text-sm text-link" (click)="removeTag(i)">close</span>
+                style="display: inline-block; border-radius: 15px; width: max-content; margin: 3px !important; white-space:nowrap;">
+                <span class="text-grey mr-3">{{data}}</span>
+                <span class="material-icons text-xs text-link" (click)="removeTag(i)">close</span>
               </div>
             </div>
           </div>
           <span class="text-sm text-light-grey w-100 mx-3 mt-4">Skills plays a major role to match a Job profile.</span>
         </div>
       </div>
-      <div class="p-2 bg-white">
-        <div class="mt-2 row d-flex justify-content-center">
-          <span class="text-grey text-md col-sm-12 ml-4 mb-3">Work experience : </span>
-          <div class="w-100">
-            <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openWorkExpModal(workExp)">Add
-              experience</button>
+      <hr>
+      <div class="p-2 bg-white w-100">
+        <div class="mt-2 w-100">
+          <div class="ml-4 mb-3 d-flex justify-content-between">
+            <span class="bold text-dark text-ssmd">Work Experience </span>
+            <span class="material-icons bold text-dark text-xxl text-link"
+              (click)="openWorkExpModal(workExp)">add</span>
           </div>
-          <div class="row w-100 d-flex justify-content-start">
-            <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
-              <div *ngFor="let data of workExpArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
+          <div class="w-100">
+            <div class="bg-grey my-4 w-100">
+              <div *ngFor="let data of workExpArray; index as i" class="w-100 text-break p-3 bg-white box-shadow"
                 style="border-radius: 7px; margin: 3px !important;">
                 <div class="d-flex justify-content-end">
-                  <span class="material-icons text-grey mr-2 text-link"
+                  <span class="material-icons-outlined text-grey mr-2 text-link"
                     (click)="editWorkExp(data, workExp, i)">edit</span>
-                  <span class="material-icons text-grey text-link" (click)="deleteWorkExp(i)">delete</span>
+                  <span class="material-icons-outlined text-grey text-link" (click)="deleteWorkExp(i)">delete</span>
                 </div>
-                <span class="text-sm d-block m-2 text-grey mr-3"><b>Job Title : </b>{{data.title}}</span>
-                <span class="text-sm d-block m-2 text-grey mr-3"><b>Company name : </b>{{data.companyName}}</span>
-                <span class="text-sm d-block m-2 text-grey mr-3"><b>Start date: </b>{{data.startDate | date : 'dd MMMM
+                <span class="text-smd d-block py-0 my-0 text-dark mr-3"><b>{{data.title}}</b></span>
+                <div class="d-flex justify-content-start vertical-center">
+                  <span class="text-sm text-dark mr-3 vertical-center">{{data.companyName}}
+                  </span>
+                  <span class="material-icons text-dark bold text-xxs mr-1">stop_circle</span>
+                  <span class="text-sm text-dark mr-3 vertical-center">
+                    {{data.type}}</span>
+                </div>
+                <span class="text-sm d-block text-grey mr-3">{{data.startDate | date : 'MMMM
+                  yyyy'}} - {{data.isWorking === true ? 'Present' : data.endDate | date : 'MMMM
                   yyyy'}}</span>
-                <span class="text-sm d-block m-2 text-grey mr-3"><b>End Date : </b>{{data.endDate | date : 'dd MMMM
-                  yyyy'}}</span>
+                <span class="text-sm d-block text-grey mr-3">{{data.location}}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="p-2 bg-white">
-        <div class="mt-2 row d-flex justify-content-center">
-          <span class="text-grey text-md col-sm-12 ml-4 mb-3">Education : </span>
-          <div class="w-100">
-            <button class="btn btn-primary bg-violet px-3 py-0 mx-auto" (click)="openEducationModal(education)">Add
-              Education</button>
+      <hr>
+      <div class="p-2 bg-white w-100">
+        <div class="mt-2 w-100">
+          <div class="ml-4 mb-3 d-flex justify-content-between">
+            <span class="bold text-dark text-ssmd">Education </span>
+            <span class="material-icons bold text-dark text-xxl text-link"
+              (click)="openEducationModal(education)">add</span>
           </div>
-          <div class="row w-100 d-flex justify-content-start">
-            <div class="col-sm-12 row bg-grey my-4 d-flex justify-content-center">
-              <div *ngFor="let data of educationArray; index as i" class="col-sm-4 text-break p-3 bg-white box-shadow"
+          <div class="w-100">
+            <div class="bg-grey my-4 w-100">
+              <div *ngFor="let data of educationArray; index as i" class="w-100 text-break p-3 bg-white box-shadow"
                 style="border-radius: 7px; margin: 3px !important;">
                 <div class="d-flex justify-content-end">
-                  <span class="material-icons text-grey mr-2 text-link"
+                  <span class="material-icons-outlined text-grey mr-2 text-link"
                     (click)="editEducation(data, education, i)">edit</span>
-                  <span class="material-icons text-grey text-link" (click)="deleteEducation(i)">delete</span>
+                  <span class="material-icons-outlined text-grey text-link" (click)="deleteEducation(i)">delete</span>
                 </div>
                 <span class="text-sm d-block m-2 text-grey mr-3"><b>Degree/Standard : </b>{{data.degree}}</span>
                 <span class="text-sm d-block m-2 text-grey mr-3"><b>School : </b>{{data.school}}</span>
@@ -185,9 +211,11 @@
           </div>
         </div>
       </div>
+      <hr>
       <div class="p-2 bg-white">
+        <span class="bold text-dark text-ssmd vertical-center">Attach CV <span
+            class="material-icons-outlined bold text-dark text-ssmd ml-2">attachment</span></span>
         <div class="mt-2 row d-flex justify-content-center">
-          <span class="text-grey text-md col-sm-12 ml-4">Upload resume : </span>
           <div class="row justify-content-center">
             <div class="col-sm-6">
               <span class="material-icons display-1 text-danger mx-auto">backup</span>
@@ -205,63 +233,157 @@
 </div>
 
 <ng-template #workExp>
-  <div class="bg-white p-3" style="border-radius: 7px;">
+  <div class="bg-white p-3" style="border-radius: 7px; max-height: 550px !important; overflow-y: auto;">
     <div class="d-block text-right">
       <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
     </div>
-    <span class="text-grey semi-bold d-block text-center my-2">{{workExpToUpdate !== undefined ? 'Update' : 'Add'}}
-      experience
-      details</span>
-    <div class="row p-0 m-3">
-      <div class="col-sm-12">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-            <input matStartDate readonly formControlName="start" placeholder="Start date">
-            <input matEndDate readonly formControlName="end" placeholder="End date">
-          </mat-date-range-input>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-
-          <mat-error>Invalid start date</mat-error>
-          <mat-error>Invalid end date</mat-error>
-          <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
-        </mat-form-field>
-      </div>
+    <span class="text-grey semi-bold d-block text-center my-2">{{workExpToUpdate !== undefined ? 'UPDATE' : 'ADD'}}
+      EXPERIENCE DETAILS</span>
+    <div class="row p-0 px-2 m-3" [formGroup]="workExpForm">
       <div class="col-sm-12 mt-3">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Job title</mat-label>
-          <input matInput placeholder="Enter name" class="p-0" [formControl]='title'>
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Title</mat-label>
+          <input matInput placeholder="Enter field" class="p-0" formControlName='title'>
           <mat-error>Enter valid title</mat-error>
-          <mat-hint class="text-light-grey text-xs">Ex - Java developer</mat-hint>
+          <mat-hint class="text-light-grey text-xs">Ex - Software Developer</mat-hint>
         </mat-form-field>
       </div>
       <div class="col-sm-12 mt-3">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label>Course Type</mat-label>
+          <mat-select formControlName='type'>
+            <mat-option value="Full Time">
+              Full Time
+            </mat-option>
+            <mat-option value="Part Time">
+              Part Time
+            </mat-option>
+            <mat-option value="Freelance">
+              Freelance
+            </mat-option>
+            <mat-option value="Trainee">
+              Trainee
+            </mat-option>
+            <mat-option value="Internship">
+              Internship
+            </mat-option>
+          </mat-select>
+          <mat-error>Enter valid detail</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
           <mat-label class="p-0">Company Name</mat-label>
-          <input matInput placeholder="Enter company name" class="p-0" [formControl]='companyName'>
-          <mat-error>Enter valid company Name</mat-error>
-          <mat-hint class="text-light-grey text-xs">Ex - Google</mat-hint>
+          <input matInput placeholder="Enter Company Name" class="p-0" formControlName='companyName'>
+          <mat-error>Enter valid company name</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Microsoft</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Location</mat-label>
+          <input matInput placeholder="Enter Location" class="p-0" formControlName='location'>
+          <mat-error>Enter valid location</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - United States</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-checkbox class="example-margin" formControlName='isWorking'>Present Working</mat-checkbox>
+      </div>
+      <div class="col-sm-12 mt-3 row mt-3 d-flex justify-content-between">
+        <mat-form-field appearance="outline" class="p-0 col-sm-5 mat-form-field ">
+          <mat-label>Start Date</mat-label>
+          <input matInput readonly [matDatepicker]="picker1" formControlName='startDate'>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+          <mat-error>Enter valid date</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="p-0 col-sm-5 mat-form-field"
+          *ngIf="workExpForm.get('isWorking').value !== true">
+          <mat-label>End Date</mat-label>
+          <input matInput readonly [matDatepicker]="picker2" formControlName='endDate'>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
+          <mat-error>Enter valid date</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Description</mat-label>
+          <input matInput placeholder="Enter field" class="p-0" formControlName='description'>
+          <mat-error>Enter valid field</mat-error>
         </mat-form-field>
       </div>
     </div>
-    <div class="w-100 d-flex justify-content-center mt-4">
+    <div class="w-100 d-flex justify-content-end mt-4">
       <button class="btn btn-primary bg-violet py-1 px-2" (click)="addWorkExp()">Save</button>
     </div>
   </div>
 </ng-template>
 
 <ng-template #education>
-  <div class="bg-white p-3" style="border-radius: 7px;">
+  <div class="bg-white p-3" style="border-radius: 7px; max-height: 550px !important; overflow-y: auto;">
     <div class="d-block text-right">
       <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
     </div>
-    <span class="text-grey semi-bold d-block text-center my-2">{{educationToUpdate !== undefined ? 'Update' : 'Add'}}
-      education
-      details</span>
-    <div class="row p-0 m-3" [formGroup]="educationDetailsForm">
-      <div class="col-sm-12">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+    <span class="text-grey semi-bold d-block text-center my-2">{{educationToUpdate !== undefined ? 'UPDATE' : 'ADD'}}
+      EDUCATION DETAILS</span>
+    <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label>Qualification</mat-label>
+          <input type="text" placeholder="Ex. B.Tech" aria-label="Number" matInput formControlName='degree'
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredQualifications | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>Enter valid detail</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label>Course Type</mat-label>
+          <mat-select formControlName='type'>
+            <mat-option value="Full Time">
+              Full Time
+            </mat-option>
+            <mat-option value="Part Time">
+              Part Time
+            </mat-option>
+          </mat-select>
+          <mat-error>Enter valid detail</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Field/Stream</mat-label>
+          <input matInput placeholder="Enter field" class="p-0" formControlName='field'>
+          <mat-error>Enter valid field</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Computer Science</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Institute</mat-label>
+          <input matInput placeholder="Enter name" class="p-0" formControlName='school'>
+          <mat-error>Enter valid name</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - Oxford university</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="p-0">Institute Location</mat-label>
+          <input matInput placeholder="Enter name" class="p-0" formControlName='location'>
+          <mat-error>Enter valid location</mat-error>
+          <mat-hint class="text-light-grey text-xs">Ex - England</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-3">
+        <mat-form-field appearance="outline" class="p-0 w-75 mat-form-field">
           <mat-label>Completion date</mat-label>
           <input matInput readonly [matDatepicker]="picker1" formControlName='completionDate'>
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -270,41 +392,37 @@
           <mat-error>Enter valid date</mat-error>
         </mat-form-field>
       </div>
+    </div>
+    <div class="w-100 d-flex justify-content-end mt-4">
+      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addEducation()">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #skillModal>
+  <div class="bg-white p-3" style="border-radius: 7px;">
+    <div class="d-block text-right">
+      <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
+    </div>
+    <span class="text-grey semi-bold d-block text-center my-2">ADD SKILL</span>
+    <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
       <div class="col-sm-12 mt-3">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Degree/standard</mat-label>
-          <input matInput placeholder="Enter degree/standard" class="p-0" formControlName='degree'>
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label>Skill Name</mat-label>
+          <input type="text" placeholder="Ex. JAVA" aria-label="Number" matInput [formControl]="skillName"
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredSkills | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
           <mat-error>Enter valid detail</mat-error>
-          <mat-hint class="text-light-grey text-xs">Ex - B.Tech</mat-hint>
-        </mat-form-field>
-      </div>
-      <div class="col-sm-12 mt-3">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Field/Stream</mat-label>
-          <input matInput placeholder="Enter field" class="p-0" formControlName='field'>
-          <mat-error>Enter valid field</mat-error>
-          <mat-hint class="text-light-grey text-xs">Ex - Computer Science</mat-hint>
-        </mat-form-field>
-      </div>
-      <div class="col-sm-12 mt-3">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">School</mat-label>
-          <input matInput placeholder="Enter name" class="p-0" formControlName='school'>
-          <mat-error>Enter valid School</mat-error>
-          <mat-hint class="text-light-grey text-xs">Ex - Oxford university</mat-hint>
-        </mat-form-field>
-      </div>
-      <div class="col-sm-12 mt-3">
-        <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">GPA</mat-label>
-          <input matInput type="number" placeholder="Enter GPA" class="p-0" formControlName='gpa'>
-          <mat-error>Enter valid gpa</mat-error>
-          <mat-suffix>/ 10</mat-suffix>
         </mat-form-field>
       </div>
     </div>
-    <div class="w-100 d-flex justify-content-center mt-4">
-      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addEducation()">Save</button>
+    <div class="w-100 d-flex justify-content-end mt-4">
+      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addSkill()">ADD SKILL</button>
     </div>
   </div>
 </ng-template>

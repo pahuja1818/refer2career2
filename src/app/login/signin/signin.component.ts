@@ -1,7 +1,8 @@
+import { EmployerSigninComponent } from './employer-signin/employer-signin.component';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { DbOperation } from './../../shared/models/dbOperation';
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserRole } from 'src/app/shared/models/enums';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -52,6 +53,7 @@ export class SigninComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toast: ToastService,
+    private modalService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -194,9 +196,12 @@ export class SigninComponent implements OnInit {
             this.message = 'Invalid email or password!';
           }
           else if (data.email) {
-            this.modalRef.hide();
-            window.location.reload();
-            window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
+            if (data.role === 2) {
+              this.modalRef.hide();
+              window.location.reload();
+              window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
+            }
+            else this.message = 'User not found!';
           }
           this.isServiceRunning = false;
         });
@@ -246,6 +251,13 @@ export class SigninComponent implements OnInit {
         }
       });
     }
+  }
+
+  openEmployerModal() {
+    this.modalRef.hide();
+    setTimeout(() => {
+      this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
+    }, 1000);
   }
 
 }

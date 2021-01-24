@@ -63,7 +63,6 @@ import { JobDetailsComponent } from './components/add-job-post/job-details/job-d
 import { SpinnerComponentComponent } from './components/spinner-component/spinner-component.component';
 import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.component';
 
-
 @NgModule({
   declarations: [
     SpinnerComponentComponent,

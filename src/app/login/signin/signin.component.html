@@ -51,6 +51,9 @@
       <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)="registrationVisible()">Create an
         Account</a>
     </div>
+    <div class="w-100 text-center pt-3">
+      <a class="text-primary text-violet text-link" (click)="openEmployerModal()">Sign-in as Employer</a>
+    </div>
     <form class="p-3" [formGroup]="signupForm" *ngIf="isRegistration">
       <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
         <mat-label class="semi-bold text-grey text-smd m-0">Full name</mat-label>

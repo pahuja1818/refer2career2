@@ -22,7 +22,6 @@ export class AuthService {
       this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })
         .subscribe((data: any) => {
           this.currentUser.next(data.data);
-          console.log(data);
         });
     }
   }

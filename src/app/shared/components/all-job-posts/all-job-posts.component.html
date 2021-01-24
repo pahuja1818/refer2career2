@@ -14,7 +14,7 @@
     </mat-form-field>
   </div>
   <div class="row justify-content-center bg-white p-2" style="overflow: auto;">
-    <div class="m-3 pt-4 col-12 col-sm-4" style="min-width: 350px;" *ngFor="let jobPost of filteredJobPosts"
+    <div class="m-3 pt-4 col-12 col-sm-8" style="min-width: 350px;" *ngFor="let jobPost of filteredJobPosts"
       (click)="seeDetails(jobPost)">
       <div class="card box-shadow w-100 h-100 p-3 btn btn-light">
         <div class="d-flex justify-content-between vertical-center mb-3">
@@ -25,21 +25,18 @@
           <img class="card-img-top rounded-circle" src="{{jobPost.jobPost.companyLogo}}"
             style="height: 80px; width: 80px;">
         </div>
-        <div class="w-100 vertical-center my-2 mb-3">
-          <span class="material-icons-outlined text-grey mr-2">{{jobPost.jobPost.jobType === 'In office' ? 'business'
-            :
-            'home'}}</span>
-          <span class="text-dark text-grey text-slmd">{{jobPost.jobPost.jobType}}</span>
-        </div>
-        <div class="my-2 vertical-center justify-content-start">
-          <span class="material-icons-outlined text-grey mr-2">hourglass_top</span>
-          <span class="text-grey semi-bold  d-inline">Apply by : </span>
-          <span class="text-grey">&nbsp; {{jobPost.jobPost.lastDateToApply | date: 'dd MMMM yyyy'}}</span>
-        </div>
-        <div *ngIf="jobPost.jobPost.jobType === 'In office'" class="my-2 vertical-center justify-content-start">
-          <span class="material-icons-outlined text-grey mr-2">location_on</span>
-          <span class="text-grey semi-bold  d-inline">City : </span>
-          <span class="text-grey">&nbsp; {{jobPost.jobPost.location}}</span>
+        <div class="row">
+          <div *ngIf="jobPost.jobPost.jobType === 'In office'"
+            class="col-sm-6 my-2 vertical-center justify-content-start">
+            <span class="material-icons-outlined text-grey mr-2">location_on</span>
+            <span class="text-grey semi-bold  d-inline"></span>
+            <span class="text-grey">{{jobPost.jobPost.location}}</span>
+          </div>
+          <div class="col-sm-6 vertical-center">
+            <span class="material-icons-outlined text-grey mr-2">edit</span>
+            <span class="text-grey semi-bold  d-inline"></span>
+            <span class="text-grey">{{jobPost.jobPost.skills[0].skillName + ' , ' + jobPost.jobPost.skills[1].skillName}}</span>
+          </div>
         </div>
         <div class="my-2 vertical-center justify-content-start">
           <span class="material-icons-outlined text-grey mr-2">payments</span>
@@ -56,16 +53,9 @@
             }}
             years</span>
         </div>
-        <div class="my-2 vertical-center">
-          <span class="material-icons-outlined text-grey mr-2">play_arrow</span>
-          <span class="text-grey semi-bold  d-inline">Start Date : </span>
-          <span class="text-grey">&nbsp; {{getStartDate(jobPost.jobPost.startDate) ? (jobPost.jobPost.startDate |
-            date:
-            'dd MMMM yyyy' ) : 'Immediately'}}</span>
-        </div>
-        <div class="d-block pt-2">
-          <span class="text-slmd text-grey px-3 py-2 bg-light-grey"
-            style="border-radius: 20px;">{{jobPost.jobPost.jobInternship}}</span>
+        <div class="d-flex justify-content-start">
+          <span class="text-grey text-sm">Posted on &nbsp; {{jobPost.jobPost.lastDateToApply | date: 'dd MMMM
+            yyyy'}}</span>
         </div>
       </div>
     </div>
