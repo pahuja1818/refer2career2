@@ -19,6 +19,14 @@ import { Observable } from 'rxjs';
 
 export class UserProfileComponent implements OnInit {
 
+  constructor(
+    private menu: MenuController,
+    private modalRef: BsModalRef,
+    private modalService: BsModalService,
+    private authService: AuthService,
+    private toastService: ToastService) {
+  }
+
   user: any = {};
   isEditing = false;
 
@@ -50,13 +58,52 @@ export class UserProfileComponent implements OnInit {
   cvHeadLine = '8 year experienced full stack Java developer.';
   isCVHeadEditing = false;
 
-  constructor(
-    private menu: MenuController,
-    private modalRef: BsModalRef,
-    private modalService: BsModalService,
-    private authService: AuthService,
-    private toastService: ToastService) {
-  }
+  // for education
+  qualificationOptions: string[] = ['Diploma In Mechanical Engineering',
+  'Diploma In Civil Engineering', 'Diploma In Electrical Engineering',
+    'Diploma In Electronics And Communication Engineering',
+    'Diploma In Electrical & Electronics Engineering',
+    'Diploma In Computer Engineering',
+    'Diploma In Computer Science And Engineering',
+    'Diploma In Automobile Engineering',
+    'Diploma In Information Technology',
+    'Diploma In Electronics Engineering',
+    'Diploma In Chemical Engineering',
+    'Diploma In Electrical & Communication Engineering',
+    'Diploma In Production Engineering', 'Diploma In Mining Engineering',
+    'Diploma In Architecture Engineering', 'Diploma In Mechatronics',
+    'Diploma In Electronics', 'Diploma In Printing Technology',
+    'Diploma In Fire And Safety Management',
+    'Diploma In Biomedical Engineering',
+    'Diploma In Sound Engineering', 'Diploma In Marine Engineering',
+    'Bachelor Of Technology(Mechanical Engineering)',
+    'Bachelor Of Technology(Computer Science And Engineering)',
+    'Bachelor Of Technology(Civil Engineering)',
+    'Bachelor Of Technology (Electronics & Communication Engineering)',
+    'Bachelor Of Business Administration [BBA]',
+    'Bachelor Of Business Management [BBM]',
+    'Bachelor Of Business Administration [BBA] (Marketing)',
+    'Bachelor Of Business Administration [BBA] (Human Resource Management)',
+    'Bachelor Of Management Studies [BMS]',
+    'Bachelor Of Business Administration [BBA] (Finance)',
+    'Bachelor Of Business Administration [BBA] {Hons.}',
+    'Bachelor Of Business Administration [BBA] (International Business)',
+    'Bachelor Of Tourism And Travel Management [BTTM]',
+    'Bachelor Of Science [B.Sc] (Physics)',
+    'Bachelor Of Science h [B.Sc] (Chemistry)',
+    'Bachelor Of Science [B.Sc] (Computer Science)',
+    'Bachelor Of Science [B.Sc] (Mathematics)',
+    'Bachelor Of Science [B.Sc] (Zoology)',
+    'Bachelor Of Science [B.Sc] (Botany)',
+    'Bachelor Of Science [B.Sc] (Biotechnology)',
+    'Bachelor Of Science [B.Sc] (Microbiology)',
+    'Bachelor Of Science [B.Sc] (Information Technology)',
+    'Bachelor Of Science [B.Sc]'];
+  filteredQualifications: Observable<string[]>;
+
+  skillsOptions: string[] = ['Java', 'Event Management', 'Angular 10', 'HTML', 'CSS',
+    'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
+  filteredSkills: Observable<string[]>;
 
   ngOnInit() {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
@@ -84,11 +131,11 @@ export class UserProfileComponent implements OnInit {
 
     this.workExpForm.get('isWorking').valueChanges.subscribe(val => {
       if (this.workExpForm.get('isWorking').value !== true) {
-        this.workExpForm.controls['endDate'].setValidators([Validators.required]);
-        this.workExpForm.controls['endDate'].updateValueAndValidity();
+        this.workExpForm.controls.endDate.setValidators([Validators.required]);
+        this.workExpForm.controls.endDate.updateValueAndValidity();
       } else {
-        this.workExpForm.controls['endDate'].clearValidators();
-        this.workExpForm.controls['endDate'].updateValueAndValidity();
+        this.workExpForm.controls.endDate.clearValidators();
+        this.workExpForm.controls.endDate.updateValueAndValidity();
       }
     });
   }
@@ -96,14 +143,14 @@ export class UserProfileComponent implements OnInit {
   setBasicInfo() {
     if (this.user.basicInfo) {
       this.profileForm.patchValue({
-        'mobile': this.user.basicInfo.mobile,
-        'gender': this.user.basicInfo.gender,
-        'martialStatus': this.user.basicInfo.martialStatus,
-        'dob': this.user.basicInfo.dob,
-        'nationality': this.user.basicInfo.nationality,
+        mobile: this.user.basicInfo.mobile,
+        gender: this.user.basicInfo.gender,
+        martialStatus: this.user.basicInfo.martialStatus,
+        dob: this.user.basicInfo.dob,
+        nationality: this.user.basicInfo.nationality,
       });
     }
-    else this.profileForm.reset();
+    else { this.profileForm.reset(); }
   }
 
   basicInfoEdit() {
@@ -117,18 +164,11 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  //for education
-  qualificationOptions: string[] = ['Diploma In Mechanical Engineering', 'Diploma In Civil Engineering', 'Diploma In Electrical Engineering', 'Diploma In Electronics And Communication Engineering', 'Diploma In Electrical & Electronics Engineering', 'Diploma In Computer Engineering', 'Diploma In Computer Science And Engineering', 'Diploma In Automobile Engineering', 'Diploma In Information Technology', 'Diploma In Electronics Engineering', 'Diploma In Chemical Engineering', 'Diploma In Electrical & Communication Engineering', 'Diploma In Production Engineering', 'Diploma In Mining Engineering', 'Diploma In Architecture Engineering', 'Diploma In Mechatronics', 'Diploma In Electronics', 'Diploma In Printing Technology', 'Diploma In Fire And Safety Management', 'Diploma In Biomedical Engineering', 'Diploma In Sound Engineering', 'Diploma In Marine Engineering', 'Bachelor Of Technology(Mechanical Engineering)', 'Bachelor Of Technology(Computer Science And Engineering)', 'Bachelor Of Technology(Civil Engineering)', 'Bachelor Of Technology (Electronics & Communication Engineering)', 'Bachelor Of Business Administration [BBA]', 'Bachelor Of Business Management [BBM]', 'Bachelor Of Business Administration [BBA] (Marketing)', 'Bachelor Of Business Administration [BBA] (Human Resource Management)', 'Bachelor Of Management Studies [BMS]', 'Bachelor Of Business Administration [BBA] (Finance)', 'Bachelor Of Business Administration [BBA] {Hons.}', 'Bachelor Of Business Administration [BBA] (International Business)', 'Bachelor Of Tourism And Travel Management [BTTM]', 'Bachelor Of Science [B.Sc] (Physics)', 'Bachelor Of Science h [B.Sc] (Chemistry)', 'Bachelor Of Science [B.Sc] (Computer Science)', 'Bachelor Of Science [B.Sc] (Mathematics)', 'Bachelor Of Science [B.Sc] (Zoology)', 'Bachelor Of Science [B.Sc] (Botany)', 'Bachelor Of Science [B.Sc] (Biotechnology)', 'Bachelor Of Science [B.Sc] (Microbiology)', 'Bachelor Of Science [B.Sc] (Information Technology)', 'Bachelor Of Science [B.Sc]'];
-  filteredQualifications: Observable<string[]>;
-
   private _filterQualifications(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.qualificationOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-
-  skillsOptions: string[] = ['Java', 'Event Management', 'Angular 10', 'HTML', 'CSS', 'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
-  filteredSkills: Observable<string[]>;
 
   private _filterSkills(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -175,18 +215,18 @@ export class UserProfileComponent implements OnInit {
     this.profileForm.markAllAsTouched();
     if (this.profileForm.valid) {
       this.isServiceRunning = true;
-      let basicInfo: any = {
-        'mobile': this.profileForm.get('mobile').value,
-        'gender': this.profileForm.get('gender').value,
-        'martialStatus': this.profileForm.get('martialStatus').value,
-        'dob': this.profileForm.get('dob').value,
-        'nationality': this.profileForm.get('nationality').value,
+      const basicInfo: any = {
+        mobile: this.profileForm.get('mobile').value,
+        gender: this.profileForm.get('gender').value,
+        martialStatus: this.profileForm.get('martialStatus').value,
+        dob: this.profileForm.get('dob').value,
+        nationality: this.profileForm.get('nationality').value,
       };
-      let dbOpeartion: DbOperation = {
+      const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { 'basicInfo': basicInfo },
-        query: { '_id': this.user._id }
-      }
+        data: { basicInfo },
+        query: { _id: this.user._id }
+      };
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();
@@ -194,7 +234,7 @@ export class UserProfileComponent implements OnInit {
           this.setBasicInfo();
           this.isServiceRunning = false;
         }
-      })
+      });
     }
   }
 
@@ -204,36 +244,36 @@ export class UserProfileComponent implements OnInit {
       this.isServiceRunning = true;
       this.skillsArray.push(this.skillName.value);
       this.skillName.reset();
-      let dbOpeartion: DbOperation = {
+      const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { 'skills': this.skillsArray },
-        query: { '_id': this.user._id }
-      }
+        data: { skills: this.skillsArray },
+        query: { _id: this.user._id }
+      };
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();
           this.modalRef.hide();
           this.isServiceRunning = false;
         }
-      })
+      });
     }
   }
 
   removeTag(index: any) {
     this.isServiceRunning = true;
     this.skillsArray.splice(index, 1);
-    let dbOpeartion: DbOperation = {
+    const dbOpeartion: DbOperation = {
       collection: 'users',
-      data: { 'skills': this.skillsArray },
-      query: { '_id': this.user._id }
-    }
+      data: { skills: this.skillsArray },
+      query: { _id: this.user._id }
+    };
     this.authService.update(dbOpeartion).then((data: any) => {
       if (data.data === true) {
         this.getUser();
         this.modalRef.hide();
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 
   openWorkExpModal(template: any) {
@@ -267,17 +307,17 @@ export class UserProfileComponent implements OnInit {
       }
       else { this.workExpArray[this.workExpToUpdate] = workExp; }
       this.workExpToUpdate = undefined;
-      let dbOpeartion: DbOperation = {
+      const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { 'workExperience': this.workExpArray },
-        query: { '_id': this.user._id }
-      }
+        data: { workExperience: this.workExpArray },
+        query: { _id: this.user._id }
+      };
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();
           this.isServiceRunning = false;
         }
-      })
+      });
       this.modalRef.hide();
     }
   }
@@ -300,17 +340,17 @@ export class UserProfileComponent implements OnInit {
   deleteWorkExp(index: number) {
     this.isServiceRunning = false;
     this.workExpArray.splice(index, 1);
-    let dbOpeartion: DbOperation = {
+    const dbOpeartion: DbOperation = {
       collection: 'users',
-      data: { 'workExperience': this.workExpArray },
-      query: { '_id': this.user._id }
-    }
+      data: { workExperience: this.workExpArray },
+      query: { _id: this.user._id }
+    };
     this.authService.update(dbOpeartion).then((data: any) => {
       if (data.data === true) {
         this.getUser();
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 
   openEducationModal(template: any) {
@@ -337,17 +377,17 @@ export class UserProfileComponent implements OnInit {
       }
       else { this.educationArray[this.educationToUpdate] = education; }
       this.educationToUpdate = undefined;
-      let dbOpeartion: DbOperation = {
+      const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { 'education': this.educationArray },
-        query: { '_id': this.user._id }
-      }
+        data: { education: this.educationArray },
+        query: { _id: this.user._id }
+      };
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();
           this.isServiceRunning = false;
         }
-      })
+      });
       this.modalRef.hide();
     }
   }
@@ -355,17 +395,17 @@ export class UserProfileComponent implements OnInit {
   deleteEducation(index: number) {
     this.isServiceRunning = true;
     this.educationArray.splice(index, 1);
-    let dbOpeartion: DbOperation = {
+    const dbOpeartion: DbOperation = {
       collection: 'users',
-      data: { 'education': this.educationArray },
-      query: { '_id': this.user._id }
-    }
+      data: { education: this.educationArray },
+      query: { _id: this.user._id }
+    };
     this.authService.update(dbOpeartion).then((data: any) => {
       if (data.data === true) {
         this.getUser();
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 
   editEducation(education: any, template: any, i) {
@@ -391,17 +431,17 @@ export class UserProfileComponent implements OnInit {
     const reader: FileReader = new FileReader();
     reader.onload = (file: any) => {
       this.user.photo = file.target.result;
-      let dbOpeartion: DbOperation = {
+      const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { 'photo': this.user.photo },
-        query: { '_id': this.user._id }
-      }
+        data: { photo: this.user.photo },
+        query: { _id: this.user._id }
+      };
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();
           this.isServiceRunning = false;
         }
-      })
+      });
     };
     reader.readAsDataURL(event.target.files[0]);
   }
@@ -410,7 +450,7 @@ export class UserProfileComponent implements OnInit {
     if (this.isCVHeadEditing) {
       this.cvHeadLine = this.user.cvHead ? this.user.cvHead : '8 year experienced full stack Java developer.';
     }
-    this.isCVHeadEditing = !this.isCVHeadEditing
+    this.isCVHeadEditing = !this.isCVHeadEditing;
   }
 
   saveCVHeadLine() {

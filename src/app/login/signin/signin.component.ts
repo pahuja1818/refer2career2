@@ -201,7 +201,7 @@ export class SigninComponent implements OnInit {
               window.location.reload();
               window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
             }
-            else this.message = 'User not found!';
+            else { this.message = 'User not found!'; }
           }
           this.isServiceRunning = false;
         });
