@@ -21,7 +21,7 @@ export class EmployerSigninComponent implements OnInit {
   loginForm: FormGroup;
   message = '';
   isServiceRunning = false;
-
+  isPasswordVisible = false;
   constructor(
     public modalRef: BsModalRef,
     private authService: AuthService,
