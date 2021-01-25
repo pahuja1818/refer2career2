@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
         }
       }
     }
-    else { this.router.navigateByUrl('/home'); }
   }
 
   initializeApp() {

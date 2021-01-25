@@ -1,3 +1,4 @@
+import { ReferAndEarnComponent } from './refer-and-earn/refer-and-earn.component';
 import { EmployerSigninComponent } from './login/signin/employer-signin/employer-signin.component';
 import { HomePageModule } from './home/home.module';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -74,12 +75,15 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 import * as $ from 'jquery';
 import { SpinnerComponentComponent } from './shared/components/spinner-component/spinner-component.component';
+import { PartnersComponent } from './partners/partners.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    EmployerSigninComponent
+    EmployerSigninComponent,
+    PartnersComponent,
+    ReferAndEarnComponent
   ],
   entryComponents: [
     SigninComponent,

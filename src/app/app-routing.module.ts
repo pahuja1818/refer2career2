@@ -1,10 +1,20 @@
+import { ReferAndEarnComponent } from './refer-and-earn/refer-and-earn.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PartnersComponent } from './partners/partners.component';
 
 const routes: Routes = [
   {
+    path: 'partners',
+    component: PartnersComponent
+  },
+  {
+    path: 'refer-and-earn',
+    component: ReferAndEarnComponent
+  },
+  {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,15 +23,15 @@ const routes: Routes = [
   },
   {
     path: 'referer',
-    loadChildren: () => import('./user/user.module').then( m => m.UserModule)
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then( m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'recruiter',
-    loadChildren: () => import('./employer/employer.module').then( m => m.EmployerModule)
+    loadChildren: () => import('./employer/employer.module').then(m => m.EmployerModule)
   },
 ];
 
