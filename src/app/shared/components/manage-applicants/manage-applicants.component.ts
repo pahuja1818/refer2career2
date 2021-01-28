@@ -20,26 +20,26 @@ export class ManageApplicantsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllJobs();
-    console.log(JSON.parse(window.atob(window.localStorage.getItem('id')))._id)
+    console.log(JSON.parse(window.atob(window.localStorage.getItem('id')))._id);
   }
 
   getAllJobs() {
     this.isServiceRunning = true;
-    let dbOperation: DbOperation = {
+    const dbOperation: DbOperation = {
       collection: 'jobposts',
       query: { 'jobPost.createdBy': JSON.parse(window.atob(window.localStorage.getItem('id')))._id }
-    }
+    };
     this.dbService.find(dbOperation).subscribe((data: any) => {
       if (data.data.length > 0) {
         this.allPosts = data.data;
         this.allPosts.sort((a: any, b: any) => {
-          let c: any = new Date(a.jobPost.createdAt);
-          let d: any = new Date(b.jobPost.createdAt);
+          const c: any = new Date(a.jobPost.createdAt);
+          const d: any = new Date(b.jobPost.createdAt);
           return d - c;
         });
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 
   navigate(id: any) {
