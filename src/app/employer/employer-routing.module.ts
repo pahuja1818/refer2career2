@@ -1,3 +1,4 @@
+import { ApplicationsComponent } from './../shared/components/applications/applications.component';
 import { JobDetailsEmployerComponent } from './job-details-employer/job-details-employer.component';
 import { EmployerMessagesComponent } from './employer-messages/employer-messages.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
@@ -27,6 +28,9 @@ const routes: Routes = [
       },
       {
         path: 'applicants', component: ApplicantsComponent
+      },
+      {
+        path: 'applicants/:jobId', component: ApplicationsComponent
       },
       {
         path: 'messages', component: EmployerMessagesComponent

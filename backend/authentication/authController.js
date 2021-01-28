@@ -129,9 +129,12 @@ module.exports.updateAdminDetails = (req, res) => {
 }
 
 module.exports.find = (req, res) => {
-    const data = req.body;
+    const query = req.body.query ? req.body.query : {};
     const collection = req.body.collection;
-    mongoUtil.collection(collection).findOne({ _id: new ObjectId(data._id) }, function (err, result) {
+    if (query._id) {
+        query._id = new ObjectId(query._id)
+    }
+    mongoUtil.collection(collection).find(query).toArray(function (err, result) {
         if (err) return res.status(200).json({ 'error': false });;
         return res.status(200).json({ 'data': result });
     });

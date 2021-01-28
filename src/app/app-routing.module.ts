@@ -1,3 +1,4 @@
+import { SigninComponent } from './login/signin/signin.component';
 import { ReferAndEarnComponent } from './refer-and-earn/refer-and-earn.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
@@ -13,12 +14,12 @@ const routes: Routes = [
     component: ReferAndEarnComponent
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'login',
+    component: SigninComponent
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

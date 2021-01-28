@@ -1,0 +1,37 @@
+<div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
+  <ion-header style="position: fixed; ">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Manage Applicants</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="row justify-content-center px-1">
+    <div class="m-3 mt-5 p-2 bg-white col-sm-9"
+      style="margin-top: 70px !important; border-radius: 7px; overflow-y: auto !important; border: 1px solid #cccccc;">
+      <table class="table">
+        <thead class="thead-light">
+          <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col text-center">PROFILE</th>
+            <th scope="col text-center">STATUS</th>
+            <th scope="col text-center">ACTION</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr *ngFor="let post of allPosts; index as i">
+            <td>{{i+1}}</td>
+            <td class="">{{post.jobPost.title}}</td>
+            <td class="pt-3"><span class="p-2 my-auto px-5 text-success"
+                style="background-color: #e2ffd1; border-radius: 10px;">Active</span></td>
+            <td class=""><span (click)="navigate(post._id)" class="p-1 px-5 btn btn-primary bg-violet"
+                style="border-radius: 10px;">View
+                Applications</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

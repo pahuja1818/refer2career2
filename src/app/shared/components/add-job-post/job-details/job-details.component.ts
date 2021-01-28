@@ -18,7 +18,6 @@ export class JobDetailsComponent implements OnInit {
     private modalService: BsModalService,
     private toastService: ToastService,
   ) {
-    console.log('i called');
   }
 
   jobPost: any = {};

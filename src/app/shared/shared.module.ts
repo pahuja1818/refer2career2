@@ -1,3 +1,5 @@
+import { ApplicationsComponent } from './components/applications/applications.component';
+import { ManageApplicantsComponent } from './components/manage-applicants/manage-applicants.component';
 import { AddJobPostComponent } from './components/add-job-post/add-job-post.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -69,6 +71,8 @@ import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.c
     AddJobPostComponent,
     JobDetailsComponent,
     AllJobPostsComponent,
+    ManageApplicantsComponent,
+    ApplicationsComponent
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -185,7 +189,9 @@ import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.c
     ModalModule,
     HttpClientModule,
     JobDetailsComponent,
-    AllJobPostsComponent
+    AllJobPostsComponent,
+    ManageApplicantsComponent,
+    ApplicationsComponent
   ],
   providers: [
     StatusBar,
