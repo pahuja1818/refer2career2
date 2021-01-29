@@ -1,3 +1,4 @@
+import { AngularFireModule } from '@angular/fire';
 import { ReferAndEarnComponent } from './refer-and-earn/refer-and-earn.component';
 import { EmployerSigninComponent } from './login/signin/employer-signin/employer-signin.component';
 import { HomePageModule } from './home/home.module';
@@ -76,6 +77,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import * as $ from 'jquery';
 import { SpinnerComponentComponent } from './shared/components/spinner-component/spinner-component.component';
 import { PartnersComponent } from './partners/partners.component';
+import { firebaseConfig } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -150,6 +152,7 @@ import { PartnersComponent } from './partners/partners.component';
     AppRoutingModule,
     SharedModule,
     NgbModule,
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
