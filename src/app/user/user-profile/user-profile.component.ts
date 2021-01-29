@@ -1,3 +1,4 @@
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { startWith, map } from 'rxjs/operators';
 import { DbOperation } from './../../shared/models/dbOperation';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -10,6 +11,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Template } from '@angular/compiler/src/render3/r3_ast';
 import { ObjectId } from 'mongodb';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,11 +22,48 @@ import { Observable } from 'rxjs';
 export class UserProfileComponent implements OnInit {
 
   constructor(
+    private storage: AngularFireStorageModule,
     private menu: MenuController,
     private modalRef: BsModalRef,
     private modalService: BsModalService,
     private authService: AuthService,
     private toastService: ToastService) {
+  }
+
+  basePath: string = '/profile-resumes'
+  uploadTask: firebase.storage.UploadTask;
+
+  openResume() {
+    window.open(this.user.resume, "_blank");
+  }
+
+  async uploadResume() {
+    this.isServiceRunning = true;
+    let storageRef: any = firebase.storage().ref();
+    let time = new Date().getTime();
+    await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.blob);
+    storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
+      let dbOpeartion: DbOperation = {
+        collection: 'users',
+        query: { '_id': this.user._id },
+        data: { "resume": url }
+      }
+      this.authService.update(dbOpeartion).then((data: any) => {
+        if (data.data === true) {
+          this.isServiceRunning = false;
+          this.getUser();
+        }
+      });
+    })
+  }
+
+  blob: any;
+  filename: any;
+
+  fileChange(event: any) {
+    this.blob = event.target.files[0];
+    this.filename = event.target.files[0].name;
+    this.uploadResume();
   }
 
   user: any = {};
@@ -60,7 +99,7 @@ export class UserProfileComponent implements OnInit {
 
   // for education
   qualificationOptions: string[] = ['Diploma In Mechanical Engineering',
-  'Diploma In Civil Engineering', 'Diploma In Electrical Engineering',
+    'Diploma In Civil Engineering', 'Diploma In Electrical Engineering',
     'Diploma In Electronics And Communication Engineering',
     'Diploma In Electrical & Electronics Engineering',
     'Diploma In Computer Engineering',
@@ -475,10 +514,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser() {
-    this.authService.find({ collection: 'users', _id: this.user._id }).subscribe((data: any) => {
-      if (data.data) {
-        this.user = data.data;
+    this.isServiceRunning = true;
+    this.authService.find({
+      collection: 'users', query: {
+        _id: this.user._id
+      }
+    }).subscribe((data: any) => {
+      if (data.data.length > 0) {
+        this.user = data.data[0];
+        console.log(this.user);
         this.setBasicInfo();
+        this.isServiceRunning = false;
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }
     });

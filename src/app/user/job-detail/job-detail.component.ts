@@ -6,6 +6,7 @@ import { JobPostServiceService } from './../../shared/services/job-post-service.
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Status } from 'src/app/shared/models/enums';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-job-detail',
@@ -25,6 +26,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   post: any = {};
   skills: any[] = [];
   fileData: any = undefined;
+  filename: any = undefined;
 
   appliedDate: any = undefined;
 
@@ -95,44 +97,48 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   closeModal() {
     this.modalRef.hide();
   }
+
+  basePath: string = '/refered-resumes'
+  uploadTask: firebase.storage.UploadTask;
   async referJobPost() {
-    console.log(this.referJobPostForm.value);
+    let resume;
     let file: any;
     this.referJobPostForm.markAllAsTouched();
     if (this.referJobPostForm.valid) {
-      const name = this.referJobPostForm.get('email').value;
-      const files = new FormData();
-      files.append(`${name}`, this.fileData);
-      files.append('random', Date.now().toString());
-      files.append('name', `${name}`);
-      await this.referService.uploadResume(files).then(data => {
+      let storageRef: any = firebase.storage().ref();
+      let time = new Date().getTime();
+      await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.fileData);
+      storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
+        resume = url;
+        console.log(url);
         this.fileData = undefined;
-        file = this.baseUrl + data;
-      });
-    }
-    if (file && this.fileData === undefined) {
-      const refer: any = {
-        resume: file,
-        jobTitle: this.jobPost.jobPost.title,
-        email: this.referJobPostForm.get('email').value,
-        jobId: this.jobId,
-        referedBy: (JSON.parse(window.atob(window.localStorage.getItem('id')))).email,
-        createdAt: new Date(),
-        status: 0,
-        statusUpdatedAt: new Date(),
-      };
-      this.referService.checkReferedProfile({
-        jobId: this.jobPost.jobPostId,
-        email: this.referJobPostForm.get('email').value
-      }).subscribe((data: any) => {
-        if (data.data === null) {
-          this.referService.referJobPost(refer).subscribe((ele: any) => {
-            this.toastService.showToast('Refered successfully');
-            this.modalRef.hide();
+
+        if (resume && this.fileData === undefined) {
+          const refer: any = {
+            resume: resume,
+            jobTitle: this.jobPost.jobPost.title,
+            email: this.referJobPostForm.get('email').value,
+            jobId: this.jobId,
+            referedBy: (JSON.parse(window.atob(window.localStorage.getItem('id')))).email,
+            createdAt: new Date(),
+            status: 0,
+            statusUpdatedAt: new Date(),
+          };
+          this.referService.checkReferedProfile({
+            jobId: this.jobPost.jobPostId,
+            email: this.referJobPostForm.get('email').value
+          }).subscribe((data: any) => {
+            if (data.data === null) {
+              this.referService.referJobPost(refer).subscribe((ele: any) => {
+                this.toastService.showToast('Refered successfully');
+                this.modalRef.hide();
+              });
+            }
+            else { this.toastService.showToast('This profile already refered!', 'bg-danger'); }
           });
+
         }
-        else { this.toastService.showToast('This profile already refered!', 'bg-danger'); }
-      });
+      })
     }
   }
 
@@ -141,6 +147,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     this.fileData = event.target.files[0];
+    this.filename = event.target.files[0].name;
   }
 
   getExperience(value: number) {
