@@ -64,6 +64,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { JobDetailsComponent } from './components/add-job-post/job-details/job-details.component';
 import { SpinnerComponentComponent } from './components/spinner-component/spinner-component.component';
 import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.component';
+import { SigninComponent } from '../login/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.c
     JobDetailsComponent,
     AllJobPostsComponent,
     ManageApplicantsComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    SigninComponent
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -191,7 +193,8 @@ import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.c
     JobDetailsComponent,
     AllJobPostsComponent,
     ManageApplicantsComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    SigninComponent
   ],
   providers: [
     StatusBar,

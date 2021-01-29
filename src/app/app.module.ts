@@ -80,13 +80,11 @@ import { PartnersComponent } from './partners/partners.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent,
     EmployerSigninComponent,
     PartnersComponent,
     ReferAndEarnComponent
   ],
   entryComponents: [
-    SigninComponent,
   ],
   imports: [
     BrowserAnimationsModule,
