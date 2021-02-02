@@ -71,6 +71,11 @@ export class AuthService {
     return this.http.post(this.baseUrl + `/api/otpRequest`, body, { headers: this.headers });
   }
 
+  sendMail(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/send-mail`, body, { headers: this.headers });
+  }
+
   verify(data: any) {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/verifyOTP`, body, { headers: this.headers });

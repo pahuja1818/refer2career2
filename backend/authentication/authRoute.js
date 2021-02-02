@@ -3,7 +3,7 @@ var express = require('express');
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
 
-const { registerUser, verifyOTP, login, updateAdminDetails, getDetails, update, find, insertOTP, verify } = require('./authController.js');
+const { registerUser, verifyOTP, login, sendMail, updateAdminDetails, getDetails, update, find, insertOTP, verify } = require('./authController.js');
 
 router.post("/register/candidate", registerUser);
 router.post("/verify/candidate", verifyOTP);
@@ -14,5 +14,6 @@ router.post("/update", update);
 router.post("/find", find);
 router.post("/otpRequest", insertOTP);
 router.post("/verifyOTP", verify);
+router.post("/send-mail", sendMail);
 
 module.exports = router;

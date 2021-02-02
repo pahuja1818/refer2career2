@@ -64,6 +64,25 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  resendOTP() {
+    this.isServiceRunning = true;
+    this.authService.getOTP({ email: this.signupForm.get('email').value }).subscribe((data: any) => {
+      if (data.data === true) {
+        this.toast.showToast("Passcode Sent Successfully!");
+        let counter = 30;
+        timer(1000, 1000)
+          .pipe(
+            takeWhile(() => counter > 0),
+            tap(() => counter--)
+          )
+          .subscribe(() => {
+            this.timer = counter;
+          });
+        this.isServiceRunning = false;
+      }
+    })
+  }
+
   isValidOTP() {
     return this.otp.length === 6;
   }

@@ -36,18 +36,18 @@ module.exports.registerUser = (req, res) => {
                                 secure: false,//true
                                 port: 25,//465
                                 auth: {
-                                    user: 'tusharpahuja824@gmail.com',
-                                    pass: '1357902468@Aa'
+                                    user: 'refer2career@gmail.com',
+                                    pass: 'refer2career@2020'
                                 }, tls: {
                                     rejectUnauthorized: false
                                 }
                             });
 
                             var mailOptions = {
-                                from: 'tusharpahuja824@gmail.com',
+                                from: 'refer2career@gmail.com',
                                 to: user.email,
-                                subject: 'Verification code for Insta Jobs',
-                                html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Insta jobs<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!'
+                                subject: 'Verification code for Refer2Career',
+                                html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'
                             };
 
                             smtpTransport.sendMail(mailOptions, function (error, info) {
@@ -175,18 +175,18 @@ module.exports.insertOTP = (req, res) => {
                 secure: false,//true
                 port: 25,//465
                 auth: {
-                    user: 'tusharpahuja824@gmail.com',
-                    pass: '1357902468@Aa'
+                    user: 'refer2career@gmail.com',
+                    pass: 'refer2career@2020'
                 }, tls: {
                     rejectUnauthorized: false
                 }
             });
 
             var mailOptions = {
-                from: 'tusharpahuja824@gmail.com',
+                from: 'refer2career@gmail.com',
                 to: user.email,
                 subject: 'Verification code for Insta Jobs',
-                html: `<p>Hello` + '</p><p>Here is your verification code for Insta jobs<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!'
+                html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'
             };
 
             smtpTransport.sendMail(mailOptions, function (error, info) {
@@ -223,6 +223,38 @@ module.exports.verify = (req, res) => {
         }
         else {
             return res.status(200).json({ 'error': 'Invalid passcode' });
+        }
+    });
+}
+
+module.exports.sendMail = (req, res) => {
+    let user = req.body.email;
+    let subject = req.body.subject;
+    let content = req.body.content;
+    var smtpTransport = nodemailer.createTransport({
+        service: 'gmail',//smtp.gmail.com  //in place of service use host...
+        secure: false,//true
+        port: 25,//465
+        auth: {
+            user: 'refer2career@gmail.com',
+            pass: 'refer2career@2020'
+        }, tls: {
+            rejectUnauthorized: false
+        }
+    });
+
+    var mailOptions = {
+        from: 'refer2career@gmail.com',
+        to: user,
+        subject: subject,
+        html: content
+    };
+
+    smtpTransport.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.status(200).json({ 'data': true });
         }
     });
 }

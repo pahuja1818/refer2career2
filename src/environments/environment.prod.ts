@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {
-    apiKey: "AIzaSyB9Ytk9GOeiJ_o5hh5tUfmlvtG6lnfO62c",
-    authDomain: "instajob-7ceb0.firebaseapp.com",
-    databaseURL: "https://instajob-7ceb0.firebaseio.com",
-    projectId: "instajob-7ceb0",
-    storageBucket: "instajob-7ceb0.appspot.com",
-    messagingSenderId: "991874706467",
-    appId: "1:991874706467:web:0e0d092fa47769906d1596",
-    measurementId: "G-06GR9BHD9V"
+    apiKey: "AIzaSyD8oHgN3nK3qcT7kvcMVTs9mkzeqFJ9vSY",
+    authDomain: "refer2career-9342a.firebaseapp.com",
+    projectId: "refer2career-9342a",
+    storageBucket: "refer2career-9342a.appspot.com",
+    messagingSenderId: "833213007308",
+    appId: "1:833213007308:web:e09ff54d82c39b3c188969",
+    measurementId: "G-LJET8FMWKP"
   }
 };
