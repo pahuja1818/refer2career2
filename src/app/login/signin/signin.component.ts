@@ -68,7 +68,7 @@ export class SigninComponent implements OnInit {
     this.isServiceRunning = true;
     this.authService.getOTP({ email: this.signupForm.get('email').value }).subscribe((data: any) => {
       if (data.data === true) {
-        this.toast.showToast("Passcode Sent Successfully!");
+        this.toast.showToast('Passcode Sent Successfully!');
         let counter = 30;
         timer(1000, 1000)
           .pipe(
@@ -80,7 +80,7 @@ export class SigninComponent implements OnInit {
           });
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 
   isValidOTP() {

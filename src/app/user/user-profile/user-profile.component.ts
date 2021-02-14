@@ -7,9 +7,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
-import { ObjectId } from 'mongodb';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase';
 
@@ -30,41 +27,11 @@ export class UserProfileComponent implements OnInit {
     private toastService: ToastService) {
   }
 
-  basePath: string = '/profile-resumes'
+  basePath = '/profile-resumes';
   uploadTask: firebase.storage.UploadTask;
-
-  openResume() {
-    window.open(this.user.resume, "_blank");
-  }
-
-  async uploadResume() {
-    this.isServiceRunning = true;
-    let storageRef: any = firebase.storage().ref();
-    let time = new Date().getTime();
-    await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.blob);
-    storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
-      let dbOpeartion: DbOperation = {
-        collection: 'users',
-        query: { '_id': this.user._id },
-        data: { "resume": url }
-      }
-      this.authService.update(dbOpeartion).then((data: any) => {
-        if (data.data === true) {
-          this.isServiceRunning = false;
-          this.getUser();
-        }
-      });
-    })
-  }
 
   blob: any;
   filename: any;
-
-  fileChange(event: any) {
-    this.blob = event.target.files[0];
-    this.filename = event.target.files[0].name;
-    this.uploadResume();
-  }
 
   user: any = {};
   isEditing = false;
@@ -144,6 +111,36 @@ export class UserProfileComponent implements OnInit {
     'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
   filteredSkills: Observable<string[]>;
 
+  openResume() {
+    window.open(this.user.resume, '_blank');
+  }
+
+  async uploadResume() {
+    this.isServiceRunning = true;
+    const storageRef: any = firebase.storage().ref();
+    const time = new Date().getTime();
+    await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.blob);
+    storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
+      const dbOpeartion: DbOperation = {
+        collection: 'users',
+        query: { _id: this.user._id },
+        data: { resume: url }
+      };
+      this.authService.update(dbOpeartion).then((data: any) => {
+        if (data.data === true) {
+          this.isServiceRunning = false;
+          this.getUser();
+        }
+      });
+    });
+  }
+
+  fileChange(event: any) {
+    this.blob = event.target.files[0];
+    this.filename = event.target.files[0].name;
+    this.uploadResume();
+  }
+
   ngOnInit() {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
     this.getUser();
@@ -177,7 +174,9 @@ export class UserProfileComponent implements OnInit {
         this.workExpForm.controls.endDate.updateValueAndValidity();
       }
     });
+    this.isServiceRunning = false;
   }
+
 
   setBasicInfo() {
     if (this.user.basicInfo) {
@@ -196,10 +195,6 @@ export class UserProfileComponent implements OnInit {
     this.isBasiDetailEditing = !this.isBasiDetailEditing;
     if (!this.isBasiDetailEditing) {
       this.setBasicInfo();
-      this.profileForm.disable();
-    }
-    else {
-      this.profileForm.enable();
     }
   }
 
@@ -223,7 +218,6 @@ export class UserProfileComponent implements OnInit {
       gender: new FormControl('', [Validators.required]),
       dob: new FormControl(null, [Validators.required]),
     });
-    this.profileForm.disable();
   }
 
   initializeEducationForm() {
@@ -331,7 +325,7 @@ export class UserProfileComponent implements OnInit {
   addWorkExp() {
     this.workExpForm.markAllAsTouched();
     if (this.workExpForm.valid) {
-      const workExp = {
+      const workExp: any = {
         title: this.workExpForm.get('title').value,
         type: this.workExpForm.get('type').value,
         companyName: this.workExpForm.get('companyName').value,
@@ -346,11 +340,13 @@ export class UserProfileComponent implements OnInit {
       }
       else { this.workExpArray[this.workExpToUpdate] = workExp; }
       this.workExpToUpdate = undefined;
+      const totalWorkExp = this.calculateExp();
       const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { workExperience: this.workExpArray },
+        data: { workExperience: this.workExpArray, totalWorkExp: +totalWorkExp },
         query: { _id: this.user._id }
       };
+      console.log(dbOpeartion);
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();
@@ -359,6 +355,23 @@ export class UserProfileComponent implements OnInit {
       });
       this.modalRef.hide();
     }
+  }
+
+  calculateExp() {
+    let total = 0;
+    for (const post of this.workExpArray) {
+      const dateFirst = post.endDate !== null ? new Date(post.endDate) : new Date();
+      const dateSecond = new Date(post.startDate);
+      // time difference
+      const timeDiff = Math.abs(dateFirst.getTime() - dateSecond.getTime());
+
+      // days difference
+      const diffYears = (timeDiff / (1000 * 3600 * 24 * 365));
+      total += diffYears;
+
+    }
+    return total.toFixed(0);
+
   }
 
   editWorkExp(workExp: any, template: any, i) {
@@ -379,9 +392,10 @@ export class UserProfileComponent implements OnInit {
   deleteWorkExp(index: number) {
     this.isServiceRunning = false;
     this.workExpArray.splice(index, 1);
+    const totalWorkExp = this.calculateExp();
     const dbOpeartion: DbOperation = {
       collection: 'users',
-      data: { workExperience: this.workExpArray },
+      data: { workExperience: this.workExpArray, totalWorkExp },
       query: { _id: this.user._id }
     };
     this.authService.update(dbOpeartion).then((data: any) => {

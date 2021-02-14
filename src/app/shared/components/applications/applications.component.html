@@ -10,6 +10,12 @@
   <div class="w-100 vh-100">
     <div class="p-2 bg-white w-100 vh-100" style="margin-top: 50px !important; overflow-y: auto !important;">
       <h4 class="text-md text-center m-4">{{post.jobPost ? post.jobPost.title : ''}}</h4>
+      <div class="vertical-center justify-content-end">
+        <button class="btn btn-outline-primary mr-2" (click)="openFilter(filter)">Add Filter</button>
+        <span class="text-link text-danger" (click)="clearFilter()" *ngIf="skillsArray.length > 0 || minExp">Clear
+          Filter</span>
+      </div>
+      <app-not-found *ngIf="allAplications.length === 0"></app-not-found>
       <div class="row justify-content-center bg-white p-2" style="overflow: auto;">
         <div class="m-3 pt-4 col-12 col-sm-8" style="min-width: 350px;" *ngFor="let user of allAplications">
           <div class="card box-shadow w-100 h-100 p-3 btn btn-light">
@@ -21,12 +27,12 @@
                 yyyy'}}</span>
             </div>
             <div class="row my-3" *ngIf='user.skills'>
-              <div class="col-sm-12 d-flex vertical-center">
-                <div class="col-sm-2 text-left">
-                  Skills
+              <div class="col-sm-12 row ml-1 vertical-center">
+                <div class="col-sm-2 text-left mb-2">
+                  Skills :
                 </div>
                 <div class="col-sm-10 text-left">
-                  <span class="mx-2 px-4 py-2 bg-light-grey" style="border-radius: 10px;"
+                  <span class="col mx-2 px-4 py-2 bg-light-grey" style="border-radius: 10px;"
                     *ngFor="let skill of user.skills">
                     {{skill}}
                   </span>
@@ -42,12 +48,24 @@
                   <div class="text-left" *ngFor="let exp of user.workExperience">
                     <span class="text-grey text-sm mx-2"><b>Title: </b>{{exp.title}}</span>
                     <span class="text-grey text-sm mx-2"><b>Company: </b>{{exp.companyName}}</span>
-                  </div>
-                  <div class="text-left" *ngFor="let exp of user.workExperience">
-                    <span class="text-grey text-sm mx-2"><b>Title: </b>{{exp.title}}</span>
-                    <span class="text-grey text-sm mx-2"><b>Company: </b>{{exp.companyName}}</span>
+                    <span class="text-grey text-sm mx-2"><b></b>{{calculateTotalExp(exp)}}</span>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="row my-3 ml-1 vertical-center justify-content-start" *ngIf='user.workExperience'>
+              <div class="col-sm-5 d-flex justify-content-start" *ngIf="user.basicInfo.mobile">
+                <span>Mobile Number: <span class="text-grey">{{user.basicInfo.mobile}}</span>
+                </span>
+              </div>
+              <div class="col-sm-5 d-flex justify-content-start">
+                <span *ngIf="user.email">Email: <span class="text-grey">{{user.email}}</span>
+                </span>
+              </div>
+            </div>
+            <div class="row my-3" *ngIf='user.resume'>
+              <div class="col-sm-12 d-flex justify-content-end">
+                <button class="btn btn-primary bg-violet" (click)="seeResume(user.resume)">Resume</button>
               </div>
             </div>
           </div>
@@ -56,3 +74,60 @@
     </div>
   </div>
 </div>
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>
+
+<ng-template #filter>
+  <div class="bg-white p-3" style="border-radius: 10px !important;">
+    <div class="d-flex justify-content-between mb-5">
+      <span class="bold">Filter</span>
+      <span class="material-icons text-link" (click)="closeModal()">close</span>
+    </div>
+    <div class="ml-4 my-3 d-flex justify-content-between">
+      <span class="text-grey text-smd">Search by skills </span>
+      <span class="text-info text-link" (click)="openSkillModal(skillModal)">+ Add Skill</span>
+    </div>
+    <div class="row col-sm-11 d-flex justify-content-start">
+      <div class="col-sm-12 my-4">
+        <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
+          style="display: inline-block; border-radius: 15px; width: max-content; margin: 3px !important; white-space:nowrap;">
+          <span class="text-grey mr-3">{{data}}</span>
+          <span class="material-icons text-xs text-link" (click)="removeTag(i)">close</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <label class="text-grey">Minimum Experience (in years)</label>
+      <input class="form-control" type="text" [(ngModel)]="minExp" placeholder="Enter Experience">
+    </div>
+    <div class="d-flex justify-content-end mt-5">
+      <button class="btn btn-primary text-sm bg-violet" (click)="seeResults()">See Results</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #skillModal>
+  <div class="bg-white p-3" style="border-radius: 7px;">
+    <div class="d-block text-right">
+      <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
+    </div>
+    <span class="text-grey semi-bold d-block text-center my-2">ADD SKILL</span>
+    <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label>Skill Name</mat-label>
+          <input type="text" placeholder="Ex. JAVA" aria-label="Number" matInput [formControl]="skillName"
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredSkills | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>Enter valid detail</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-end mt-4">
+      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addSkill()">ADD SKILL</button>
+    </div>
+  </div>
+</ng-template>

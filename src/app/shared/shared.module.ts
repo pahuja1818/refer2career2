@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { ManageApplicantsComponent } from './components/manage-applicants/manage-applicants.component';
 import { AddJobPostComponent } from './components/add-job-post/add-job-post.component';
@@ -74,7 +75,8 @@ import { SigninComponent } from '../login/signin/signin.component';
     AllJobPostsComponent,
     ManageApplicantsComponent,
     ApplicationsComponent,
-    SigninComponent
+    SigninComponent,
+    NotFoundComponent
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -136,6 +138,7 @@ import { SigninComponent } from '../login/signin/signin.component';
     ModalModule.forRoot(),
   ],
   exports: [
+    NotFoundComponent,
     SpinnerComponentComponent,
     MatProgressSpinnerModule,
     AlertModule,

@@ -46,6 +46,11 @@ export class AuthService {
     return this.http.post(this.baseUrl + `/api/updateAdminDetails`, body, { headers: this.headers }).toPromise();
   }
 
+  create(data: any) {
+    const body = JSON.stringify(data);
+    return this.http.post(this.baseUrl + `/api/create`, body, { headers: this.headers }).toPromise();
+  }
+
   update(data: any) {
     const body = JSON.stringify(data);
     return this.http.post(this.baseUrl + `/api/update`, body, { headers: this.headers }).toPromise();

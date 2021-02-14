@@ -40,6 +40,9 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
 
   public baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
 
+  basePath = '/refered-resumes';
+  uploadTask: firebase.storage.UploadTask;
+
   ngOnInit() {
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
@@ -73,6 +76,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
 
   referJobModal(template: any) {
     this.referJobPostForm = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       resume: new FormControl(null, Validators.required),
     });
@@ -97,26 +101,23 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   closeModal() {
     this.modalRef.hide();
   }
-
-  basePath: string = '/refered-resumes'
-  uploadTask: firebase.storage.UploadTask;
   async referJobPost() {
     let resume;
-    let file: any;
+    // const file: any;
     this.referJobPostForm.markAllAsTouched();
     if (this.referJobPostForm.valid) {
-      let storageRef: any = firebase.storage().ref();
-      let time = new Date().getTime();
+      const storageRef: any = firebase.storage().ref();
+      const time = new Date().getTime();
       await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.fileData);
       storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
         resume = url;
-        console.log(url);
         this.fileData = undefined;
 
         if (resume && this.fileData === undefined) {
           const refer: any = {
-            resume: resume,
+            resume,
             jobTitle: this.jobPost.jobPost.title,
+            name: this.referJobPostForm.get('name').value,
             email: this.referJobPostForm.get('email').value,
             jobId: this.jobId,
             referedBy: (JSON.parse(window.atob(window.localStorage.getItem('id')))).email,
@@ -138,7 +139,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           });
 
         }
-      })
+      });
     }
   }
 

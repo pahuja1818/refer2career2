@@ -597,3 +597,13 @@ background:  linear-gradient(90deg, rgba(116,109,241,1) 0%, rgb(101, 197, 214) 0
   white-space: normal !important;
   word-wrap: break-word !important;
 }
+
+.not-clickable{
+  pointer-events: none;
+}
+
+.img-login {
+  height: 250px;
+  opacity: 0.95;
+  object-fit: cover;
+}

@@ -35,9 +35,8 @@
       <div class="p-2 m-4 bg-white box-shadow" style="border-radius: 4px;">
         <div class="vertical-center justify-content-between">
           <span class="bold text-dark text-ssmd">CV Headline</span>
-          <span class="material-icons-outlined text-link" (click)="editCVHead()">{{isCVHeadEditing
-            ? 'close' :
-            'edit'}}</span>
+          <span class="text-info text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()">Edit</span>
+          <span class="material-icons-outlined text-link" (click)="editCVHead()" *ngIf="isCVHeadEditing">close</span>
         </div>
         <span class="text-smd my-4" *ngIf="!isCVHeadEditing">{{cvHeadLine}}</span>
         <input class="form-control my-3" *ngIf="isCVHeadEditing" type="text" placeholder="" [(ngModel)]="cvHeadLine">
@@ -53,11 +52,12 @@
         <div class="mt-2 w-100">
           <div class="ml-4 mb-3 d-flex justify-content-between">
             <span class="bold text-dark text-ssmd">Basic Info </span>
-            <span class="material-icons-outlined bold text-dark text-xxl text-link"
+            <span class="material-icons-outlined text-info text-xxl text-link"
               (click)="basicInfoEdit()">{{isBasiDetailEditing ? 'close' : 'edit'}}</span>
           </div>
-          <div class="row col-sm-10 mx-auto d-flex justify-content-between">
-            <div class="col-sm-5 mb-2">
+          <div class="row col-sm-10 mx-auto d-flex justify-content-between"
+            [ngClass]="isBasiDetailEditing ? '' : 'not-clickable'">
+            <div class=" col-sm-5 mb-2">
               <mat-form-field class="p-0 w-100 mat-form-field">
                 <mat-label class="p-0">Phone number</mat-label>
                 <span matPrefix>+91 &nbsp;</span>
@@ -133,11 +133,10 @@
         <div class="mt-2 w-100">
           <div class="ml-4 mb-3 d-flex justify-content-between">
             <span class="bold text-dark text-ssmd">Skills </span>
-            <span class="material-icons bold text-dark text-xxl text-link"
-              (click)="openSkillModal(skillModal)">add</span>
+            <span class="text-info text-link" (click)="openSkillModal(skillModal)">+ Add Skill</span>
           </div>
-          <div class="row col-sm-9 d-flex justify-content-start">
-            <div class="col-sm-9 my-4">
+          <div class="row col-sm-11 d-flex justify-content-start">
+            <div class="col-sm-12 my-4">
               <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
                 style="display: inline-block; border-radius: 15px; width: max-content; margin: 3px !important; white-space:nowrap;">
                 <span class="text-grey mr-3">{{data}}</span>
@@ -153,8 +152,7 @@
         <div class="mt-2 w-100">
           <div class="ml-4 mb-3 d-flex justify-content-between">
             <span class="bold text-dark text-ssmd">Work Experience </span>
-            <span class="material-icons bold text-dark text-xxl text-link"
-              (click)="openWorkExpModal(workExp)">add</span>
+            <span class="text-info text-link" (click)="openWorkExpModal(workExp)">+ Add Experience</span>
           </div>
           <div class="w-100">
             <div class="bg-grey my-4 w-100">
@@ -187,8 +185,7 @@
         <div class="mt-2 w-100">
           <div class="ml-4 mb-3 d-flex justify-content-between">
             <span class="bold text-dark text-ssmd">Education </span>
-            <span class="material-icons bold text-dark text-xxl text-link"
-              (click)="openEducationModal(education)">add</span>
+            <span class="text-info text-link" (click)="openEducationModal(education)">+ Add Education</span>
           </div>
           <div class="w-100">
             <div class="bg-grey my-4 w-100">

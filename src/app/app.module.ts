@@ -80,7 +80,7 @@ import { SpinnerComponentComponent } from './shared/components/spinner-component
 import { PartnersComponent } from './partners/partners.component';
 import { environment } from './../environments/environment';
 import * as firebase from 'firebase';
-firebase.initializeApp(environment.firebaseConfig); 
+firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [

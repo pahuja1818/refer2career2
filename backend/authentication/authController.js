@@ -143,13 +143,21 @@ module.exports.find = (req, res) => {
 module.exports.update = (req, res) => {
     const data = req.body.data;
     const collection = req.body.collection;
-    console.log(req.body);
     const query = req.body.query ? req.body.query : {};
-    console.log(query);
     if (query._id) {
         query._id = new ObjectId(query._id)
     }
     mongoUtil.collection(collection).updateOne(query, { $set: data }, function (err, result) {
+        if (err) return res.status(200).json({ 'data': false });
+        return res.status(200).json({ 'data': true });
+    });
+}
+
+
+module.exports.create = (req, res) => {
+    const data = req.body.data;
+    const collection = req.body.collection;
+    mongoUtil.collection(collection).insertOne(data, function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': true });
     });

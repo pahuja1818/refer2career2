@@ -49,11 +49,11 @@ export class AllJobPostsComponent implements OnInit {
 
     else if (this.role === 0) {
       this.router.navigateByUrl(`/admin/jobs/detail/${data._id}`);
- }
+    }
 
     else if (this.role === 1) {
       this.router.navigateByUrl(`/recruiter/job-posts/detail/${data._id}`);
- }
+    }
   }
 
   private _filter(name: string): any[] {
@@ -69,7 +69,8 @@ export class AllJobPostsComponent implements OnInit {
         this.filteredJobPosts.push(JSON.stringify(jobPost));
       }
       jobPost.jobPost.skills.forEach((element: any) => {
-        if (element.skillName.includes(search)) {
+        const name: string = element.skillName;
+        if (name.toLowerCase().includes(search)) {
           this.filteredJobPosts.push(JSON.stringify(jobPost));
         }
       });
