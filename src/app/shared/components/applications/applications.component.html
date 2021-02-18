@@ -12,10 +12,21 @@
       <h4 class="text-md text-center m-4">{{post.jobPost ? post.jobPost.title : ''}}</h4>
       <div class="vertical-center justify-content-end">
         <button class="btn btn-outline-primary mr-2" (click)="openFilter(filter)">Add Filter</button>
-        <span class="text-link text-danger" (click)="clearFilter()" *ngIf="skillsArray.length > 0 || minExp">Clear
-          Filter</span>
       </div>
-      <app-not-found *ngIf="allAplications.length === 0"></app-not-found>
+      <div class="row justify-content-center">
+        <div class="col-sm-8 my-2">
+          <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-violet vertical-center"
+            style="display: inline-block; border-radius: 5px; width: max-content; margin: 3px !important; white-space:nowrap;">
+            <span class="text-white mr-3">{{data}}</span>
+            <span class="material-icons text-xs text-white text-link pt-1" (click)="removeFromFilter(i)">close</span>
+          </div>
+          <div class="p-1 px-2 bg-violet vertical-center" *ngIf="minExp"
+            style="display: inline-block; border-radius: 5px; width: max-content; margin: 3px !important; white-space:nowrap;">
+            <span class="text-white mr-3">Minimum Experience: {{minExp}} Years</span>
+            <span class="material-icons text-xs text-white text-link pt-1" (click)="removeExp()">close</span>
+          </div>
+        </div>
+      </div>
       <div class="row justify-content-center bg-white p-2" style="overflow: auto;">
         <div class="m-3 pt-4 col-12 col-sm-8" style="min-width: 350px;" *ngFor="let user of allAplications">
           <div class="card box-shadow w-100 h-100 p-3 btn btn-light">
@@ -71,36 +82,40 @@
           </div>
         </div>
       </div>
+      <app-not-found *ngIf="allAplications.length === 0"></app-not-found>
     </div>
   </div>
 </div>
 <app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>
 
 <ng-template #filter>
-  <div class="bg-white p-3" style="border-radius: 10px !important;">
-    <div class="d-flex justify-content-between mb-5">
-      <span class="bold">Filter</span>
-      <span class="material-icons text-link" (click)="closeModal()">close</span>
-    </div>
-    <div class="ml-4 my-3 d-flex justify-content-between">
-      <span class="text-grey text-smd">Search by skills </span>
-      <span class="text-info text-link" (click)="openSkillModal(skillModal)">+ Add Skill</span>
-    </div>
-    <div class="row col-sm-11 d-flex justify-content-start">
-      <div class="col-sm-12 my-4">
-        <div *ngFor="let data of skillsArray; index as i" class="p-1 px-2 bg-light vertical-center"
-          style="display: inline-block; border-radius: 15px; width: max-content; margin: 3px !important; white-space:nowrap;">
-          <span class="text-grey mr-3">{{data}}</span>
-          <span class="material-icons text-xs text-link" (click)="removeTag(i)">close</span>
+  <div class="row p-0 pl-0 ml-0 vh-100 justify-content-end">
+    <div class="col-sm-3 p-0 pl-0 ml-0 h-100 bg-white">
+      <div class="p-3 pt-5 h-100">
+        <div class="vertical-center justify-content-between mb-5">
+          <span class="semi-bold text-md">Filter</span>
+          <span class="material-icons text-link text-md bold mr-3" (click)="closeModal()">close</span>
+        </div>
+
+        <div class="mr-3 mb-3">
+          <label class="text-grey">Skills</label>
+          <ng-select placeholder="Select skills" [multiple]="true" [(ngModel)]="skillsArray">
+            <ng-option *ngFor="let option of filteredSkills | async" [value]="option">
+              {{option}}</ng-option>
+          </ng-select>
+        </div>
+        <div class="mr-3">
+          <label class="text-grey">Minimum Experience (in years)</label>
+          <input class="form-control" type="number" [(ngModel)]="minExp" placeholder="Enter Experience">
         </div>
       </div>
-    </div>
-    <div class="mt-4">
-      <label class="text-grey">Minimum Experience (in years)</label>
-      <input class="form-control" type="text" [(ngModel)]="minExp" placeholder="Enter Experience">
-    </div>
-    <div class="d-flex justify-content-end mt-5">
-      <button class="btn btn-primary text-sm bg-violet" (click)="seeResults()">See Results</button>
+      <div class="my-3 position-absolute w-100" style="bottom: 0px !important; padding: 0px;">
+        <hr class="w-100">
+        <div class="vertical-center justify-content-center py-3">
+          <span class="text-primary text-smd mr-3 text-violet text-link" (click)="clearFilter()">Clear all</span>
+          <button class="btn btn-primary bg-violet text-sm" (click)="seeResults()">See Results</button>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

@@ -66,6 +66,7 @@ import { JobDetailsComponent } from './components/add-job-post/job-details/job-d
 import { SpinnerComponentComponent } from './components/spinner-component/spinner-component.component';
 import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.component';
 import { SigninComponent } from '../login/signin/signin.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SigninComponent } from '../login/signin/signin.component';
     AddJobPostComponent,
   ],
   imports: [
+    NgSelectModule,
     CommonModule,
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -197,7 +199,8 @@ import { SigninComponent } from '../login/signin/signin.component';
     AllJobPostsComponent,
     ManageApplicantsComponent,
     ApplicationsComponent,
-    SigninComponent
+    SigninComponent,
+    NgSelectModule
   ],
   providers: [
     StatusBar,

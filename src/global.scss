@@ -30,6 +30,7 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 
 .w-80{
@@ -165,6 +166,17 @@
     margin: 0!important;
     min-width: 100%;
     animation: fall;
+    animation-duration: 500ms;
+    overflow: hidden;
+  }
+
+  .filter-modal {
+    align-items: initial !important;
+    margin: 0px 0 0 0px;
+    margin: 0!important;
+    min-width: 100%;
+    left:0;
+    animation: rightLeft;
     animation-duration: 500ms;
     overflow: hidden;
   }
@@ -337,6 +349,15 @@
     }
     to {
         bottom: 0%;
+    }
+  }
+
+  @keyframes rightLeft {
+    from {
+        left: 100%;
+    }
+    to {
+        right: 0%;
     }
   }
 

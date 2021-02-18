@@ -44,7 +44,6 @@ export class ApplicationsComponent implements OnInit {
   skillsArray: any[] = [];
 
   ngOnInit() {
-
     this.route.params.subscribe((params: Params) => {
       if (params.jobId) {
         this.postId = params.jobId;
@@ -63,7 +62,6 @@ export class ApplicationsComponent implements OnInit {
 
     return this.skillsOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-
 
   closeModal() {
     this.modalRef.hide();
@@ -137,10 +135,11 @@ export class ApplicationsComponent implements OnInit {
   }
   openFilter(template: any) {
     this.filterTemplate = template;
-    this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
+    this.modalRef = this.modalService.show(template, { class: "filter-modal", ignoreBackdropClick: true, animated: true });
   }
 
   seeResults() {
+    console.log(this.skillsArray);
     this.isServiceRunning = true;
     this.candidatesArray.forEach((cand: any, index) => {
       const dbOperation: DbOperation = {
@@ -179,7 +178,6 @@ export class ApplicationsComponent implements OnInit {
   addSkill() {
     this.skillName.markAsTouched();
     if (this.skillName.value) {
-      this.isServiceRunning = true;
       this.skillsArray.push(this.skillName.value);
       this.modalRef.hide();
       this.openFilter(this.filterTemplate);
@@ -187,8 +185,17 @@ export class ApplicationsComponent implements OnInit {
   }
 
   removeTag(index: any) {
-    this.isServiceRunning = true;
     this.skillsArray.splice(index, 1);
+  }
+
+  removeFromFilter(index: any) {
+    this.skillsArray.splice(index, 1);
+    this.seeResults();
+  }
+
+  removeExp() {
+    this.minExp = null;
+    this.seeResults();
   }
 
   clearFilter() {

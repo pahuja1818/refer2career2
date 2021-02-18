@@ -1,3 +1,4 @@
+import { CountryStateCityService } from './../../shared/services/country-state-city.service';
 import { MenuController } from '@ionic/angular';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,7 @@ export class EmployerDashboardComponent implements OnInit {
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
+    private csc: CountryStateCityService
   ) { }
 
   ngOnInit() { }
