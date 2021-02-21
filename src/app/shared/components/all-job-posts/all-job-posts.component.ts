@@ -1,9 +1,12 @@
+import { DbOperation } from './../../models/dbOperation';
+import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { JobPostServiceService } from '../../services/job-post-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { thLocale } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-all-job-posts',
@@ -21,9 +24,48 @@ export class AllJobPostsComponent implements OnInit {
   options: any[] = ['Angular Developer', 'Manager', 'Chartered accountant'];
   filteredOptions: Observable<any[]>;
 
+  isSortByExpanded = false;
+  isLocationExpanded = false;
+  isPartTimeExpanded = false;
+  isRemoteExpanded = false;
+  isExperienceExpanded = false;
+
+  allLocations: Set<String> = new Set<String>();
+  selectedLocations: Set<String> = new Set<String>();
+  selectedLocationsArray: any[] = [];
+
+  isRelevent = false;
+  isServiceRunning = false;
+
+  isSortBy = false;
+
+  refineInitial: any = {
+    'partTime': false,
+    'remote': false,
+    "minExp": 0,
+    'location': []
+  }
+
+  refine: any = {
+    'partTime': false,
+    'remote': false,
+    "minExp": 0,
+    'location': []
+  }
+
+  isChanged(): boolean {
+    return !(JSON.stringify(this.refine) === JSON.stringify(this.refineInitial));
+  }
+
+  closeSortBy(value: any){
+    this.isSortBy = value;
+    this.isSortByExpanded = false;
+  }
+
   constructor(
     private jobPostService: JobPostServiceService,
     private router: Router,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -39,7 +81,21 @@ export class AllJobPostsComponent implements OnInit {
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.filteredJobPosts = data;
       this.allJobPost = data;
+      this.sortByDate();
     });
+
+    let dbOpeartion: DbOperation = {
+      collection: "jobposts",
+      //query: {"jobPost.location": { $in: ["New Delhi", "Pune"] }},
+      selectedFields: { "jobPost.location": 1 },
+    }
+    this.authService.find(dbOpeartion).subscribe((data: any) => {
+      if (data.data.length > 0) {
+        data.data.forEach((ele: any) => {
+          this.allLocations.add(ele.jobPost.location);
+        })
+      }
+    })
   }
 
   seeDetails(data: any) {
@@ -84,6 +140,14 @@ export class AllJobPostsComponent implements OnInit {
     });
   }
 
+  sortByDate() {
+    this.filteredJobPosts.sort((a: any, b: any) => {
+      let dateA: any = new Date(a.jobPost.createdAt);
+      let dateB: any = new Date(b.jobPost.createdAt);
+      return dateB - dateA;
+    });
+  }
+
   getExperience(value: number) {
     return `${value} - ${value + 1}`;
   }
@@ -94,5 +158,52 @@ export class AllJobPostsComponent implements OnInit {
     const diffTime = Math.abs(date2 - date1);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays >= 7;
+  }
+
+  updateLocation(event: any, location: String) {
+    if (event.checked === true) {
+      this.selectedLocations.add(location);
+    }
+    else this.selectedLocations.delete(location);
+    this.refine.location = [...this.selectedLocations];
+    console.log(this.isChanged());
+  }
+
+  refineJobs() {
+    this.isServiceRunning = true;
+    let dbOpeartion: DbOperation = {
+      collection: "jobposts",
+      query: {},
+    }
+    if (this.refine.partTime) {
+      dbOpeartion.query["jobPost.partTime"] = this.refine.partTime;
+    }
+
+    if (this.refine.remote) {
+      dbOpeartion.query["jobPost.jobType"] = this.refine.remote ? 'Work from home' : 'In office';
+    }
+
+    if (this.selectedLocations.size > 0) {
+      dbOpeartion.query["jobPost.location"] = { $in: [...this.selectedLocations] };
+    }
+
+    if (this.refine.minExp > 0) {
+      dbOpeartion.query["jobPost.experience"] = { $gt: this.refine.minExp ? this.refine.minExp - 1 : 0 };
+    }
+
+    console.log(dbOpeartion);
+    this.authService.find(dbOpeartion).subscribe((data: any) => {
+      if (data.data) {
+        this.filteredJobPosts = data.data;
+        this.allJobPost = data.data;
+        this.refineInitial.sortBy = this.refine.sortBy,
+          this.refineInitial.partTime = this.refine.partTime,
+          this.refineInitial.remote = this.refine.remote,
+          this.refineInitial.minExp = this.refine.minExp,
+          this.refineInitial.location = this.refine.location;
+        this.sortByDate();
+        this.isServiceRunning = false;
+      }
+    })
   }
 }
