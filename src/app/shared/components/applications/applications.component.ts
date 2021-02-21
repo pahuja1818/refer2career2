@@ -135,7 +135,7 @@ export class ApplicationsComponent implements OnInit {
   }
   openFilter(template: any) {
     this.filterTemplate = template;
-    this.modalRef = this.modalService.show(template, { class: "filter-modal", ignoreBackdropClick: true, animated: true });
+    this.modalRef = this.modalService.show(template, { class: 'filter-modal', ignoreBackdropClick: true, animated: true });
   }
 
   seeResults() {

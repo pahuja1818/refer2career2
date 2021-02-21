@@ -30,8 +30,8 @@ export class AllJobPostsComponent implements OnInit {
   isRemoteExpanded = false;
   isExperienceExpanded = false;
 
-  allLocations: Set<String> = new Set<String>();
-  selectedLocations: Set<String> = new Set<String>();
+  allLocations: Set<string> = new Set<string>();
+  selectedLocations: Set<string> = new Set<string>();
   selectedLocationsArray: any[] = [];
 
   isRelevent = false;
@@ -40,18 +40,18 @@ export class AllJobPostsComponent implements OnInit {
   isSortBy = false;
 
   refineInitial: any = {
-    'partTime': false,
-    'remote': false,
-    "minExp": 0,
-    'location': []
-  }
+    partTime: false,
+    remote: false,
+    minExp: 0,
+    location: []
+  };
 
   refine: any = {
-    'partTime': false,
-    'remote': false,
-    "minExp": 0,
-    'location': []
-  }
+    partTime: false,
+    remote: false,
+    minExp: 0,
+    location: []
+  };
 
   isChanged(): boolean {
     return !(JSON.stringify(this.refine) === JSON.stringify(this.refineInitial));
@@ -84,18 +84,18 @@ export class AllJobPostsComponent implements OnInit {
       this.sortByDate();
     });
 
-    let dbOpeartion: DbOperation = {
-      collection: "jobposts",
-      //query: {"jobPost.location": { $in: ["New Delhi", "Pune"] }},
-      selectedFields: { "jobPost.location": 1 },
-    }
+    const dbOpeartion: DbOperation = {
+      collection: 'jobposts',
+      // query: {"jobPost.location": { $in: ["New Delhi", "Pune"] }},
+      selectedFields: { 'jobPost.location': 1 },
+    };
     this.authService.find(dbOpeartion).subscribe((data: any) => {
       if (data.data.length > 0) {
         data.data.forEach((ele: any) => {
           this.allLocations.add(ele.jobPost.location);
-        })
+        });
       }
-    })
+    });
   }
 
   seeDetails(data: any) {
@@ -142,8 +142,8 @@ export class AllJobPostsComponent implements OnInit {
 
   sortByDate() {
     this.filteredJobPosts.sort((a: any, b: any) => {
-      let dateA: any = new Date(a.jobPost.createdAt);
-      let dateB: any = new Date(b.jobPost.createdAt);
+      const dateA: any = new Date(a.jobPost.createdAt);
+      const dateB: any = new Date(b.jobPost.createdAt);
       return dateB - dateA;
     });
   }
@@ -160,35 +160,35 @@ export class AllJobPostsComponent implements OnInit {
     return diffDays >= 7;
   }
 
-  updateLocation(event: any, location: String) {
+  updateLocation(event: any, location: string) {
     if (event.checked === true) {
       this.selectedLocations.add(location);
     }
-    else this.selectedLocations.delete(location);
+    else { this.selectedLocations.delete(location); }
     this.refine.location = [...this.selectedLocations];
     console.log(this.isChanged());
   }
 
   refineJobs() {
     this.isServiceRunning = true;
-    let dbOpeartion: DbOperation = {
-      collection: "jobposts",
+    const dbOpeartion: DbOperation = {
+      collection: 'jobposts',
       query: {},
-    }
+    };
     if (this.refine.partTime) {
-      dbOpeartion.query["jobPost.partTime"] = this.refine.partTime;
+      dbOpeartion.query['jobPost.partTime'] = this.refine.partTime;
     }
 
     if (this.refine.remote) {
-      dbOpeartion.query["jobPost.jobType"] = this.refine.remote ? 'Work from home' : 'In office';
+      dbOpeartion.query['jobPost.jobType'] = this.refine.remote ? 'Work from home' : 'In office';
     }
 
     if (this.selectedLocations.size > 0) {
-      dbOpeartion.query["jobPost.location"] = { $in: [...this.selectedLocations] };
+      dbOpeartion.query['jobPost.location'] = { $in: [...this.selectedLocations] };
     }
 
     if (this.refine.minExp > 0) {
-      dbOpeartion.query["jobPost.experience"] = { $gt: this.refine.minExp ? this.refine.minExp - 1 : 0 };
+      dbOpeartion.query['jobPost.experience'] = { $gt: this.refine.minExp ? this.refine.minExp - 1 : 0 };
     }
 
     console.log(dbOpeartion);
@@ -204,6 +204,6 @@ export class AllJobPostsComponent implements OnInit {
         this.sortByDate();
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 }
