@@ -14,9 +14,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class JobPostsComponent implements OnInit {
 
-  allJobPost: any[] = [];
-  isServiceRunning = false;
-
   constructor(
     public modalRef: BsModalRef,
     private modalService: BsModalService,
@@ -25,6 +22,14 @@ export class JobPostsComponent implements OnInit {
     private router: Router,
     private toast: ToastService,
   ) { }
+
+  allJobPost: any[] = [];
+  isServiceRunning = false;
+
+  currentPostId: any;
+  rejectReason = 'safsaf';
+
+  referReward: number = null;
 
   ngOnInit() {
     this.jobPostService.getPosts();
@@ -56,9 +61,6 @@ export class JobPostsComponent implements OnInit {
     this.router.navigateByUrl(`/admin/jobs/detail/${id}`);
   }
 
-  currentPostId: any;
-  rejectReason: string = 'safsaf'
-
   openRejectModal(id: any, template: any) {
     this.currentPostId = id;
     this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
@@ -67,20 +69,20 @@ export class JobPostsComponent implements OnInit {
   rejectPost() {
     if (this.rejectReason) {
       this.isServiceRunning = true;
-      let db: DbOperation = {
-        collection: "jobposts",
+      const db: DbOperation = {
+        collection: 'jobposts',
         query: { _id: this.currentPostId },
         data: { status: 'rejected', rejectReason: this.rejectReason }
-      }
+      };
       this.authService.update(db).then((data: any) => {
         if (data.data) {
           this.modalRef.hide();
           this.isServiceRunning = false;
-          this.toast.showToast("Rejected Successfully!");
+          this.toast.showToast('Rejected Successfully!');
           this.currentPostId = null;
           this.jobPostService.getPosts();
         }
-      })
+      });
     }
   }
 
@@ -88,24 +90,22 @@ export class JobPostsComponent implements OnInit {
     this.currentPostId = id;
     this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
   }
-
-  referReward: number = null;
   approvePost() {
     if (this.referReward !== null) {
       this.isServiceRunning = true;
-      let db: DbOperation = {
-        collection: "jobposts",
+      const db: DbOperation = {
+        collection: 'jobposts',
         query: { _id: this.currentPostId },
-        data: { status: 'approved', referReward: this.referReward, "jobPost.verified": true }
-      }
+        data: { status: 'approved', referReward: this.referReward, 'jobPost.verified': true }
+      };
       this.authService.update(db).then((data: any) => {
         if (data.data) {
           this.modalRef.hide();
           this.isServiceRunning = false;
-          this.toast.showToast("Approved Successfully!");
+          this.toast.showToast('Approved Successfully!');
           this.jobPostService.getPosts();
         }
-      })
+      });
     }
   }
 

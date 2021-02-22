@@ -79,8 +79,8 @@ export class AllJobPostsComponent implements OnInit {
 
     const db: DbOperation = {
       collection: 'jobposts',
-      query: { "jobPost.verified": true },
-    }
+      query: { 'jobPost.verified': true },
+    };
     this.authService.find(db).subscribe((data: any) => {
       if (data.data.length > 0) {
         this.filteredJobPosts = data.data;
@@ -91,7 +91,7 @@ export class AllJobPostsComponent implements OnInit {
 
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
-      query: { "jobPost.verified": true },
+      query: { 'jobPost.verified': true },
       selectedFields: { 'jobPost.location': 1 },
     };
     this.authService.find(dbOpeartion).subscribe((data: any) => {
@@ -178,7 +178,7 @@ export class AllJobPostsComponent implements OnInit {
     this.isServiceRunning = true;
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
-      query: { "jobPost.verified": true },
+      query: { 'jobPost.verified': true },
     };
     if (this.refine.partTime) {
       dbOpeartion.query['jobPost.partTime'] = this.refine.partTime;
