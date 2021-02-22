@@ -64,7 +64,6 @@ export class AddJobPostComponent implements OnInit {
     });
 
     if (this.jobPostService.post) {
-      console.log(this.jobPostService.post);
       this.jobPost = this.jobPostService.post;
       this.jobPostForm.patchValue({
         title: this.jobPost.jobPost.title,
@@ -133,6 +132,7 @@ export class AddJobPostComponent implements OnInit {
           skills: this.skillArray,
           details: this.jobDetailsArray,
           aboutUs: this.aboutUs,
+          verified: false
         }
       };
       if (!this.jobPost) {

@@ -57,7 +57,7 @@ export class AllJobPostsComponent implements OnInit {
     return !(JSON.stringify(this.refine) === JSON.stringify(this.refineInitial));
   }
 
-  closeSortBy(value: any){
+  closeSortBy(value: any) {
     this.isSortBy = value;
     this.isSortByExpanded = false;
   }
@@ -78,15 +78,21 @@ export class AllJobPostsComponent implements OnInit {
       );
 
     this.jobPostService.getPosts();
-    this.jobPostService.jobPosts.subscribe((data: any) => {
-      this.filteredJobPosts = data;
-      this.allJobPost = data;
-      this.sortByDate();
+    const db: DbOperation = {
+      collection: 'jobposts',
+      query: { "jobPost.verified": true },
+    }
+    this.authService.find(db).subscribe((data: any) => {
+      if (data.data.length > 0) {
+        this.filteredJobPosts = data.data;
+        this.allJobPost = data.data;
+        this.sortByDate();
+      }
     });
 
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
-      // query: {"jobPost.location": { $in: ["New Delhi", "Pune"] }},
+      query: { "jobPost.verified": true },
       selectedFields: { 'jobPost.location': 1 },
     };
     this.authService.find(dbOpeartion).subscribe((data: any) => {
@@ -173,7 +179,7 @@ export class AllJobPostsComponent implements OnInit {
     this.isServiceRunning = true;
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
-      query: {},
+      query: { "jobPost.verified": true },
     };
     if (this.refine.partTime) {
       dbOpeartion.query['jobPost.partTime'] = this.refine.partTime;

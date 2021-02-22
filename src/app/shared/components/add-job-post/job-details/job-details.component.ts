@@ -12,6 +12,8 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class JobDetailsComponent implements OnInit {
 
+  isServiceRunning = false;
+
   constructor(
     private jobPostService: JobPostServiceService,
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class JobDetailsComponent implements OnInit {
   modalRef: BsModalRef;
 
   ngOnInit() {
+    this.isServiceRunning = true;
     this.role = JSON.parse(window.atob(window.localStorage.getItem('id'))).role;
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
@@ -39,13 +42,13 @@ export class JobDetailsComponent implements OnInit {
           data.forEach(post => {
             if (post.jobPostId === params.id) {
               this.appliedDate = post.date;
-              console.log(post);
             }
           });
         });
         console.log(params.id);
         this.jobPostService.getJobPost({ id: params.id }).subscribe((data: any) => {
           this.jobPost = data.data;
+          this.isServiceRunning = false;
           this.skills = this.jobPost.jobPost.skills;
         });
       }

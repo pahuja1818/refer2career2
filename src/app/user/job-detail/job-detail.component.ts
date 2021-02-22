@@ -15,6 +15,8 @@ import * as firebase from 'firebase';
 })
 export class JobDetailComponent implements OnInit, AfterViewInit {
 
+  isServiceRunning = false;
+
   constructor(
     private jobPostService: JobPostServiceService,
     private route: ActivatedRoute,
@@ -44,6 +46,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   uploadTask: firebase.storage.UploadTask;
 
   ngOnInit() {
+    this.isServiceRunning = true;
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
     this.route.params.subscribe((params: Params) => {
@@ -53,13 +56,13 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           data.forEach(post => {
             if (post.jobPostId === params.id) {
               this.appliedDate = post.date;
-              console.log(post);
             }
           });
         });
         this.jobPostService.getJobPost({ id: params.id }).subscribe((data: any) => {
           console.log(data);
           this.jobPost = data.data;
+          this.isServiceRunning = false;
           this.skills = this.jobPost.jobPost.skills;
         },
           err => console.log(err));
