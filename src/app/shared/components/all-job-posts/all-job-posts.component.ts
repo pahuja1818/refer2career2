@@ -77,10 +77,9 @@ export class AllJobPostsComponent implements OnInit {
         map(name => name ? this._filter(name) : this.options.slice())
       );
 
-    this.jobPostService.getPosts();
     const db: DbOperation = {
       collection: 'jobposts',
-      //query: { "jobPost.verified": true },
+      query: { "jobPost.verified": true },
     }
     this.authService.find(db).subscribe((data: any) => {
       if (data.data.length > 0) {
@@ -92,7 +91,7 @@ export class AllJobPostsComponent implements OnInit {
 
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
-      // query: { "jobPost.verified": true },
+      query: { "jobPost.verified": true },
       selectedFields: { 'jobPost.location': 1 },
     };
     this.authService.find(dbOpeartion).subscribe((data: any) => {
@@ -179,7 +178,7 @@ export class AllJobPostsComponent implements OnInit {
     this.isServiceRunning = true;
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
-      query: {},
+      query: { "jobPost.verified": true },
     };
     if (this.refine.partTime) {
       dbOpeartion.query['jobPost.partTime'] = this.refine.partTime;
@@ -197,7 +196,6 @@ export class AllJobPostsComponent implements OnInit {
       dbOpeartion.query['jobPost.experience'] = { $gt: this.refine.minExp ? this.refine.minExp - 1 : 0 };
     }
 
-    console.log(dbOpeartion);
     this.authService.find(dbOpeartion).subscribe((data: any) => {
       if (data.data) {
         this.filteredJobPosts = data.data;

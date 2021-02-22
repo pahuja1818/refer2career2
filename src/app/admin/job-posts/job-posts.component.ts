@@ -1,3 +1,5 @@
+import { ToastService } from './../../shared/services/toast.service';
+import { DbOperation } from './../../shared/models/dbOperation';
 import { Router } from '@angular/router';
 import { JobPostServiceService } from './../../shared/services/job-post-service.service';
 import { AddJobPostComponent } from './../../shared/components/add-job-post/add-job-post.component';
@@ -20,11 +22,16 @@ export class JobPostsComponent implements OnInit {
     private modalService: BsModalService,
     private jobPostService: JobPostServiceService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: ToastService,
   ) { }
 
   ngOnInit() {
     this.jobPostService.getPosts();
+    this.getPosts();
+  }
+
+  getPosts() {
     this.isServiceRunning = true;
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.allJobPost = data;
@@ -47,6 +54,63 @@ export class JobPostsComponent implements OnInit {
 
   seeDetails(id: any) {
     this.router.navigateByUrl(`/admin/jobs/detail/${id}`);
+  }
+
+  currentPostId: any;
+  rejectReason: string = 'safsaf'
+
+  openRejectModal(id: any, template: any) {
+    this.currentPostId = id;
+    this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
+  }
+
+  rejectPost() {
+    if (this.rejectReason) {
+      this.isServiceRunning = true;
+      let db: DbOperation = {
+        collection: "jobposts",
+        query: { _id: this.currentPostId },
+        data: { status: 'rejected', rejectReason: this.rejectReason }
+      }
+      this.authService.update(db).then((data: any) => {
+        if (data.data) {
+          this.modalRef.hide();
+          this.isServiceRunning = false;
+          this.toast.showToast("Rejected Successfully!");
+          this.currentPostId = null;
+          this.jobPostService.getPosts();
+        }
+      })
+    }
+  }
+
+  openApproveModal(id: any, template: any) {
+    this.currentPostId = id;
+    this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
+  }
+
+  referReward: number = null;
+  approvePost() {
+    if (this.referReward !== null) {
+      this.isServiceRunning = true;
+      let db: DbOperation = {
+        collection: "jobposts",
+        query: { _id: this.currentPostId },
+        data: { status: 'approved', referReward: this.referReward, "jobPost.verified": true }
+      }
+      this.authService.update(db).then((data: any) => {
+        if (data.data) {
+          this.modalRef.hide();
+          this.isServiceRunning = false;
+          this.toast.showToast("Approved Successfully!");
+          this.jobPostService.getPosts();
+        }
+      })
+    }
+  }
+
+  closeModal() {
+    this.modalRef.hide();
   }
 
 }
