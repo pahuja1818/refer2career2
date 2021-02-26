@@ -33,13 +33,14 @@ export class MyApplicationsComponent implements OnInit {
     data.forEach(post => {
       this.jobService.getJobPost({ id: post.jobPostId }).subscribe((jobPost: any) => {
         jobPost.appliedDate = post.date;
+        jobPost.status = post.status;
         this.allAppliedPosts.push(jobPost);
         console.log(this.allAppliedPosts);
       });
     });
   }
 
-  seeDetails(id: any){
+  seeDetails(id: any) {
     this.router.navigateByUrl(`/referer/jobs/job-detail/${id}`);
   }
 

@@ -9,3 +9,8 @@
   ::ng-deep .cdk-overlay-container {
     z-index: 1200 !important;
   }
+
+  .active-menu{
+    color: blueviolet;
+    border-bottom: 2px solid blueviolet;
+  }

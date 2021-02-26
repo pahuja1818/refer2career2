@@ -21,7 +21,7 @@ export class ApplicationsComponent implements OnInit {
     private route: ActivatedRoute,
     private dbService: AuthService,
     public modalController: ModalController,
-    private modalService: BsModalService
+    private modalService: BsModalService,
   ) { }
 
 
@@ -35,6 +35,7 @@ export class ApplicationsComponent implements OnInit {
   public modalRef: BsModalRef;
 
   allAplications: any[] = [];
+  aplications: any[] = [];
 
   filterTemplate: any = {};
 
@@ -89,7 +90,11 @@ export class ApplicationsComponent implements OnInit {
             this.isServiceRunning = true;
             this.allAplications = [];
             this.candidatesArray = candidates.data;
-            candidates.data.forEach(cand => {
+            this.totalHired = 0;
+            this.totalRejected = 0;
+            this.totalShortlisted = 0;
+            this.applicationRecieved = 0;
+            candidates.data.forEach((cand: any) => {
               this.isServiceRunning = true;
               const dbOperation: DbOperation = {
                 collection: 'users',
@@ -100,14 +105,33 @@ export class ApplicationsComponent implements OnInit {
                   this.isServiceRunning = false;
                   const candidate: any = user.data[0];
                   candidate.appliedOn = cand.date;
+                  candidate.appliedId = cand._id;
+                  candidate.status = cand.status ? cand.status : null;
                   this.allAplications.push(candidate);
+                  if (candidate.status === null) {
+                    this.aplications.push(candidate);
+                  }
+                  switch (cand.status) {
+                    case 'Shortlisted': {
+                      this.totalShortlisted++;
+                      break;
+                    }
+                    case 'Hired': {
+                      this.totalHired++;
+                      break;
+                    }
+                    case 'Rejected': {
+                      this.totalRejected++;
+                      break;
+                    }
+                  }
+                  if (cand.status === null || cand.status === undefined) this.applicationRecieved++;
                 }
               });
             });
           }
         });
       }
-
     });
   }
 
@@ -154,8 +178,11 @@ export class ApplicationsComponent implements OnInit {
           if (this.skillsArray.length > 0) {
             this.skillsArray.forEach(skill => {
               if (candidate.skills.find((data: string) => data.includes(skill))) {
+                const candidate: any = user.data[0];
                 candidate.appliedOn = cand.date;
-                this.allAplications.push(candidate);
+                candidate.appliedId = cand._id;
+                candidate.status = cand.status ? cand.status : null;
+                this.aplications.push(candidate);
               }
             });
           }
@@ -202,6 +229,99 @@ export class ApplicationsComponent implements OnInit {
     this.skillsArray = [];
     this.minExp = null;
     this.getDetails();
+  }
+
+  //logic for top nav bar
+  isApplicationRecieved = true;
+  isShortlisted = false;
+  isHired = false;
+  isRejected = false;
+  totalHired = 0;
+  totalShortlisted = 0;
+  totalRejected = 0;
+  applicationRecieved = 0;
+  confirmModalStatus = 'Shortlisted'
+
+  changeTopMenu(id: number) {
+    this.isApplicationRecieved = false;
+    this.isShortlisted = false;
+    this.isHired = false;
+    this.isRejected = false;
+
+    switch (id) {
+      case 0: {
+        this.isApplicationRecieved = true;
+        this.aplications = this.allAplications.filter((user: any) => user.status === null);
+        break;
+      }
+      case 1: {
+        this.isShortlisted = true;
+        this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
+        break;
+      }
+      case 2: {
+        this.isHired = true;
+        this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
+        break;
+      }
+      case 3: {
+        this.isRejected = true;
+        this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
+        break;
+      }
+    }
+  }
+
+  shortlistApplicant(_id: any) {
+    this.isServiceRunning = true;
+    let db: DbOperation = {
+      collection: 'applyJob',
+      data: { status: 'Shortlisted' },
+      query: { _id: _id },
+    }
+    this.dbService.update(db).then((data: any) => {
+      console.log(data);
+      this.getDetails();
+      this.isServiceRunning = false;
+      this.modalRef.hide();
+      this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
+    })
+  }
+
+  hireApplicant(_id: any) {
+    this.isServiceRunning = true;
+    let db: DbOperation = {
+      collection: 'applyJob',
+      data: { status: 'Hired' },
+      query: { _id: _id },
+    }
+    this.dbService.update(db).then((data: any) => {
+      this.getDetails();
+      this.isServiceRunning = false;
+      this.modalRef.hide();
+      this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
+    })
+  }
+
+  rejectApplicant(_id: any) {
+    this.isServiceRunning = true;
+    let db: DbOperation = {
+      collection: 'applyJob',
+      data: { status: 'Rejected' },
+      query: { _id: _id },
+    }
+    this.dbService.update(db).then((data: any) => {
+      this.getDetails();
+      this.isServiceRunning = false;
+      this.modalRef.hide();
+      this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
+    })
+  }
+  curentUserId: any;
+  openConfirmModal(template: any, id: any, status: any) {
+    this.curentUserId = id;
+    this.confirmModalStatus = status
+    this.modalRef = this.modalService.show(template, { animated: true });
   }
 
 }

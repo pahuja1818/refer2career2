@@ -274,9 +274,7 @@ export class SigninComponent implements OnInit {
 
   openEmployerModal() {
     this.modalRef.hide();
-    setTimeout(() => {
-      this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
-    }, 1000);
+    this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
   }
 
 }

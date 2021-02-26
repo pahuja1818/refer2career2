@@ -9,8 +9,8 @@
   </ion-header>
   <div class="row justify-content-center p-2 bg-white" style=" margin-top: 70px !important;">
     <div class="" [ngClass]="jobPost.data && jobPost.data.jobPost ? 'm-3 pt-4 col-12 col-sm-4' : ''"
-      [ngStyle]="jobPost.data && jobPost.data.jobPost ? 'min-width: 350px' : ''"
-      *ngFor="let jobPost of allAppliedPosts" (click)="seeDetails(jobPost.data._id)">
+      [ngStyle]="jobPost.data && jobPost.data.jobPost ? 'min-width: 350px' : ''" *ngFor="let jobPost of allAppliedPosts"
+      (click)="seeDetails(jobPost.data._id)">
       <div class="card box-shadow w-100 h-100 p-3 btn btn-light" *ngIf="jobPost.data && jobPost.data.jobPost">
         <div class="d-flex justify-content-between vertical-center mb-3">
           <div class="text-left">
@@ -61,9 +61,9 @@
             date:
             'dd MMMM yyyy' ) : 'Immediately'}}</span>
         </div>
-        <div class="d-block pt-2">
-          <span class="text-slmd text-grey px-3 py-2 bg-light-grey"
-            style="border-radius: 20px;">{{jobPost.data.jobPost.jobInternship}}</span>
+        <div class="w-100 mt-3 pt-2 text-right">
+          <span class="text-smd px-3 py-2"
+            [ngClass]="jobPost.status === 'Shortlisted' ? 'text-primary' : jobPost.status === 'Hired' ? 'text-success' : jobPost.status === 'Rejected' ? 'text-danger' : ''">{{jobPost.status}}</span>
         </div>
       </div>
     </div>
