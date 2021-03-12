@@ -46,8 +46,8 @@ export class MyApplicationsComponent implements OnInit {
         if (index === data.length - 1) {
           this.isServiceRunning = false;
           this.allAppliedPosts.sort((a: any, b: any) => {
-            var dateA = new Date(a.appliedDate).getTime();
-            var dateB = new Date(b.appliedDate).getTime();
+            let dateA = new Date(a.appliedDate).getTime();
+            let dateB = new Date(b.appliedDate).getTime();
             return dateB - dateA;
           }
           );
@@ -57,7 +57,7 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   seeDetails(id: any) {
-    console.log(id)
+    console.log(id);
     this.router.navigateByUrl(`/referer/jobs/job-detail/${id}`);
   }
 

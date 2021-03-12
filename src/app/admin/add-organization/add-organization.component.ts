@@ -52,6 +52,7 @@ export class AddOrganizationComponent implements OnInit {
     this.initializeForm();
     if (this.organizationService.organization !== undefined) {
       this.organization = this.organizationService.organization;
+      console.log(this.organization);
       this.initializeDetail();
     }
   }
@@ -84,6 +85,14 @@ export class AddOrganizationComponent implements OnInit {
       mobile: this.organization.personalDetails.mobile,
       email: this.organization.personalDetails.email,
       alternateNumber: this.organization.personalDetails.alternateNumber,
+      organizationName: this.organization.organizationDetails.organizationName,
+      organizationEmail: this.organization.organizationDetails.organizationEmail,
+      field: this.organization.organizationDetails.organizationField,
+      organizationMobile: this.organization.organizationDetails.organizationMobile,
+      addressLineOne: this.organization.organizationDetails.addressLineOne,
+      addressLineTwo: this.organization.organizationDetails.addressLineTwo,
+      city: this.organization.organizationDetails.city,
+      pincode: this.organization.organizationDetails.pincode,
     });
     this.documentsArray = this.organization.organizationDetails.docs;
     this.organizationLogo = this.organization.organizationDetails.logo;

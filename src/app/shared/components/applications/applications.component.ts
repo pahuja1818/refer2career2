@@ -44,6 +44,18 @@ export class ApplicationsComponent implements OnInit {
   filteredSkills: Observable<string[]>;
   skillsArray: any[] = [];
 
+  // logic for top nav bar
+  isApplicationRecieved = true;
+  isShortlisted = false;
+  isHired = false;
+  isRejected = false;
+  totalHired = 0;
+  totalShortlisted = 0;
+  totalRejected = 0;
+  applicationRecieved = 0;
+  confirmModalStatus = 'Shortlisted';
+  curentUserId: any;
+
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       if (params.jobId) {
@@ -125,7 +137,7 @@ export class ApplicationsComponent implements OnInit {
                       break;
                     }
                   }
-                  if (cand.status === null || cand.status === undefined) this.applicationRecieved++;
+                  if (cand.status === null || cand.status === undefined) { this.applicationRecieved++; }
                 }
               });
             });
@@ -231,17 +243,6 @@ export class ApplicationsComponent implements OnInit {
     this.getDetails();
   }
 
-  //logic for top nav bar
-  isApplicationRecieved = true;
-  isShortlisted = false;
-  isHired = false;
-  isRejected = false;
-  totalHired = 0;
-  totalShortlisted = 0;
-  totalRejected = 0;
-  applicationRecieved = 0;
-  confirmModalStatus = 'Shortlisted'
-
   changeTopMenu(id: number) {
     this.isApplicationRecieved = false;
     this.isShortlisted = false;
@@ -274,53 +275,52 @@ export class ApplicationsComponent implements OnInit {
 
   shortlistApplicant(_id: any) {
     this.isServiceRunning = true;
-    let db: DbOperation = {
+    const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Shortlisted' },
-      query: { _id: _id },
-    }
+      query: { _id },
+    };
     this.dbService.update(db).then((data: any) => {
       console.log(data);
       this.getDetails();
       this.isServiceRunning = false;
       this.modalRef.hide();
       this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
-    })
+    });
   }
 
   hireApplicant(_id: any) {
     this.isServiceRunning = true;
-    let db: DbOperation = {
+    const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Hired' },
-      query: { _id: _id },
-    }
+      query: { _id },
+    };
     this.dbService.update(db).then((data: any) => {
       this.getDetails();
       this.isServiceRunning = false;
       this.modalRef.hide();
       this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
-    })
+    });
   }
 
   rejectApplicant(_id: any) {
     this.isServiceRunning = true;
-    let db: DbOperation = {
+    const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Rejected' },
-      query: { _id: _id },
-    }
+      query: { _id },
+    };
     this.dbService.update(db).then((data: any) => {
       this.getDetails();
       this.isServiceRunning = false;
       this.modalRef.hide();
       this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
-    })
+    });
   }
-  curentUserId: any;
   openConfirmModal(template: any, id: any, status: any) {
     this.curentUserId = id;
-    this.confirmModalStatus = status
+    this.confirmModalStatus = status;
     this.modalRef = this.modalService.show(template, { animated: true });
   }
 

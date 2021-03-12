@@ -18,7 +18,7 @@ export class UsermenuComponent implements OnInit {
 
 
   scroll(){
-    console.log("aswhdiaq");
+    console.log('aswhdiaq');
     document.getElementById('jobs').scrollIntoView({
       behavior: 'smooth'
     });
