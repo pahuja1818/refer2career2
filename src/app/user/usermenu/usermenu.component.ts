@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { PopoverModule } from 'ngx-bootstrap/popover';
@@ -14,6 +15,14 @@ export class UsermenuComponent implements OnInit {
   modalRef: BsModalRef;
   user: any = {};
 
+
+
+  scroll(){
+    console.log("aswhdiaq");
+    document.getElementById('jobs').scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
 
 
 

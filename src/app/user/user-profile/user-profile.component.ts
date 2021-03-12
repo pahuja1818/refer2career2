@@ -64,6 +64,8 @@ export class UserProfileComponent implements OnInit {
   cvHeadLine = '8 year experienced full stack Java developer.';
   isCVHeadEditing = false;
 
+  maxDob = new Date(2006, 11, 31);
+
   // for education
   qualificationOptions: string[] = ['Diploma In Mechanical Engineering',
     'Diploma In Civil Engineering', 'Diploma In Electrical Engineering',

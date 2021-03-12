@@ -21,7 +21,7 @@ export class AllJobPostsComponent implements OnInit {
   filteredJobPosts: any[] = [];
 
   myControl = new FormControl();
-  options: any[] = ['Angular Developer', 'Manager', 'Chartered accountant'];
+  options: any[] = ['Delivery boy', 'Software engineer', 'UI designer'];
   filteredOptions: Observable<any[]>;
 
   isSortByExpanded = false;

@@ -1,7 +1,19 @@
 <div class="w-100 h-100 m-0 p-0" style="border-radius: 7px; background-color: #f8f8f8">
-  <div class="w-100 bg-violet mt-5 no-border-t" style="min-height: 160px !important; border-radius: 30px;">
+  <div class="w-100 bg-violet mt-5 no-border-t" style="min-height: 220px !important; border-radius: 30px;">
   </div>
-  <div class="row justify-content-center px-0 pt-2 mx-0" style="margin-top: -120px;">
+  <div class="row justify-content-center px-0 pt-2 mx-0" style="margin-top: -170px;">
+    <mat-form-field appearance="outline" class="p-0 m-3  mb-5 col-sm-5 my-auto mx-auto mat-form-field">
+      <mat-label class="text-white">Search</mat-label>
+      <input type="text" matInput [formControl]="myControl" class="text-white" [matAutocomplete]="auto"
+        placeholder="EX- Java Developer, Management">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-icon matSuffix class="text-white">search</mat-icon>
+      <mat-hint class="text-xs text-white">Search by skills or job title</mat-hint>
+    </mat-form-field>
     <div class="col-sm-8 my-2 text-white"><span class="text-white bold text-md">Showing
         {{filteredJobPosts.length}} jobs</span>
     </div>
@@ -16,10 +28,9 @@
             [ngClass]="isSortByExpanded === true? 'rotate-right': 'rotate-left'">expand_more</span>
         </div>
         <div *ngIf="isSortByExpanded" class="my-2">
-          <span style="border-radius: 20px;" (click)="closeSortBy(true)"
-            [ngClass]="isSortBy === true ? 'sort-by-selected' : 'sort-by-not-selected'"
+          <span style="border-radius: 20px;" [ngClass]="isSortBy === true ? 'sort-by-selected' : 'sort-by-not-selected'"
             class="px-3 py-1 m-3">Relevance</span>
-          <span style="border-radius: 20px;" (click)="closeSortBy(false)"
+          <span style="border-radius: 20px;"
             [ngClass]="isSortBy === false ? 'sort-by-selected' : 'sort-by-not-selected'" class="px-3 py-1">Date</span>
         </div>
       </div>

@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="p-2 m-4 bg-white box-shadow" style="border-radius: 4px;">
+      <div class="p-2 m-3 bg-white border border-secondary" style="border-radius: 4px;">
         <div class="vertical-center justify-content-between">
           <span class="bold text-dark text-ssmd">CV Headline</span>
           <span class="text-info text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()">Edit</span>
@@ -60,9 +60,8 @@
             <div class=" col-sm-5 mb-2">
               <mat-form-field class="p-0 w-100 mat-form-field">
                 <mat-label class="p-0">Phone number</mat-label>
-                <span matPrefix>+91 &nbsp;</span>
-                <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-                <mat-error>Enter valid mobile number</mat-error>
+                <input matInput type="number" placeholder="Enter phone number" class="p-0" formControlName='mobile'>
+                <mat-error>Enter valid phone number</mat-error>
               </mat-form-field>
             </div>
             <div class="col-sm-5 mb-2">
@@ -115,7 +114,7 @@
             <div class="col-sm-5 mb-2">
               <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
                 <mat-label>Date of Birth</mat-label>
-                <input matInput readonly [matDatepicker]="picker1" formControlName='dob'>
+                <input matInput readonly [matDatepicker]="picker1" formControlName='dob' [max]="maxDob">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <mat-hint class="text-light-grey text-xs">Click on icon to select date</mat-hint>
@@ -183,7 +182,7 @@
       <hr>
       <div class="p-2 bg-white w-100">
         <div class="mt-2 w-100">
-          <div class="ml-4 mb-3 d-flex justify-content-between">
+          <div class="ml-3 mb-3 d-flex justify-content-between">
             <span class="bold text-dark text-ssmd">Education </span>
             <span class="text-info text-link" (click)="openEducationModal(education)">+ Add Education</span>
           </div>
@@ -210,21 +209,23 @@
       </div>
       <hr>
       <div class="p-2 bg-white">
-        <span class="bold text-dark text-ssmd vertical-center">Attach CV <span
-            class="material-icons-outlined bold text-dark text-ssmd ml-2">attachment</span></span>
+        <div class="vertical-center justify-content-between">
+          <span class="bold text-dark text-ssmd vertical-center ml-3">Attach CV <span
+              class="material-icons-outlined bold text-dark text-ssmd ml-2">attachment</span></span>
+          <span class="text-info text-link text-sm" *ngIf="user.resume" (click)="openResume()"><u>Open
+              Resume</u></span>
+        </div>
         <div class="mt-2 row d-flex justify-content-center">
-          <div class="row justify-content-center">
-            <div class="col-sm-6">
-              <div>
-                <button class="btn btn-primary bg-violet text-sm" *ngIf="user.resume" (click)="openResume()">Open
-                  Resume</button>
-              </div>
-              <span class="material-icons display-1 text-danger mx-auto">backup</span>
-
-              <div class="form-group">
-                <span *ngIf="user.resume">Change Resume</span>
-                <input type="file" accept=".pdf,.docx" class="form-control-file" (change)="fileChange($event)"
-                  id="exampleFormControlFile1">
+          <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+              <div class="my-4">
+                <label for="upload">
+                  <span class="btn btn-outline-primary vertical-center glyphicon glyphicon-folder-open"
+                    aria-hidden="true"><span class="material-icons text-danger mx-auto">backup</span>&nbsp; &nbsp;{{user.resume
+                    ? "Update Resume" : "Upload Resume"}}</span>
+                  <input type="file" id="upload" style="display:none" accept=".pdf,.docx" class="form-control-file"
+                    (change)="fileChange($event)">
+                </label>
               </div>
             </div>
           </div>
