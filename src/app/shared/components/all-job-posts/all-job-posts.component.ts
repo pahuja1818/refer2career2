@@ -85,6 +85,7 @@ export class AllJobPostsComponent implements OnInit {
       if (data.data.length > 0) {
         this.filteredJobPosts = data.data;
         this.allJobPost = data.data;
+        console.log(data);
         this.sortByDate();
       }
     });

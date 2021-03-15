@@ -132,7 +132,7 @@ export class AddJobPostComponent implements OnInit {
           skills: this.skillArray,
           details: this.jobDetailsArray,
           aboutUs: this.aboutUs,
-          verified: false
+          verified: this.jobPost ? this.jobPost.status === 'approved' : false
         }
       };
       if (!this.jobPost) {
