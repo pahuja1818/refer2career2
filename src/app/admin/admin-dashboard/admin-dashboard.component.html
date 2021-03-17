@@ -1,31 +1,35 @@
 <ion-app>
-    <ion-menu contentId="main-content" class="custom" type="overlay">
-      <ion-content>
-        <div class="menu-header-bg vertical-center" style="text-align: center;">
-          <img src="../../../assets/logdado.png" class="img-fluid mx-auto pt-2 pr-2" style="width: 150px; height: 100px;" alt="logo">
-        </div>
-        <ion-list class="menu-items" lines="none">
-          <ion-item routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggle()"
-            [routerLinkActiveOptions]="{exact: true}">
-            <ion-icon name="grid" routerLinkActive='icon-active'></ion-icon>Dashboard
-          </ion-item>
-          <ion-item routerLink="/admin/profile" routerLinkActive="active" (click)="toggle()">
-            <ion-icon name="person" routerLinkActive='icon-active'></ion-icon>My Profile
-          </ion-item>
-          <ion-item routerLink="/admin/organizations" routerLinkActive="active" (click)="toggle()">
-            <ion-icon name="business" routerLinkActive='icon-active'></ion-icon>Organizations
-          </ion-item>
-          <ion-item routerLink="/admin/jobs" routerLinkActive='active' (click)="toggle()">
-            <ion-icon name="briefcase" routerLinkActive='icon-active'></ion-icon>Job Posts
-          </ion-item>
-          <ion-item (click)="openModal(logout)" class="text-link">
-            <ion-icon name="log-out"></ion-icon>Logout
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content">
-    </ion-router-outlet>
+  <ion-menu contentId="main-content" class="custom" type="overlay">
+    <ion-content>
+      <div class="menu-header-bg vertical-center" style="text-align: center;">
+        <img src="../../../assets/logdado.png" class="img-fluid mx-auto pt-2 pr-2" style="width: 150px; height: 100px;"
+          alt="logo">
+      </div>
+      <ion-list class="menu-items" lines="none">
+        <ion-item routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggle()"
+          [routerLinkActiveOptions]="{exact: true}">
+          <ion-icon name="grid" routerLinkActive='icon-active'></ion-icon>Dashboard
+        </ion-item>
+        <ion-item routerLink="/admin/profile" routerLinkActive="active" (click)="toggle()">
+          <ion-icon name="person" routerLinkActive='icon-active'></ion-icon>My Profile
+        </ion-item>
+        <ion-item routerLink="/admin/organizations" routerLinkActive="active" (click)="toggle()">
+          <ion-icon name="business" routerLinkActive='icon-active'></ion-icon>Organizations
+        </ion-item>
+        <ion-item routerLink="/admin/applicants" routerLinkActive='active' (click)="toggle()">
+          <ion-icon name="people" routerLinkActive='icon-active'></ion-icon>Applicants
+        </ion-item>
+        <ion-item routerLink="/admin/jobs" routerLinkActive='active' (click)="toggle()">
+          <ion-icon name="briefcase" routerLinkActive='icon-active'></ion-icon>Job Posts
+        </ion-item>
+        <ion-item (click)="openModal(logout)" class="text-link">
+          <ion-icon name="log-out"></ion-icon>Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content">
+  </ion-router-outlet>
 </ion-app>
 
 <ng-template #logout>

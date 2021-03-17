@@ -42,15 +42,13 @@
                 === 'rejected' ?
                 'Rejected' : 'Approved'}}</span>
             </td>
-            <td class="vertical-center">
-              <span (click)="seeDetails(post._id)" class="p-1 px-3 mr-5 btn btn-primary bg-violet"
+            <td class="vertical-center justify-content-center">
+              <span (click)="seeDetails(post._id)" class="p-1 px-3 btn btn-primary bg-violet"
                 style="border-radius: 10px;">View Job Post</span>
-              <div class="d-flex justify-content-end w-100">
-                <span *ngIf="!post.status" (click)="openApproveModal(post._id, approve)"
-                  class="p-1 mr-2 px-3 btn btn-success" style="border-radius: 10px;">Approve</span>
-                <span (click)="openRejectModal(post._id, reject)" *ngIf="!post.status"
-                  class="p-1 px-3 mr-2 btn btn-danger" style="border-radius: 10px;">Reject</span>
-              </div>
+              <span *ngIf="!post.status" (click)="openApproveModal(post._id, approve)"
+                class="p-1 mr-2 ml-3 px-3 btn btn-success" style="border-radius: 10px;">Approve</span>
+              <span (click)="openRejectModal(post._id, reject)" *ngIf="!post.status"
+                class="p-1 px-3 mr-2 btn btn-danger" style="border-radius: 10px;">Reject</span>
             </td>
           </tr>
         </tbody>

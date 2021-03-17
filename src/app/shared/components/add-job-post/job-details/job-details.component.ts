@@ -36,6 +36,7 @@ export class JobDetailsComponent implements OnInit {
     this.role = JSON.parse(window.atob(window.localStorage.getItem('id'))).role;
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
+    this.jobPost.jobPost.details = [];
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.jobPostService.myApplications.subscribe((data: any) => {

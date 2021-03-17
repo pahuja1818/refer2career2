@@ -47,8 +47,8 @@ export class MyApplicationsComponent implements OnInit {
         if (index === data.length - 1) {
           this.isServiceRunning = false;
           this.allAppliedPosts.sort((a: any, b: any) => {
-            let dateA = new Date(a.appliedDate).getTime();
-            let dateB = new Date(b.appliedDate).getTime();
+            const dateA = new Date(a.appliedDate).getTime();
+            const dateB = new Date(b.appliedDate).getTime();
             return dateB - dateA;
           }
           );

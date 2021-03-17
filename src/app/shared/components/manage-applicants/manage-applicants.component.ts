@@ -37,8 +37,8 @@ export class ManageApplicantsComponent implements OnInit {
           const d: any = new Date(b.jobPost.createdAt);
           return d - c;
         });
-        this.isServiceRunning = false;
       }
+      this.isServiceRunning = false;
     });
   }
 

@@ -1,3 +1,4 @@
+import { ApplicantsComponent } from './../employer/applicants/applicants.component';
 import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,7 +23,8 @@ import { AddOrganizationComponent } from './add-organization/add-organization.co
     EmployerPageComponent,
     JobPostsComponent,
     AddOrganizationComponent,
-    JobDetailsAdminComponent
+    JobDetailsAdminComponent,
+    ApplicantsComponent
   ],
   imports: [
     CommonModule,

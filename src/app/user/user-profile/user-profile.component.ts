@@ -277,8 +277,9 @@ export class UserProfileComponent implements OnInit {
     this.skillName.markAsTouched();
     if (this.skillName.value) {
       this.isServiceRunning = true;
-      if (!this.skillsArray.includes(this.skillName.value))
+      if (!this.skillsArray.includes(this.skillName.value)) {
         this.skillsArray.push(this.skillName.value);
+      }
       this.skillName.reset();
       const dbOpeartion: DbOperation = {
         collection: 'users',
