@@ -41,6 +41,7 @@ export class MyApplicationsComponent implements OnInit {
           jobPost.appliedDate = post.date;
           jobPost.status = post.status;
           jobPost.jobPost = jobPost.data.jobPost;
+          jobPost.referReward = jobPost.data.referReward;
           this.allAppliedPosts.push(jobPost);
         }
         if (index === data.length - 1) {

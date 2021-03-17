@@ -27,11 +27,16 @@
           <span class="material-icons text-grey text-md bold"
             [ngClass]="isSortByExpanded === true? 'rotate-right': 'rotate-left'">expand_more</span>
         </div>
-        <div *ngIf="isSortByExpanded" class="my-2">
-          <span style="border-radius: 20px;" [ngClass]="isSortBy === true ? 'sort-by-selected' : 'sort-by-not-selected'"
-            class="px-3 py-1 m-3">Relevance</span>
-          <span style="border-radius: 20px;"
-            [ngClass]="isSortBy === false ? 'sort-by-selected' : 'sort-by-not-selected'" class="px-3 py-1">Date</span>
+        <div *ngIf="isSortByExpanded" class="my-2 row vertical-center justify-content-center">
+          <div class="m-2">
+            <span style="border-radius: 20px;"
+              [ngClass]="isSortBy === true ? 'sort-by-selected' : 'sort-by-not-selected'" class="px-3 py-1"
+              (click)="isSortBy = true">Relevance</span>
+          </div>
+          <div class="m-2">
+            <span style="border-radius: 20px;" (click)="isSortBy = false"
+              [ngClass]="isSortBy === false ? 'sort-by-selected' : 'sort-by-not-selected'" class="px-3 py-1">Date</span>
+          </div>
         </div>
       </div>
       <div class="border-12 text-link m-2 mr-2 w-100 bg-white overlay p-3">
@@ -42,17 +47,45 @@
         </div>
         <div *ngIf="isExperienceExpanded" class="my-2">
           <label class="text-sm text-grey">Minimum Experience req. (in years)</label>
-          <input type="number" class="form-control" [(ngModel)]="refine.minExp">
+          <mat-slider class="w-100" [(ngModel)]="refine.minExp" thumbLabel [displayWith]="formatLabel" tickInterval="1"
+            min="0" max="10">
+          </mat-slider>
         </div>
       </div>
       <div class="border-12 text-link m-2 mr-2 w-100 bg-white overlay p-3">
         <div class="vertical-center justify-content-between" (click)="isPartTimeExpanded = !isPartTimeExpanded">
-          <span class="text-ssmd">Part Time</span>
+          <span class="text-ssmd">Job Type</span>
           <span class="material-icons text-grey text-md bold"
-            [ngClass]="isPartTimeExpanded === true? 'rotate-right': 'rotate-left'">expand_more</span>
+            [ngClass]="isPartTimeExpanded === true? 'rotate-right': 'rotate-left'"> expand_more</span>
         </div>
-        <div *ngIf="isPartTimeExpanded" class="my-2">
-          <mat-slide-toggle [(ngModel)]="refine.partTime"></mat-slide-toggle>
+        <div *ngIf="isPartTimeExpanded" class="my-2 p-2">
+          <div class="mb-3 vertical-center">
+            <span class="text-sm semi-bold text-grey mr-2">Part
+              time</span>
+            <mat-slide-toggle [(ngModel)]="refine.partTime"></mat-slide-toggle>
+          </div>
+          <div class="mb-2 vertical-center">
+            <span class="text-sm semi-bold text-grey mr-2">Full
+              time</span>
+            <mat-slide-toggle [(ngModel)]="refine.fullTime"></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="border-12 text-link m-2 mr-2 w-100 bg-white overlay p-3">
+        <div class="vertical-center justify-content-between" (click)="isJobCategoryExpanded = !isJobCategoryExpanded">
+          <span class="text-ssmd">Job Category</span>
+          <span class="material-icons text-grey text-md bold"
+            [ngClass]="isJobCategoryExpanded === true? 'rotate-right': 'rotate-left'"> expand_more</span>
+        </div>
+        <div *ngIf="isJobCategoryExpanded" class="my-2 p-2">
+          <div class="mb-3 vertical-center">
+            <span class="text-sm semi-bold text-grey mr-2">Jobs</span>
+            <mat-slide-toggle [(ngModel)]="refine.jobs"></mat-slide-toggle>
+          </div>
+          <div class="mb-2 vertical-center">
+            <span class="text-sm semi-bold text-grey mr-2">Internships</span>
+            <mat-slide-toggle [(ngModel)]="refine.internships"></mat-slide-toggle>
+          </div>
         </div>
       </div>
       <div class="border-12 text-link m-2 mr-2 w-100 bg-white overlay p-3">
@@ -82,7 +115,7 @@
       </div>
       <div class="d-flex justify-content-center">
         <button *ngIf="isChanged()"
-          class="overlay btn btn-primary position-fixed my-2 mx-auto text-sm bg-violet px-3 py-1"
+          class="overlay btn btn-primary position-fixed my-2 mb-4 mx-auto text-smd bg-violet px-5 py-2"
           style="border-radius: 30px; bottom: 0" (click)="refineJobs()">Refine
           Jobs</button>
       </div>
@@ -98,43 +131,51 @@
             <div class="text-left">
               <span class="text-dark text-ssmd semi-bold d-block">{{jobPost.jobPost.title}}</span>
               <span class="semi-bold d-block w-100 text-left"
-                style="color: rgb(61, 29, 88);">{{jobPost.jobPost.companyName}}</span>
+                style="color: rgb(93, 35, 141);">{{jobPost.jobPost.companyName}}</span>
             </div>
-            <img class="card-img-top rounded-circle" *ngIf="jobPost.jobPost.companyLogo"
-              src="{{jobPost.jobPost.companyLogo}}" style="height: 80px; width: 80px;">
+            <img class="" *ngIf="jobPost.jobPost.companyLogo" src="{{jobPost.jobPost.companyLogo}}"
+              style="max-height: 70px; max-width: 160px; min-height: 70px; min-width: 70px;">
           </div>
           <div class="row">
             <div *ngIf="jobPost.jobPost.jobType === 'In office'"
               class="col-sm-6 my-2 vertical-center justify-content-start">
-              <span class="material-icons-outlined text-ssmd text-grey mr-2">location_on</span>
+              <span class="material-icons-outlined text-md text-grey mr-2 text-violet">location_on</span>
               <span class="text-grey semi-bold text-smd  d-inline">Location : </span>
               <span class="text-grey text-smd">&nbsp;{{jobPost.jobPost.location}}</span>
             </div>
+            <div *ngIf="jobPost.jobPost.jobType !== 'In office'"
+              class="col-sm-6 my-2 vertical-center justify-content-start">
+              <span class="material-icons-outlined text-md text-grey mr-2 text-violet">home</span>
+              <span class="text-grey semi-bold text-smd  d-inline">Work from home</span>
+            </div>
             <div class="col-sm-6 vertical-center" *ngIf="jobPost.jobPost.skills.length > 0">
-              <span class="material-icons-outlined text-grey mr-2 text-ssmd">edit</span>
+              <span class="material-icons-outlined text-grey mr-2 text-md text-violet">psychology</span>
               <span class="text-grey semi-bold text-smd  d-inline"></span>
-              <span class="text-grey text-smd text-wrap">{{jobPost.jobPost.skills[0].skillName +
-                jobPost.jobPost.skills.length > 1 ? ' , ' +
+              <span class="text-grey text-smd text-wrap">{{jobPost.jobPost.skills[0].skillName }}
+                {{ jobPost.jobPost.skills.length > 1 ? ' , ' +
                 jobPost.jobPost.skills[1].skillName : ''}}</span>
             </div>
           </div>
           <div class="my-2 vertical-center justify-content-start">
-            <span class="material-icons-outlined text-grey mr-2">payments</span>
-            <span class="text-grey semi-bold d-inline">{{jobPost.jobPost.jobInternship === 'Job' ? 'Salary' :
+            <span class="material-icons-outlined text-grey mr-2 text-violet">payments</span>
+            <span class="text-grey semi-bold d-inline">{{jobPost.jobPost.jobInternship === 'Job' ? 'Salary'
+              :
               'Stipend'}}
               :
             </span>
             <span class="text-grey">&nbsp; &#8377; {{jobPost.jobPost.salary}} {{jobPost.jobPost.salaryType}}</span>
           </div>
           <div class="my-2 vertical-center">
-            <span class="material-icons-outlined text-grey text-ssmd mr-2">work</span>
+            <span class="material-icons-outlined text-grey text-ssmd mr-2 text-violet">work</span>
             <span class="text-grey semi-bold text-smd  d-inline">Experience : </span>
-            <span class="text-grey text-smd">&nbsp; {{ jobPost.jobPost ? getExperience(jobPost.jobPost.experience) : ''
+            <span class="text-grey text-smd">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
               }}
               years</span>
           </div>
-          <div class="d-flex justify-content-end mt-3">
-            <span class="text-grey text-sm text-break">Posted on &nbsp; {{jobPost.jobPost.createdAt | date: 'dd
+          <div class="row justify-content-between vertical-center mt-3">
+            <span class="text-sm text-grey semi-bold col-auto">Refer reward: <span
+                class="badge badge-primary text-sm bg-violet">₹{{jobPost.referReward}}</span></span>
+            <span class="text-grey text-sm text-break col-auto">Posted on&nbsp;{{jobPost.jobPost.createdAt | date: 'dd
               MMMM
               yyyy'}}</span>
           </div>

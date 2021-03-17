@@ -31,7 +31,14 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
+.login-bg{
+  background-image: url(./assets/login-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  }
 
 .w-80{
     width: 80% !important;
@@ -320,7 +327,7 @@
   }
 
   .text-violet{
-    color:rgb(113, 30, 190) !important;
+    color:rgb(79, 90, 187) !important;
   }
 
   .text-dark-blue{
@@ -359,9 +366,13 @@
     transition-duration:0.5s;
   }
 
+  .border-violet{
+    border: solid 1px rgb(79, 90, 187);
+  }
+
 
   html, body { height: 100%; }
-  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f8f8f8; }
+  body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #f8f8f8; }
   
   @keyframes fall {
     from {

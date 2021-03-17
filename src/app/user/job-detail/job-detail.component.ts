@@ -49,6 +49,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     this.isServiceRunning = true;
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
+    this.jobPost.jobPost.details = [];
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.jobId = params.id;

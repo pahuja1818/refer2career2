@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
 
   isBasiDetailEditing = false;
   skillName = new FormControl(null, Validators.required);
-  skillsArray: any[] = [];
+  skillsArray: string[] = [];
 
   isServiceRunning = false;
 
@@ -277,7 +277,8 @@ export class UserProfileComponent implements OnInit {
     this.skillName.markAsTouched();
     if (this.skillName.value) {
       this.isServiceRunning = true;
-      this.skillsArray.push(this.skillName.value);
+      if (!this.skillsArray.includes(this.skillName.value))
+        this.skillsArray.push(this.skillName.value);
       this.skillName.reset();
       const dbOpeartion: DbOperation = {
         collection: 'users',

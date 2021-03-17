@@ -27,6 +27,7 @@ export class AllJobPostsComponent implements OnInit {
   isSortByExpanded = false;
   isLocationExpanded = false;
   isPartTimeExpanded = false;
+  isJobCategoryExpanded = false;
   isRemoteExpanded = false;
   isExperienceExpanded = false;
 
@@ -41,6 +42,9 @@ export class AllJobPostsComponent implements OnInit {
 
   refineInitial: any = {
     partTime: false,
+    fullTime: false,
+    jobs: false,
+    internships: false,
     remote: false,
     minExp: 0,
     location: []
@@ -48,6 +52,9 @@ export class AllJobPostsComponent implements OnInit {
 
   refine: any = {
     partTime: false,
+    fullTime: false,
+    jobs: false,
+    internships: false,
     remote: false,
     minExp: 0,
     location: []
@@ -85,7 +92,7 @@ export class AllJobPostsComponent implements OnInit {
       if (data.data.length > 0) {
         this.filteredJobPosts = data.data;
         this.allJobPost = data.data;
-        console.log(data);
+        console.log(this.allJobPost);
         this.sortByDate();
       }
     });
@@ -155,7 +162,7 @@ export class AllJobPostsComponent implements OnInit {
   }
 
   getExperience(value: number) {
-    return `${value} - ${value + 1}`;
+    return `${value}`;
   }
 
   getStartDate(date: any) {
@@ -181,8 +188,23 @@ export class AllJobPostsComponent implements OnInit {
       collection: 'jobposts',
       query: { 'jobPost.verified': true },
     };
-    if (this.refine.partTime) {
+    if (this.refine.partTime && this.refine.fullTime) {
+      //
+    }
+    else if (this.refine.partTime) {
       dbOpeartion.query['jobPost.partTime'] = this.refine.partTime;
+    }
+    else if (this.refine.fullTime) {
+      dbOpeartion.query['jobPost.partTime'] = false;
+    }
+    if (this.refine.jobs && this.refine.internships) {
+      //
+    }
+    else if (this.refine.jobs) {
+      dbOpeartion.query['jobPost.jobInternship'] = 'Job';
+    }
+    else if (this.refine.internships) {
+      dbOpeartion.query['jobPost.jobInternship'] = 'Internship';
     }
 
     if (this.refine.remote) {
@@ -203,6 +225,9 @@ export class AllJobPostsComponent implements OnInit {
         this.allJobPost = data.data;
         this.refineInitial.sortBy = this.refine.sortBy,
           this.refineInitial.partTime = this.refine.partTime,
+          this.refineInitial.fullTime = this.refine.fullTime,
+          this.refineInitial.jobs = this.refine.jobs,
+          this.refineInitial.internships = this.refine.internships,
           this.refineInitial.remote = this.refine.remote,
           this.refineInitial.minExp = this.refine.minExp,
           this.refineInitial.location = this.refine.location;
