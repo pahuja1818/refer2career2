@@ -56,7 +56,10 @@ export class SigninComponent implements OnInit {
     private modalService: BsModalService,
   ) { }
 
+  isScreenBig = false;
+
   ngOnInit() {
+    if (window.screen.width > 1150) this.isScreenBig = true;
     this.initializeSignupForm();
     this.loginForm = new FormGroup({
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
@@ -97,14 +100,20 @@ export class SigninComponent implements OnInit {
   }
 
   registrationVisible() {
-    this.hideAll();
-    this.initializeSignupForm();
-    this.isRegistration = true;
+    this.flip();
+    setTimeout(() => {
+      this.hideAll();
+      this.initializeSignupForm();
+      this.isRegistration = true;
+    }, 300);
   }
 
   loginVisible() {
-    this.hideAll();
-    this.isLogin = true;
+    this.flip();
+    setTimeout(() => {
+      this.hideAll();
+      this.isLogin = true;
+    }, 300);
   }
 
   hideAll() {
@@ -274,7 +283,13 @@ export class SigninComponent implements OnInit {
 
   openEmployerModal() {
     this.modalRef.hide();
-    this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
+    this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'full-modal', ignoreBackdropClick: true, animated: true });
+  }
+
+
+  flip() {
+    var element = document.getElementById("cardToFlip");
+    element.classList.toggle("flipped");
   }
 
 }

@@ -1,152 +1,203 @@
-<div class="vh-100 w-100 vertical-center login-bg" style="background-color: rgb(224, 223, 223);">
-  <div class="w-100 row p-0 m-0 justify-content-center">
-    <div class="col-sm-5 p-2 " style="max-height: 90vh !important; overflow: auto;">
-      <div class="w-100 mx-auto m-2 p-2 box-shadow p-0 bg-white" style="border-radius: 7px !important;">
-        <div class="">
-          <div class="d-flex justify-content-center mb-2">
-            <img *ngIf="!isVerifyOTP"
-              src="{{ isLogin?'../../../assets/login2.jpg': isRegistration ?'../../../assets/register.jpg': '../../../assets/forgotpassword.jpg'}}"
-              class="img-fluid" alt="" style="height: 140px; width: 180px;">
+<div class="vw-100 vh-100 login-bg position-absolute">
+  <div class="layer"></div>
+  ...
+</div>
+<div class="flipCard w-100">
+  <div class="card vh-100 w-100 vertical-center bg-transparent" id="cardToFlip">
+    <div class="side front w-100 row p-0 m-0 vertical-center justify-content-center">
+      <div class="col-sm-9 p-2" style="height: 86vh !important;">
+        <div class="w-100 row vertical-center h-100 mx-auto bg-white border-7">
+          <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-left-7 vertical-center">
+            <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">Welcome Back!!</span>
+              <span class="text-ssmd d-block text-center">
+                To keep connected with us please signin with your credentials.
+              </span></span>
           </div>
-        </div>
-        <div class="vertical-center w-100 justify-content-center mb-2">
-          <span class="material-icons text-grey semi-bold text-md mr-2">{{ isLogin?'login': isRegistration
-            ?'person_add_alt_1': isForgotPassword ? 'cached': isResetPassword ? 'autorenew' : ''}}</span>
-          <span class="text-grey text-ssmd semi-bold">{{ isLogin?'Login': isRegistration ?'Registration':
-            isForgotPassword ?
-            'Forgot Password' : isResetPassword ? 'Reset Password' : ''}}</span>
-        </div>
-        <form [formGroup]="loginForm" class="p-3" *ngIf="isLogin">
-          <alert type="success" class="text-sm m-2" *ngIf="isVerified">
-            Now you can login with your credentials.
-          </alert>
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
-            <input matInput class="text-sm m-0" type="email" placeholder="Enter email" formControlName='emailLogin'>
-            <mat-error class="text-xs">Enter valid email*</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
-            <input matInput class="text-sm m-0" [type]="!isPasswordVisible ? 'password': 'text'"
-              placeholder="Enter password" formControlName='passwordLogin'>
-            <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
-              class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
-            </span>
-            <mat-error class="text-xs">Password required*</mat-error>
-          </mat-form-field>
-          <div class="text-right mb-2">
-            <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
-          </div>
-          <div class="d-flex justify-content-center">
-            <button *ngIf="!isServiceRunning" class="btn btn-primary p-1 px-4" style="border-radius: 20px;"
-              (click)="login()">Login</button>
-          </div>
-        </form>
-        <div class="w-100 text-center" *ngIf="isLogin">
-          <a class="text-sm text-link semi-bold text-warning text-yellow" (click)="forgotPasswordVisible()">Forgot
-            Password</a>
-          <span class="text-grey text-md mx-2">|</span>
-          <span class="text-grey text-sm mr-1">Not registered yet?</span>
-          <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)="registrationVisible()">Create an
-            Account</a>
-        </div>
-        <div class="w-100 text-center pt-3">
-          <a class="text-primary text-violet text-link" *ngIf="isLogin" (click)="openEmployerModal()">Sign-in as
-            Employer</a>
-        </div>
-        <form class="p-3" [formGroup]="signupForm" *ngIf="isRegistration">
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label class="semi-bold text-grey text-smd m-0">Full name</mat-label>
-            <input matInput class="text-sm m-0" placeholder="Enter name" formControlName='name'>
-            <mat-error class="text-xs">Enter valid name*</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
-            <input matInput class="text-sm m-0" type="email" placeholder="Enter email" formControlName='email'>
-            <mat-error class="text-xs">Enter valid email*</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
-            <input matInput class="text-sm m-0" [(ngModel)]='password' [type]="!isPasswordVisible ? 'password': 'text'"
-              placeholder="Enter password" formControlName='password'>
-            <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
-              class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
-            </span>
-            <mat-error class="text-xs">Password must be greater than 6 digits*</mat-error>
-          </mat-form-field>
-          <div class="text-right mb-2">
-            <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
-          </div>
-          <div class="d-flex justify-content-center">
-            <button *ngIf="!isServiceRunning" class="btn btn-primary p-1 px-4" style="border-radius: 20px;"
-              (click)="registerCandidate()">Register</button>
-          </div>
-        </form>
-        <div class="w-100 text-center" *ngIf="isRegistration">
-          <span class="text-grey text-sm mr-1">Already a member? </span>
-          <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)='loginVisible()'>Login</a>
-        </div>
-        <div *ngIf="isVerifyOTP" class="w-100">
-          <alert type="success" class="text-sm">
-            We have sent a 6 digit passcode at {{ signupForm.get('email').value }} {{email.value}} kindly enter the code
-            here.
-          </alert>
-          <div class="p-3">
-            <label class="semi-bold mt-2">Enter a 6-digit passcode</label>
-            <ng-otp-input name="otp" ngDefaultControl [(ngModel)]='otp' (onInputChange)="onOtpChange($event)"
-              [config]="{length:6, allowNumbersOnly:true, inputClass:'mb-2'	}">
-            </ng-otp-input>
-            <div class="text-right">
-              <span class="text-sm text-danger" *ngIf="!isOTPCorrect"><b>Invalid code</b></span>
+          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'">
+            <div class="">
+              <div class="d-flex justify-content-center mb-4">
+                <img *ngIf="!isVerifyOTP"
+                  src="{{ isLogin?'../../../assets/login2.jpg': isRegistration ?'../../../assets/register.jpg': '../../../assets/forgotpassword.jpg'}}"
+                  class="img-fluid" alt="" style="height: 110px; width: 140px;">
+              </div>
             </div>
-            <button *ngIf="!isServiceRunning" (click)="verifyOTP()"
-              class="btn btn-primary d-block p-1 px-4 text-sm">Verify</button>
-            <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
-            <div class="mt-5">
-              <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
-                  class="text-secondary">Resend Code </span> 00 :
-                {{timer > 9 ? timer : '0'+timer}}</a>
-              <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2" *ngIf='timer <= 0' (click)="resendOTP()">Resend Code</a>
+            <div class="vertical-center w-100 justify-content-center mb-2">
+              <span class="text-primary text-md semi-bold">{{ isLogin?'Signin to Refer2Career': isRegistration
+                ?'Registration':
+                isForgotPassword ?
+                'Forgot Password' : isResetPassword ? 'Reset Password' : ''}}</span>
+            </div>
+            <form [formGroup]="loginForm" class="p-3 row justify-content-center" *ngIf="isLogin">
+              <alert type="success" class="text-sm m-2" *ngIf="isVerified">
+                Now you can login with your credentials.
+              </alert>
+              <mat-form-field appearance="" class="p-0 mb-2 w-100 col-sm-7 mb-3 mat-form-field">
+                <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
+                <input matInput class="text-sm m-0" type="email" name="email" placeholder="Enter email"
+                  formControlName='emailLogin'>
+                <mat-error class="text-xs">Enter valid email*</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="" class="p-0 w-100 mb-3 col-sm-7 mat-form-field vertical-center">
+                <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
+                <input matInput class="m-0" [type]="!isPasswordVisible ? 'password': 'text'"
+                  placeholder="Enter password" name="password" formControlName='passwordLogin'>
+                <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+                  class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+                </span>
+                <mat-error class="text-xs">Password required*</mat-error>
+              </mat-form-field>
+              <div class="text-right mb-2">
+                <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
+              </div>
+              <div class="col-sm-12 d-flex justify-content-center">
+                <button *ngIf="!isServiceRunning" class="btn bg-violet btn-primary p-1 px-4"
+                  style="border-radius: 20px;" (click)="login()">Signin</button>
+              </div>
+            </form>
+            <div class="w-100 text-center" *ngIf="isLogin">
+              <a class="text-sm text-link semi-bold text-primary" (click)="forgotPasswordVisible()">Forgot
+                Password</a>
+              <span class="text-grey text-md mx-2">|</span>
+              <span class="text-grey text-sm mr-1">Not registered yet?</span>
+              <a class="text-sm text-link semi-bold text-primary mr-2" (click)="registrationVisible()">Create
+                an
+                Account</a>
+            </div>
+            <div class="w-100 text-center pt-3">
+              <a class="text-primary text-link semi-bold" *ngIf="isLogin" (click)="openEmployerModal()">Sign-in as
+                Employer</a>
+            </div>
+            <div *ngIf="isVerifyOTP" class="w-100">
+              <alert type="success" class="text-sm">
+                We have sent a 6 digit passcode at {{ signupForm.get('email').value }} {{email.value}} kindly enter the
+                code
+                here.
+              </alert>
+              <div class="p-3">
+                <label class="semi-bold mt-2">Enter a 6-digit passcode</label>
+                <ng-otp-input name="otp" ngDefaultControl [(ngModel)]='otp' (onInputChange)="onOtpChange($event)"
+                  [config]="{length:6, allowNumbersOnly:true, inputClass:'mb-2'	}">
+                </ng-otp-input>
+                <div class="text-right">
+                  <span class="text-sm text-danger" *ngIf="!isOTPCorrect"><b>Invalid code</b></span>
+                </div>
+                <button *ngIf="!isServiceRunning" (click)="verifyOTP()"
+                  class="btn btn-primary d-block p-1 px-4 text-sm">Verify</button>
+                <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
+                <div class="mt-5">
+                  <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
+                      class="text-secondary">Resend Code </span> 00 :
+                    {{timer > 9 ? timer : '0'+timer}}</a>
+                  <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2" *ngIf='timer <= 0'
+                    (click)="resendOTP()">Resend Code</a>
+                </div>
+              </div>
+              <div class="w-100 text-center">
+                <a class="text-warning text-yelllow text-sm text-link" (click)='back()'>{{'<<'}} Back</a>
+              </div>
+            </div>
+            <div class="p-3" *ngIf="isForgotPassword">
+              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="Enter email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">Enter valid email*</mat-error>
+              </mat-form-field>
+              <div class="d-flex justify-content-center mb-5">
+                <button class="w-75 btn btn-primary p-2 text-smd bold"
+                  style="border-radius: 60px; border-color: 0px !important;" (click)="forgotPassword()">Proceed</button>
+              </div>
+            </div>
+            <div class="p-3" *ngIf="isResetPassword">
+              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                <mat-label class="semi-bold text-grey text-smd m-0">New Password</mat-label>
+                <input matInput class="text-sm m-0" [type]="!isPasswordVisible ? 'password': 'text'"
+                  placeholder="Enter password" [formControl]='resetPassword'>
+                <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+                  class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+                </span>
+                <mat-error class="text-xs">Password required*</mat-error>
+              </mat-form-field>
+              <div class="d-flex justify-content-center mb-5">
+                <button class="w-75 btn btn-primary p-2 text-smd bold"
+                  style="border-radius: 60px; border-color: 0px !important;" (click)="restPassword()">Reset</button>
+              </div>
+            </div>
+            <div class="w-100 text-center" *ngIf="isForgotPassword">
+              <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)='loginVisible()'>Login
+                here.</a>
             </div>
           </div>
-          <div class="w-100 text-center">
-            <a class="text-warning text-yelllow text-sm text-link" (click)='back()'>{{'<<'}} Back</a>
-          </div>
-        </div>
-        <div class="p-3" *ngIf="isForgotPassword">
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="Enter email" [formControl]="email" required>
-            <mat-error *ngIf="email.invalid">Enter valid email*</mat-error>
-          </mat-form-field>
-          <div class="d-flex justify-content-center mb-5">
-            <button class="w-75 btn btn-primary p-2 text-smd bold"
-              style="border-radius: 60px; border-color: 0px !important;" (click)="forgotPassword()">Proceed</button>
-          </div>
-        </div>
-        <div class="p-3" *ngIf="isResetPassword">
-          <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-            <mat-label class="semi-bold text-grey text-smd m-0">New Password</mat-label>
-            <input matInput class="text-sm m-0" [type]="!isPasswordVisible ? 'password': 'text'"
-              placeholder="Enter password" [formControl]='resetPassword'>
-            <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
-              class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
-            </span>
-            <mat-error class="text-xs">Password required*</mat-error>
-          </mat-form-field>
-          <div class="d-flex justify-content-center mb-5">
-            <button class="w-75 btn btn-primary p-2 text-smd bold"
-              style="border-radius: 60px; border-color: 0px !important;" (click)="restPassword()">Reset</button>
-          </div>
-        </div>
-        <div class="w-100 text-center" *ngIf="isForgotPassword">
-          <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)='loginVisible()'>Login here.</a>
         </div>
       </div>
     </div>
+    <div class="side back w-100 row p-0 m-0 vertical-center justify-content-center">
+      <div class="col-sm-9 p-2" style="height: 86vh !important;">
+        <div class="w-100 row vertical-center h-100 mx-auto bg-white border-7">
+          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'">
+            <div class="">
+              <div class="d-flex justify-content-center mb-4">
+                <img *ngIf="!isVerifyOTP"
+                  src="{{ isLogin?'../../../assets/login2.jpg': isRegistration ?'../../../assets/register.jpg': '../../../assets/forgotpassword.jpg'}}"
+                  class="img-fluid" alt="" style="height: 110px; width: 140px;">
+              </div>
+            </div>
+            <div class="vertical-center w-100 justify-content-center mb-2">
+              <span class="text-violet text-md semi-bold">{{ isLogin?'Signin to Refer2Career': isRegistration
+                ?'Create Account':
+                isForgotPassword ?
+                'Forgot Password' : isResetPassword ? 'Reset Password' : ''}}</span>
+            </div>
+            <form class="p-3 row justify-content-center" [formGroup]="signupForm" *ngIf="isRegistration">
+              <mat-form-field class="p-0 w-100 mat-form-field col-sm-7 mb-3">
+                <mat-label class="semi-bold text-grey text-smd m-0">Full name</mat-label>
+                <input matInput class="text-sm m-0" name="name" placeholder="Enter name" formControlName='name'>
+                <mat-error class="text-xs">Enter valid name*</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="p-0 w-100 mat-form-field col-sm-7 mb-3">
+                <mat-label class="semi-bold text-grey text-smd m-0">E-mail</mat-label>
+                <input matInput class="text-sm m-0" name="email" type="email" placeholder="Enter email"
+                  formControlName='email'>
+                <mat-error class="text-xs">Enter valid email*</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="p-0 w-100 mat-form-field col-sm-7 mb-4">
+                <mat-label class="semi-bold text-grey text-smd m-0">Password</mat-label>
+                <input matInput class="text-sm m-0" name="password" [type]="!isPasswordVisible ? 'password': 'text'"
+                  placeholder="Enter password" formControlName='password'>
+                <span matSuffix (click)="isPasswordVisible = !isPasswordVisible"
+                  class="text-link material-icons text-grey">{{!isPasswordVisible ? 'visibility_off': 'visibility'}}
+                </span>
+                <mat-error class="text-xs">Password must be greater than 6 digits*</mat-error>
+              </mat-form-field>
+              <div class="text-right mb-2">
+                <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
+              </div>
+              <div class="col-sm-12 d-flex justify-content-center mb-3">
+                <button *ngIf="!isServiceRunning" class="btn btn-primary p-1 px-4" style="border-radius: 20px;"
+                  (click)="registerCandidate()">Create Account</button>
+              </div>
+            </form>
+            <div class="w-100 text-center" *ngIf="isRegistration">
+              <span class="text-grey text-sm mr-1">Already a member? </span>
+              <a class="text-sm text-link semi-bold text-primary mr-2" (click)='loginVisible()'><u>Login here</u></a>
+            </div>
+          </div>
+          <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-right-7 vertical-center">
+            <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">Hello friend!!</span>
+              <span class="text-ssmd d-block text-center">
+                Enter your personal details and start applying for job.
+              </span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="vh-100 w-100 vertical-center bg-transparent">
+  <div class="w-100 row p-0 m-0 vertical-center justify-content-center">
+
   </div>
 </div>
 <app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

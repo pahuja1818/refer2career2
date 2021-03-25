@@ -13,6 +13,7 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+@import '../node_modules/bootstrap/scss/variables';
 
 @import "~@ionic/angular/css/core.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
@@ -34,11 +35,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
+@import '~bootstrap/scss/bootstrap.scss';
+
+
 .login-bg{
-  background-image: url(./assets/login-bg.jpg);
-  background-position: center;
-  background-size: cover;
-  }
+  position: relative;
+  background-image: url("./assets/login-bg.jpg");
+}
+
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(204, 183, 255);
+    opacity: 0.3;
+}
+
+.bg-transparent{
+  background-color: transparent;
+}
+  
 
 .w-80{
     width: 80% !important;
@@ -347,7 +365,7 @@
   }
 
   .bg-violet{
-    background-color: rgb(140, 151, 245);
+    background-color: rgb(111, 120, 209);
   }
   
 
@@ -670,3 +688,85 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.border-6{
+  border-radius: 6px;
+}
+
+.border-7{
+  border-radius: 7px;
+}
+
+.border-8{
+  border-radius: 8px;
+}
+
+.border-10{
+  border-radius: 10px;
+}
+
+.border-left-7{
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.border-right-7{
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+
+
+
+
+.flipCard {
+  -webkit-perspective: 800;
+  -ms-perspective: 800;
+  -moz-perspective: 800;
+  -o-perspective: 800;
+   position: relative;
+} 
+.flipCard .card.flipped {
+  transform:rotatey(-180deg);
+  -ms-transform:rotatey(-180deg); /* IE 9 */
+  -moz-transform:rotatey(-180deg); /* Firefox */
+  -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
+  -o-transform:rotatey(-180deg); /* Opera */
+}
+.flipCard .card {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 1.3s;
+  -moz-transform-style: preserve-3d;
+  -moz-transition: 1.3s;
+  -ms-transform-style: preserve-3d;
+  -ms-transition: 1.3s;
+  -o-transform-style: preserve-3d;
+  -o-transition: 1.3s;
+  transform-style: preserve-3d;
+  transition: 1.3s;
+}
+.flipCard .card .side {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 2;
+  backface-visibility: hidden;  /* W3C */
+  -webkit-backface-visibility: hidden; /* Safari & Chrome */
+  -moz-backface-visibility: hidden; /* Firefox */
+  -ms-backface-visibility: hidden; /* Internet Explorer */
+  -o-backface-visibility: hidden; /* Opera */
+  overflow: auto;
+}
+.flipCard .card .back {
+  transform:rotatey(-180deg);
+  -ms-transform:rotatey(-180deg); /* IE 9 */
+  -moz-transform:rotatey(-180deg); /* Firefox */
+  -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
+  -o-transform:rotatey(-180deg); /* Opera */
+}
+

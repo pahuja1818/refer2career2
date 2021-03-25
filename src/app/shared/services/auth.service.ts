@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 })
 export class AuthService {
 
+  isScreenBig = false;
+
   currentUser: Subject<any> = new Subject<any>();
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
@@ -15,6 +17,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.getCurrentUser();
+    if(window.screen.width > 1150){
+      this.isScreenBig = true;
+    }
   }
 
   getCurrentUser() {

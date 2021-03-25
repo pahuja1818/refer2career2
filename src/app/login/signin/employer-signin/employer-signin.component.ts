@@ -30,7 +30,10 @@ export class EmployerSigninComponent implements OnInit {
     private modalService: BsModalService,
   ) { }
 
+  isScreenBig = false;
+
   ngOnInit() {
+    if (window.screen.width > 1150) this.isScreenBig = true;
     this.loginForm = new FormGroup({
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
       passwordLogin: new FormControl(null, [Validators.required]),
