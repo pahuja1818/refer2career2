@@ -1,4 +1,3 @@
-import { ApplicantsComponent } from './../employer/applicants/applicants.component';
 import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { EmployerPageComponent } from './employer-page/employer-page.component';
 import { JobPostsComponent } from './job-posts/job-posts.component';
 import { AddOrganizationComponent } from './add-organization/add-organization.component';
+import { ApplicantsComponent } from './applicants/applicants.component';
 
 @NgModule({
   declarations: [

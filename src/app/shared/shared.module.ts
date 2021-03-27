@@ -81,6 +81,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   entryComponents: [
     AddJobPostComponent,
+    ManageApplicantsComponent
   ],
   imports: [
     NgSelectModule,
