@@ -56,6 +56,8 @@ export class ApplicationsComponent implements OnInit {
   confirmModalStatus = 'Shortlisted';
   curentUserId: any;
 
+  allReferedProfiles: any = [];
+
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       if (params.jobId) {
@@ -147,8 +149,6 @@ export class ApplicationsComponent implements OnInit {
       }
     });
   }
-
-  allReferedProfiles: any = []
 
   getReferedProfiles() {
     this.isServiceRunning = true;
