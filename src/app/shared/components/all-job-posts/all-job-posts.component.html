@@ -1,19 +1,14 @@
 <div class="w-100 h-100 m-0 p-0" style="border-radius: 7px; background-color: #f8f8f8">
-  <div class="w-100 bg-violet mt-5 no-border-t" style="min-height: 220px !important; border-radius: 30px;">
+  <div class="w-100 bg-violet mt-5 no-border-t" style="min-height: 240px !important; border-radius: 30px;">
   </div>
-  <div class="row justify-content-center px-0 pt-2 mx-0" style="margin-top: -170px;">
-    <mat-form-field appearance="outline" class="p-0 m-3  mb-5 col-sm-5 my-auto mx-auto mat-form-field">
-      <mat-label class="text-white">Search</mat-label>
-      <input type="text" matInput [formControl]="myControl" class="text-white" [matAutocomplete]="auto"
-        placeholder="EX- Java Developer, Management">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-icon matSuffix class="text-white">search</mat-icon>
-      <mat-hint class="text-xs text-white">Search by skills or job title</mat-hint>
-    </mat-form-field>
+  <div class="row justify-content-center px-0 pt-2 mx-0" style="margin-top: -214px;">
+    <div class="col-sm-5 vertical-center justify-content-between bg-white m-3 p-2 px-2" style="border-radius: 40px;">
+      <div class="w-75 vertical-center justify-content-center">
+        <input type="text" placeholder="Search by skills or job title" class="no-border search" style="width: 95%;" [formControl]="myControl">
+      </div>
+      <button class="btn btn-primary px-3 w-25 py-2" style="border-radius: 40px;"
+        (click)="filterJobPosts()">Search</button>
+    </div>
     <div class="col-sm-8 my-2 text-white"><span class="text-white bold text-md">Showing
         {{filteredJobPosts.length}} jobs</span>
     </div>
@@ -21,6 +16,8 @@
     <div class="col-sm-2 m-2 mr-4 p-0">
 
       <div class="border-12 m-2 mr-2 w-100 bg-white overlay text-dark p-3 semi-bold text-ssmd">Refine Jobs</div>
+      <a *ngIf="isFilterAdded()" class="d-block text-center bold text-smd text-violet text-link m-2 my-3"
+        (click)="clearFilter()">Clear Filter</a>
       <div class="border-12 text-link m-2 mr-2 w-100 bg-white overlay p-3">
         <div class="vertical-center justify-content-between" (click)="isSortByExpanded = !isSortByExpanded">
           <span class="text-ssmd">Sort By</span>
@@ -129,9 +126,8 @@
         <div class="card border-12 p-3 btn btn-light">
           <div class="d-flex justify-content-between vertical-center mb-3">
             <div class="text-left">
-              <span class="text-dark text-ssmd semi-bold d-block">{{jobPost.jobPost.title}}</span>
-              <span class="semi-bold d-block w-100 text-left"
-                style="color: rgb(93, 35, 141);">{{jobPost.jobPost.companyName}}</span>
+              <span class="text-slmd text-primary bold d-block">{{jobPost.jobPost.title}}</span>
+              <span class="semi-bold d-block text-primary w-100 text-left">{{jobPost.jobPost.companyName}}</span>
             </div>
             <img class="" *ngIf="jobPost.jobPost.companyLogo" src="{{jobPost.jobPost.companyLogo}}"
               style="max-height: 70px; max-width: 160px; min-height: 70px; min-width: 70px;">

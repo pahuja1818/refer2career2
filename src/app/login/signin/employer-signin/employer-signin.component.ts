@@ -9,6 +9,7 @@ import { timer } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { DbOperation } from 'src/app/shared/models/dbOperation';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class EmployerSigninComponent implements OnInit {
 
   loginForm: FormGroup;
   message = '';
+
+  isLogin = true;
   isServiceRunning = false;
   isPasswordVisible = false;
   constructor(
@@ -63,5 +66,168 @@ export class EmployerSigninComponent implements OnInit {
         });
     }
   }
+
+  otp = '';
+  isOTPCorrect = true;
+  timer: number;
+  isVerified = false;
+
+  isForgotPassOTP = false;
+
+  isResetPassword = false;
+
+
+  role = UserRole;
+  isVerifyOTP = false;
+  isRegistration = false;
+  isForgotPassword = false;
+  isConfirmPasswordVisible = false;
+  signupForm: FormGroup;
+  password = '';
+  email = new FormControl('', [Validators.required, Validators.email]);
+  resetPassword = new FormControl('', [Validators.required, Validators.minLength(7)]);
+
+  isPasswordReset = false;
+
+
+  resendOTP() {
+    this.isServiceRunning = true;
+    this.authService.getOTP({ email: this.signupForm.get('email').value }).subscribe((data: any) => {
+      if (data.data === true) {
+        this.toast.showToast('Passcode Sent Successfully!');
+        let counter = 30;
+        timer(1000, 1000)
+          .pipe(
+            takeWhile(() => counter > 0),
+            tap(() => counter--)
+          )
+          .subscribe(() => {
+            this.timer = counter;
+          });
+        this.isServiceRunning = false;
+      }
+    });
+  }
+
+  isValidOTP() {
+    return this.otp.length === 6;
+  }
+
+  onOtpChange($event) {
+    this.otp = $event;
+  }
+
+  forgotPasswordVisible() {
+    this.hideAll();
+    this.isForgotPassword = true;
+  }
+
+  loginVisible() {
+    setTimeout(() => {
+      this.hideAll();
+      this.isLogin = true;
+    }, 300);
+  }
+
+  showLogin() {
+    this.hideAll();
+    this.isLogin = true;
+  }
+
+  hideAll() {
+    this.isResetPassword = false;
+    this.isLogin = false;
+    this.isRegistration = false;
+    this.isForgotPassword = false;
+    this.isVerifyOTP = false;
+    this.isPasswordReset = false;
+    this.message = '';
+  }
+
+
+  verifyOTP() {
+    this.isServiceRunning = true;
+    if (this.isForgotPassOTP) {
+      const data = {
+        email: this.email.value,
+        otp: this.otp
+      };
+      this.authService.verify(data).subscribe((res: any) => {
+        if (res.data === true) {
+          this.isVerified = true;
+          this.hideAll();
+          this.isResetPassword = true;
+        }
+        else { this.isOTPCorrect = false; }
+        this.isServiceRunning = false;
+      });
+    }
+    else {
+      const data = {
+        email: this.signupForm.get('email').value,
+        otp: this.otp
+      };
+      this.authService.verifyOTP(data).then((res: any) => {
+        if (res.data === true) {
+          this.isVerified = true;
+          this.hideAll();
+          this.isLogin = true;
+        }
+        else { this.isOTPCorrect = true; }
+        this.isServiceRunning = false;
+      });
+    }
+  }
+
+  back() {
+    this.hideAll();
+    this.isLogin = true;
+  }
+
+
+  forgotPassword() {
+    if (this.email.valid) {
+      this.isServiceRunning = true;
+      this.authService.getOTP({ email: this.email.value }).subscribe((data: any) => {
+        console.log(data.data);
+        if (data.data === true) {
+          this.hideAll();
+          this.isVerifyOTP = true;
+          let counter = 30;
+          timer(1000, 1000)
+            .pipe(
+              takeWhile(() => counter > 0),
+              tap(() => counter--)
+            )
+            .subscribe(() => {
+              this.timer = counter;
+            });
+          this.isForgotPassOTP = true;
+        }
+        this.isServiceRunning = false;
+      });
+    }
+  }
+
+  restPassword() {
+    this.resetPassword.markAsTouched();
+    console.log('yay');
+    if (this.resetPassword.value) {
+      const dbopeartion: DbOperation = {
+        collection: 'users',
+        data: { password: this.resetPassword.value },
+        query: { email: this.email.value }
+      };
+      this.authService.update(dbopeartion).then((data: any) => {
+        if (data.data === true) {
+          this.hideAll();
+          this.toast.showToast('Password Reseted!');
+          this.isLogin = true;
+          this.isServiceRunning = false;
+        }
+      });
+    }
+  }
+
 
 }

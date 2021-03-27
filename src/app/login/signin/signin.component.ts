@@ -60,6 +60,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     if (window.screen.width > 1150) this.isScreenBig = true;
+    else this.isScreenBig = false;
     this.initializeSignupForm();
     this.loginForm = new FormGroup({
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
@@ -116,6 +117,11 @@ export class SigninComponent implements OnInit {
     }, 300);
   }
 
+  showLogin() {
+    this.hideAll();
+    this.isLogin = true;
+  }
+
   hideAll() {
     this.isResetPassword = false;
     this.isLogin = false;
@@ -150,7 +156,6 @@ export class SigninComponent implements OnInit {
         },
       };
       this.authService.registerCandidate(candidate).subscribe((data: any) => {
-        console.log('yes');
         if (data.error) {
           this.message = data.error;
         }
@@ -198,7 +203,7 @@ export class SigninComponent implements OnInit {
         if (res.data === true) {
           this.isVerified = true;
           this.hideAll();
-          this.isLogin = true;
+          this.loginVisible();
         }
         else { this.isOTPCorrect = true; }
         this.isServiceRunning = false;
@@ -208,7 +213,7 @@ export class SigninComponent implements OnInit {
 
   back() {
     this.hideAll();
-    this.isRegistration = true;
+    this.isLogin = true;
   }
 
   login() {

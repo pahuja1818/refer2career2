@@ -345,7 +345,7 @@
   }
 
   .text-violet{
-    color:rgb(79, 90, 187) !important;
+    color:rgb(123, 132, 214) !important;
   }
 
   .text-dark-blue{
@@ -365,7 +365,7 @@
   }
 
   .bg-violet{
-    background-color: rgb(111, 120, 209);
+    background-color: rgb(123, 132, 214);
   }
   
 
@@ -714,6 +714,26 @@ input[type=number] {
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
 }
+
+.no-border{
+  border: 0px !important;
+  color: #000;
+}
+
+.search:focus{
+  border: 0px !important;
+  border-color: #FFFFFF;
+  outline: none;
+}
+
+input::-webkit-input-placeholder {
+  color: #888 !important;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #888 !important;
+}c
+
 
 
 

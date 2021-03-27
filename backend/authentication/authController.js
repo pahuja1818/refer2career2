@@ -195,7 +195,7 @@ module.exports.insertOTP = (req, res) => {
                 from: 'refer2career@gmail.com',
                 to: user.email,
                 subject: 'Verification code for Insta Jobs',
-                html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'
+                html: '<p>Hello ' + `${user.name ? user.name : ''} ` + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'
             };
 
             smtpTransport.sendMail(mailOptions, function (error, info) {

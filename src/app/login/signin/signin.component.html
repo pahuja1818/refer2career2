@@ -8,9 +8,11 @@
       <div class="col-sm-9 p-2" style="height: 86vh !important;">
         <div class="w-100 row vertical-center h-100 mx-auto bg-white border-7">
           <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-left-7 vertical-center">
-            <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">Welcome Back!!</span>
+            <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">{{ !isLogin ? "Don't
+                worry!!": 'Welcome Back!!'}}</span>
               <span class="text-ssmd d-block text-center">
-                To keep connected with us please signin with your credentials.
+                {{ !isLogin ? 'We will help you to reset your account password.' : 'To keep connected with us
+                please signin with your credentials.'}}
               </span></span>
           </div>
           <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'">
@@ -47,7 +49,7 @@
                 </span>
                 <mat-error class="text-xs">Password required*</mat-error>
               </mat-form-field>
-              <div class="text-right mb-2">
+              <div class="text-right mb-2 col-sm-12">
                 <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
               </div>
               <div class="col-sm-12 d-flex justify-content-center">
@@ -68,48 +70,54 @@
               <a class="text-primary text-link semi-bold" *ngIf="isLogin" (click)="openEmployerModal()">Sign-in as
                 Employer</a>
             </div>
-            <div *ngIf="isVerifyOTP" class="w-100">
-              <alert type="success" class="text-sm">
-                We have sent a 6 digit passcode at {{ signupForm.get('email').value }} {{email.value}} kindly enter the
-                code
-                here.
-              </alert>
-              <div class="p-3">
-                <label class="semi-bold mt-2">Enter a 6-digit passcode</label>
-                <ng-otp-input name="otp" ngDefaultControl [(ngModel)]='otp' (onInputChange)="onOtpChange($event)"
-                  [config]="{length:6, allowNumbersOnly:true, inputClass:'mb-2'	}">
-                </ng-otp-input>
-                <div class="text-right">
-                  <span class="text-sm text-danger" *ngIf="!isOTPCorrect"><b>Invalid code</b></span>
+            <div *ngIf="isVerifyOTP" class="w-100 p-3 d-flex justify-content-center">
+              <div class="w-100">
+                <alert type="success" class="text-sm">
+                  We have sent a 6 digit passcode at {{ signupForm.get('email').value }} {{email.value}} kindly enter
+                  the
+                  code
+                  here.
+                </alert>
+                <div class="p-3">
+                  <label class="semi-bold mt-2">Enter a 6-digit passcode</label>
+                  <ng-otp-input name="otp" ngDefaultControl [(ngModel)]='otp' (onInputChange)="onOtpChange($event)"
+                    [config]="{length:6, allowNumbersOnly:true, inputClass:'mb-3'	}">
+                  </ng-otp-input>
+                  <div class="text-right mb-2 d-block">
+                    <span class="text-sm text-danger" *ngIf="!isOTPCorrect"><b>Invalid code</b></span>
+                  </div>
+                  <button *ngIf="!isServiceRunning" (click)="verifyOTP()"
+                    class="btn btn-primary d-block p-1 px-4 text-sm" style="border-radius: 20px;">Verify</button>
+                  <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
+                  <div class="mt-5">
+                    <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
+                        class="text-secondary">Resend Code </span> 00 :
+                      {{timer > 9 ? timer : '0'+timer}}</a>
+                    <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2" *ngIf='timer <= 0'
+                      (click)="resendOTP()">Resend Code</a>
+                  </div>
                 </div>
-                <button *ngIf="!isServiceRunning" (click)="verifyOTP()"
-                  class="btn btn-primary d-block p-1 px-4 text-sm">Verify</button>
-                <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
-                <div class="mt-5">
-                  <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
-                      class="text-secondary">Resend Code </span> 00 :
-                    {{timer > 9 ? timer : '0'+timer}}</a>
-                  <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2" *ngIf='timer <= 0'
-                    (click)="resendOTP()">Resend Code</a>
+                <div class="w-100 text-center">
+                  <a class="text-primary text-sm text-link vertical-center" (click)='back()'><span
+                      class="material-icons mr-2">keyboard_backspace</span>
+                    Back</a>
                 </div>
-              </div>
-              <div class="w-100 text-center">
-                <a class="text-warning text-yelllow text-sm text-link" (click)='back()'>{{'<<'}} Back</a>
               </div>
             </div>
-            <div class="p-3" *ngIf="isForgotPassword">
-              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+            <div class="p-3 row justify-content-center" *ngIf="isForgotPassword">
+              <mat-form-field class="p-0 w-100 mat-form-field col-sm-7 mb-4">
                 <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="Enter email" [formControl]="email" required>
+                <input matInput placeholder="Enter email" name="email" [formControl]="email" required>
                 <mat-error *ngIf="email.invalid">Enter valid email*</mat-error>
               </mat-form-field>
-              <div class="d-flex justify-content-center mb-5">
-                <button class="w-75 btn btn-primary p-2 text-smd bold"
-                  style="border-radius: 60px; border-color: 0px !important;" (click)="forgotPassword()">Proceed</button>
+              <div class="d-flex justify-content-center mb-5 col-sm-12">
+                <button class="btn btn-primary p-1 px-4 text-smd bold"
+                  style="border-radius: 20px; border-color: 0px !important;" (click)="forgotPassword()">Send
+                  Passcode</button>
               </div>
             </div>
-            <div class="p-3" *ngIf="isResetPassword">
-              <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+            <div class="p-3 row justify-content-center" *ngIf="isResetPassword">
+              <mat-form-field class="p-0 w-100 mat-form-field col-sm-7 mb-3">
                 <mat-label class="semi-bold text-grey text-smd m-0">New Password</mat-label>
                 <input matInput class="text-sm m-0" [type]="!isPasswordVisible ? 'password': 'text'"
                   placeholder="Enter password" [formControl]='resetPassword'>
@@ -118,14 +126,14 @@
                 </span>
                 <mat-error class="text-xs">Password required*</mat-error>
               </mat-form-field>
-              <div class="d-flex justify-content-center mb-5">
-                <button class="w-75 btn btn-primary p-2 text-smd bold"
-                  style="border-radius: 60px; border-color: 0px !important;" (click)="restPassword()">Reset</button>
+              <div class="w-100 d-flex justify-content-center mb-5">
+                <button class="btn btn-primary p-1 px-4 text-smd bold"
+                  style="border-radius: 20px; border-color: 0px !important;" (click)="restPassword()">Reset</button>
               </div>
             </div>
             <div class="w-100 text-center" *ngIf="isForgotPassword">
-              <a class="text-sm text-link semi-bold text-warning text-yellow mr-2" (click)='loginVisible()'>Login
-                here.</a>
+              <a class="text-sm text-link semi-bold text-primary mr-2" (click)='showLogin()'><u>Login
+                  here.</u></a>
             </div>
           </div>
         </div>
@@ -171,7 +179,7 @@
                 </span>
                 <mat-error class="text-xs">Password must be greater than 6 digits*</mat-error>
               </mat-form-field>
-              <div class="text-right mb-2">
+              <div class="text-right mb-2 col-sm-12">
                 <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
               </div>
               <div class="col-sm-12 d-flex justify-content-center mb-3">
@@ -182,6 +190,40 @@
             <div class="w-100 text-center" *ngIf="isRegistration">
               <span class="text-grey text-sm mr-1">Already a member? </span>
               <a class="text-sm text-link semi-bold text-primary mr-2" (click)='loginVisible()'><u>Login here</u></a>
+            </div>
+            <div *ngIf="isVerifyOTP" class="w-100 p-3 d-flex justify-content-center">
+              <div class="w-100">
+                <alert type="success" class="text-sm">
+                  We have sent a 6 digit passcode at {{ signupForm.get('email').value }} {{email.value}} kindly enter
+                  the
+                  code
+                  here.
+                </alert>
+                <div class="p-3">
+                  <label class="semi-bold mt-2">Enter a 6-digit passcode</label>
+                  <ng-otp-input name="otp" ngDefaultControl [(ngModel)]='otp' (onInputChange)="onOtpChange($event)"
+                    [config]="{length:6, allowNumbersOnly:true, inputClass:'mb-3'	}">
+                  </ng-otp-input>
+                  <div class="text-right mb-2 d-block">
+                    <span class="text-sm text-danger" *ngIf="!isOTPCorrect"><b>Invalid code</b></span>
+                  </div>
+                  <button *ngIf="!isServiceRunning" (click)="verifyOTP()"
+                    class="btn btn-primary d-block p-1 px-4 text-sm" style="border-radius: 20px;">Verify</button>
+                  <ion-spinner color="primary" mode="md" *ngIf="isServiceRunning"></ion-spinner>
+                  <div class="mt-5">
+                    <a class="text-primary d-block semi-bold text-sm mt-3 pb-2" *ngIf='timer > 0'><span
+                        class="text-secondary">Resend Code </span> 00 :
+                      {{timer > 9 ? timer : '0'+timer}}</a>
+                    <a class="text-primary semi-bold d-block text-link text-sm mt-3 pb-2" *ngIf='timer <= 0'
+                      (click)="resendOTP()">Resend Code</a>
+                  </div>
+                </div>
+                <div class="w-100 text-center">
+                  <a class="text-primary text-sm text-link vertical-center" (click)='back()'><span
+                      class="material-icons mr-2">keyboard_backspace</span>
+                    Back</a>
+                </div>
+              </div>
             </div>
           </div>
           <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-right-7 vertical-center">

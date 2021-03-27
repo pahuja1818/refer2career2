@@ -50,6 +50,16 @@ export class AllJobPostsComponent implements OnInit {
     location: []
   };
 
+  refineDefaultInitial: any = {
+    partTime: false,
+    fullTime: false,
+    jobs: false,
+    internships: false,
+    remote: false,
+    minExp: 0,
+    location: []
+  };
+
   refine: any = {
     partTime: false,
     fullTime: false,
@@ -64,9 +74,42 @@ export class AllJobPostsComponent implements OnInit {
     return !(JSON.stringify(this.refine) === JSON.stringify(this.refineInitial));
   }
 
+  isFilterAdded(): boolean {
+    return !(JSON.stringify(this.refine) === JSON.stringify(this.refineDefaultInitial));
+  }
+
   closeSortBy(value: any) {
     this.isSortBy = value;
     this.isSortByExpanded = false;
+  }
+
+  clearFilter() {
+    this.refineInitial.partTime = this.refineDefaultInitial.partTime;
+    this.refineInitial.fullTime = this.refineDefaultInitial.fullTime;
+    this.refineInitial.jobs = this.refineDefaultInitial.jobs;
+    this.refineInitial.internships = this.refineDefaultInitial.internships;
+    this.refineInitial.remote = this.refineDefaultInitial.remote;
+    this.refineInitial.minExp = this.refineDefaultInitial.minExp;
+    this.refineInitial.location = this.refineDefaultInitial.location;
+
+    this.refine.partTime = this.refineDefaultInitial.partTime;
+    this.refine.fullTime = this.refineDefaultInitial.fullTime;
+    this.refine.jobs = this.refineDefaultInitial.jobs;
+    this.refine.internships = this.refineDefaultInitial.internships;
+    this.refine.remote = this.refineDefaultInitial.remote;
+    this.refine.minExp = this.refineDefaultInitial.minExp;
+    this.refine.location = this.refineDefaultInitial.location;
+
+    this.selectedLocations.clear();
+
+    this.refineJobs();
+
+    this.isSortByExpanded = false;
+    this.isLocationExpanded = false;
+    this.isPartTimeExpanded = false;
+    this.isJobCategoryExpanded = false;
+    this.isRemoteExpanded = false;
+    this.isExperienceExpanded = false;
   }
 
   constructor(
@@ -76,14 +119,7 @@ export class AllJobPostsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.myControl.valueChanges.subscribe(x => this.filterJobPosts(x));
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.options.slice())
-      );
-
+    this.isServiceRunning = true;
     const db: DbOperation = {
       collection: 'jobposts',
       query: { 'jobPost.verified': true },
@@ -94,6 +130,7 @@ export class AllJobPostsComponent implements OnInit {
         this.allJobPost = data.data;
         console.log(this.allJobPost);
         this.sortByDate();
+        this.isServiceRunning = false;
       }
     });
 
@@ -130,7 +167,8 @@ export class AllJobPostsComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  filterJobPosts(search: string) {
+  filterJobPosts() {
+    let search = this.myControl.value;
     search = search.toLowerCase();
     this.filteredJobPosts = [];
     this.allJobPost.forEach((jobPost: any, index: number) => {
@@ -223,8 +261,7 @@ export class AllJobPostsComponent implements OnInit {
       if (data.data) {
         this.filteredJobPosts = data.data;
         this.allJobPost = data.data;
-        this.refineInitial.sortBy = this.refine.sortBy,
-          this.refineInitial.partTime = this.refine.partTime,
+        this.refineInitial.partTime = this.refine.partTime,
           this.refineInitial.fullTime = this.refine.fullTime,
           this.refineInitial.jobs = this.refine.jobs,
           this.refineInitial.internships = this.refine.internships,
