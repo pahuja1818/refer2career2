@@ -293,7 +293,7 @@ export class SigninComponent implements OnInit {
 
 
   flip() {
-    let element = document.getElementById('cardToFlip');
+    const element = document.getElementById('cardToFlip');
     element.classList.toggle('flipped');
   }
 

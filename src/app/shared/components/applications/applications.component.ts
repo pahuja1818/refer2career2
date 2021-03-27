@@ -61,6 +61,7 @@ export class ApplicationsComponent implements OnInit {
       if (params.jobId) {
         this.postId = params.jobId;
         this.getDetails();
+        this.getReferedProfiles();
       }
     });
 
@@ -147,6 +148,28 @@ export class ApplicationsComponent implements OnInit {
     });
   }
 
+  allReferedProfiles: any = []
+
+  getReferedProfiles() {
+    this.isServiceRunning = true;
+    const operation: DbOperation = {
+      collection: 'referedProfiles',
+      query: { jobId: this.postId }
+    };
+    this.dbService.find(operation).subscribe((data: any) => {
+      this.isServiceRunning = false;
+      if (data.data.length > 0) {
+        console.log(data.data);
+        this.allReferedProfiles = data.data;
+      }
+    });
+  }
+
+  openResume(resume: any) {
+    window.open(resume);
+  }
+
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: AllJobPostsComponent,
@@ -190,11 +213,11 @@ export class ApplicationsComponent implements OnInit {
           if (this.skillsArray.length > 0) {
             this.skillsArray.forEach(skill => {
               if (candidate.skills.find((data: string) => data.includes(skill))) {
-                const candidate: any = user.data[0];
-                candidate.appliedOn = cand.date;
-                candidate.appliedId = cand._id;
-                candidate.status = cand.status ? cand.status : null;
-                this.aplications.push(candidate);
+                const localCandidate: any = user.data[0];
+                localCandidate.appliedOn = cand.date;
+                localCandidate.appliedId = cand._id;
+                localCandidate.status = cand.status ? cand.status : null;
+                this.aplications.push(localCandidate);
               }
             });
           }
@@ -273,12 +296,12 @@ export class ApplicationsComponent implements OnInit {
     }
   }
 
-  shortlistApplicant(_id: any) {
+  shortlistApplicant(id: any) {
     this.isServiceRunning = true;
     const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Shortlisted' },
-      query: { _id },
+      query: { id },
     };
     this.dbService.update(db).then((data: any) => {
       console.log(data);
@@ -289,12 +312,12 @@ export class ApplicationsComponent implements OnInit {
     });
   }
 
-  hireApplicant(_id: any) {
+  hireApplicant(id: any) {
     this.isServiceRunning = true;
     const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Hired' },
-      query: { _id },
+      query: { id },
     };
     this.dbService.update(db).then((data: any) => {
       this.getDetails();
@@ -304,12 +327,12 @@ export class ApplicationsComponent implements OnInit {
     });
   }
 
-  rejectApplicant(_id: any) {
+  rejectApplicant(id: any) {
     this.isServiceRunning = true;
     const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Rejected' },
-      query: { _id },
+      query: { id },
     };
     this.dbService.update(db).then((data: any) => {
       this.getDetails();
