@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.getCurrentUser();
-    if(window.screen.width > 1150){
+    if (window.screen.width > 1150){
       this.isScreenBig = true;
     }
   }

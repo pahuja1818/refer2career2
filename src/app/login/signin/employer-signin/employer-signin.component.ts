@@ -18,13 +18,6 @@ import { DbOperation } from 'src/app/shared/models/dbOperation';
   styleUrls: ['./employer-signin.component.scss'],
 })
 export class EmployerSigninComponent implements OnInit {
-
-  loginForm: FormGroup;
-  message = '';
-
-  isLogin = true;
-  isServiceRunning = false;
-  isPasswordVisible = false;
   constructor(
     public modalRef: BsModalRef,
     private authService: AuthService,
@@ -33,10 +26,39 @@ export class EmployerSigninComponent implements OnInit {
     private modalService: BsModalService,
   ) { }
 
+  loginForm: FormGroup;
+  message = '';
+
+  isLogin = true;
+  isServiceRunning = false;
+  isPasswordVisible = false;
+
   isScreenBig = false;
 
+  otp = '';
+  isOTPCorrect = true;
+  timer: number;
+  isVerified = false;
+
+  isForgotPassOTP = false;
+
+  isResetPassword = false;
+
+
+  role = UserRole;
+  isVerifyOTP = false;
+  isRegistration = false;
+  isForgotPassword = false;
+  isConfirmPasswordVisible = false;
+  signupForm: FormGroup;
+  password = '';
+  email = new FormControl('', [Validators.required, Validators.email]);
+  resetPassword = new FormControl('', [Validators.required, Validators.minLength(7)]);
+
+  isPasswordReset = false;
+
   ngOnInit() {
-    if (window.screen.width > 1150) this.isScreenBig = true;
+    if (window.screen.width > 1150) { this.isScreenBig = true; }
     this.loginForm = new FormGroup({
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
       passwordLogin: new FormControl(null, [Validators.required]),
@@ -66,28 +88,6 @@ export class EmployerSigninComponent implements OnInit {
         });
     }
   }
-
-  otp = '';
-  isOTPCorrect = true;
-  timer: number;
-  isVerified = false;
-
-  isForgotPassOTP = false;
-
-  isResetPassword = false;
-
-
-  role = UserRole;
-  isVerifyOTP = false;
-  isRegistration = false;
-  isForgotPassword = false;
-  isConfirmPasswordVisible = false;
-  signupForm: FormGroup;
-  password = '';
-  email = new FormControl('', [Validators.required, Validators.email]);
-  resetPassword = new FormControl('', [Validators.required, Validators.minLength(7)]);
-
-  isPasswordReset = false;
 
 
   resendOTP() {

@@ -59,8 +59,8 @@ export class SigninComponent implements OnInit {
   isScreenBig = false;
 
   ngOnInit() {
-    if (window.screen.width > 1150) this.isScreenBig = true;
-    else this.isScreenBig = false;
+    if (window.screen.width > 1150) { this.isScreenBig = true; }
+    else { this.isScreenBig = false; }
     this.initializeSignupForm();
     this.loginForm = new FormGroup({
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
@@ -293,8 +293,8 @@ export class SigninComponent implements OnInit {
 
 
   flip() {
-    var element = document.getElementById("cardToFlip");
-    element.classList.toggle("flipped");
+    let element = document.getElementById('cardToFlip');
+    element.classList.toggle('flipped');
   }
 
 }
