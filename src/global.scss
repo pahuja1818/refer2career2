@@ -297,6 +297,10 @@
     border-radius: 12px !important;
     border-width: 0px !important;
   }
+
+  .rounded-button{
+    border-radius: 16px !important;
+  }
   
   .vertical-center {
     display: flex;
@@ -732,7 +736,7 @@ input::-webkit-input-placeholder {
 
 input:focus::-webkit-input-placeholder {
   color: #888 !important;
-}c
+}
 
 
 
@@ -788,5 +792,9 @@ input:focus::-webkit-input-placeholder {
   -moz-transform:rotatey(-180deg); /* Firefox */
   -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
   -o-transform:rotatey(-180deg); /* Opera */
+}
+
+body {
+  font-family: 'Open Sans' !important;
 }
 

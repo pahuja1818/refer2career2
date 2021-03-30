@@ -27,6 +27,8 @@ export class UserProfileComponent implements OnInit {
     private toastService: ToastService) {
   }
 
+
+
   basePath = '/profile-resumes';
   uploadTask: firebase.storage.UploadTask;
 
@@ -61,7 +63,7 @@ export class UserProfileComponent implements OnInit {
   workExpForm: FormGroup;
   educationArray: any[] = [];
 
-  cvHeadLine = '8 year experienced full stack Java developer.';
+  cvHeadLine = '';
   isCVHeadEditing = false;
 
   maxDob = new Date(2006, 11, 31);
@@ -144,6 +146,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
     this.getUser();
     this.initializeProfileForm();
@@ -151,11 +154,11 @@ export class UserProfileComponent implements OnInit {
     this.initializeEducationForm();
     if (this.user.cvHead) {
       this.cvHeadLine = this.user.cvHead;
-      this.educationArray = this.user.education ? this.user.education : [];
-      this.workExpArray = this.user.workExperience ? this.user.workExperience : [];
-      this.skillsArray = this.user.skills ? this.user.skills : [];
-      this.setBasicInfo();
     }
+    this.educationArray = this.user.education ? this.user.education : [];
+    this.workExpArray = this.user.workExperience ? this.user.workExperience : [];
+    this.skillsArray = this.user.skills ? this.user.skills : [];
+    this.setBasicInfo();
 
     this.filteredQualifications = this.educationDetailsForm.get('degree').valueChanges.pipe(
       startWith(''),
@@ -505,7 +508,7 @@ export class UserProfileComponent implements OnInit {
 
   editCVHead() {
     if (this.isCVHeadEditing) {
-      this.cvHeadLine = this.user.cvHead ? this.user.cvHead : '8 year experienced full stack Java developer.';
+      this.cvHeadLine = this.user.cvHead ? this.user.cvHead : '';
     }
     this.isCVHeadEditing = !this.isCVHeadEditing;
   }
@@ -523,7 +526,7 @@ export class UserProfileComponent implements OnInit {
           this.isServiceRunning = false;
         }
         else {
-          console.log(data);
+          console.log(data);  
           this.isServiceRunning = false;
         }
       },
@@ -550,6 +553,20 @@ export class UserProfileComponent implements OnInit {
 
   otpRequest() {
 
+  }
+
+
+  get profileCompleted() {
+    let percent = 12;
+    if (this.cvHeadLine) percent += 10;
+    if (this.workExpArray.length > 0) percent += 15;
+    if (this.skillsArray.length > 0) percent += 12;
+    if (this.educationArray.length > 0) percent += 11;
+    if (this.user.resume) percent += 15;
+    if (this.user.basicInfo) percent += 15;
+    if(this.user.photo) percent += 10;
+    document.getElementById("progress-bar").style.width = percent + "%"
+    return percent;
   }
 
 
