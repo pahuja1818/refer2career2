@@ -21,7 +21,7 @@ export class EmployerProfleComponent implements OnInit {
 
   ngOnInit() {
     this.isServiceRunning = true;
-    //this.user.personalDetails = {};
+    // this.user.personalDetails = {};
     this.initializeForm();
     this.authService.getCurrentUser();
     this.authService.currentUser.subscribe((data: any) => {

@@ -557,14 +557,14 @@ export class UserProfileComponent implements OnInit {
 
   get profileCompleted() {
     let percent = 12;
-    if (this.cvHeadLine) percent += 10;
-    if (this.workExpArray.length > 0) percent += 15;
-    if (this.skillsArray.length > 0) percent += 12;
-    if (this.educationArray.length > 0) percent += 11;
-    if (this.user.resume) percent += 15;
-    if (this.user.basicInfo) percent += 15;
-    if (this.user.photo) percent += 10;
-    document.getElementById("progress-bar").style.width = percent + "%"
+    if (this.cvHeadLine) { percent += 10; }
+    if (this.workExpArray.length > 0) { percent += 15; }
+    if (this.skillsArray.length > 0) { percent += 12; }
+    if (this.educationArray.length > 0) { percent += 11; }
+    if (this.user.resume) { percent += 15; }
+    if (this.user.basicInfo) { percent += 15; }
+    if (this.user.photo) { percent += 10; }
+    document.getElementById('progress-bar').style.width = percent + '%';
     return percent;
   }
 }

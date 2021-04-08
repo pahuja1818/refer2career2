@@ -123,7 +123,7 @@ export class ApplicationsComponent implements OnInit {
                   candidate.appliedOn = cand.date;
                   candidate.appliedId = cand._id;
                   candidate.status = cand.status ? cand.status : null;
-                  console.log(candidate)
+                  console.log(candidate);
                   this.allAplications.push(candidate);
                   if (candidate.status === null) {
                     this.aplications.push(candidate);
@@ -192,16 +192,16 @@ export class ApplicationsComponent implements OnInit {
   }
 
   seeResume(resume: string, _id: any, profileViews: any) {
-    let db: DbOperation = {
+    const db: DbOperation = {
       collection: 'users',
-      data: { "profileViews": profileViews ? profileViews + 1 : 1 },
-      query: {_id : _id}
-    }
+      data: { profileViews: profileViews ? profileViews + 1 : 1 },
+      query: {_id}
+    };
     this.dbService.update(db).then((data: any) => {
       if (data.data) {
         window.open(resume);
       }
-    })
+    });
   }
   openFilter(template: any) {
     this.filterTemplate = template;
