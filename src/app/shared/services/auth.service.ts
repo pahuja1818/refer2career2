@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   linkedInLogin(){
-    return this.http.get(this.baseUrl + `/linkedin`, { headers: this.headers });
+    return this.http.get(this.baseUrl + `/linkedin`, { headers:  new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
   }
 
   getCurrentUser() {

@@ -96,7 +96,7 @@
             </div>
             <div class="row my-3" *ngIf='user.resume'>
               <div class="col-sm-12 d-flex justify-content-end">
-                <button class="btn btn-primary bg-violet" (click)="seeResume(user.resume)">Resume</button>
+                <button class="btn btn-primary bg-violet" (click)="seeResume(user.resume, user._id, user.profileViews)">Resume</button>
               </div>
             </div>
             <div class="vertical-center" *ngIf="isApplicationRecieved || isShortlisted">

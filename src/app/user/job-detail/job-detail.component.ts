@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ReferJobPostService } from './../../shared/services/refer-job-post.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastService } from './../../shared/services/toast.service';
@@ -23,7 +24,10 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService,
     private toastService: ToastService,
     private referService: ReferJobPostService,
+    private dbService: AuthService
   ) { }
+
+  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
   jobPost: any = {};
   post: any = {};
   skills: any[] = [];
@@ -74,6 +78,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log();
   }
+
   applyJobModal(template: any) {
     this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
   }
@@ -95,9 +100,19 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     };
     this.jobPostService.applyJobPost(obj).subscribe((data: any) => {
       if (data.data) {
-        this.toastService.showToast('Applied successfully!');
-        this.jobPostService.getMyApplications();
-        this.modalRef.hide();
+        let mail = {
+          email: this.user.email,
+          subject: "Applied Successfully!",
+          content: `<p>Hello ${this.user.name} </p><p>You have successfully applied for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+        }
+        this.dbService.sendMail(mail).subscribe((data: any) => {
+          if (data.data) {
+            this.toastService.showToast('Applied successfully!');
+            this.jobPostService.getMyApplications();
+            this.modalRef.hide();
+          }
+        });
+
       }
     });
   }
@@ -136,6 +151,25 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
             if (data.data === null) {
               this.referService.referJobPost(refer).subscribe((ele: any) => {
                 this.toastService.showToast('Refered successfully');
+                let mail = {
+                  email: this.user.email,
+                  subject: "Refered Successfully!",
+                  content: `<p>Hello ${this.user.name} </p><p>You have successfully refered ${refer.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+                }
+                this.dbService.sendMail(mail).subscribe((data: any) => {
+                  if (data.data) {
+                    let mail = {
+                      email: refer.email,
+                      subject: `You have been refered by ${this.user.name}!`,
+                      content: `<p>Hello ${refer.name} </p><p>You have been refered by ${this.user.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><p><a style="color: blue;" href="https://refer2career.com">Login to Refer2Career</a> and increase chance to get hired by completing your profile.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+                    }
+                    this.dbService.sendMail(mail).subscribe((data: any) => {
+                      if (data.data) {
+
+                      }
+                    });
+                  }
+                });
                 this.modalRef.hide();
               });
             }

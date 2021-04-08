@@ -526,7 +526,7 @@ export class UserProfileComponent implements OnInit {
           this.isServiceRunning = false;
         }
         else {
-          console.log(data);  
+          console.log(data);
           this.isServiceRunning = false;
         }
       },
@@ -555,7 +555,6 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-
   get profileCompleted() {
     let percent = 12;
     if (this.cvHeadLine) percent += 10;
@@ -564,12 +563,10 @@ export class UserProfileComponent implements OnInit {
     if (this.educationArray.length > 0) percent += 11;
     if (this.user.resume) percent += 15;
     if (this.user.basicInfo) percent += 15;
-    if(this.user.photo) percent += 10;
+    if (this.user.photo) percent += 10;
     document.getElementById("progress-bar").style.width = percent + "%"
     return percent;
   }
-
-
 }
 
 

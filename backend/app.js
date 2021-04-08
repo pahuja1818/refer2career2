@@ -60,12 +60,17 @@ passport.use(new LinkedInStrategy({
         // represent the logged-in user. In a typical application, you would want
         // to associate the LinkedIn account with a user record in your database,
         // and return that user instead.
+        console.log(profile);
         return done(null, profile);
     });
 }));
 
 app.get('/linkedin',
-    passport.authenticate('linkedin'));
+    passport.authenticate('linkedin'),
+    function (req, res) {
+        console.log('asasdasd');
+    }
+);
 // callback method which linkedin will hit after successfull login of user
 app.get('/callback/',
     passport.authenticate('linkedin', { failureRedirect: '/login' }),
@@ -75,15 +80,15 @@ app.get('/callback/',
     });
 
 
-    function ensureAuthenticated(req, res, next) {
-        if (req.isAuthenticated()) { return next(); }
-        res.redirect('/login')
-        }
-        // Method to logout
-        app.get('/logout', function(req, res){
-        req.logout();
-        res.redirect('/');
-        });
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/login')
+}
+// Method to logout
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
 // method to load index.ejs file on base path
 
 app.use((req, res, next) => {

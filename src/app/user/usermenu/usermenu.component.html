@@ -63,11 +63,13 @@
           style="border: 1px solid #bfc2f7; border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
             style="margin-top: -30px; width: 90px; height: 90px;">
-            <span class="material-icons text-lg text-white mx-auto">monetization_on</span>
+            <span class="material-icons text-lg text-white mx-auto">preview</span>
           </div>
           <div class="w-100 text-center my-3">
-            <span class="d-block text-dark semi-bold text-lg">Encashments</span>
-            <span class="d-block text-dark">Have you funds encashed</span>
+            <span class="d-block text-dark semi-bold text-lg">{{user.profileViews ? user.profileViews : 0}} profile
+              {{user.profileViews ? user.profileViews > 1 ? 'views' : 'view' : 'view'}}</span>
+            <span class="d-block text-dark">Your profile viewed {{user.profileViews ? user.profileViews : 0}}
+              {{user.profileViews ? user.profileViews > 1 ? 'times' : 'time' : 'time'}} by employers!</span>
           </div>
           <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
             <button class="btn btn-outline-info py-1 px-5" style="border-radius: 30px;">View</button>

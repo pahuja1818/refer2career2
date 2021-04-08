@@ -119,9 +119,11 @@ export class ApplicationsComponent implements OnInit {
                 if (user.data.length > 0) {
                   this.isServiceRunning = false;
                   const candidate: any = user.data[0];
+                  console.log(user.data[0]._id);
                   candidate.appliedOn = cand.date;
                   candidate.appliedId = cand._id;
                   candidate.status = cand.status ? cand.status : null;
+                  console.log(candidate)
                   this.allAplications.push(candidate);
                   if (candidate.status === null) {
                     this.aplications.push(candidate);
@@ -189,8 +191,17 @@ export class ApplicationsComponent implements OnInit {
     return diffYears.toFixed(0) + ' Years';
   }
 
-  seeResume(resume: string) {
-    window.open(resume);
+  seeResume(resume: string, _id: any, profileViews: any) {
+    let db: DbOperation = {
+      collection: 'users',
+      data: { "profileViews": profileViews ? profileViews + 1 : 1 },
+      query: {_id : _id}
+    }
+    this.dbService.update(db).then((data: any) => {
+      if (data.data) {
+        window.open(resume);
+      }
+    })
   }
   openFilter(template: any) {
     this.filterTemplate = template;

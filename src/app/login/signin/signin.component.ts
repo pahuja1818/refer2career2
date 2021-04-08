@@ -241,7 +241,7 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  linkedinLogin(){
+  linkedinLogin() {
     this.authService.linkedInLogin().subscribe(data => {
       console.log(data);
     })
