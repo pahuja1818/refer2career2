@@ -1,136 +1,183 @@
-<ion-header [translucent]="true" class="bg-primary">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>My Profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-<div class="bg-white" style="overflow: auto;">
-  <br>
-  <br>
-  <div class="w-100 d-flex justify-content-center">
-    <div class="vertical-center">
-      <div class="">
-        <div class="w-100 d-flex justify-content-center">
-          <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md" *ngIf="!userPhoto"
-            style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
-          <img *ngIf="userPhoto" class="img-fulid rounded-circle"
-            style="height: 70px !important; width: 70px !important;" src="{{userPhoto}}" alt="">
+<div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
+  <ion-header style="position: fixed">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="primary" class="mr-4" *ngIf="user">
+        <span class="material-icons-outlined vertical-center text-ssmd">account_circle<span class="ml-1k'">{{user ?
+            user.organizationDetails.organizationName : ''}}</span></span>
+      </ion-buttons>
+      <ion-title>
+        My Profile
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="h-100 w-100" style="overflow-y: auto;" *ngIf="user">
+    <div class="bg-primary w-100 text-white"
+      style="min-height: 220px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
+    </div>
+    <div class="row justify-content-center" style="margin-top: -160px;">
+      <div class="col-sm-10 px-0 mt-5"
+        style="margin-top: 60px !important; overflow-y: auto !important; overflow-x: hidden;">
+        <div class="bg-white border-8">
+          <div class="row">
+            <div class="col align-self-center">
+              <div class="p-3 m-3 vertical-center justify-content-start">
+                <div>
+                  <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
+                    class="position-absolute"
+                    style="opacity: 0 !important; height: 130px !important; width: 125px !important;" />
+                  <span class="border-6 bg-primary mx-auto text-center material-icons pt-3 text-grey text-lg"
+                    *ngIf="!user.photo"
+                    style="border-width: 2px; height: 130px !important; width: 125px !important; border: 2px solid rgb(255, 255, 255);">{{user
+                    ? user.organizationDetails.organizationName[0] : ''}}</span>
+                  <img *ngIf="user.photo" class="img-fulid border-6"
+                    style="height: 130px !important; width: 125px !important; border: 2px solid white;"
+                    src="{{user.photo}}" alt="">
+                </div>
+                <div class="text-dark ml-4">
+                  <div class="w-100 bold text-md mb-3">{{user.organizationDetails.organizationName}}</div>
+                  <div class="w-100 vertical-center">
+                    <span class="material-icons-outlined vertical-center text-smd mr-5">mail
+                      <span class="ml-2">{{user.organizationDetails.organizationEmail}}</span></span>
+                    <span *ngIf="user.basicInfo" class="material-icons-outlined vertical-center text-smd mr-4">call
+                      <span class="ml-2">{{user.organizationDetails.organizationMobile}}</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 row mt-4 p-0 m-0 justify-content-end">
+          <div class="col-sm-4 p-0 m-0">
+            <div class="bg-white p-3 border-8 mr-3">
+              <span class="text-lg mb-4">Publish Job post and start hiring!<span class="text-smd">% Profile
+                  Completed</span></span>
+              <div class="progress">
+                <div class="progress-bar" id="progress-bar">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8 m-0 p-0">
+            <div class="bg-white border-8">
+              <div class="mt-4 row d-flex justify-content-center" [formGroup]="detailForm">
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Name</mat-label>
+                    <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
+                    <mat-error>Enter valid name</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Phone number</mat-label>
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
+                    <mat-error>Enter valid mobile number</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Email</mat-label>
+                    <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Alternate contact number</mat-label>
+                    <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
+                    <mat-error>Enter valid email*</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                </div>
+                <div class="col-sm-12 my-3 text-grey">
+                  <h5 class="text-center">Organization Details</h5>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Organization name</mat-label>
+                    <input formControlName='organizationName' matInput placeholder="Enter Organization name"
+                      class="p-0">
+                    <mat-error>Enter valid name</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Organization field</mat-label>
+                    <input formControlName='field' matInput placeholder="Enter Organization field" class="p-0">
+                    <mat-error>Enter valid field</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Contact number</mat-label>
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input formControlName='organizationMobile' matInput placeholder="Enter contact number" type="tel"
+                      class="p-0" value='psj'>
+                    <mat-error>Enter valid contact number*</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">organizationEmail</mat-label>
+                    <input formControlName='organizationEmail' matInput placeholder="Enter email" class="p-0">
+                    <mat-error>Enter valid email</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Address line one</mat-label>
+                    <input formControlName='addressLineOne' matInput placeholder="Enter Address line one" class="p-0"
+                      value='psj'>
+                    <mat-error *ngIf="false">Enter valid details</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Address line two</mat-label>
+                    <input formControlName='addressLineTwo' matInput placeholder="Address line two" class="p-0">
+                    <mat-error>Enter valid details</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">City</mat-label>
+                    <input formControlName='city' matInput placeholder="Enter city" class="p-0">
+                    <mat-error>Enter valid city</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 mx-3 mb-2">
+                  <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
+                    <mat-label class="p-0">Pincode</mat-label>
+                    <input formControlName='pincode' matInput type="number" placeholder="Enter email" class="p-0">
+                    <mat-error>Enter valid pincode</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4 my-2">
+                  <div class="w-100 d-flex justify-content-center">
+                    <input type="file" accept=".png, .jpg, .jpeg" class="position-absolute w-25 h-25"
+                      style="opacity: 0 !important;" />
+                    <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md"
+                      *ngIf="!organizationLogo"
+                      style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
+                    <img *ngIf="organizationLogo" class="img-fulid rounded-circle"
+                      style="height: 70px !important; width: 70px !important;" src="{{organizationLogo}}" alt="">
+                  </div>
+                  <span class="d-block text-smd text-bold text-center mt-2">LOGO</span>
+                </div>
+                <div class="col-sm-11 d-flex justify-content-end mb-4 mt-3">
+                  <button type="submit" class="btn btn-primary p-0 text-smd bg-violet px-4 mr-2">Save</button>
+                  <button class="btn btn-secondary text-smd px-4 p-0">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ml-3">
-        <div class="w-100 text-grey semi-bold text-smd">{{user.personalDetails.name}}</div>
-        <div class="w-100 text-grey semi-bold text-smd">{{user.email}}</div>
-      </div>
-    </div>
-  </div>
-  <div class="mt-4 row d-flex justify-content-center" [formGroup]="detailForm">
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Name</mat-label>
-        <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
-        <mat-error>Enter valid name</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Phone number</mat-label>
-        <span matPrefix>+91 &nbsp;</span>
-        <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-        <mat-error>Enter valid mobile number</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Email</mat-label>
-        <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Alternate contact number</mat-label>
-        <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
-        <mat-error>Enter valid email*</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-    </div>
-    <div class="col-sm-12 my-3 text-grey">
-      <h5 class="text-center">Organization Details</h5>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Organization name</mat-label>
-        <input formControlName='organizationName' matInput placeholder="Enter Organization name" class="p-0">
-        <mat-error>Enter valid name</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Organization field</mat-label>
-        <input formControlName='field' matInput placeholder="Enter Organization field" class="p-0">
-        <mat-error>Enter valid field</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Contact number</mat-label>
-        <span matPrefix>+91 &nbsp;</span>
-        <input formControlName='organizationMobile' matInput placeholder="Enter contact number" type="tel" class="p-0"
-          value='psj'>
-        <mat-error>Enter valid contact number*</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">organizationEmail</mat-label>
-        <input formControlName='organizationEmail' matInput placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid email</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Address line one</mat-label>
-        <input formControlName='addressLineOne' matInput placeholder="Enter Address line one" class="p-0" value='psj'>
-        <mat-error *ngIf="false">Enter valid details</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Address line two</mat-label>
-        <input formControlName='addressLineTwo' matInput placeholder="Address line two" class="p-0">
-        <mat-error>Enter valid details</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">City</mat-label>
-        <input formControlName='city' matInput placeholder="Enter city" class="p-0">
-        <mat-error>Enter valid city</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 mx-3 mb-2">
-      <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
-        <mat-label class="p-0">Pincode</mat-label>
-        <input formControlName='pincode' matInput type="number" placeholder="Enter email" class="p-0">
-        <mat-error>Enter valid pincode</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-4 my-2">
-      <div class="w-100 d-flex justify-content-center">
-        <input type="file" accept=".png, .jpg, .jpeg" class="position-absolute w-25 h-25"
-          style="opacity: 0 !important;" />
-        <span class="rounded-circle mx-auto text-center material-icons pt-3 text-grey text-md" *ngIf="!organizationLogo"
-          style="border-style: dashed; height: 70px !important; width: 70px !important; border-color: rgb(129, 129, 129);">photo</span>
-        <img *ngIf="organizationLogo" class="img-fulid rounded-circle"
-          style="height: 70px !important; width: 70px !important;" src="{{organizationLogo}}" alt="">
-      </div>
-      <span class="d-block text-smd text-bold text-center mt-2">LOGO</span>
-    </div>
-    <div class="col-sm-11 d-flex justify-content-end mb-4 mt-3">
-      <button type="submit" class="btn btn-primary p-0 text-smd bg-violet px-4 mr-2">Save</button>
-      <button class="btn btn-secondary text-smd px-4 p-0">Cancel</button>
     </div>
   </div>
 </div>
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

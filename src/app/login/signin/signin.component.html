@@ -56,6 +56,12 @@
                 <button *ngIf="!isServiceRunning" class="btn bg-violet btn-primary p-1 px-4"
                   style="border-radius: 20px;" (click)="login()">Signin</button>
               </div>
+              <div class="col-sm-12 p-3 d-flex justify-content-center">
+                <div>
+                  <img (click)="linkedinLogin()" src="./../../../assets/linkedin-signin-button.png" alt="" style="max-width: 200px; max-height: 40px;"
+                    class="image-fluid">
+                </div>
+              </div>
             </form>
             <div class="w-100 text-center" *ngIf="isLogin">
               <a class="text-sm text-link semi-bold text-primary" (click)="forgotPasswordVisible()">Forgot

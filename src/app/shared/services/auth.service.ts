@@ -22,6 +22,10 @@ export class AuthService {
     }
   }
 
+  linkedInLogin(){
+    return this.http.get(this.baseUrl + `/linkedin`, { headers: this.headers });
+  }
+
   getCurrentUser() {
     if (window.localStorage.getItem('id')) {
       this.getDetails({ email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email })

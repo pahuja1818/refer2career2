@@ -9,22 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployerProfleComponent implements OnInit {
 
-  user: any = {};
+  user: any = undefined;
   detailForm: FormGroup;
   organizationLogo: any;
   userPhoto: any;
+  isServiceRunning = false;
 
   constructor(
     private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.user.personalDetails = {};
+    this.isServiceRunning = true;
+    //this.user.personalDetails = {};
     this.initializeForm();
     this.authService.getCurrentUser();
     this.authService.currentUser.subscribe((data: any) => {
       this.user = data;
-      console.log(this.user);
+      this.isServiceRunning = false;
       this.initializeDetails();
     });
   }
@@ -49,28 +51,26 @@ export class EmployerProfleComponent implements OnInit {
   }
 
   initializeForm() {
-    console.log(this.user);
-    if (!this.user.organizationDetails) { this.user.organizationDetails = {}; }
+
     this.detailForm = new FormGroup({
-      name: new FormControl({ value: this.user.name, disabled: true }, [Validators.required]),
-      email: new FormControl({ value: this.user.email, disabled: true }, [Validators.required, Validators.email]),
-      mobile: new FormControl({ value: this.user.mobile, disabled: true },
+      name: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      mobile: new FormControl(null,
         [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-      alternateNumber: new FormControl({ value: this.user.alternateNumber, disabled: true }, [Validators.required]),
-      organizationName: new FormControl(this.user.organizationDetails.organizationName, [Validators.required]),
-      organizationEmail: new FormControl(this.user.organizationDetails.organizationEmail,
+      alternateNumber: new FormControl(null, [Validators.required]),
+      organizationName: new FormControl(null, [Validators.required]),
+      organizationEmail: new FormControl(null,
         [Validators.required, Validators.email]),
-      organizationMobile: new FormControl(this.user.organizationDetails.organizationMobile,
+      organizationMobile: new FormControl(null,
         [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-      field: new FormControl(this.user.organizationDetails.organizationField, [Validators.required]),
-      addressLineOne: new FormControl(this.user.organizationDetails.addressLineOne, [Validators.required]),
-      addressLineTwo: new FormControl(this.user.organizationDetails.addressLineTwo,
+      field: new FormControl(null, [Validators.required]),
+      addressLineOne: new FormControl(null, [Validators.required]),
+      addressLineTwo: new FormControl(null,
         [Validators.required]),
-      city: new FormControl(this.user.organizationDetails.city, [Validators.required]),
-      pincode: new FormControl(this.user.organizationDetails.pincode,
+      city: new FormControl(null, [Validators.required]),
+      pincode: new FormControl(null,
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
     });
-    this.detailForm.disable();
   }
 
 }

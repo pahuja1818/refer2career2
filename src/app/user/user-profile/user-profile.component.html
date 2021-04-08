@@ -6,7 +6,7 @@
       </ion-buttons>
       <ion-buttons slot="primary" class="mr-4" *ngIf="user.name">
         <span class="material-icons-outlined vertical-center text-ssmd">account_circle<span
-            class="ml-1">{{user.name}}</span></span>
+            class="ml-1k'">{{user.name}}</span></span>
       </ion-buttons>
       <ion-title>
         My Profile
@@ -28,9 +28,8 @@
                   <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
                     class="position-absolute"
                     style="opacity: 0 !important; height: 130px !important; width: 125px !important;" />
-                  <span class="border-6 bg-white mx-auto text-center material-icons pt-3 text-grey text-lg"
-                    *ngIf="!user.photo"
-                    style="border-width: 2px; height: 130px !important; width: 125px !important; border: 2px solid rgb(255, 255, 255);">{{user.name[0]}}</span>
+                  <span class="border-6S mx-auto text-center text-lg material-icons text-grey text-lg"
+                    *ngIf="!user.photo">face</span>
                   <img *ngIf="user.photo" class="img-fulid border-6"
                     style="height: 130px !important; width: 125px !important; border: 2px solid white;"
                     src="{{user.photo}}" alt="">

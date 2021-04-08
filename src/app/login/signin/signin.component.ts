@@ -241,6 +241,12 @@ export class SigninComponent implements OnInit {
     }
   }
 
+  linkedinLogin(){
+    this.authService.linkedInLogin().subscribe(data => {
+      console.log(data);
+    })
+  }
+
 
   forgotPassword() {
     if (this.email.valid) {
