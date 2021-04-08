@@ -191,11 +191,11 @@ export class ApplicationsComponent implements OnInit {
     return diffYears.toFixed(0) + ' Years';
   }
 
-  seeResume(resume: string, _id: any, profileViews: any) {
+  seeResume(resume: string, id: any, profileViews: any) {
     const db: DbOperation = {
       collection: 'users',
       data: { profileViews: profileViews ? profileViews + 1 : 1 },
-      query: {_id}
+      query: {_id: id}
     };
     this.dbService.update(db).then((data: any) => {
       if (data.data) {

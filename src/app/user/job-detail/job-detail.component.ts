@@ -105,8 +105,8 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           subject: 'Applied Successfully!',
           content: `<p>Hello ${this.user.name} </p><p>You have successfully applied for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
         };
-        this.dbService.sendMail(mail).subscribe((data: any) => {
-          if (data.data) {
+        this.dbService.sendMail(mail).subscribe((pata: any) => {
+          if (pata.data) {
             this.toastService.showToast('Applied successfully!');
             this.jobPostService.getMyApplications();
             this.modalRef.hide();
@@ -156,15 +156,15 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
                   subject: 'Refered Successfully!',
                   content: `<p>Hello ${this.user.name} </p><p>You have successfully refered ${refer.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
                 };
-                this.dbService.sendMail(mail).subscribe((data: any) => {
-                  if (data.data) {
-                    const mail = {
+                this.dbService.sendMail(mail).subscribe((pata: any) => {
+                  if (pata.data) {
+                    const email = {
                       email: refer.email,
                       subject: `You have been refered by ${this.user.name}!`,
                       content: `<p>Hello ${refer.name} </p><p>You have been refered by ${this.user.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><p><a style="color: blue;" href="https://refer2career.com">Login to Refer2Career</a> and increase chance to get hired by completing your profile.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
                     };
-                    this.dbService.sendMail(mail).subscribe((data: any) => {
-                      if (data.data) {
+                    this.dbService.sendMail(email).subscribe((jata: any) => {
+                      if (jata.data) {
 
                       }
                     });
