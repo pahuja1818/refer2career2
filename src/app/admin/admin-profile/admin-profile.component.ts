@@ -62,7 +62,6 @@ export class AdminProfileComponent implements OnInit {
   }
 
   initializeForm() {
-    console.log(this.user);
     if (!this.user.organizationDetails) { this.user.organizationDetails = {}; }
     this.detailForm = new FormGroup({
       name: new FormControl({ value: this.user.name, disabled: true }, [Validators.required]),
@@ -135,7 +134,6 @@ export class AdminProfileComponent implements OnInit {
       };
       this.authService.updateAdminDetails(details).then(data => {
         if (data) {
-          console.log('true');
           this.isEditing = false;
           this.detailForm.disable();
           this.toastService.showToast('Details Updated Successfully!');

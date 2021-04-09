@@ -46,7 +46,6 @@ export class JobDetailsComponent implements OnInit {
             }
           });
         });
-        console.log(params.id);
         this.jobPostService.getJobPost({ id: params.id }).subscribe((data: any) => {
           this.jobPost = data.data;
           this.isServiceRunning = false;

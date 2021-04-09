@@ -189,7 +189,6 @@ export class EmployerSigninComponent implements OnInit {
     if (this.email.valid) {
       this.isServiceRunning = true;
       this.authService.getOTP({ email: this.email.value }).subscribe((data: any) => {
-        console.log(data.data);
         if (data.data === true) {
           this.hideAll();
           this.isVerifyOTP = true;
@@ -211,7 +210,6 @@ export class EmployerSigninComponent implements OnInit {
 
   restPassword() {
     this.resetPassword.markAsTouched();
-    console.log('yay');
     if (this.resetPassword.value) {
       const dbopeartion: DbOperation = {
         collection: 'users',

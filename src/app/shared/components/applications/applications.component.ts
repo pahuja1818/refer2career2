@@ -119,11 +119,9 @@ export class ApplicationsComponent implements OnInit {
                 if (user.data.length > 0) {
                   this.isServiceRunning = false;
                   const candidate: any = user.data[0];
-                  console.log(user.data[0]._id);
                   candidate.appliedOn = cand.date;
                   candidate.appliedId = cand._id;
                   candidate.status = cand.status ? cand.status : null;
-                  console.log(candidate);
                   this.allAplications.push(candidate);
                   if (candidate.status === null) {
                     this.aplications.push(candidate);
@@ -161,7 +159,6 @@ export class ApplicationsComponent implements OnInit {
     this.dbService.find(operation).subscribe((data: any) => {
       this.isServiceRunning = false;
       if (data.data.length > 0) {
-        console.log(data.data);
         this.allReferedProfiles = data.data;
       }
     });
@@ -209,7 +206,6 @@ export class ApplicationsComponent implements OnInit {
   }
 
   seeResults() {
-    console.log(this.skillsArray);
     this.isServiceRunning = true;
     this.candidatesArray.forEach((cand: any, index) => {
       const dbOperation: DbOperation = {
@@ -315,7 +311,6 @@ export class ApplicationsComponent implements OnInit {
       query: { id },
     };
     this.dbService.update(db).then((data: any) => {
-      console.log(data);
       this.getDetails();
       this.isServiceRunning = false;
       this.modalRef.hide();

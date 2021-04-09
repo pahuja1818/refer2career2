@@ -14,7 +14,6 @@ module.exports = {
     },
 
     getDb: function () {
-        console.log('mongo started');
         return _db;
     }
 };

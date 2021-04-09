@@ -128,7 +128,6 @@ export class AllJobPostsComponent implements OnInit {
       if (data.data.length > 0) {
         this.filteredJobPosts = data.data;
         this.allJobPost = data.data;
-        console.log(this.allJobPost);
         this.sortByDate();
         this.isServiceRunning = false;
       }
@@ -217,7 +216,6 @@ export class AllJobPostsComponent implements OnInit {
     }
     else { this.selectedLocations.delete(location); }
     this.refine.location = [...this.selectedLocations];
-    console.log(this.isChanged());
   }
 
   refineJobs() {

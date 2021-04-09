@@ -58,7 +58,6 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   seeDetails(id: any) {
-    console.log(id);
     this.router.navigateByUrl(`/referer/jobs/job-detail/${id}`);
   }
 

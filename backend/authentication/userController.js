@@ -13,7 +13,6 @@ module.exports.registerUser = (req, res) => {
     const user = req.body.user;
     mongoUtil.collection("users").findOne({ 'email': user.email }, function (err, result) {
         if (err) throw err;
-        console.log(result);
         if (result !== null && result.verified === true) {
             return res.status(200).json({ 'error': 'Email already registered' });
         }
@@ -22,10 +21,8 @@ module.exports.registerUser = (req, res) => {
             let otp = Math.floor(100000 + Math.random() * 900000);
             mongoUtil.collection("verify").deleteMany({ 'email': user.email }, function (err, obj) {
                 if (err) throw err;
-                console.log(obj.result.n + " document(s) deleted");
                 mongoUtil.collection("verify").insertOne({ 'email': user.email, 'otp': otp, 'time': new Date() }, function (err, res) {
                     if (err) throw err;
-                    console.log("1 otp inserted");
                     mongoUtil.collection("users").deleteMany({ 'email': user.email }, function (err, obj) {
                         if (err) throw err;
                         mongoUtil.collection("users").insertOne(user, function (err, res) {
@@ -53,7 +50,6 @@ module.exports.registerUser = (req, res) => {
                                 if (error) {
                                     console.log(error);
                                 } else {
-                                    console.log('Email sent: ' + info.response);
                                     res.status(200).json({ 'data': true });
                                 }
                             });
@@ -69,7 +65,6 @@ module.exports.registerUser = (req, res) => {
 module.exports.verifyOTP = (req, res) => {
     const data = req.body;
     mongoUtil.collection("verify").findOne({ 'email': data.email }, function (err, result) {
-        console.log(data);
         if (err) throw err;
         let date = new Date();
         let time = result.time;
@@ -82,18 +77,14 @@ module.exports.verifyOTP = (req, res) => {
                 });
                 mongoUtil.collection("users").updateOne({ 'email': data.email }, { $set: { verified: true } }, function (err, res) {
                     if (err) throw err;
-                    console.log("1 document updated");
                 });
-                console.log('yes');
                 return res.status(200).json({ 'data': true });
             }
             else {
-                console.log('yes');
                 return res.status(200).json({ 'data': false });
             }
         }
         else {
-            console.log('yes');
             return res.status(200).json({ 'error': 'Invalid passcode' });
         }
     });

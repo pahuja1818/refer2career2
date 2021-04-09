@@ -1,3 +1,4 @@
+import { DbOperation } from './../models/dbOperation';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
@@ -6,6 +7,8 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
+  user: any = {};
 
   isScreenBig = false;
 
@@ -17,13 +20,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.getCurrentUser();
-    if (window.screen.width > 1150){
+    if (window.screen.width > 1150) {
       this.isScreenBig = true;
     }
+    if (JSON.parse(window.atob(window.localStorage.getItem('id')))._id) {
+      let dbOperation: DbOperation = {
+        collection: "users",
+        query: { "_id": JSON.parse(window.atob(window.localStorage.getItem('id')))._id }
+      }
+      this.find(dbOperation).subscribe((data: any) => {
+        if (data.data) this.user = data.data[0];
+      })
+    }
+
   }
 
-  linkedInLogin(){
-    return this.http.get(this.baseUrl + `/linkedin`, { headers:  new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})});
+  linkedInLogin() {
+    return this.http.get(`https://www.linkedin.com/oauth/v2/authorization?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8084%2Fcallback%2F&scope=r_emailaddress%20r_liteprofile&client_id=78pijkn0197pgp`, { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) });
   }
 
   getCurrentUser() {

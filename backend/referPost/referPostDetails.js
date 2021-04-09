@@ -34,7 +34,6 @@ module.exports.getReferedJobPosts = (req, res) => {
 }
 
 exports.uploadResume = (req, res) => {
-    console.log(res.files);
     if (!req.files) {
         res.status(200).json({ error: "no file found" });
     }

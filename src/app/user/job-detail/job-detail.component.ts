@@ -50,6 +50,11 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   uploadTask: firebase.storage.UploadTask;
 
   ngOnInit() {
+    this.referJobPostForm = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      resume: new FormControl(null, Validators.required),
+    });
     this.isServiceRunning = true;
     this.jobPostService.getMyApplications();
     this.jobPost.jobPost = {};
@@ -65,7 +70,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           });
         });
         this.jobPostService.getJobPost({ id: params.id }).subscribe((data: any) => {
-          console.log(data);
           this.jobPost = data.data;
           this.isServiceRunning = false;
           this.skills = this.jobPost.jobPost.skills;
@@ -76,7 +80,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log();
   }
 
   applyJobModal(template: any) {
@@ -84,11 +87,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   }
 
   referJobModal(template: any) {
-    this.referJobPostForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      resume: new FormControl(null, Validators.required),
-    });
+
     this.modalRef = this.modalService.show(template, { class: 'min-overlay', ignoreBackdropClick: true, animated: true });
   }
 
@@ -182,7 +181,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   }
 
   uploadResume(event: any) {
-    console.log(event.target.files);
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     this.fileData = event.target.files[0];

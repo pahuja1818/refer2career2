@@ -17,30 +17,35 @@
     <div class="bg-primary w-100 text-white"
       style="min-height: 220px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
     </div>
-    <div class="row justify-content-center" style="margin-top: -160px;">
-      <div class="col-sm-10 px-0 mt-5"
-        style="margin-top: 60px !important; overflow-y: auto !important; overflow-x: hidden;">
+    <div class="row p-0 m-0 justify-content-center" style="margin-top: -160px !important;">
+      <div class="col-sm-10 p-2 mt-5" style="overflow-y: auto !important; overflow-x: hidden;">
         <div class="bg-white border-8">
           <div class="row">
-            <div class="col align-self-center">
-              <div class="p-3 m-3 vertical-center justify-content-start">
-                <div>
-                  <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
-                    class="position-absolute"
-                    style="opacity: 0 !important; height: 130px !important; width: 125px !important;" />
-                  <span class="border-6S mx-auto text-center text-lg material-icons text-grey text-lg"
-                    *ngIf="!user.photo">face</span>
-                  <img *ngIf="user.photo" class="img-fulid border-6"
-                    style="height: 130px !important; width: 125px !important; border: 2px solid white;"
-                    src="{{user.photo}}" alt="">
+            <div class="col-sm-10 align-self-center">
+              <div class="p-3 m-2 row vertical-center justify-content-start">
+                <div class="col-sm-2 d-flex justify-content-center">
+                  <div>
+                    <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
+                      class="position-absolute"
+                      style="opacity: 0 !important; height: 130px !important; width: 125px !important;" />
+                    <span class="border-6S mx-auto text-center text-lg material-icons text-grey text-lg"
+                      *ngIf="!user.photo">face</span>
+                    <img *ngIf="user.photo" class="img-fulid border-6"
+                      style="height: 130px !important; width: 125px !important; border: 2px solid white;"
+                      src="{{user.photo}}" alt="">
+                  </div>
                 </div>
-                <div class="text-dark ml-4">
-                  <div class="w-100 bold text-md mb-3">{{user.name}}</div>
-                  <div class="w-100 vertical-center">
-                    <span class="material-icons-outlined vertical-center text-smd mr-5">mail
-                      <span class="ml-2">{{user.email}}</span></span>
-                    <span *ngIf="user.basicInfo" class="material-icons-outlined vertical-center text-smd mr-4">call
-                      <span class="ml-2">{{user.basicInfo.mobile}}</span></span>
+                <div class="text-dark col-sm-7">
+                  <div class="w-100 bold text-md mb-2">{{user.name}}</div>
+                  <div class="w-100 row vertical-center">
+                    <div class="col-sm-5 my-2">
+                      <span class="material-icons-outlined vertical-center text-smd mr-5">mail
+                        <span class="ml-2">{{user.email}}</span></span>
+                    </div>
+                    <div class="col-sm-5 my-2">
+                      <span *ngIf="user.basicInfo" class="material-icons-outlined vertical-center text-smd mr-4">call
+                        <span class="ml-2">{{user.basicInfo.mobile}}</span></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -48,8 +53,8 @@
           </div>
         </div>
         <div class="col-sm-12 row mt-4 p-0 m-0 justify-content-end">
-          <div class="col-sm-4 p-0 m-0">
-            <div class="bg-white p-3 border-8 mr-3">
+          <div class="col-sm-4 p-2 m-0 mb-3">
+            <div class="bg-white p-3 border-8">
               <span class="text-lg mb-4">{{profileCompleted}}<span class="text-smd">% Profile Completed</span></span>
               <div class="progress">
                 <div class="progress-bar" id="progress-bar">
@@ -106,7 +111,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-8 m-0 p-0">
+          <div class="col-sm-8 m-0 p-2">
             <div class="p-3 mx-0 mb-3 bg-white border-8">
               <div class="vertical-center justify-content-between">
                 <span class="bold text-dark text-ssmd">CV Headline</span>
@@ -128,8 +133,8 @@
                 <div class="mb-3 d-flex justify-content-between">
                   <span class="bold text-dark text-ssmd">Personal Details </span>
                   <span class="material-icons-outlined vertical-center text-violet text-md text-link"
-                    (click)="basicInfoEdit()">{{isBasiDetailEditing ? 'close' : 'edit'}} <span
-                      class="text-sm">{{isBasiDetailEditing ? 'Cancel edit' : 'Edit'}}</span></span>
+                    (click)="basicInfoEdit()">{{isBasiDetailEditing ? '' : 'edit'}} <span
+                      class="text-sm">{{isBasiDetailEditing ? 'Cancel' : 'Edit'}}</span></span>
                 </div>
                 <div class="p-3" [ngClass]="isBasiDetailEditing ? 'border-violet box-shadow' : ''"
                   style="border-radius: 6px;">

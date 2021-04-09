@@ -8,7 +8,6 @@ var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 mongoUtil.connectToServer(function (err, client) {
     if (err) console.log(err);
-    console.log('stargjsgdj');
     // start the rest of your app here
     const AuthRoutes = require('./authentication/authRoute');
     const OrganizationRoutes = require('./addOrganizations/addOrganizationsRoute');
@@ -60,7 +59,6 @@ passport.use(new LinkedInStrategy({
         // represent the logged-in user. In a typical application, you would want
         // to associate the LinkedIn account with a user record in your database,
         // and return that user instead.
-        console.log(profile);
         return done(null, profile);
     });
 }));
@@ -71,18 +69,21 @@ app.get('/link',
     }
 );
 
+app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
+
 app.get('/linkedin',
     passport.authenticate('linkedin'),
     function (req, res) {
-        console.log('asasdasd');
     }
 );
 // callback method which linkedin will hit after successfull login of user
 app.get('/callback/',
     passport.authenticate('linkedin', { failureRedirect: '/login' }),
     function (req, res) {
-        console.log('asasdasd');
-        res.redirect('http://localhost:4200');
+        //res.redirect('http://localhost:4200');
     });
 
 

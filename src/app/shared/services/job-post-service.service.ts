@@ -25,7 +25,6 @@ export class JobPostServiceService {
   getMyApplications() {
     this.appliedJobPost({ candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }).subscribe((data: any) => {
       if (data.data) {
-        console.log(data.data);
         this.myApplications.next(data.data);
       }
     });

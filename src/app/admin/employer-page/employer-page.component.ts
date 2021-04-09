@@ -34,7 +34,6 @@ export class EmployerPageComponent implements OnInit {
   }
 
   seeDetails(organization: any) {
-    console.log(organization);
     this.orgService.organization = undefined;
     this.orgService.organization = organization;
     this.modalRef = this.modalService.show(AddOrganizationComponent,

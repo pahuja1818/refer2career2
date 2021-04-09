@@ -431,7 +431,6 @@ export class UserProfileComponent implements OnInit {
         location: this.educationDetailsForm.get('location').value,
         field: this.educationDetailsForm.get('field').value,
       };
-      console.log(education);
       if (this.educationToUpdate === undefined) {
         this.educationArray.push(education);
       }
@@ -526,7 +525,6 @@ export class UserProfileComponent implements OnInit {
           this.isServiceRunning = false;
         }
         else {
-          console.log(data);
           this.isServiceRunning = false;
         }
       },
@@ -543,7 +541,6 @@ export class UserProfileComponent implements OnInit {
     }).subscribe((data: any) => {
       if (data.data.length > 0) {
         this.user = data.data[0];
-        console.log(this.user);
         this.setBasicInfo();
         this.isServiceRunning = false;
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));

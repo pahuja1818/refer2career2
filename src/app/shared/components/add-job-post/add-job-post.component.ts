@@ -145,7 +145,6 @@ export class AddJobPostComponent implements OnInit {
       }
       else {
         post._id = this.jobPost._id;
-        console.log(post);
         this.jobPostService.updateJobPost(post).subscribe((data: any) => {
           if (data.data === true) { this.toastService.showToast('Job Post Updated Successfully !'); }
           this.jobPostService.post = undefined;

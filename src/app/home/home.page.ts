@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
   constructor(
     private modalService: BsModalService,
   ) {
-    console.log(AOS);
   }
 
   ngOnInit() {

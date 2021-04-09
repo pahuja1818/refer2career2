@@ -23,7 +23,6 @@ export class ReferedProfilesComponent implements OnInit {
     })
       .subscribe((data: any) => {
         this.allReferedProfiles = data.data;
-        console.log(data.data);
       });
   }
 

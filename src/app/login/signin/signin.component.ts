@@ -224,7 +224,6 @@ export class SigninComponent implements OnInit {
           .value).toLowerCase(), password: this.loginForm.get('passwordLogin').value
       })
         .then((data: any) => {
-          console.log(data);
           if (data.error) {
             this.message = 'Invalid email or password!';
           }
@@ -243,7 +242,6 @@ export class SigninComponent implements OnInit {
 
   linkedinLogin() {
     this.authService.linkedInLogin().subscribe(data => {
-      console.log(data);
     });
   }
 
@@ -252,7 +250,6 @@ export class SigninComponent implements OnInit {
     if (this.email.valid) {
       this.isServiceRunning = true;
       this.authService.getOTP({ email: this.email.value }).subscribe((data: any) => {
-        console.log(data.data);
         if (data.data === true) {
           this.hideAll();
           this.isVerifyOTP = true;
@@ -274,7 +271,6 @@ export class SigninComponent implements OnInit {
 
   restPassword() {
     this.resetPassword.markAsTouched();
-    console.log('yay');
     if (this.resetPassword.value) {
       const dbopeartion: DbOperation = {
         collection: 'users',

@@ -20,7 +20,6 @@ export class ManageApplicantsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllJobs();
-    console.log(JSON.parse(window.atob(window.localStorage.getItem('id')))._id);
   }
 
   getAllJobs() {
@@ -43,7 +42,6 @@ export class ManageApplicantsComponent implements OnInit {
   }
 
   navigate(id: any) {
-    console.log(id);
     this.router.navigateByUrl(`/recruiter/applicants/${id}`);
   }
 

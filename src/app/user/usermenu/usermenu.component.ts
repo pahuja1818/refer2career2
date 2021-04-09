@@ -13,37 +13,30 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class UsermenuComponent implements OnInit {
 
   modalRef: BsModalRef;
-  user: any = {};
-
-
+  user: any;
 
   scroll() {
-    console.log('aswhdiaq');
     document.getElementById('jobs').scrollIntoView({
       behavior: 'smooth'
     });
   }
 
-
-
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
     private authService: AuthService,
-  ) { }
-
-  ngOnInit() {
-    this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+  ) { 
+    this.user = this.authService.user;
   }
 
-
+  ngOnInit() {
+  }
 
   toggle() {
     if (window.screen.width < 990) {
       this.menu.toggle();
     }
   }
-
 
 
 }

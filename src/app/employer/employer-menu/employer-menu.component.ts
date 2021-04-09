@@ -14,7 +14,6 @@ export class EmployerMenuComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
-    console.log(this.user);
   }
 
 }

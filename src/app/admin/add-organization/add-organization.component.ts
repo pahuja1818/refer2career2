@@ -52,7 +52,6 @@ export class AddOrganizationComponent implements OnInit {
     this.initializeForm();
     if (this.organizationService.organization !== undefined) {
       this.organization = this.organizationService.organization;
-      console.log(this.organization);
       this.initializeDetail();
     }
   }
@@ -145,7 +144,6 @@ export class AddOrganizationComponent implements OnInit {
       this.organizationService.addOrganization(details).then((data: any) => {
         this.isServiceRunning = false;
         if (data.data) {
-          console.log(data);
           this.isEditing = false;
           this.detailForm.reset();
           this.userPhoto = undefined;

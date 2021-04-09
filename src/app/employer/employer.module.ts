@@ -34,6 +34,5 @@ import { JobDetailsComponent } from '../shared/components/add-job-post/job-detai
 
 export class EmployerModule {
   constructor() {
-    console.log('Employer Module');
   }
 }
