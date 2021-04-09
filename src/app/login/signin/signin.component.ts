@@ -241,8 +241,9 @@ export class SigninComponent implements OnInit {
   }
 
   linkedinLogin() {
-    this.authService.linkedInLogin().subscribe(data => {
-    });
+    window.open("http://localhost:8084/linkedin", "_self");
+    //this.authService.linkedInLogin().subscribe(data => {
+    //});
   }
 
 

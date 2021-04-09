@@ -13,6 +13,7 @@ const routes: Routes = [
     path: 'refer-and-earn',
     component: ReferAndEarnComponent
   },
+
   {
     path: 'login',
     component: SigninComponent
@@ -21,6 +22,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'linked-in-authentication-665486522485-services-pahujaji-5cacwqw165123232',
+    component: SigninComponent
   },
   {
     path: 'referer',

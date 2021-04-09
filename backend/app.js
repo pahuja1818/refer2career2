@@ -63,27 +63,18 @@ passport.use(new LinkedInStrategy({
     });
 }));
 
-app.get('/link',
-    function (req, res) {
-        res.redirect('http://localhost:8084/linkedin');
-    }
-);
-
-app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
-
 app.get('/linkedin',
     passport.authenticate('linkedin'),
     function (req, res) {
+        //console.log(req);
     }
 );
 // callback method which linkedin will hit after successfull login of user
 app.get('/callback/',
     passport.authenticate('linkedin', { failureRedirect: '/login' }),
     function (req, res) {
-        //res.redirect('http://localhost:4200');
+        console.log(req);
+        res.redirect('http://localhost:4200/login/linked-in-authentication-665486522485/');
     });
 
 
@@ -99,7 +90,6 @@ app.get('/logout', function (req, res) {
 // method to load index.ejs file on base path
 
 app.use((req, res, next) => {
-
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,PUT,OPTIONS');
