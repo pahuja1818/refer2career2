@@ -25,7 +25,7 @@ export class UsermenuComponent implements OnInit {
     private menu: MenuController,
     private modalService: BsModalService,
     private authService: AuthService,
-  ) { 
+  ) {
     this.user = this.authService.user;
   }
 

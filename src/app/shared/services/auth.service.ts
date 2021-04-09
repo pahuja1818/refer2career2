@@ -24,13 +24,13 @@ export class AuthService {
       this.isScreenBig = true;
     }
     if (JSON.parse(window.atob(window.localStorage.getItem('id')))._id) {
-      let dbOperation: DbOperation = {
-        collection: "users",
-        query: { "_id": JSON.parse(window.atob(window.localStorage.getItem('id')))._id }
-      }
+      const dbOperation: DbOperation = {
+        collection: 'users',
+        query: { _id: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }
+      };
       this.find(dbOperation).subscribe((data: any) => {
-        if (data.data) this.user = data.data[0];
-      })
+        if (data.data) { this.user = data.data[0]; }
+      });
     }
 
   }
