@@ -65,6 +65,12 @@ passport.use(new LinkedInStrategy({
     });
 }));
 
+app.get('/link',
+    function (req, res) {
+        res.redirect('http://localhost:8084/linkedin');
+    }
+);
+
 app.get('/linkedin',
     passport.authenticate('linkedin'),
     function (req, res) {
