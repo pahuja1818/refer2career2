@@ -23,7 +23,7 @@ export class AuthService {
     if (window.screen.width > 1150) {
       this.isScreenBig = true;
     }
-    if (JSON.parse(window.atob(window.localStorage.getItem('id')))._id) {
+    if (JSON.parse(window.atob(window.localStorage.getItem('id')))) {
       const dbOperation: DbOperation = {
         collection: 'users',
         query: { _id: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }
