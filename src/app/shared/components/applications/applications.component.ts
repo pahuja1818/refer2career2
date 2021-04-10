@@ -192,7 +192,7 @@ export class ApplicationsComponent implements OnInit {
     const db: DbOperation = {
       collection: 'users',
       data: { profileViews: profileViews ? profileViews + 1 : 1 },
-      query: {_id: id}
+      query: { _id: id }
     };
     this.dbService.update(db).then((data: any) => {
       if (data.data) {

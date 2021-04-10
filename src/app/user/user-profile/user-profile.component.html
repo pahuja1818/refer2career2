@@ -28,11 +28,15 @@
                     <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
                       class="position-absolute"
                       style="opacity: 0 !important; height: 130px !important; width: 125px !important;" />
-                    <span class="border-6S mx-auto text-center text-lg material-icons text-grey text-lg"
-                      *ngIf="!user.photo">face</span>
-                    <img *ngIf="user.photo" class="img-fulid border-6"
+                      <div *ngIf="!organizationLogo"
+                      class="bg-opacity vertical-center border-6 bg-primary mx-auto text-center text-white text-xxlg"
+                      style="border-width: 2px; height: 130px !important; width: 125px !important; border: 2px solid rgb(255, 255, 255);">
+                      <span class="w-100 text-center material-icons text-xxlg">{{user
+                        ? user.name[0] : ''}}</span>
+                    </div>
+                    <img *ngIf="organizationLogo" class="img-fulid border-6"
                       style="height: 130px !important; width: 125px !important; border: 2px solid white;"
-                      src="{{user.photo}}" alt="">
+                      src="{{organizationLogo}}" alt="">
                   </div>
                 </div>
                 <div class="text-dark col-sm-7">
