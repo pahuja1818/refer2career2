@@ -1,3 +1,5 @@
+import { DbOperation } from './../../shared/models/dbOperation';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserRole } from './../../shared/models/enums';
 import { OrganizationsService } from './../../shared/services/organizations.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +16,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 })
 export class AddOrganizationComponent implements OnInit {
 
-  user: any = {};
+  user: any;
   organization: any = {};
   currrentDocIndex: any = undefined;
 
@@ -45,7 +47,8 @@ export class AddOrganizationComponent implements OnInit {
     private menu: MenuController,
     private organizationService: OrganizationsService,
     private toastService: ToastService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -141,24 +144,45 @@ export class AddOrganizationComponent implements OnInit {
           docs: this.documentsArray
         }
       };
-      this.organizationService.addOrganization(details).then((data: any) => {
-        this.isServiceRunning = false;
-        if (data.data) {
-          this.isEditing = false;
-          this.detailForm.reset();
-          this.userPhoto = undefined;
-          this.organizationLogo = undefined;
-          this.documentsArray = [];
-          this.toastService.showToast('Organization Added Successfully!');
-          setTimeout(time => {
-            window.location.reload();
-          }, 3000);
+      if (this.organization) {
+        details.lastUpdated = new Date();
+        let db: DbOperation = {
+          collection: "users",
+          data: details,
+          query: { '_id': this.organization._id }
         }
-        else if (data.error) {
-          this.message = data.error;
-        }
-        else { this.toastService.showToast('Something went wrong!', 'bg-danger'); }
-      });
+        console.log(db);
+        this.authService.update(db).then((data: any) => {
+          if (data.data) {
+            this.toastService.showToast('Organization updated Successfully!');
+            this.modalService.hide();
+            setTimeout(time => {
+              window.location.reload();
+            }, 2000);
+          }
+          else this.toastService.showToast('Something went wrong!', 'bg-danger');
+        })
+      }
+      else {
+        this.organizationService.addOrganization(details).then((data: any) => {
+          this.isServiceRunning = false;
+          if (data.data) {
+            this.isEditing = false;
+            this.detailForm.reset();
+            this.userPhoto = undefined;
+            this.organizationLogo = undefined;
+            this.documentsArray = [];
+            this.toastService.showToast('Organization Added Successfully!');
+            setTimeout(time => {
+              window.location.reload();
+            }, 3000);
+          }
+          else if (data.error) {
+            this.message = data.error;
+          }
+          else { this.toastService.showToast('Something went wrong!', 'bg-danger'); }
+        });
+      }
     }
   }
 
