@@ -97,7 +97,7 @@ export class AddJobPostComponent implements OnInit {
   }
 
   deleteFieldValueJobDetailsArray(index) {
-    if (this.skillArray.length > 1) {
+    if (this.jobDetailsArray.length > 1) {
       this.jobDetailsArray.splice(index, 1);
     }
   }
@@ -109,52 +109,58 @@ export class AddJobPostComponent implements OnInit {
   save() {
     this.message = '';
     this.jobPostForm.markAllAsTouched();
-    if (this.jobPostForm.valid) {
-      this.isServiceRunning = true;
-      const post: any = {
-        jobPost: {
-          active: true,
-          companyName: this.companyName,
-          companyLogo: this.companyLogo,
-          createdBy: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
-          createdAt: new Date(),
-          title: this.jobPostForm.get('title').value,
-          vacancy: this.jobPostForm.get('vacancy').value,
-          salary: this.jobPostForm.get('salary').value,
-          location: this.jobPostForm.get('location').value,
-          jobType: this.jobPostForm.get('jobType').value,
-          jobInternship: this.jobPostForm.get('jobInternship').value,
-          salaryType: this.jobPostForm.get('salaryType').value,
-          partTime: this.jobPostForm.get('partTime').value,
-          lastDateToApply: this.jobPostForm.get('lastDateToApply').value,
-          experience: this.jobPostForm.get('experience').value,
-          startDate: this.jobPostForm.get('startDate').value,
-          skills: this.skillArray,
-          details: this.jobDetailsArray,
-          aboutUs: this.aboutUs,
-          verified: this.jobPost ? this.jobPost.status === 'approved' : false
+    if (this.skillArray.length > 1) {
+      if (this.jobDetailsArray.length > 1) {
+        if (this.jobPostForm.valid) {
+          this.isServiceRunning = true;
+          const post: any = {
+            jobPost: {
+              active: true,
+              companyName: this.companyName,
+              companyLogo: this.companyLogo,
+              createdBy: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
+              createdAt: new Date(),
+              title: this.jobPostForm.get('title').value,
+              vacancy: this.jobPostForm.get('vacancy').value,
+              salary: this.jobPostForm.get('salary').value,
+              location: this.jobPostForm.get('location').value,
+              jobType: this.jobPostForm.get('jobType').value,
+              jobInternship: this.jobPostForm.get('jobInternship').value,
+              salaryType: this.jobPostForm.get('salaryType').value,
+              partTime: this.jobPostForm.get('partTime').value,
+              lastDateToApply: this.jobPostForm.get('lastDateToApply').value,
+              experience: this.jobPostForm.get('experience').value,
+              startDate: this.jobPostForm.get('startDate').value,
+              skills: this.skillArray,
+              details: this.jobDetailsArray,
+              aboutUs: this.aboutUs,
+              verified: this.jobPost ? this.jobPost.status === 'approved' : false
+            }
+          };
+          if (!this.jobPost) {
+            this.jobPostService.addJobPost(post).subscribe((data: any) => {
+              if (data.data === true) { this.toastService.showToast('Job Post Added Successfully !'); }
+              this.isServiceRunning = false;
+              this.modalRef.hide();
+              this.jobPostService.getPosts();
+            });
+          }
+          else {
+            post._id = this.jobPost._id;
+            this.jobPostService.updateJobPost(post).subscribe((data: any) => {
+              if (data.data === true) { this.toastService.showToast('Job Post Updated Successfully !'); }
+              this.jobPostService.post = undefined;
+              this.isServiceRunning = false;
+              this.modalService.hide();
+              window.history.back();
+              this.jobPostService.getPosts();
+            });
+          }
         }
-      };
-      if (!this.jobPost) {
-        this.jobPostService.addJobPost(post).subscribe((data: any) => {
-          if (data.data === true) { this.toastService.showToast('Job Post Added Successfully !'); }
-          this.isServiceRunning = false;
-          this.modalRef.hide();
-          this.jobPostService.getPosts();
-        });
       }
-      else {
-        post._id = this.jobPost._id;
-        this.jobPostService.updateJobPost(post).subscribe((data: any) => {
-          if (data.data === true) { this.toastService.showToast('Job Post Updated Successfully !'); }
-          this.jobPostService.post = undefined;
-          this.isServiceRunning = false;
-          this.modalService.hide();
-          window.history.back();
-          this.jobPostService.getPosts();
-        });
-      }
+      else this.toastService.showToast("Enter Job Details", 'bg-danger');
     }
+    else this.toastService.showToast("Enter Skills", 'bg-danger');
   }
 
   deletePost() {

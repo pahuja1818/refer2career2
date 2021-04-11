@@ -10,7 +10,7 @@
         (click)="filterJobPosts()">Search</button>
     </div>
     <div class="col-sm-8 my-2 text-white"><span class="text-white bold text-md">Showing
-        {{filteredJobPosts.length}} jobs</span>
+        {{filteredJobPosts.length}} Jobs</span>
     </div>
     <div class="col-sm-12"></div>
     <div class="col-sm-2 m-2 mr-4 p-0">
@@ -104,7 +104,7 @@
         <div *ngIf="isLocationExpanded" class="px-3 pt-3 pb-1">
           <div *ngFor="let location of allLocations">
             <section class="example-section">
-              <mat-checkbox class="example-margin" (change)="updateLocation($event, location)">{{location}}
+              <mat-checkbox class="example-margin text-uppercase" (change)="updateLocation($event, location)">{{location}}
               </mat-checkbox>
             </section>
           </div>
@@ -166,7 +166,7 @@
             <span class="text-grey semi-bold text-smd  d-inline">Experience : </span>
             <span class="text-grey text-smd">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
               }}
-              years</span>
+              year{{jobPost.jobPost.experience > 1 ? 's': ''}}</span>
           </div>
           <div class="row justify-content-between vertical-center mt-3">
             <span class="text-sm text-grey semi-bold col-auto">Refer reward: <span

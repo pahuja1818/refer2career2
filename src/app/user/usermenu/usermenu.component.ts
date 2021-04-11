@@ -26,16 +26,34 @@ export class UsermenuComponent implements OnInit {
     private modalService: BsModalService,
     private authService: AuthService,
   ) {
-    this.user = this.authService.user;
   }
 
   ngOnInit() {
+    this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+    //this.user = this.authService.user;
+    this.getUser();
   }
 
   toggle() {
     if (window.screen.width < 990) {
       this.menu.toggle();
     }
+  }
+
+  getUser() {
+   // this.isServiceRunning = true;
+    this.authService.find({
+      collection: 'users', query: {
+        _id: this.user._id
+      }
+    }).subscribe((data: any) => {
+      if (data.data.length > 0) {
+        this.user = data.data[0];
+       // this.setBasicInfo();
+        //this.isServiceRunning = false;
+        window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
+      }
+    });
   }
 
 

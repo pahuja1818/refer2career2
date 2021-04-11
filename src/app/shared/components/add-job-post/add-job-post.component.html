@@ -6,13 +6,15 @@
         <img class="img-fluid" src="../../../assets/logo.png" alt="" style="width: 120px; height: 90px;">
       </div>
     </div>
-    <span class="d-block text-grey text-center bold mt-2">Add Job Post</span>
+    <span class="d-block text-grey text-center text-smd bold mt-2">Add Job Post</span>
     <div class="row px-2 justify-content-center">
-      <span class="col-sm-11 d-block text-right material-icons text-grey text-link" *ngIf="jobPost"
-        (click)="delete(deletePopup)">delete</span>
+      <div class="col-sm-12 text-right">
+        <span class="text-right material-icons text-grey text-link" *ngIf="jobPost"
+          (click)="delete(deletePopup)">delete</span>
+      </div>
       <div class="row justify-content-center px-2">
         <div class="col-sm-6 mx-2 bg-white"
-          style="border-radius: 7px; overflow-y: auto !important; border: 1px solid #cccccc;">
+          style="border-radius: 7px; overflow-y: auto !important; overflow-x: hidden !important; border: 1px solid #cccccc;">
           <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
             <div class="col-sm-6 mb-2">
               <mat-form-field appearance="outline" class="p-0 w-100 mat-form-field">
@@ -49,7 +51,7 @@
             <div class="col-sm-6 mb-2">
               <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
                 <mat-label>{{ jobPostForm.get('jobInternship').value === "Job" ? 'Salary' : 'Stipend'}}</mat-label>
-                <input matInput formControlName='salary' type="number" class="p-0">
+                <input matInput formControlName='salary' name="salary" type="number" class="p-0">
                 <span matPrefix>&#8377;&nbsp;</span>
                 <span matSuffix>.00</span>
               </mat-form-field>
@@ -79,8 +81,7 @@
             <div class="col-sm-12 row mx-0 p-0">
               <div class="col-sm-6">
                 <mat-label class="p-0">Experience (in years)</mat-label>
-                <mat-slider class="w-100" formControlName="experience" thumbLabel
-                  tickInterval="1" min="0" max="10">
+                <mat-slider class="w-100" formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
                 </mat-slider>
               </div>
             </div>
