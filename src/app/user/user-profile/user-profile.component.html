@@ -66,31 +66,31 @@
               </div>
               <div class="my-3" *ngIf="profileCompleted < 100">
                 <label class="text-dark semi-bold">Complete your profile</label>
-                <div *ngIf="cvHeadLine" class="my-2">
+                <div *ngIf="!cvHeadLine" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">CV Headline</span>
                   <span class="badge badge-info">Adds 10%</span>
                 </div>
-                <div *ngIf="user.basicInfo" class="my-2">
+                <div *ngIf="!user.basicInfo" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Personal Details</span>
                   <span class="badge badge-info">Adds 15%</span>
                 </div>
-                <div *ngIf="user.photo" class="my-2">
+                <div *ngIf="!user.photo" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Profile photo</span>
                   <span class="badge badge-info">Adds 10%</span>
                 </div>
-                <div *ngIf="user.resume" class="my-2">
+                <div *ngIf="!user.resume" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Resume</span>
                   <span class="badge badge-info">Adds 15%</span>
                 </div>
-                <div *ngIf="skillsArray.length > 0" class="my-2">
+                <div *ngIf="skillsArray.length === 0" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Skills</span>
                   <span class="badge badge-info">Adds 12%</span>
                 </div>
-                <div *ngIf="educationArray.length > 0" class="my-2">
+                <div *ngIf="educationArray.length === 0" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Education</span>
                   <span class="badge badge-info">Adds 11%</span>
                 </div>
-                <div *ngIf="workExpArray.length > 0" class="my-2">
+                <div *ngIf="workExpArray.length === 0" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Experience</span>
                   <span class="badge badge-info">Adds 15%</span>
                 </div>

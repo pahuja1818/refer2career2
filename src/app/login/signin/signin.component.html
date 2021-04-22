@@ -5,9 +5,10 @@
 <div class="flipCard w-100">
   <div class="card vh-100 w-100 vertical-center bg-transparent" id="cardToFlip">
     <div class="side front w-100 row p-0 m-0 vertical-center justify-content-center">
-      <div class="col-sm-9 p-2" style="height: 86vh !important;">
-        <div class="w-100 row vertical-center h-100 mx-auto bg-white border-7">
-          <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-left-7 vertical-center">
+      <div class="col-sm-9 p-2" style="max-height: 96vh !important;">
+        <div class="w-100 row vertical-center h-100 mx-auto bg-violet border-7">
+          <div *ngIf="isScreenBig" style="height: 100% !important;"
+            class="col-sm-5 bg-violet w-100 border-left-7 vertical-center">
             <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">{{ !isLogin ? "Don't
                 worry!!": 'Welcome Back!!'}}</span>
               <span class="text-ssmd d-block text-center">
@@ -15,7 +16,7 @@
                 please signin with your credentials.'}}
               </span></span>
           </div>
-          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'">
+          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'" class=" p-3 bg-white border-7">
             <div class="">
               <div class="d-flex justify-content-center mb-4">
                 <img *ngIf="!isVerifyOTP"
@@ -56,10 +57,11 @@
                 <button *ngIf="!isServiceRunning" class="btn bg-violet btn-primary p-1 px-4"
                   style="border-radius: 20px;" (click)="login()">Signin</button>
               </div>
-              <div class="col-sm-12 p-3 d-flex justify-content-center">
-                <div>
-                  <img (click)="linkedinLogin()" src="./../../../assets/linkedin-signin-button.png" alt="" style="max-width: 200px; max-height: 40px;"
-                    class="image-fluid">
+              <div class="col-sm-12 p-3 mt-4 d-flex justify-content-center">
+                <div class="vertical-center">
+                  <span class="text-grey">Sign in using &nbsp;</span>
+                  <span class="text-dark text-smd bold" (click)="linkedinLogin()"> Linked </span>
+                  <ion-icon class="linked-in-color text-lg" (click)="linkedinLogin()" name="logo-linkedin"></ion-icon>
                 </div>
               </div>
             </form>
@@ -72,7 +74,7 @@
                 an
                 Account</a>
             </div>
-            <div class="w-100 text-center pt-3">
+            <div class="w-100 text-center pt-1 mb-2">
               <a class="text-primary text-link semi-bold" *ngIf="isLogin" (click)="openEmployerModal()">Sign-in as
                 Employer</a>
             </div>
@@ -146,9 +148,9 @@
       </div>
     </div>
     <div class="side back w-100 row p-0 m-0 vertical-center justify-content-center">
-      <div class="col-sm-9 p-2" style="height: 86vh !important;">
-        <div class="w-100 row vertical-center h-100 mx-auto bg-white border-7">
-          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'">
+      <div class="col-sm-9 p-2" style="max-height: 96vh !important;">
+        <div class="w-100 row vertical-center h-100 mx-auto bg-violet border-7">
+          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'" class="p-3 bg-white border-7">
             <div class="">
               <div class="d-flex justify-content-center mb-4">
                 <img *ngIf="!isVerifyOTP"
@@ -157,7 +159,7 @@
               </div>
             </div>
             <div class="vertical-center w-100 justify-content-center mb-2">
-              <span class="text-violet text-md semi-bold">{{ isLogin?'Signin to Refer2Career': isRegistration
+              <span class="text-violet text-md semi-bold">{{ isLogin ? 'Signin to Refer2Career': isRegistration
                 ?'Create Account':
                 isForgotPassword ?
                 'Forgot Password' : isResetPassword ? 'Reset Password' : ''}}</span>
@@ -235,7 +237,7 @@
           <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-right-7 vertical-center">
             <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">Hello friend!!</span>
               <span class="text-ssmd d-block text-center">
-                Enter your personal details and start applying for job.
+                Enter your details and start applying for job.
               </span></span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="h-100 w-100" style="overflow-y: auto;">
   <div class="bg-primary w-100 text-white"
     style="min-height: 290px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
-    <div class="d-flex justify-content-between p-2">
+    <div class="vertical-center justify-content-between p-2">
       <div class="d-flex justify-content-end vertical-center">
         <ion-menu-button class="text-white"></ion-menu-button>
       </div>
@@ -23,7 +23,7 @@
   </div>
   <div class="mt-4 pt-4">
     <div class="row p-0 m-0 justify-content-between">
-      <div class="row p-2 m-0 col-sm-4">
+      <div class="row p-2 m-0 col-sm-4 mt-4">
         <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
           style="border: 1px solid #bfc2f7; border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
@@ -41,24 +41,25 @@
           </div>
         </div>
       </div>
-      <div class="row p-2 m-0 col-sm-4">
+      <div class="row p-2 m-0 col-sm-4 mt-4">
         <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
           style="border: 1px solid #bfc2f7; border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
             style="margin-top: -30px; width: 90px; height: 90px;">
-            <span class="material-icons text-xlg text-white mx-auto">recent_actors</span>
+            <span class="material-icons text-lg text-white mx-auto">recent_actors</span>
           </div>
           <div class="w-100 text-center my-3">
             <span class="d-block text-dark semi-bold text-lg">Referred Profiles</span>
             <span class="d-block text-dark">Check the status of referred candidates</span>
+            <span class="d-block text-white">dsvsdvds</span>
           </div>
           <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
-            <button class="btn btn-outline-info py-1 px-5" routerLink="/referer/my-applications/refered"
+            <button routerLink="/referer/jobs" class="btn btn-outline-info py-1 px-5"
               style="border-radius: 30px;">View</button>
           </div>
         </div>
       </div>
-      <div class="row p-2 m-0 col-sm-4">
+      <div class="row p-2 m-0 col-sm-4 mt-4">
         <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
           style="border: 1px solid #bfc2f7; border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
@@ -66,13 +67,15 @@
             <span class="material-icons text-lg text-white mx-auto">preview</span>
           </div>
           <div class="w-100 text-center my-3">
-            <span class="d-block text-dark semi-bold text-lg">{{user.profileViews ? user.profileViews : 0}} Profile
+            <span class="d-block text-dark semi-bold text-lg"> Profile
               {{user.profileViews ? user.profileViews > 1 ? 'Views' : 'View' : 'view'}}</span>
             <span class="d-block text-dark">Your profile viewed {{user.profileViews ? user.profileViews : 0}}
               {{user.profileViews ? user.profileViews > 1 ? 'times' : 'time' : 'time'}} by employers!</span>
+            <span class="d-block text-white">dvsdv</span>
           </div>
           <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
-            <button class="btn btn-outline-info py-1 px-5" style="border-radius: 30px;">View</button>
+            <button routerLink="/referer/jobs" class="btn btn-outline-info py-1 px-5"
+              style="border-radius: 30px;">View</button>
           </div>
         </div>
       </div>
