@@ -158,9 +158,9 @@ export class AddJobPostComponent implements OnInit {
           }
         }
       }
-      else this.toastService.showToast("Enter Job Details", 'bg-danger');
+      else { this.toastService.showToast('Enter Job Details', 'bg-danger'); }
     }
-    else this.toastService.showToast("Enter Skills", 'bg-danger');
+    else { this.toastService.showToast('Enter Skills', 'bg-danger'); }
   }
 
   deletePost() {

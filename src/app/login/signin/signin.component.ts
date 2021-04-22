@@ -58,17 +58,17 @@ export class SigninComponent implements OnInit {
   ) { }
 
   isScreenBig = false;
-  socialUser: any = {}
+  socialUser: any = {};
 
   ngOnInit() {
     this.routing.params.subscribe((params: Params) => {
       if (params.user) {
         this.isServiceRunning = true;
         this.socialUser = params.user;
-        let db: DbOperation = {
-          collection: "users",
+        const db: DbOperation = {
+          collection: 'users',
           query: { providerId: this.socialUser }
-        }
+        };
         this.authService.find(db).subscribe((data: any) => {
           console.log(data);
           if (data.data) {
@@ -79,12 +79,12 @@ export class SigninComponent implements OnInit {
             }
           }
           else {
-            this.toast.showToast("Something Went Wrong!", "bg-danger");
+            this.toast.showToast('Something Went Wrong!', 'bg-danger');
             setTimeout(() => {
               window.open('https://refer2career.com/', '_self');
-            },3000)
+            }, 3000);
           }
-        })
+        });
       }
     });
     if (window.screen.width > 1150) { this.isScreenBig = true; }

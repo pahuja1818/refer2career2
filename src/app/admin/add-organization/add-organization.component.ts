@@ -146,11 +146,11 @@ export class AddOrganizationComponent implements OnInit {
       };
       if (this.organization) {
         details.lastUpdated = new Date();
-        let db: DbOperation = {
-          collection: "users",
+        const db: DbOperation = {
+          collection: 'users',
           data: details,
-          query: { '_id': this.organization._id }
-        }
+          query: { _id: this.organization._id }
+        };
         console.log(db);
         this.authService.update(db).then((data: any) => {
           if (data.data) {
@@ -160,8 +160,8 @@ export class AddOrganizationComponent implements OnInit {
               window.location.reload();
             }, 2000);
           }
-          else this.toastService.showToast('Something went wrong!', 'bg-danger');
-        })
+          else { this.toastService.showToast('Something went wrong!', 'bg-danger'); }
+        });
       }
       else {
         this.organizationService.addOrganization(details).then((data: any) => {

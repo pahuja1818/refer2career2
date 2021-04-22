@@ -288,7 +288,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   }
 
   closeModal(id = 0) {
-    if (id == 0) {
+    if (id === 0) {
       this.modalService.hide();
     }
     else {

@@ -30,7 +30,7 @@ export class UsermenuComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
-    //this.user = this.authService.user;
+    // this.user = this.authService.user;
     this.getUser();
   }
 
@@ -50,7 +50,7 @@ export class UsermenuComponent implements OnInit {
       if (data.data.length > 0) {
         this.user = data.data[0];
        // this.setBasicInfo();
-        //this.isServiceRunning = false;
+        // this.isServiceRunning = false;
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }
     });
