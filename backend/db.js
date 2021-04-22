@@ -6,7 +6,7 @@ var _db;
 
 module.exports = {
     connectToServer: function (callback) {
-        MongoClient.connect(url, function (err, client) {
+        MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, client) {
              //_db = client.db('Refer2Career');
             _db = client.db('insta-jobs');
             return callback(err);

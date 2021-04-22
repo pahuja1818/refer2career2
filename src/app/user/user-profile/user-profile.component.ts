@@ -549,7 +549,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   otpRequest() {
-
   }
 
   get profileCompleted() {

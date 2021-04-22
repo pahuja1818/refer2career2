@@ -10,7 +10,7 @@ export class JobPostServiceService {
 
   headers = new HttpHeaders({ 'content-type': 'application/json' });
 
-  public baseUrl = window.location.host.includes('localhost') ?  'http://localhost:8084' :  'https://instajobapp.herokuapp.com' ;
+  public baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
 
   post: any = undefined;
   jobPosts: Subject<any> = new Subject<any>();
@@ -31,15 +31,17 @@ export class JobPostServiceService {
   }
 
   getPosts() {
-    if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === 1) {
-      this.getJobPostsByEmployer({ _id: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }).subscribe((data: any) => {
-        this.jobPosts.next(data.data);
-      });
-    }
-    else {
-      this.getAllJobPosts().subscribe((data: any) => {
-        this.jobPosts.next(data.data);
-      });
+    if (window.localStorage.getItem('id')){
+      if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === 1) {
+        this.getJobPostsByEmployer({ _id: JSON.parse(window.atob(window.localStorage.getItem('id')))._id }).subscribe((data: any) => {
+          this.jobPosts.next(data.data);
+        });
+      }
+      else {
+        this.getAllJobPosts().subscribe((data: any) => {
+          this.jobPosts.next(data.data);
+        });
+      }
     }
   }
 

@@ -24,7 +24,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'linked-in-authentication-665486522485-services-pahujaji-5cacwqw165123232',
+    path: 'login/:code/:user',
     component: SigninComponent
   },
   {

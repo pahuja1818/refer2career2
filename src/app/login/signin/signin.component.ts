@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { timer } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 import { Route } from '@angular/compiler/src/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -52,13 +52,41 @@ export class SigninComponent implements OnInit {
     public modalRef: BsModalRef,
     private authService: AuthService,
     private router: Router,
+    private routing: ActivatedRoute,
     private toast: ToastService,
     private modalService: BsModalService,
   ) { }
 
   isScreenBig = false;
+  socialUser: any = {}
 
   ngOnInit() {
+    this.routing.params.subscribe((params: Params) => {
+      if (params.user) {
+        this.isServiceRunning = true;
+        this.socialUser = params.user;
+        let db: DbOperation = {
+          collection: "users",
+          query: { providerId: this.socialUser }
+        }
+        this.authService.find(db).subscribe((data: any) => {
+          console.log(data);
+          if (data.data) {
+            if (data.data.length > 0) {
+              window.localStorage.setItem('id', window.btoa(JSON.stringify(data.data[0])));
+              window.location.reload();
+              this.isServiceRunning = false;
+            }
+          }
+          else {
+            this.toast.showToast("Something Went Wrong!", "bg-danger");
+            setTimeout(() => {
+              window.open('https://refer2career.com/', '_self');
+            },3000)
+          }
+        })
+      }
+    });
     if (window.screen.width > 1150) { this.isScreenBig = true; }
     else { this.isScreenBig = false; }
     this.initializeSignupForm();
@@ -241,7 +269,7 @@ export class SigninComponent implements OnInit {
   }
 
   linkedinLogin() {
-    window.open('http://localhost:8084/linkedin', '_self');
+    window.open('https://instajobapp.herokuapp.com/linkedin', '_self');
     // this.authService.linkedInLogin().subscribe(data => {
     // });
   }

@@ -5,7 +5,7 @@ const ResumeParser = require('resume-parser');
 
 var passport = require('passport');
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-
+var mongo;
 mongoUtil.connectToServer(function (err, client) {
     if (err) console.log(err);
     // start the rest of your app here
@@ -17,6 +17,7 @@ mongoUtil.connectToServer(function (err, client) {
     app.use('/api', OrganizationRoutes);
     app.use('/api', JobPostRoutes);
     app.use('/api', ReferJobPostRoutes);
+    mongo = require('./db.js').getDb();
 });
 
 const bodyparser = require('body-parser');
@@ -50,7 +51,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new LinkedInStrategy({
     clientID: '78pijkn0197pgp',
     clientSecret: 'XL9shz8q217eF2BI',
-    callbackURL: "http://localhost:8084/callback/",
+    callbackURL: "https://instajobapp.herokuapp.com/callback/",
     scope: ['r_emailaddress', 'r_liteprofile'],
 }, function (accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
@@ -66,15 +67,50 @@ passport.use(new LinkedInStrategy({
 app.get('/linkedin',
     passport.authenticate('linkedin'),
     function (req, res) {
-        //console.log(req);
+        // console.log(req);
     }
 );
 // callback method which linkedin will hit after successfull login of user
 app.get('/callback/',
     passport.authenticate('linkedin', { failureRedirect: '/login' }),
     function (req, res) {
-        console.log(req);
-        res.redirect('http://localhost:4200/login/linked-in-authentication-665486522485/');
+        let time = new Date().getTime();
+        let user = {
+            name: req.user.name.givenName + " " + req.user.name.familyName,
+            email: req.user.emails[0].value,
+            provider: req.user.provider,
+            providerId: req.user.id,
+            photo: req.user.photos[1].value,
+            verified: true,
+            role: 2,
+        }
+        mongo.collection("users").findOne({ 'email': user.email }, function (err, result) {
+            if (err) throw err;
+            if (result !== null) {
+                const query = {'email': user.email};
+                mongo.collection("users").updateOne(query, { $set: user }, function (err, rep) {
+                    if (err) throw err;
+                    user = user.providerId;
+                    res.redirect(`https://refer2career.com/login/linked-in-authentication-${time}
+                    linked-in-authentication-${time}linked-in-authentication-${time}
+                    linked-in-authentication-${time}linked-in-authentication-${time}
+                    linked-in-authentication-${time}linked-in-authentication-${time}
+                    linked-in-authentication-${time}/${user}`);
+                });
+            }
+            else {
+                mongo.collection("users").insertOne(user, function (err, rep) {
+                    if (err) throw err;
+                    user = user.providerId;
+                    res.redirect(`https://refer2career.com/login/linked-in-authentication-${time}
+                    linked-in-authentication-${time}linked-in-authentication-${time}
+                    linked-in-authentication-${time}linked-in-authentication-${time}
+                    linked-in-authentication-${time}linked-in-authentication-${time}
+                    linked-in-authentication-${time}/${user}`);
+                });
+            }
+        });
+
     });
 
 
