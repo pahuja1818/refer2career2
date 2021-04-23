@@ -40,6 +40,8 @@ export class AllJobPostsComponent implements OnInit {
 
   isSortBy = false;
 
+  isScreenBig = false;
+
   refineInitial: any = {
     partTime: false,
     fullTime: false,
@@ -83,6 +85,14 @@ export class AllJobPostsComponent implements OnInit {
     this.isSortByExpanded = false;
   }
 
+  refineJobsDropDown = false;
+
+  openRefineJobs() {
+    if (!this.isScreenBig) {
+      this.refineJobsDropDown = !this.refineJobsDropDown;
+    }
+  }
+
   clearFilter() {
     this.refineInitial.partTime = this.refineDefaultInitial.partTime;
     this.refineInitial.fullTime = this.refineDefaultInitial.fullTime;
@@ -101,7 +111,6 @@ export class AllJobPostsComponent implements OnInit {
     this.refine.location = this.refineDefaultInitial.location;
 
     this.selectedLocations.clear();
-
     this.refineJobs();
 
     this.isSortByExpanded = false;
@@ -119,6 +128,10 @@ export class AllJobPostsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (window.screen.width > 1150) {
+      this.isScreenBig = true;
+      this.refineJobsDropDown = true;
+    }
     this.isServiceRunning = true;
     const db: DbOperation = {
       collection: 'jobposts',
@@ -168,7 +181,9 @@ export class AllJobPostsComponent implements OnInit {
 
   filterJobPosts() {
     let search = this.myControl.value;
+    if(search)
     search = search.toLowerCase();
+    else search = '';
     this.filteredJobPosts = [];
     this.allJobPost.forEach((jobPost: any, index: number) => {
       if (jobPost.jobPost.title.toLowerCase().includes(search)) {
@@ -266,6 +281,8 @@ export class AllJobPostsComponent implements OnInit {
           this.refineInitial.remote = this.refine.remote,
           this.refineInitial.minExp = this.refine.minExp,
           this.refineInitial.location = this.refine.location;
+        this.refineJobsDropDown = false;
+        this.filterJobPosts();
         this.sortByDate();
         this.isServiceRunning = false;
       }
