@@ -46,7 +46,7 @@ export class ManageApplicantsComponent implements OnInit {
     if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {
       this.router.navigateByUrl(`/admin/applicants/${id}`);
     }
-    else this.router.navigateByUrl(`/recruiter/applicants/${id}`);
+    else { this.router.navigateByUrl(`/recruiter/applicants/${id}`); }
   }
 
 }

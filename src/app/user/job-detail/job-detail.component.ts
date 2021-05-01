@@ -165,10 +165,10 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
             status: 0,
             statusUpdatedAt: new Date(),
           };
-          let db: DbOperation = {
-            "collection": 'referedProfiles',
+          const db: DbOperation = {
+            collection: 'referedProfiles',
             query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
-          }
+          };
           this.dbService.find(db).subscribe((data: any) => {
             if (data.data === null) {
               this.referService.referJobPost(refer).subscribe((ele: any) => {

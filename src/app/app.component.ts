@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
       }
     }
     else {
-      if(!(this.location.path().includes('login'))){
+      if (!(this.location.path().includes('login'))){
         this.router.navigateByUrl('/login');
       }
     }

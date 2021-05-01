@@ -15,6 +15,12 @@ import { thLocale } from 'ngx-bootstrap/chronos';
 })
 export class AllJobPostsComponent implements OnInit {
 
+  constructor(
+    private jobPostService: JobPostServiceService,
+    private router: Router,
+    private authService: AuthService,
+  ) { }
+
   role = JSON.parse(window.atob(window.localStorage.getItem('id'))).role;
 
   allJobPost: any[] = [];
@@ -72,6 +78,8 @@ export class AllJobPostsComponent implements OnInit {
     location: []
   };
 
+  refineJobsDropDown = false;
+
   isChanged(): boolean {
     return !(JSON.stringify(this.refine) === JSON.stringify(this.refineInitial));
   }
@@ -84,8 +92,6 @@ export class AllJobPostsComponent implements OnInit {
     this.isSortBy = value;
     this.isSortByExpanded = false;
   }
-
-  refineJobsDropDown = false;
 
   openRefineJobs() {
     if (!this.isScreenBig) {
@@ -120,12 +126,6 @@ export class AllJobPostsComponent implements OnInit {
     this.isRemoteExpanded = false;
     this.isExperienceExpanded = false;
   }
-
-  constructor(
-    private jobPostService: JobPostServiceService,
-    private router: Router,
-    private authService: AuthService,
-  ) { }
 
   ngOnInit() {
     if (window.screen.width > 1150) {
@@ -181,9 +181,10 @@ export class AllJobPostsComponent implements OnInit {
 
   filterJobPosts() {
     let search = this.myControl.value;
-    if(search)
+    if (search) {
     search = search.toLowerCase();
-    else search = '';
+    }
+    else { search = ''; }
     this.filteredJobPosts = [];
     this.allJobPost.forEach((jobPost: any, index: number) => {
       if (jobPost.jobPost.title.toLowerCase().includes(search)) {
