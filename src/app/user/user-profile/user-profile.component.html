@@ -345,7 +345,7 @@
     <div class="row p-0 px-2 m-3" [formGroup]="workExpForm">
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Title</mat-label>
+          <mat-label class="p-0 text-grey">Title</mat-label>
           <input matInput placeholder="Enter field" class="p-0" formControlName='title'>
           <mat-error>Enter valid title</mat-error>
           <mat-hint class="text-light-grey text-xs">Ex - Software Developer</mat-hint>
@@ -353,7 +353,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label>Job Type</mat-label>
+          <mat-label class="text-grey">Job Type</mat-label>
           <mat-select formControlName='type'>
             <mat-option value="Full Time">
               Full Time
@@ -376,7 +376,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Company Name</mat-label>
+          <mat-label class="p-0 text-grey">Company Name</mat-label>
           <input matInput placeholder="Enter Company Name" class="p-0" formControlName='companyName'>
           <mat-error>Enter valid company name</mat-error>
           <mat-hint class="text-light-grey text-xs">Ex - Microsoft</mat-hint>
@@ -384,7 +384,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Location</mat-label>
+          <mat-label class="p-0 text-grey">Location</mat-label>
           <input matInput placeholder="Enter Location" class="p-0" formControlName='location'>
           <mat-error>Enter valid location</mat-error>
           <mat-hint class="text-light-grey text-xs">Ex - United States</mat-hint>
@@ -395,7 +395,7 @@
       </div>
       <div class="col-sm-12 mt-3 row mt-3 d-flex justify-content-between">
         <mat-form-field appearance="outline" class="p-0 col-sm-5 mat-form-field ">
-          <mat-label>Start Date</mat-label>
+          <mat-label class="text-grey">Start Date</mat-label>
           <input matInput readonly [matDatepicker]="picker1" formControlName='startDate'>
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -404,7 +404,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="p-0 col-sm-5 mat-form-field"
           *ngIf="workExpForm.get('isWorking').value !== true">
-          <mat-label>End Date</mat-label>
+          <mat-label  class="text-grey">End Date</mat-label>
           <input matInput readonly [matDatepicker]="picker2" formControlName='endDate'>
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
@@ -414,7 +414,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Description</mat-label>
+          <mat-label class="p-0 text-grey">Description</mat-label>
           <input matInput placeholder="Enter field" class="p-0" formControlName='description'>
           <mat-error>Enter Description</mat-error>
         </mat-form-field>
@@ -436,7 +436,7 @@
     <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label>Qualification</mat-label>
+          <mat-label class="text-grey">Qualification</mat-label>
           <input type="text" placeholder="Ex. B.Tech" aria-label="Number" matInput formControlName='degree'
             [matAutocomplete]="auto">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -449,7 +449,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label>Course Type</mat-label>
+          <mat-label class="text-grey">Course Type</mat-label>
           <mat-select formControlName='type'>
             <mat-option value="Full Time">
               Full Time
@@ -463,7 +463,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Field/Stream</mat-label>
+          <mat-label class="p-0 text-grey">Field/Stream</mat-label>
           <input matInput placeholder="Enter field" class="p-0" formControlName='field'>
           <mat-error>Enter valid field</mat-error>
           <mat-hint class="text-light-grey text-xs">Ex - Computer Science</mat-hint>
@@ -471,7 +471,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Institute</mat-label>
+          <mat-label class="p-0 text-grey">Institute</mat-label>
           <input matInput placeholder="Enter name" class="p-0" formControlName='school'>
           <mat-error>Enter valid name</mat-error>
           <mat-hint class="text-light-grey text-xs">Ex - Oxford university</mat-hint>
@@ -479,7 +479,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label class="p-0">Institute Location</mat-label>
+          <mat-label class="p-0 text-grey">Institute Location</mat-label>
           <input matInput placeholder="Enter name" class="p-0" formControlName='location'>
           <mat-error>Enter valid location</mat-error>
           <mat-hint class="text-light-grey text-xs">Ex - England</mat-hint>
@@ -487,7 +487,7 @@
       </div>
       <div class="col-sm-12 mt-3">
         <mat-form-field appearance="outline" class="p-0 w-75 mat-form-field">
-          <mat-label>Completion date</mat-label>
+          <mat-label class="text-grey">Completion date</mat-label>
           <input matInput readonly [matDatepicker]="picker1" formControlName='completionDate'>
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
@@ -512,7 +512,7 @@
     <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
-          <mat-label>Skill Name</mat-label>
+          <mat-label class="text-grey">Skill Name</mat-label>
           <input type="text" placeholder="Ex. JAVA" aria-label="Number" matInput [formControl]="skillName"
             [matAutocomplete]="auto">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
