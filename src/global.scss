@@ -575,7 +575,7 @@ ion-item.selected {
   height: 150px;
   width: 285px;
   background: linear-gradient(120deg,rgb(255, 255, 255) 100%, rgb(164, 172, 245));
-  box-shadow: 0px 10px 10px rgba(140, 151, 245, 0.8);
+  box-shadow: 0px 10px 10px #504A62;
   transform: rotate(-10deg);
   border-radius: 10px 10px 10px 50px;
   margin-left: -18px;
@@ -624,14 +624,14 @@ p{
 
 .active{
   border-left: 5px solid;
-  border-color: rgb(140, 151, 245);
-  color: rgb(140, 151, 245);
-  background-color: rgb(140, 151, 245);
+  border-color: #504A62;
+  color: #504A62;
+  background-color: #504A62;
   padding-left: 15px;
 }
 
 .icon-active{
-color: rgb(140, 151, 245) !important;
+color: #504A62 !important;
 }
 
 .split-pane-md.split-pane-visible>.split-pane-side {
@@ -645,7 +645,7 @@ color: rgb(140, 151, 245) !important;
 
 .dash-bg{
   background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%,rgba(140,151,245,1) 0%, rgba(140,151,245,1) 100%);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%,#504A62 0%, #504A62 100%);
 }
 
 .bg-coloured{

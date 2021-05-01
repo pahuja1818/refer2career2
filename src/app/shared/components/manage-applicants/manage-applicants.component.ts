@@ -1,3 +1,4 @@
+import { UserRole } from 'src/app/shared/models/enums';
 import { Router } from '@angular/router';
 import { DbOperation } from './../../models/dbOperation';
 import { AuthService } from './../../services/auth.service';
@@ -42,7 +43,10 @@ export class ManageApplicantsComponent implements OnInit {
   }
 
   navigate(id: any) {
-    this.router.navigateByUrl(`/recruiter/applicants/${id}`);
+    if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {
+      this.router.navigateByUrl(`/admin/applicants/${id}`);
+    }
+    else this.router.navigateByUrl(`/recruiter/applicants/${id}`);
   }
 
 }

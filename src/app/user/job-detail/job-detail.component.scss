@@ -11,6 +11,19 @@ hr{
     transform: translateY(-1.1em) scale(.75);
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  //color: rgb(160, 160, 160);
+  opacity: 1 !important; /* Firefox */
+}
+
+input::-webkit-input-placeholder {
+  color: #888 !important;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #888 !important;
+}
+
   ::ng-deep .cdk-overlay-container {
     z-index: 1200 !important;
   }

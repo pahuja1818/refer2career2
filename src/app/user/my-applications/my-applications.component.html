@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-sm-6 vertical-center" *ngIf="jobPost.jobPost.skills.length > 0">
                   <span class="material-icons-outlined text-grey mr-2 text-md text-violet">psychology</span>
-                  <span class="text-grey semi-bold text-smd  d-inline"></span>
+                  <span class="text-grey semi-bold text-smd  d-inline">Skills : &nbsp;</span>
                   <span class="text-grey text-smd text-wrap">{{jobPost.jobPost.skills[0].skillName }}
                     {{ jobPost.jobPost.skills.length > 1 ? ' , ' +
                     jobPost.jobPost.skills[1].skillName : ''}}</span>
@@ -65,7 +65,7 @@
                 <span class="text-sm text-grey semi-bold col-auto">Refer reward: <span
                     class="badge badge-primary text-sm bg-violet">₹{{jobPost.referReward}}</span></span>
               </div>
-              <div class="vertical-center justify-content-between mt-3">
+              <div class="vertical-center justify-content-between mt-1">
                 <span class="text-smd py-2"
                   [ngClass]="jobPost.status === 'Shortlisted' ? 'text-primary' : jobPost.status === 'Hired' ? 'text-success' : jobPost.status === 'Rejected' ? 'text-danger' : ''">{{jobPost.status}}</span>
                 <span class="text-grey text-sm text-break">Submitted on &nbsp; {{jobPost.appliedDate | date: 'dd

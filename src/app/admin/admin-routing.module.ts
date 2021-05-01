@@ -1,3 +1,4 @@
+import { ApplicationsComponent } from './../shared/components/applications/applications.component';
 import { ApplicantsComponent } from './../employer/applicants/applicants.component';
 import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,9 @@ const routes: Routes = [
       },
       {
         path: 'applicants', component: ApplicantsComponent
+      },
+      {
+        path: 'applicants/:jobId', component: ApplicationsComponent
       },
       {
         path: 'jobs', component: JobPostsComponent

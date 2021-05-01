@@ -213,6 +213,7 @@ export class ApplicationsComponent implements OnInit {
         query: { _id: cand.candidateId, totalWorkExp: { $gt: this.minExp ? this.minExp - 1 : 0 } }
       };
       this.allAplications = [];
+      this.aplications = [];
       this.dbService.find(dbOperation).subscribe((user: any) => {
         this.isServiceRunning = false;
         if (user.data.length > 0) {
@@ -225,12 +226,14 @@ export class ApplicationsComponent implements OnInit {
                 localCandidate.appliedId = cand._id;
                 localCandidate.status = cand.status ? cand.status : null;
                 this.aplications.push(localCandidate);
+                this.allAplications.push(localCandidate);
               }
             });
           }
           else {
             candidate.appliedOn = candidate.date;
             this.allAplications.push(candidate);
+            this.aplications.push(candidate);
           }
         }
       });

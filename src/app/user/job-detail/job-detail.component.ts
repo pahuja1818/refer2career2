@@ -1,3 +1,4 @@
+import { DbOperation } from 'src/app/shared/models/dbOperation';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -10,6 +11,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Status } from 'src/app/shared/models/enums';
 import * as firebase from 'firebase';
+import { Db } from 'mongodb';
 
 @Component({
   selector: 'app-job-detail',
@@ -19,6 +21,7 @@ import * as firebase from 'firebase';
 export class JobDetailComponent implements OnInit, AfterViewInit {
 
   isServiceRunning = false;
+  maxDob = new Date(2006, 11, 31);
 
   constructor(
     private jobPostService: JobPostServiceService,
@@ -51,15 +54,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   basePath = '/refered-resumes';
   uploadTask: firebase.storage.UploadTask;
 
-  skillName = new FormControl(null, Validators.required);
-  skillsArray: string[] = [];
-
-  filteredQualifications: Observable<string[]>;
-
-  skillsOptions: string[] = ['Java', 'Event Management', 'Angular 10', 'HTML', 'CSS',
-    'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
-  filteredSkills: Observable<string[]>;
-
 
   profileForm: FormGroup;
 
@@ -67,9 +61,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     start: new FormControl(null, Validators.required),
     end: new FormControl(null, Validators.required)
   });
-
-  workExpToUpdate: any = undefined;
-  workExpArray: any[] = [];
 
   title = new FormControl('', Validators.required);
   companyName = new FormControl('', Validators.required);
@@ -79,9 +70,10 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   referTemplate: any;
 
   ngOnInit() {
-    this.initializeWorkExpForm();
     this.referJobPostForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
+      fatherName: new FormControl(null, [Validators.required]),
+      dob: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       resume: new FormControl(null, Validators.required),
     });
@@ -107,18 +99,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           err => console.log(err));
       }
     });
-
-    this.filteredSkills = this.skillName.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterSkills(value))
-    );
-  }
-
-
-  private _filterSkills(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.skillsOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngAfterViewInit() {
@@ -158,11 +138,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openSkillModal(template: any) {
-    this.closeModal(0);
-    this.skillName.patchValue('');
-    this.modalService.show(template, { id: 1, ignoreBackdropClick: true, animated: true });
-  }
+
 
   async referJobPost() {
     let resume;
@@ -175,25 +151,25 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
       storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
         resume = url;
         this.fileData = undefined;
-
         if (resume && this.fileData === undefined) {
           const refer: any = {
             resume,
             jobTitle: this.jobPost.jobPost.title,
             name: this.referJobPostForm.get('name').value,
             email: this.referJobPostForm.get('email').value,
+            fatherName: this.referJobPostForm.get('fatherName').value,
+            dob: this.referJobPostForm.get('dob').value,
             jobId: this.jobId,
-            workExperience: this.workExpArray,
-            skills: this.skillsArray,
             referedBy: (JSON.parse(window.atob(window.localStorage.getItem('id')))).email,
             createdAt: new Date(),
             status: 0,
             statusUpdatedAt: new Date(),
           };
-          this.referService.checkReferedProfile({
-            jobId: this.jobPost.jobPostId,
-            email: this.referJobPostForm.get('email').value
-          }).subscribe((data: any) => {
+          let db: DbOperation = {
+            "collection": 'referedProfiles',
+            query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
+          }
+          this.dbService.find(db).subscribe((data: any) => {
             if (data.data === null) {
               this.referService.referJobPost(refer).subscribe((ele: any) => {
                 this.toastService.showToast('Refered successfully');
@@ -216,10 +192,10 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
                     });
                   }
                 });
-                this.modalRef.hide();
+                this.modalService.hide();
               });
             }
-            else { this.toastService.showToast('This profile already refered!', 'bg-danger'); }
+            else { this.toastService.showToast('This profile is already refered for this job post!', 'bg-danger'); }
           });
 
         }
@@ -246,46 +222,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     return diffDays >= 7;
   }
 
-  initializeWorkExpForm() {
-    this.workExpForm = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      type: new FormControl(null, Validators.required),
-      companyName: new FormControl(null, Validators.required),
-      location: new FormControl(null, Validators.required),
-      isWorking: new FormControl(false, Validators.required),
-      startDate: new FormControl(null, Validators.required),
-      endDate: new FormControl(null),
-      description: new FormControl(null, Validators.required),
-    });
-  }
-
-  addSkill() {
-    this.skillName.markAsTouched();
-    if (this.skillName.value) {
-      this.isServiceRunning = true;
-      if (!this.skillsArray.includes(this.skillName.value)) {
-        this.skillsArray.push(this.skillName.value);
-      }
-      this.skillName.reset();
-    }
-  }
-
-  removeTag(index: any) {
-    this.isServiceRunning = true;
-    this.skillsArray.splice(index, 1);
-  }
-
-  openWorkExpModal(template: any) {
-    this.workExpToUpdate = undefined;
-    this.range.reset();
-    this.title.reset();
-    this.companyName.reset();
-    this.workExpToUpdate = undefined;
-    this.closeModal(0);
-    setTimeout(() => {
-      this.modalService.show(template, { id: 2, ignoreBackdropClick: true, animated: true });
-    }, 500);
-  }
 
   closeModal(id = 0) {
     if (id === 0) {
@@ -295,51 +231,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
       this.modalService.hide(id);
       this.referJobModal(this.referTemplate);
     }
-  }
-
-  addWorkExp() {
-    this.workExpForm.markAllAsTouched();
-    if (this.workExpForm.valid) {
-      const workExp: any = {
-        title: this.workExpForm.get('title').value,
-        type: this.workExpForm.get('type').value,
-        companyName: this.workExpForm.get('companyName').value,
-        location: this.workExpForm.get('location').value,
-        isWorking: this.workExpForm.get('isWorking').value,
-        startDate: this.workExpForm.get('startDate').value,
-        endDate: this.workExpForm.get('endDate').value,
-        description: this.workExpForm.get('description').value,
-      };
-      if (this.workExpToUpdate === undefined) {
-        this.workExpArray.push(workExp);
-      }
-      else { this.workExpArray[this.workExpToUpdate] = workExp; }
-      this.workExpToUpdate = undefined;
-      this.closeModal(2);
-    }
-  }
-
-  editWorkExp(workExp: any, template: any, i) {
-    this.workExpToUpdate = i;
-    this.workExpForm.patchValue({
-      title: workExp.title,
-      type: workExp.type,
-      companyName: workExp.companyName,
-      location: workExp.location,
-      isWorking: workExp.isWorking,
-      startDate: workExp.startDate,
-      endDate: workExp.endDate,
-      description: workExp.description,
-    });
-    this.closeModal(0);
-    setTimeout(() => {
-      this.modalService.show(template, { id: 2, ignoreBackdropClick: true, animated: true });
-    }, 500);
-  }
-
-  deleteWorkExp(index: number) {
-    this.isServiceRunning = false;
-    this.workExpArray.splice(index, 1);
   }
 
 }

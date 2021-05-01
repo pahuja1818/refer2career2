@@ -119,7 +119,8 @@
             <div class="p-3 mx-0 mb-3 bg-white border-8">
               <div class="vertical-center justify-content-between">
                 <span class="bold text-dark text-ssmd">CV Headline</span>
-                <span class="text-violet text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()"> Add +</span>
+                <span class="text-violet text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()"> {{cvHeadLine ?
+                  'Add' : 'Edit'}}</span>
               </div>
               <span class="text-smd my-4" *ngIf="!isCVHeadEditing">{{cvHeadLine ? cvHeadLine : 'Give an introductory
                 title to your profile to be viewed by Employers'}}</span>
@@ -146,9 +147,9 @@
                     [ngClass]="isBasiDetailEditing ? '' : 'not-clickable'">
                     <div class=" col-sm-5 mb-2">
                       <mat-form-field class="p-0 w-100 mat-form-field">
-                        <mat-label class="p-0">Phone number</mat-label>
+                        <mat-label class="p-0  text-grey">Phone number</mat-label>
                         <input matInput type="number" placeholder="Enter phone number" class="p-0"
-                          formControlName='mobile'>
+                          formControlName='mobile' name="mobile">
                         <mat-error>Enter valid phone number</mat-error>
                       </mat-form-field>
                     </div>
@@ -415,7 +416,7 @@
         <mat-form-field class="p-0 w-100 mat-form-field">
           <mat-label class="p-0">Description</mat-label>
           <input matInput placeholder="Enter field" class="p-0" formControlName='description'>
-          <mat-error>Enter valid field</mat-error>
+          <mat-error>Enter Description</mat-error>
         </mat-form-field>
       </div>
     </div>

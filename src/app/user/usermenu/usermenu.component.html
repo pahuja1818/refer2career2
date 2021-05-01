@@ -24,8 +24,8 @@
   <div class="mt-4 pt-4">
     <div class="row p-0 m-0 justify-content-between">
       <div class="row p-2 m-0 col-sm-4 mt-4">
-        <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
-          style="border: 1px solid #bfc2f7; border-radius: 10px;">
+        <div class="col-sm-9 mx-auto d-flex border border-primary justify-content-center bg-white card"
+          style="border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
             style="margin-top: -30px; width: 90px; height: 90px;">
             <span class="material-icons text-lg text-white mx-auto">search</span>
@@ -42,8 +42,8 @@
         </div>
       </div>
       <div class="row p-2 m-0 col-sm-4 mt-4">
-        <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
-          style="border: 1px solid #bfc2f7; border-radius: 10px;">
+        <div class="col-sm-9 mx-auto border border-primary d-flex justify-content-center bg-white card"
+          style="border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
             style="margin-top: -30px; width: 90px; height: 90px;">
             <span class="material-icons text-lg text-white mx-auto">recent_actors</span>
@@ -54,14 +54,14 @@
             <span class="d-block text-white">dsvsdvds</span>
           </div>
           <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
-            <button routerLink="/referer/jobs" class="btn btn-outline-info py-1 px-5"
+            <button routerLink="/referer/my-applications/refered" class="btn btn-outline-info py-1 px-5"
               style="border-radius: 30px;">View</button>
           </div>
         </div>
       </div>
       <div class="row p-2 m-0 col-sm-4 mt-4">
-        <div class="col-sm-9 mx-auto d-flex justify-content-center bg-white card"
-          style="border: 1px solid #bfc2f7; border-radius: 10px;">
+        <div class="col-sm-9 mx-auto border border-primary d-flex justify-content-center bg-white card"
+          style="border-radius: 10px;">
           <div class="rounded-circle bg-violet vertical-center mx-auto"
             style="margin-top: -30px; width: 90px; height: 90px;">
             <span class="material-icons text-lg text-white mx-auto">preview</span>
@@ -74,8 +74,8 @@
             <span class="d-block text-white">dvsdv</span>
           </div>
           <div class="w-100 d-flex justify-content-center py-4 pb-5 mb-2">
-            <button routerLink="/referer/jobs" class="btn btn-outline-info py-1 px-5"
-              style="border-radius: 30px;">View</button>
+            <button class="btn btn-outline-info py-1 px-5" style="border-radius: 30px;">{{user.profileViews ?
+              user.profileViews > 1 ? user.profileViews + ' Views' : 'No views' : 'View'}}</button>
           </div>
         </div>
       </div>
