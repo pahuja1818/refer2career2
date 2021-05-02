@@ -119,7 +119,7 @@
             <div class="p-3 mx-0 mb-3 bg-white border-8">
               <div class="vertical-center justify-content-between">
                 <span class="bold text-dark text-ssmd">CV Headline</span>
-                <span class="text-violet text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()"> {{cvHeadLine ?
+                <span class="text-violet text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()"> {{!cvHeadLine ?
                   'Add' : 'Edit'}}</span>
               </div>
               <span class="text-smd my-4" *ngIf="!isCVHeadEditing">{{cvHeadLine ? cvHeadLine : 'Give an introductory

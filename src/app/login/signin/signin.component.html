@@ -57,11 +57,18 @@
                 <button *ngIf="!isServiceRunning" class="btn bg-violet btn-primary p-1 px-4"
                   style="border-radius: 20px;" (click)="login()">Sign in</button>
               </div>
-              <div class="col-sm-12 p-3 mt-4 d-flex justify-content-center">
-                <div class="vertical-center">
-                  <span class="text-grey">Sign in using &nbsp;</span>
-                  <span class="text-dark text-smd bold" (click)="linkedinLogin()"> Linked </span>
-                  <ion-icon class="linked-in-color text-lg" (click)="linkedinLogin()" name="logo-linkedin"></ion-icon>
+              <div class="w-100 d-flex mt-3">
+                <hr class="text-grey">
+                <span class="text-grey"> or </span>
+                <hr class="text-grey">
+              </div>
+              <div class="col-sm-12 p-2">
+                <h5 class="w-100 text-grey text-sm text-center">Sign in using</h5>
+                <div class="w-100 d-flex justify-content-center">
+                  <ion-icon class="linked-in-color text-lg m-2" (click)="linkedinLogin()" name="logo-linkedin">
+                  </ion-icon>
+                  <ion-icon class="text-danger text-lg m-2" name="logo-google"></ion-icon>
+                  <ion-icon class="facebook-color text-lg m-2" name="logo-facebook"></ion-icon>
                 </div>
               </div>
             </form>

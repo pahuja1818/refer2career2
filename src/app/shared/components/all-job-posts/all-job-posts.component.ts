@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { thLocale } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-all-job-posts',
@@ -182,7 +181,7 @@ export class AllJobPostsComponent implements OnInit {
   filterJobPosts() {
     let search = this.myControl.value;
     if (search) {
-    search = search.toLowerCase();
+      search = search.toLowerCase();
     }
     else { search = ''; }
     this.filteredJobPosts = [];
@@ -282,7 +281,8 @@ export class AllJobPostsComponent implements OnInit {
           this.refineInitial.remote = this.refine.remote,
           this.refineInitial.minExp = this.refine.minExp,
           this.refineInitial.location = this.refine.location;
-        this.refineJobsDropDown = false;
+        if (!this.isScreenBig)
+          this.refineJobsDropDown = false;
         this.filterJobPosts();
         this.sortByDate();
         this.isServiceRunning = false;

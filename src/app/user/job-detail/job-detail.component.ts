@@ -145,32 +145,34 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     // const file: any;
     this.referJobPostForm.markAllAsTouched();
     if (this.referJobPostForm.valid) {
-      const storageRef: any = firebase.storage().ref();
-      const time = new Date().getTime();
-      await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.fileData);
-      storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
-        resume = url;
-        this.fileData = undefined;
-        if (resume && this.fileData === undefined) {
-          const refer: any = {
-            resume,
-            jobTitle: this.jobPost.jobPost.title,
-            name: this.referJobPostForm.get('name').value,
-            email: this.referJobPostForm.get('email').value,
-            fatherName: this.referJobPostForm.get('fatherName').value,
-            dob: this.referJobPostForm.get('dob').value,
-            jobId: this.jobId,
-            referedBy: (JSON.parse(window.atob(window.localStorage.getItem('id')))).email,
-            createdAt: new Date(),
-            status: 0,
-            statusUpdatedAt: new Date(),
-          };
-          const db: DbOperation = {
-            collection: 'referedProfiles',
-            query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
-          };
-          this.dbService.find(db).subscribe((data: any) => {
-            if (data.data === null) {
+      const db: DbOperation = {
+        collection: 'referedProfiles',
+        query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
+      };
+      this.dbService.find(db).subscribe(async (data: any) => {
+        console.log(data);
+        if (data.data.length === 0) {
+          const storageRef: any = firebase.storage().ref();
+          const time = new Date().getTime();
+          await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.fileData);
+          storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
+            resume = url;
+            this.fileData = undefined;
+            if (resume && this.fileData === undefined) {
+              const refer: any = {
+                resume,
+                jobTitle: this.jobPost.jobPost.title,
+                name: this.referJobPostForm.get('name').value,
+                email: this.referJobPostForm.get('email').value,
+                fatherName: this.referJobPostForm.get('fatherName').value,
+                dob: this.referJobPostForm.get('dob').value,
+                jobId: this.jobId,
+                referedBy: (JSON.parse(window.atob(window.localStorage.getItem('id')))).email,
+                createdAt: new Date(),
+                status: 0,
+                statusUpdatedAt: new Date(),
+              };
+
               this.referService.referJobPost(refer).subscribe((ele: any) => {
                 this.toastService.showToast('Refered successfully');
                 const mail = {
@@ -187,7 +189,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
                     };
                     this.dbService.sendMail(email).subscribe((jata: any) => {
                       if (jata.data) {
-
                       }
                     });
                   }
@@ -195,10 +196,11 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
                 this.modalService.hide();
               });
             }
-            else { this.toastService.showToast('This profile is already refered for this job post!', 'bg-danger'); }
           });
 
         }
+        else { this.toastService.showToast('This profile is already refered for this job post!', 'bg-danger'); }
+
       });
     }
   }

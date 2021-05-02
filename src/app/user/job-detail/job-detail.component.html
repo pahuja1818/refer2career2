@@ -128,33 +128,33 @@
 <ng-template class="p-2" #referModal>
   <div class="bg-white p-3" style="border-radius: 5px; max-height: 600px; overflow-y: scroll;"
     [formGroup]="referJobPostForm">
-    <div class="d-block text-right">
+    <div class="d-block mb-0 text-right">
       <span class="material-icons text-grey text-link" (click)="closeModal(0)">close</span>
     </div>
-    <span class="d-block text-grey bold mb-2">Enter the details of the person whom you are refering - </span>
+    <span class="d-block text-grey bold mb-2">Enter the details of the person whom you are referring - </span>
     <div class="row p-0 m-3">
-      <div class="col-sm-12">
+      <div class="col-sm-12 mb-2">
         <mat-form-field class="p-0 w-100">
           <mat-label class="p-0 text-grey">Name</mat-label>
-          <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
+          <input matInput placeholder="Enter name" autocomplete="none" class="p-0" formControlName='name'>
           <mat-error>Enter valid detail</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 mb-2">
         <mat-form-field class="p-0 w-100">
           <mat-label class="p-0 text-grey">Father's Name</mat-label>
-          <input matInput placeholder="Enter father name" class="p-0" formControlName='fatherName'>
+          <input matInput placeholder="Enter father name" autocomplete="none" class="p-0" formControlName='fatherName'>
           <mat-error>Enter valid detail</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 mb-2">
         <mat-form-field class="p-0 w-100 mat-form-field">
           <mat-label class="p-0 text-grey">Email</mat-label>
-          <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
+          <input matInput placeholder="Enter email" autocomplete="none" class="p-0" formControlName='email'>
           <mat-error>Enter valid email</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 mb-2">
         <mat-form-field class="p-0 w-100 mat-form-field">
           <mat-label class="text-grey">Date of Birth</mat-label>
           <input matInput readonly [matDatepicker]="picker1" formControlName='dob' [max]="maxDob">
@@ -168,7 +168,7 @@
     <div class="row p-0 m-3">
       <span class="text-grey w-100 col-sm-12 mb-2">Upload resume : </span>
       <div class="col-sm-12">
-        <span class="material-icons mx-auto display-1 text-danger">backup</span>
+        <span class="material-icons mx-auto text-xxlg text-danger">backup</span>
         <div class="form-group">
           <input type="file" accept=".pdf,.docx" formControlName='resume' (change)="uploadResume($event)"
             class="form-control-file" id="exampleFormControlFile1">
@@ -177,9 +177,7 @@
           resume of candidate</mat-error>
       </div>
     </div>
-    <div class="row justify-content-center my-2">
-    </div>
-    <div class="w-100 d-flex justify-content-end my-4 pt-5">
+    <div class="w-100 d-flex justify-content-center mt-3">
       <button class="btn btn-primary bg-violet px-4 py-2" (click)="referJobPost()">Refer</button>
     </div>
   </div>

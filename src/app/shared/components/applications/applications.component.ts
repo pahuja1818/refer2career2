@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { FormControl, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -22,6 +23,7 @@ export class ApplicationsComponent implements OnInit {
     private dbService: AuthService,
     public modalController: ModalController,
     private modalService: BsModalService,
+    private toast: ToastService,
   ) { }
 
 
@@ -123,7 +125,7 @@ export class ApplicationsComponent implements OnInit {
                   candidate.appliedId = cand._id;
                   candidate.status = cand.status ? cand.status : null;
                   this.allAplications.push(candidate);
-                  if (candidate.status === null) {
+                  if (candidate.status === null || candidate.status === undefined) {
                     this.aplications.push(candidate);
                   }
                   switch (cand.status) {
@@ -311,13 +313,18 @@ export class ApplicationsComponent implements OnInit {
     const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Shortlisted' },
-      query: { id },
+      query: { _id: id },
     };
+    console.log(id);
     this.dbService.update(db).then((data: any) => {
-      this.getDetails();
-      this.isServiceRunning = false;
-      this.modalRef.hide();
-      this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
+      if (data.data == true) {
+        this.getDetails();
+        this.isServiceRunning = false;
+        this.modalRef.hide();
+        this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
+        this.toast.showToast("Shortlisted Successfully!");
+      }
+      else this.toast.showToast("Something went wrong!", "bg-danger")
     });
   }
 
@@ -326,13 +333,17 @@ export class ApplicationsComponent implements OnInit {
     const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Hired' },
-      query: { id },
+      query: { _id: id },
     };
     this.dbService.update(db).then((data: any) => {
-      this.getDetails();
-      this.isServiceRunning = false;
-      this.modalRef.hide();
-      this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
+      if (data.data == true) {
+        this.getDetails();
+        this.isServiceRunning = false;
+        this.modalRef.hide();
+        this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
+        this.toast.showToast("Hired Successfully!");
+      }
+      else this.toast.showToast("Something went wrong!", "bg-danger")
     });
   }
 
@@ -341,13 +352,17 @@ export class ApplicationsComponent implements OnInit {
     const db: DbOperation = {
       collection: 'applyJob',
       data: { status: 'Rejected' },
-      query: { id },
+      query: { _id: id },
     };
     this.dbService.update(db).then((data: any) => {
-      this.getDetails();
-      this.isServiceRunning = false;
-      this.modalRef.hide();
-      this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
+      if (data.data == true) {
+        this.getDetails();
+        this.isServiceRunning = false;
+        this.modalRef.hide();
+        this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
+        this.toast.showToast("Rejected Successfully!");
+      }
+      else this.toast.showToast("Something went wrong!", "bg-danger")
     });
   }
   openConfirmModal(template: any, id: any, status: any) {

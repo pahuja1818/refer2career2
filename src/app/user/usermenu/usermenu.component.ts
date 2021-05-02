@@ -1,7 +1,6 @@
 import { element } from 'protractor';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { PopoverModule } from 'ngx-bootstrap/popover';
 import { MenuController } from '@ionic/angular';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -41,7 +40,7 @@ export class UsermenuComponent implements OnInit {
   }
 
   getUser() {
-   // this.isServiceRunning = true;
+    // this.isServiceRunning = true;
     this.authService.find({
       collection: 'users', query: {
         _id: this.user._id
@@ -49,7 +48,7 @@ export class UsermenuComponent implements OnInit {
     }).subscribe((data: any) => {
       if (data.data.length > 0) {
         this.user = data.data[0];
-       // this.setBasicInfo();
+        // this.setBasicInfo();
         // this.isServiceRunning = false;
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }
