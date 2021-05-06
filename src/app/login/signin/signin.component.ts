@@ -274,6 +274,12 @@ export class SigninComponent implements OnInit {
     // });
   }
 
+  googleLogin() {
+    window.open('https://instajobapp.herokuapp.com/google', '_self');
+    // this.authService.linkedInLogin().subscribe(data => {
+    // });
+  }
+
 
   forgotPassword() {
     if (this.email.valid) {

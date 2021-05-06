@@ -48,6 +48,8 @@ passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
 
+// sign in with linked in ----------
+
 passport.use(new LinkedInStrategy({
     clientID: '78pijkn0197pgp',
     clientSecret: 'XL9shz8q217eF2BI',
@@ -87,7 +89,7 @@ app.get('/callback/',
         mongo.collection("users").findOne({ 'email': user.email }, function (err, result) {
             if (err) throw err;
             if (result !== null) {
-                const query = {'email': user.email};
+                const query = { 'email': user.email };
                 mongo.collection("users").updateOne(query, { $set: user }, function (err, rep) {
                     if (err) throw err;
                     user = user.providerId;
@@ -113,6 +115,71 @@ app.get('/callback/',
 
     });
 
+
+//Sign in with Google -----------
+
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GOOGLE_CLIENT_ID = '593137889627-c89jf8s7lii6r05ns466lt0lkkpvhog7.apps.googleusercontent.com';
+const GOOGLE_CLIENT_SECRET = 'HFe2JkRt8oZZfIqNHOHmI2XA';
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "https://instajobapp.herokuapp.com/google/callback/"
+},
+    function (accessToken, refreshToken, profile, done) {
+        userProfile = profile;
+        return done(null, userProfile);
+    }
+));
+
+app.get('/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] }),
+    function (req, res) {
+        // Successful authentication, redirect success.
+        //console.log(res);
+    });
+
+app.get('/google/callback/',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+        console.log(req.user);
+        let time = new Date().getTime();
+        let user = {
+            name: req.user.name.givenName + " " + req.user.name.familyName,
+            email: req.user.emails[0].value,
+            provider: req.user.provider,
+            providerId: req.user.id,
+            photo: req.user.photos[0].value,
+            verified: true,
+            role: 2,
+        }
+        mongo.collection("users").findOne({ 'email': user.email }, function (err, result) {
+            if (err) throw err;
+            if (result !== null) {
+                const query = { 'email': user.email };
+                mongo.collection("users").updateOne(query, { $set: user }, function (err, rep) {
+                    if (err) throw err;
+                    user = user.providerId;
+                    res.redirect(`https://refer2career.com/login/google-authentication-${time}
+                    google-authentication-${time}google-authentication-${time}
+                    google-authentication-${time}google-authentication-${time}
+                    google-authentication-${time}google-authentication-${time}
+                    google-authentication-${time}/${user}`);
+                });
+            }
+            else {
+                mongo.collection("users").insertOne(user, function (err, rep) {
+                    if (err) throw err;
+                    user = user.providerId;
+                    res.redirect(`https://refer2career.com/login/google-authentication-${time}
+                    google-authentication-${time}google-authentication-${time}
+                    google-authentication-${time}google-authentication-${time}
+                    google-authentication-${time}google-authentication-${time}
+                    google-authentication-${time}/${user}`);
+                });
+            }
+        });
+    });
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
