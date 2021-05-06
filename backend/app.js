@@ -181,6 +181,73 @@ app.get('/google/callback/',
         });
     });
 
+
+
+
+//login with facebook ------------------------------
+
+const FacebookStrategy = require('passport-facebook').Strategy;
+
+passport.use(new FacebookStrategy({
+    clientID: '537416687257101',
+    clientSecret: 'cede02260273efbc8712d6c9c99323ea',
+    callbackURL: 'https://instajobapp.herokuapp.com/facebook/callback/',
+    profileFields: ['id', 'photos', 'emails', 'name']
+}, function (accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+}
+));
+
+
+app.get('/facebook',
+    passport.authenticate('facebook', { scope: ['email'] }),
+    function (req, res) {
+        // Successful authentication, redirect success.
+        //console.log(res);
+    });
+
+app.get('/facebook/callback/',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        console.log(req.user);
+        let time = new Date().getTime();
+        let user = {
+            name: req.user.name.givenName + " " + req.user.name.familyName,
+            email: req.user.emails[0].value,
+            provider: req.user.provider,
+            providerId: req.user.id,
+            photo: req.user.photos[0].value,
+            verified: true,
+            role: 2,
+        }
+        mongo.collection("users").findOne({ 'email': user.email }, function (err, result) {
+            if (err) throw err;
+            if (result !== null) {
+                const query = { 'email': user.email };
+                mongo.collection("users").updateOne(query, { $set: user }, function (err, rep) {
+                    if (err) throw err;
+                    user = user.providerId;
+                    res.redirect(`https://refer2career.com/login/facebook-authentication-${time}
+                    facebook-authentication-${time}facebook-authentication-${time}
+                    facebook-authentication-${time}facebook-authentication-${time}
+                    facebook-authentication-${time}facebook-authentication-${time}
+                    facebook-authentication-${time}/${user}`);
+                });
+            }
+            else {
+                mongo.collection("users").insertOne(user, function (err, rep) {
+                    if (err) throw err;
+                    user = user.providerId;
+                    res.redirect(`https://refer2career.com/login/facebook-authentication-${time}
+                    facebook-authentication-${time}facebook-authentication-${time}
+                    facebook-authentication-${time}facebook-authentication-${time}
+                    facebook-authentication-${time}facebook-authentication-${time}
+                    facebook-authentication-${time}/${user}`);
+                });
+            }
+        });
+    });
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
     res.redirect('/login')

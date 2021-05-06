@@ -280,6 +280,12 @@ export class SigninComponent implements OnInit {
     // });
   }
 
+  facebookLogin() {
+    window.open('https://instajobapp.herokuapp.com/facebook', '_self');
+    // this.authService.linkedInLogin().subscribe(data => {
+    // });
+  }
+
 
   forgotPassword() {
     if (this.email.valid) {
