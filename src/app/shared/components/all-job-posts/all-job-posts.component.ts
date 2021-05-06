@@ -281,8 +281,9 @@ export class AllJobPostsComponent implements OnInit {
           this.refineInitial.remote = this.refine.remote,
           this.refineInitial.minExp = this.refine.minExp,
           this.refineInitial.location = this.refine.location;
-        if (!this.isScreenBig)
+        if (!this.isScreenBig) {
           this.refineJobsDropDown = false;
+        }
         this.filterJobPosts();
         this.sortByDate();
         this.isServiceRunning = false;

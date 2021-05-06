@@ -317,14 +317,14 @@ export class ApplicationsComponent implements OnInit {
     };
     console.log(id);
     this.dbService.update(db).then((data: any) => {
-      if (data.data == true) {
+      if (data.data === true) {
         this.getDetails();
         this.isServiceRunning = false;
         this.modalRef.hide();
         this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
-        this.toast.showToast("Shortlisted Successfully!");
+        this.toast.showToast('Shortlisted Successfully!');
       }
-      else this.toast.showToast("Something went wrong!", "bg-danger")
+      else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
     });
   }
 
@@ -336,14 +336,14 @@ export class ApplicationsComponent implements OnInit {
       query: { _id: id },
     };
     this.dbService.update(db).then((data: any) => {
-      if (data.data == true) {
+      if (data.data === true) {
         this.getDetails();
         this.isServiceRunning = false;
         this.modalRef.hide();
         this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
-        this.toast.showToast("Hired Successfully!");
+        this.toast.showToast('Hired Successfully!');
       }
-      else this.toast.showToast("Something went wrong!", "bg-danger")
+      else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
     });
   }
 
@@ -355,14 +355,14 @@ export class ApplicationsComponent implements OnInit {
       query: { _id: id },
     };
     this.dbService.update(db).then((data: any) => {
-      if (data.data == true) {
+      if (data.data === true) {
         this.getDetails();
         this.isServiceRunning = false;
         this.modalRef.hide();
         this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
-        this.toast.showToast("Rejected Successfully!");
+        this.toast.showToast('Rejected Successfully!');
       }
-      else this.toast.showToast("Something went wrong!", "bg-danger")
+      else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
     });
   }
   openConfirmModal(template: any, id: any, status: any) {
