@@ -1,3 +1,4 @@
+import { FeedbackComponent } from './feedback/feedback.component';
 import { ApplicationsComponent } from './../shared/components/applications/applications.component';
 import { ApplicantsComponent } from './../employer/applicants/applicants.component';
 import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
@@ -35,6 +36,9 @@ const routes: Routes = [
       },
       {
         path: 'jobs/detail/:id', component: JobDetailsAdminComponent
+      },
+      {
+        path: 'feedback', component: FeedbackComponent
       },
       {
         path: 'messages', component: MessagesComponent

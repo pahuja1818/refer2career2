@@ -1,3 +1,4 @@
+import { FeedbackComponent } from './feedback/feedback.component';
 import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,7 +25,8 @@ import { ApplicantsComponent } from './applicants/applicants.component';
     JobPostsComponent,
     AddOrganizationComponent,
     JobDetailsAdminComponent,
-    ApplicantsComponent
+    ApplicantsComponent,
+    FeedbackComponent
   ],
   imports: [
     CommonModule,
