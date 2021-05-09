@@ -24,6 +24,9 @@ const routes: Routes = [
         path: 'job-posts', component: JobPostsComponent
       },
       {
+        path: 'job-posts/create', component: JobPostsComponent
+      },
+      {
         path: 'job-posts/detail/:id', component: JobDetailsEmployerComponent
       },
       {

@@ -155,7 +155,7 @@
                     </div>
                     <div class="col-sm-5 mb-2">
                       <mat-form-field class="p-0 w-100 mat-form-field">
-                        <mat-label>Gender</mat-label>
+                        <mat-label class="p-0  text-grey">Gender</mat-label>
                         <mat-select formControlName='gender'>
                           <mat-option value="Female">
                             Female
@@ -172,7 +172,7 @@
                     </div>
                     <div class="col-sm-5 mb-2">
                       <mat-form-field class="p-0 w-100 mat-form-field">
-                        <mat-label>Martial Status</mat-label>
+                        <mat-label class="p-0  text-grey">Martial Status</mat-label>
                         <mat-select formControlName='martialStatus'>
                           <mat-option value="Single">
                             Single
@@ -195,14 +195,14 @@
                     </div>
                     <div class="col-sm-5 mb-2">
                       <mat-form-field class="p-0 w-100 mat-form-field">
-                        <mat-label class="p-0">Nationality</mat-label>
+                        <mat-label class="p-0  text-grey">Nationality</mat-label>
                         <input matInput placeholder="Enter nationality" class="p-0" formControlName='nationality'>
                         <mat-error>Enter valid detail</mat-error>
                       </mat-form-field>
                     </div>
                     <div class="col-sm-5 mb-2">
                       <mat-form-field class="p-0 w-100 mat-form-field">
-                        <mat-label>Date of Birth</mat-label>
+                        <mat-label class="p-0  text-grey">Date of Birth</mat-label>
                         <input matInput readonly [matDatepicker]="picker1" formControlName='dob' [max]="maxDob">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>

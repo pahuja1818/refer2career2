@@ -21,6 +21,7 @@ export class JobPostsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.router.url.includes("create")) this.addJobPost();
     this.jobPostService.getPosts();
     this.jobPostService.jobPosts.subscribe((data: any) => {
       this.allJobPost = data;
