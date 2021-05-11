@@ -7,7 +7,7 @@
       <ion-title>Referred Profiles</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="row justify-content-center" style=" margin-top: 70px !important;">
+  <div class="row justify-content-center" *ngIf="!isServiceRunning" style=" margin-top: 70px !important;">
     <div class="col-sm-5 m-3 pt-4" *ngFor="let profile of allReferedProfiles">
       <div class="card box-shadow w-100 p-3 btn btn-light">
         <span class="badge badge-success p-2 mb-3" style="width: max-content;">Submitted

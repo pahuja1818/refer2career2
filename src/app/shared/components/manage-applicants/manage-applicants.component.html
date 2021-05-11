@@ -7,7 +7,7 @@
       <ion-title>Manage Applicants</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="row justify-content-center px-1">
+  <div class="row justify-content-center px-1" *ngIf="!isServiceRunning">
     <div class="m-3 mt-5 p-2 bg-white col-sm-9"
       style="margin-top: 70px !important; border-radius: 7px; overflow-y: auto !important; border: 1px solid #cccccc;">
       <table class="table" *ngIf="allPosts.length > 0">

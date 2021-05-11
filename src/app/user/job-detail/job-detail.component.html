@@ -7,7 +7,7 @@
       <ion-title>Job Details</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="row justify-content-center px-1">
+  <div class="row justify-content-center px-1" *ngIf="!isServiceRunning">
     <div class="m-3 mt-5 p-2 bg-white col-sm-6"
       style="margin-top: 70px !important; border-radius: 7px; overflow-y: auto !important; overflow-x: hidden; border: 1px solid #cccccc;">
       <div class="d-flex justify-content-between vertical-center mb-3">
@@ -92,10 +92,15 @@
         </div>
       </div>
       <div *ngIf="jobPost.jobPost.details.length > 1">
-        <span class="text-dark text-ssmd semi-bold d-block my-3">Job Details</span>
-        <div *ngFor="let detail of jobPost.jobPost.details">
-          <span *ngIf="detail.detail" class="vertical-center text-ssmd text-grey px-3 py-2  m-2 bg-light"> <span
-              class="material-icons-outlined text-sm text-grey mr-2">circle</span> &nbsp; {{detail.detail}}</span>
+        <span class="text-dark text-ssmd semi-bold d-block my-3">Job Description</span>
+        <div *ngIf="jobPost.jobPost.details.length > 0">
+          <div *ngFor="let detail of jobPost.jobPost.details">
+            <span *ngIf="detail.detail" class="vertical-center text-ssmd text-grey px-3 py-2  m-2 bg-light"> <span
+                class="material-icons-outlined text-sm text-grey mr-2">circle</span> &nbsp; {{detail.detail}}</span>
+          </div>
+        </div>
+        <div *ngIf="jobPost.jobPost.details">
+          <p class="text-greay text-sm text-break" style="white-space: pre;">{{jobPost.jobPost.details}}</p>
         </div>
       </div>
       <div class="pt-2">

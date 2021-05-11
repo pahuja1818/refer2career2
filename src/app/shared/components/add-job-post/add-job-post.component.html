@@ -5,32 +5,32 @@
     <div class="col-sm-12">
       <span class="material-icons d-block text-right text-lg text-link text-white semi-bold"
         (click)="close()">close</span>
-      <span class="text-right my-3 material-icons text-white text-link" *ngIf="jobPost"
+      <span class="material-icons d-block text-right text-lg mt-3 text-link text-white semi-bold" *ngIf="jobPost"
         (click)="delete(deletePopup)">delete</span>
     </div>
     <div class="col-sm-8">
-      <span class="d-block text-white text-center semi-bold bold text-lg my-3">Add Job Post</span>
+      <span class="d-block text-white text-center semi-bold bold text-lg my-3">Post a job</span>
     </div>
     <div class="col-sm-8 mx-2 bg-white"
       style="border-radius: 7px; overflow-y: auto !important; overflow-x: hidden !important;">
       <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
         <div class="col-sm-5 m-3">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Title</mat-label>
+            <mat-label class="p-0">Job Title/Designation <span class="text-danger">*</span></mat-label>
             <input matInput placeholder="ex Software Developer" class="p-0" formControlName='title'>
             <mat-error>Enter valid title</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Total Vacancies</mat-label>
+            <mat-label class="p-0">Total Vacancies <span class="text-danger">*</span></mat-label>
             <input matInput type="number" placeholder="ex 10" class="p-0" formControlName='vacancy'>
             <mat-error>Enter valid number</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>Job/Internship</mat-label>
+            <mat-label>Job/Internship <span class="text-danger">*</span></mat-label>
             <mat-select formControlName='jobInternship'>
               <mat-option value="Job">Job</mat-option>
               <mat-option value="Internship">Internship</mat-option>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label>Job Type</mat-label>
+            <mat-label>Job Type <span class="text-danger">*</span></mat-label>
             <mat-select formControlName='jobType'>
               <mat-option value="In office">In office</mat-option>
               <mat-option value="Work from home">Work from home</mat-option>
@@ -48,7 +48,8 @@
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>{{ jobPostForm.get('jobInternship').value === "Job" ? 'Salary' : 'Stipend'}}</mat-label>
+            <mat-label>{{ jobPostForm.get('jobInternship').value === "Job" ? 'Salary' : 'Stipend'}} <span
+                class="text-danger">*</span></mat-label>
             <input matInput formControlName='salary' name="salary" type="number" class="p-0">
             <span matPrefix>&#8377;&nbsp;</span>
             <span matSuffix>.00</span>
@@ -56,7 +57,7 @@
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>Salary type</mat-label>
+            <mat-label>Salary type <span class="text-danger">*</span></mat-label>
             <mat-select formControlName='salaryType'>
               <mat-option value="per week">per week</mat-option>
               <mat-option value="per month">per month</mat-option>
@@ -66,7 +67,7 @@
         </div>
         <div class="col-sm-5 m-" *ngIf="jobPostForm.get('jobType').value === 'In office'">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Location</mat-label>
+            <mat-label class="p-0">Job Location <span class="text-danger">*</span></mat-label>
             <input matInput placeholder="ex Bengaluru" class="p-0" formControlName='location'>
             <mat-error>Enter valid location</mat-error>
           </mat-form-field>
@@ -77,44 +78,34 @@
           </section>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-label class="p-0">Experience (in years)</mat-label>
+          <mat-label class="p-0">Work Experience (Minimum) <span class="text-danger">*</span></mat-label>
           <mat-slider class="w-100" formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
           </mat-slider>
         </div>
         <div class="col-sm-5 m-3"></div>
-        <div class="col-sm-11 d-flex justify-content-center p-0 m-0">
-          <div class="col-sm-11 p-0 mb-3 mx-4">
-            <label class="text-grey semi-bold d-block text-center mb-3">Skills required</label>
-            <div class="input-group my-3" *ngFor="let field of skillArray; let i = index">
-              <input type="text" class="form-control" [(ngModel)]="field.skillName"
-                [ngModelOptions]="{standalone: true}" placeholder="Skill name">
-              <div class="input-group-prepend">
-                <div class="input-group-text material-icons bg-white text-link"
-                  (click)="deleteFieldValueToSkillArray(i)">
-                  delete
+        <div class="p-4 bg-white mb-3 col-sm-11">
+          <div class="mt-2 w-100">
+            <div class="ml-4 mb-3 d-flex justify-content-between">
+              <span class="bold text-dark text-ssmd">Skills </span>
+              <span class="text-violet text-link" (click)="openSkillModal(skillModal)">Add Skill +</span>
+            </div>
+            <div class="row col-sm-11 d-flex justify-content-start">
+              <div class="col-sm-12 my-4">
+                <div *ngFor="let data of skillsArray; index as i"
+                  class="p-1 px-2 bg-light border-violet vertical-center"
+                  style="display: inline-block; border-radius: 15px; width: max-content; margin: 7px !important; white-space:nowrap;">
+                  <span class="text-grey mr-3 text-violet">{{data.skillName}}</span>
+                  <span class="material-icons text-xs text-link" (click)="deleteFieldValueToSkillArray(i)">close</span>
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary bg-violet text-sm d-flex justify-content-center"
-              (click)="addFieldValueToSkillArray()">Add skill</button>
           </div>
         </div>
         <div class="col-sm-11 d-flex justify-content-center p-0 m-0">
-          <div class="col-sm-11 p-0 mb-3 mx-4">
-            <label class="text-grey semi-bold d-block text-center mb-3">Job Details</label>
-            <div class="input-group my-3" *ngFor="let field of jobDetailsArray; let i = index">
-              <input type="text" class="form-control" [(ngModel)]="field.detail" [ngModelOptions]="{standalone: true}"
-                placeholder="Detail">
-              <div class="input-group-prepend">
-                <div class="input-group-text material-icons bg-white text-link"
-                  (click)="deleteFieldValueJobDetailsArray(i)">delete
-                </div>
-              </div>
-            </div>
-            <div class="w-100">
-              <button class="btn btn-primary bg-violet text-sm ml-1 p-1 d-flex justify-content-center"
-                (click)="addFieldValueToJobDetailsArray()">Add Detail</button>
-            </div>
+          <div class="col-sm-11 p-0 my-3 mx-4">
+            <label class="text-grey semi-bold d-block text-center mb-3">Job Description</label>
+            <textarea class="form-control" placeholder="Enter job description" [(ngModel)]="description"
+              [ngModelOptions]="{standalone: true}" rows="8"></textarea>
           </div>
         </div>
         <div class="col-sm-5 m-3">
@@ -171,6 +162,33 @@
     <div class="d-flex justify-content-between mt-3">
       <button type="button" class="btn btn-secondary bg-grey px-3 py-1" (click)="deletePost()">Yes</button>
       <button type="button" class="btn btn-prmary bg-violet px-3 py-1" (click)="close(2)">No</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #skillModal>
+  <div class="bg-white p-3" style="border-radius: 7px;">
+    <div class="d-block text-right">
+      <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
+    </div>
+    <span class="text-grey semi-bold d-block text-center my-2">ADD SKILL</span>
+    <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
+      <div class="col-sm-12 mt-3">
+        <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-label class="text-grey">Skill Name</mat-label>
+          <input type="text" placeholder="Ex. JAVA" aria-label="Number" matInput [formControl]="skillName"
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredSkills | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>Enter valid detail</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="w-100 d-flex justify-content-end mt-4">
+      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addFieldValueToSkillArray()">ADD SKILL</button>
     </div>
   </div>
 </ng-template>

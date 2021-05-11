@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ReferedProfilesComponent implements OnInit {
 
   allReferedProfiles: any[] = [];
+  isServiceRunning = false;
 
   constructor(
     private referService: ReferJobPostService,
@@ -17,12 +18,14 @@ export class ReferedProfilesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isServiceRunning = true;
     this.referService.getReferedJobPosts({
       email:
         (JSON.parse(window.atob(window.localStorage.getItem('id')))).email
     })
       .subscribe((data: any) => {
         this.allReferedProfiles = data.data;
+        this.isServiceRunning = false;
       });
   }
 

@@ -5,6 +5,8 @@ import { JobPostServiceService } from './../../services/job-post-service.service
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-job-post',
@@ -19,19 +21,27 @@ export class AddJobPostComponent implements OnInit {
   jobPostForm: FormGroup;
   aboutUs = '';
 
+  description: any = '';
+
   companyName = JSON.parse(window.atob(window.localStorage.getItem('id'))).organizationDetails.organizationName;
   companyLogo = JSON.parse(window.atob(window.localStorage.getItem('id'))).organizationDetails.logo;
 
   isServiceRunning = false;
   message = '';
 
-  skillArray: any[] = [];
   jobDetailsArray: any[] = [];
   newAttribute: any = {};
 
   firstField = true;
   firstFieldName = 'First Item name';
   isEditItems: boolean;
+
+  skillsOptions: string[] = ['Java', 'Event Management', 'Angular 10', 'HTML', 'CSS',
+    'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
+
+  skillName = new FormControl(null, Validators.required);
+  skillsArray: any[] = [];
+  filteredSkills: Observable<string[]>;
 
   formatLabel(value: number) {
     if (value === 10) { return '10+'; }
@@ -47,7 +57,10 @@ export class AddJobPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.skillArray.push({ skillName: '' });
+    this.filteredSkills = this.skillName.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterSkills(value))
+    );
     this.jobDetailsArray.push({ detail: '' });
     this.jobPostForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
@@ -78,18 +91,41 @@ export class AddJobPostComponent implements OnInit {
         startDate: new Date(this.jobPost.jobPost.startDate),
         experience: this.jobPost.jobPost.experience,
       });
-      this.skillArray = this.jobPost.jobPost.skills;
+      this.skillsArray = this.jobPost.jobPost.skills;
       this.jobDetailsArray = this.jobPost.jobPost.details;
       this.aboutUs = this.jobPost.jobPost.aboutUs;
     }
   }
 
+  closeModal() {
+    this.modalService.hide(2);
+  }
+
+  openSkillModal(template: any) {
+    this.skillName.patchValue('');
+    this.modalRef = this.modalService.show(template, { id: 2, ignoreBackdropClick: true, animated: true });
+  }
+
+  private _filterSkills(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.skillsOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   addFieldValueToSkillArray() {
-    this.skillArray.push({ skillName: '' });
+    this.skillName.markAsTouched();
+    if (this.skillName.value) {
+      this.isServiceRunning = true;
+      if (!this.skillsArray.includes(this.skillName.value)) {
+        this.skillsArray.push({ skillName: this.skillName.value });
+      }
+      this.closeModal();
+      this.skillName.reset();
+    }
   }
 
   deleteFieldValueToSkillArray(index) {
-    if (this.skillArray.length > 1) { this.skillArray.splice(index, 1); }
+    if (this.skillsArray.length > 1) { this.skillsArray.splice(index, 1); }
   }
 
   addFieldValueToJobDetailsArray() {
@@ -109,7 +145,7 @@ export class AddJobPostComponent implements OnInit {
   save() {
     this.message = '';
     this.jobPostForm.markAllAsTouched();
-    if (this.skillArray.length > 1) {
+    if (this.skillsArray.length > 1) {
       if (this.jobDetailsArray.length > 1) {
         if (this.jobPostForm.valid) {
           this.isServiceRunning = true;
@@ -131,8 +167,8 @@ export class AddJobPostComponent implements OnInit {
               lastDateToApply: this.jobPostForm.get('lastDateToApply').value,
               experience: this.jobPostForm.get('experience').value,
               startDate: this.jobPostForm.get('startDate').value,
-              skills: this.skillArray,
-              details: this.jobDetailsArray,
+              skills: this.skillsArray,
+              details: this.description,
               aboutUs: this.aboutUs,
               verified: this.jobPost ? this.jobPost.status === 'approved' : false
             }

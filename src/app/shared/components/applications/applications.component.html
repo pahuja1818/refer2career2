@@ -7,7 +7,7 @@
       <ion-title>Applications</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="w-100 vh-100">
+  <div class="w-100 vh-100" *ngIf="!isServiceRunning">
     <div class="p-2 bg-white w-100 vh-100" style="margin-top: 50px !important; overflow-y: auto !important;">
       <h4 class="text-md text-center m-4">{{post.jobPost ? post.jobPost.title : ''}}</h4>
       <div class="row justify-content-center vertical-center mt-5">
@@ -96,7 +96,8 @@
             </div>
             <div class="row my-3" *ngIf='user.resume'>
               <div class="col-sm-12 d-flex justify-content-end">
-                <button class="btn btn-primary bg-violet" (click)="seeResume(user.resume, user._id, user.profileViews)">Resume</button>
+                <button class="btn btn-primary bg-violet"
+                  (click)="seeResume(user.resume, user._id, user.profileViews)">Resume</button>
               </div>
             </div>
             <div class="vertical-center" *ngIf="isApplicationRecieved || isShortlisted">
@@ -133,7 +134,7 @@
                 <td>{{profile.email}}</td>
                 <td><button class="btn btn-primary px-3 py-1" (click)="openResume(profile.resume)">Open Resume</button>
                 </td>
-                
+
               </tr>
             </tbody>
           </table>
