@@ -262,7 +262,7 @@ export class UserProfileComponent implements OnInit {
       };
       const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { basicInfo },
+        data: { basicInfo, profileCompleted: this.profileCompleted },
         query: { _id: this.user._id }
       };
       this.authService.update(dbOpeartion).then((data: any) => {
@@ -286,7 +286,7 @@ export class UserProfileComponent implements OnInit {
       this.skillName.reset();
       const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { skills: this.skillsArray },
+        data: { skills: this.skillsArray, profileCompleted: this.profileCompleted },
         query: { _id: this.user._id }
       };
       this.authService.update(dbOpeartion).then((data: any) => {
@@ -304,7 +304,7 @@ export class UserProfileComponent implements OnInit {
     this.skillsArray.splice(index, 1);
     const dbOpeartion: DbOperation = {
       collection: 'users',
-      data: { skills: this.skillsArray },
+      data: { skills: this.skillsArray, profileCompleted: this.profileCompleted },
       query: { _id: this.user._id }
     };
     this.authService.update(dbOpeartion).then((data: any) => {
@@ -492,7 +492,7 @@ export class UserProfileComponent implements OnInit {
       this.user.photo = file.target.result;
       const dbOpeartion: DbOperation = {
         collection: 'users',
-        data: { photo: this.user.photo },
+        data: { photo: this.user.photo, profileCompleted: this.profileCompleted },
         query: { _id: this.user._id }
       };
       this.authService.update(dbOpeartion).then((data: any) => {
@@ -516,7 +516,7 @@ export class UserProfileComponent implements OnInit {
     if (this.isCVHeadEditing) {
       this.isServiceRunning = true;
       this.authService.update({
-        collection: 'users', data: { cvHead: this.cvHeadLine },
+        collection: 'users', data: { cvHead: this.cvHeadLine, profileCompleted: this.profileCompleted },
         query: { _id: this.user._id }
       }).then((data: any) => {
         if (data.data === true) {
@@ -542,6 +542,7 @@ export class UserProfileComponent implements OnInit {
       if (data.data.length > 0) {
         this.user = data.data[0];
         this.setBasicInfo();
+        this.updateProfileCompletion();
         this.isServiceRunning = false;
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }
@@ -562,6 +563,21 @@ export class UserProfileComponent implements OnInit {
     if (this.user.photo) { percent += 10; }
     document.getElementById('progress-bar').style.width = percent + '%';
     return percent;
+  }
+
+  updateProfileCompletion() {
+    this.isServiceRunning = true;
+    const dbOpeartion: DbOperation = {
+      collection: 'users',
+      data: { profileCompleted: this.profileCompleted },
+      query: { _id: this.user._id }
+    };
+    this.authService.update(dbOpeartion).then((data: any) => {
+      if (data.data === true) {
+        this.modalRef.hide();
+        this.isServiceRunning = false;
+      }
+    });
   }
 }
 

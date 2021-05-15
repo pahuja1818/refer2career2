@@ -746,3 +746,8 @@ body {
   overflow-x: hidden !important;
 }
 
+.fall-animation {
+  animation: fall;
+  animation-duration: 500ms;
+}
+

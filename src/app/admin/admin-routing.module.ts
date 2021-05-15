@@ -1,3 +1,4 @@
+import { ViewProfileComponent } from './../shared/components/view-profile/view-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ApplicationsComponent } from './../shared/components/applications/applications.component';
 import { ApplicantsComponent } from './../employer/applicants/applicants.component';
@@ -27,6 +28,9 @@ const routes: Routes = [
       },
       {
         path: 'applicants', component: ApplicantsComponent
+      },
+      {
+        path: 'applicants/profile/:id', component: ViewProfileComponent
       },
       {
         path: 'applicants/:jobId', component: ApplicationsComponent

@@ -1,3 +1,4 @@
+import { UserRole } from './../../models/enums';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { FormControl, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
@@ -6,7 +7,7 @@ import { element } from 'protractor';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DbOperation } from './../../models/dbOperation';
 import { AuthService } from './../../services/auth.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AllJobPostsComponent } from '../all-job-posts/all-job-posts.component';
@@ -18,14 +19,11 @@ import { AllJobPostsComponent } from '../all-job-posts/all-job-posts.component';
 })
 export class ApplicationsComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private dbService: AuthService,
-    public modalController: ModalController,
-    private modalService: BsModalService,
-    private toast: ToastService,
-  ) { }
+  allCandidates: any[] = [];
+  filteredCandidates: any[] = [];
+  isAllChecked = false;
 
+  totalChecked = 0;
 
   isServiceRunning = false;
   skillName = new FormControl(null, Validators.required);
@@ -60,11 +58,23 @@ export class ApplicationsComponent implements OnInit {
 
   allReferedProfiles: any = [];
 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dbService: AuthService,
+    public modalController: ModalController,
+    private modalService: BsModalService,
+    private toast: ToastService,
+  ) { }
+
+
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       if (params.jobId) {
         this.postId = params.jobId;
         this.getDetails();
+        this.allCandidates = [];
+        this.getApplicants();
         this.getReferedProfiles();
       }
     });
@@ -85,6 +95,49 @@ export class ApplicationsComponent implements OnInit {
     this.modalRef.hide();
   }
 
+  getApplicants() {
+    this.allCandidates = [];
+    this.filteredCandidates = [];
+    this.isServiceRunning = true;
+    const db: DbOperation = {
+      collection: 'applyJob',
+      query: { jobPostId: this.postId }
+    };
+    this.dbService.find(db).subscribe((candidates: any) => {
+      this.isServiceRunning = false;
+      if (candidates.data.length > 0) {
+        candidates.data.forEach((cand: any, index) => {
+          this.isServiceRunning = true;
+          const dbOperation: DbOperation = {
+            collection: 'users',
+            query: { _id: cand.candidateId },
+            selectedFields: { name: 1, resume: 1, _id: 1, profileCompleted: 1, email: 1 },
+          };
+          this.dbService.find(dbOperation).subscribe((a: any) => {
+            if (a.data.length > 0) {
+              a = a.data[0];
+              let user = {
+                applyId: cand._id,
+                _id: a._id,
+                name: a.name,
+                resume: a.resume,
+                email: a.email,
+                status: cand.status ? cand.status : null,
+                isChecked: false,
+                profileCompleted: a.profileCompleted ? a.profileCompleted : 20
+              }
+              if (!this.allCandidates.find(data => data._id === user._id))
+                this.allCandidates.push(user);
+              this.changeTopMenu(0);
+              this.calculateApplocants();
+              this.isServiceRunning = false;
+            }
+          });
+        });
+      }
+    });
+  }
+
   getDetails() {
     this.isServiceRunning = true;
     const operation: DbOperation = {
@@ -96,58 +149,6 @@ export class ApplicationsComponent implements OnInit {
       if (data.data.length > 0) {
         this.isServiceRunning = true;
         this.post = data.data[0];
-        const db: DbOperation = {
-          collection: 'applyJob',
-          query: { jobPostId: this.postId }
-        };
-        this.dbService.find(db).subscribe((candidates: any) => {
-          this.isServiceRunning = false;
-
-          if (candidates.data.length > 0) {
-            this.isServiceRunning = true;
-            this.allAplications = [];
-            this.candidatesArray = candidates.data;
-            this.totalHired = 0;
-            this.totalRejected = 0;
-            this.totalShortlisted = 0;
-            this.applicationRecieved = 0;
-            candidates.data.forEach((cand: any) => {
-              this.isServiceRunning = true;
-              const dbOperation: DbOperation = {
-                collection: 'users',
-                query: { _id: cand.candidateId }
-              };
-              this.dbService.find(dbOperation).subscribe((user: any) => {
-                if (user.data.length > 0) {
-                  this.isServiceRunning = false;
-                  const candidate: any = user.data[0];
-                  candidate.appliedOn = cand.date;
-                  candidate.appliedId = cand._id;
-                  candidate.status = cand.status ? cand.status : null;
-                  this.allAplications.push(candidate);
-                  if (candidate.status === null || candidate.status === undefined) {
-                    this.aplications.push(candidate);
-                  }
-                  switch (cand.status) {
-                    case 'Shortlisted': {
-                      this.totalShortlisted++;
-                      break;
-                    }
-                    case 'Hired': {
-                      this.totalHired++;
-                      break;
-                    }
-                    case 'Rejected': {
-                      this.totalRejected++;
-                      break;
-                    }
-                  }
-                  if (cand.status === null || cand.status === undefined) { this.applicationRecieved++; }
-                }
-              });
-            });
-          }
-        });
       }
     });
   }
@@ -158,10 +159,56 @@ export class ApplicationsComponent implements OnInit {
       collection: 'referedProfiles',
       query: { jobId: this.postId }
     };
-    this.dbService.find(operation).subscribe((data: any) => {
+    this.dbService.find(operation).subscribe((candidates: any) => {
       this.isServiceRunning = false;
-      if (data.data.length > 0) {
-        this.allReferedProfiles = data.data;
+      if (candidates.data.length > 0) {
+        candidates.data.forEach((cand: any, index) => {
+          this.isServiceRunning = true;
+          const dbOperation: DbOperation = {
+            collection: 'users',
+            query: { email: cand.email, role: 2 },
+            selectedFields: { name: 1, resume: 1, _id: 1, profileCompleted: 1, email: 1 },
+          };
+          this.dbService.find(dbOperation).subscribe((a: any) => {
+            if (a.data.length > 0) {
+              a = a.data[0];
+              let user = {
+                applyId: cand._id,
+                refered: true,
+                _id: a._id,
+                name: a.name,
+                resume: cand.resume,
+                email: a.email,
+                status: cand.status ? cand.status : null,
+                isChecked: false,
+                profileCompleted: a.profileCompleted ? a.profileCompleted : 20
+              }
+              if (!this.allCandidates.find(data => data._id === user._id))
+                this.allCandidates.push(user);
+              this.changeTopMenu(0);
+              this.calculateApplocants();
+            }
+            else {
+              let user = {
+                applyId: cand._id,
+                _id: cand._id,
+                name: cand.name,
+                refered: true,
+                resume: cand.resume,
+                email: cand.email,
+                status: cand.status ? cand.status : null,
+                isChecked: false,
+                profileCompleted: cand.profileCompleted ? a.profileCompleted : 20
+              }
+              if (!this.allCandidates.find(data => data._id === user._id))
+                this.allCandidates.push(user);
+              this.changeTopMenu(0);
+              this.calculateApplocants();
+            }
+            this.isServiceRunning = false;
+          });
+
+        });
       }
     });
   }
@@ -202,6 +249,7 @@ export class ApplicationsComponent implements OnInit {
       }
     });
   }
+
   openFilter(template: any) {
     this.filterTemplate = template;
     this.modalRef = this.modalService.show(template, { class: 'filter-modal', ignoreBackdropClick: true, animated: true });
@@ -278,6 +326,12 @@ export class ApplicationsComponent implements OnInit {
     this.getDetails();
   }
 
+  removeChecked() {
+    this.allCandidates.map((data: any) => {
+      data.isChecked = false;
+    })
+  }
+
   changeTopMenu(id: number) {
     this.isApplicationRecieved = false;
     this.isShortlisted = false;
@@ -287,88 +341,165 @@ export class ApplicationsComponent implements OnInit {
     switch (id) {
       case 0: {
         this.isApplicationRecieved = true;
-        this.aplications = this.allAplications.filter((user: any) => user.status === null);
+        this.filterApplicants(null);
+        this.totalChecked = 0;
+        this.removeChecked();
         break;
       }
       case 1: {
         this.isShortlisted = true;
-        this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
+        this.filterApplicants('Shortlisted');
+        this.totalChecked = 0;
+        this.removeChecked();
         break;
       }
       case 2: {
         this.isHired = true;
-        this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
+        this.filterApplicants('Hired');
+        this.totalChecked = 0;
+        this.removeChecked();
         break;
       }
       case 3: {
         this.isRejected = true;
-        this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
+        this.filterApplicants('Rejected');
+        this.totalChecked = 0;
+        this.removeChecked();
         break;
       }
     }
   }
 
-  shortlistApplicant(id: any) {
+  shortlistApplicant() {
     this.isServiceRunning = true;
-    const db: DbOperation = {
-      collection: 'applyJob',
-      data: { status: 'Shortlisted' },
-      query: { _id: id },
-    };
-    console.log(id);
-    this.dbService.update(db).then((data: any) => {
-      if (data.data === true) {
-        this.getDetails();
+    this.allCandidates.forEach((user: any, index) => {
+      if (user.isChecked === true) {
+        const db: DbOperation = {
+          collection: user.refered === true ? 'referedProfiles' : 'applyJob',
+          data: { status: 'Shortlisted' },
+          query: { _id: user.applyId },
+        };
+        this.dbService.update(db).then((data: any) => {
+          if (data.data === true) {
+            user.isChecked = false;
+            this.isServiceRunning = false;
+          }
+          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
+        });
+      }
+      if (index = this.allCandidates.length - 1) {
         this.isServiceRunning = false;
         this.modalRef.hide();
-        this.aplications = this.allAplications.filter((user: any) => user.status === 'Shortlisted');
+        this.allCandidates = [];
+        this.filteredCandidates = [];
+        this.getApplicants();
+        this.getReferedProfiles();
         this.toast.showToast('Shortlisted Successfully!');
       }
-      else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
-    });
+    })
   }
 
   hireApplicant(id: any) {
     this.isServiceRunning = true;
-    const db: DbOperation = {
-      collection: 'applyJob',
-      data: { status: 'Hired' },
-      query: { _id: id },
-    };
-    this.dbService.update(db).then((data: any) => {
-      if (data.data === true) {
-        this.getDetails();
+    this.allCandidates.forEach((user: any, index) => {
+      if (user.isChecked === true) {
+        const db: DbOperation = {
+          collection: user.refered ? 'referedProfiles' : 'applyJob',
+          data: { status: 'Hired' },
+          query: { _id: user.applyId },
+        };
+        this.dbService.update(db).then((data: any) => {
+          if (data.data === true) {
+            user.isChecked = false;
+            this.isServiceRunning = false;
+          }
+          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
+        });
+      }
+      if (index = this.allCandidates.length - 1) {
         this.isServiceRunning = false;
         this.modalRef.hide();
-        this.aplications = this.allAplications.filter((user: any) => user.status === 'Hired');
+        this.allCandidates = [];
+        this.filteredCandidates = [];
+        this.getApplicants();
+        this.getReferedProfiles();
         this.toast.showToast('Hired Successfully!');
       }
-      else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
-    });
+    })
   }
 
   rejectApplicant(id: any) {
     this.isServiceRunning = true;
-    const db: DbOperation = {
-      collection: 'applyJob',
-      data: { status: 'Rejected' },
-      query: { _id: id },
-    };
-    this.dbService.update(db).then((data: any) => {
-      if (data.data === true) {
-        this.getDetails();
+    this.allCandidates.forEach((user: any, index) => {
+      if (user.isChecked === true) {
+        const db: DbOperation = {
+          collection: user.refered ? 'referedProfiles' : 'applyJob',
+          data: { status: 'Rejected' },
+          query: { _id: user.applyId },
+        };
+        this.dbService.update(db).then((data: any) => {
+          if (data.data === true) {
+            user.isChecked = false;
+            this.isServiceRunning = false;
+          }
+          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
+        });
+      }
+      if (index = this.allCandidates.length - 1) {
         this.isServiceRunning = false;
         this.modalRef.hide();
-        this.aplications = this.allAplications.filter((user: any) => user.status === 'Rejected');
+        this.allCandidates = [];
+        this.filteredCandidates = [];
+        this.getApplicants();
+        this.getReferedProfiles();
         this.toast.showToast('Rejected Successfully!');
       }
-      else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
-    });
+    })
+
   }
-  openConfirmModal(template: any, id: any, status: any) {
-    this.curentUserId = id;
+
+  openConfirmModal(template: any, status: any) {
     this.confirmModalStatus = status;
     this.modalRef = this.modalService.show(template, { animated: true });
+  }
+
+  checkAll() {
+    this.isAllChecked = !this.isAllChecked;
+    if (this.isAllChecked) {
+      this.totalChecked = this.allCandidates.length;
+    }
+    else this.totalChecked = 0;
+    this.allCandidates.map((cand: any) => {
+      cand.isChecked = this.isAllChecked;
+    })
+  }
+
+  checkedUser(index: number) {
+    this.filteredCandidates[index].isChecked = !this.filteredCandidates[index].isChecked
+    if (this.filteredCandidates[index].isChecked) this.totalChecked++;
+    else {
+      this.totalChecked--;
+      this.isAllChecked = false;
+    }
+  }
+
+  filterApplicants(status) {
+    this.filteredCandidates = this.allCandidates.filter(data => data.status === status);
+    this.filteredCandidates.sort((a, b) => b.profileCompleted - a.profileCompleted);
+  }
+
+  viewProfile(id: any) {
+    if (JSON.parse(window.atob(window.localStorage.getItem('id'))).role === UserRole.ADMIN) {
+      this.router.navigateByUrl(`/admin/applicants/profile/${id}`);
+    }
+    else { this.router.navigateByUrl(`/recruiter/applicants/profile/${id}`); }
+  }
+
+  calculateApplocants() {
+    this.applicationRecieved = this.allCandidates.filter((data) => data.status === null).length;
+    this.totalShortlisted = this.allCandidates.filter((data) => data.status === 'Shortlisted').length;
+    this.totalHired = this.allCandidates.filter((data) => data.status === 'Hired').length;
+    this.totalRejected = this.allCandidates.filter((data) => data.status === 'Rejected').length;
   }
 
 }

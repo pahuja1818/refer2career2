@@ -148,7 +148,7 @@ export class AllJobPostsComponent implements OnInit {
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
       query: { 'jobPost.verified': true },
-      selectedFields: { 'jobPost.location': 1 },
+      selectedFields: { 'jobPost.location': 1, '_id': 0 },
     };
     this.authService.find(dbOpeartion).subscribe((data: any) => {
       if (data.data.length > 0) {
@@ -231,6 +231,10 @@ export class AllJobPostsComponent implements OnInit {
     }
     else { this.selectedLocations.delete(location); }
     this.refine.location = [...this.selectedLocations];
+  }
+
+  checkLocation(location: any) {
+    return this.selectedLocations.has(location);
   }
 
   refineJobs() {

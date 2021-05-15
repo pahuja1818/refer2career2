@@ -109,7 +109,7 @@
         <div *ngIf="isLocationExpanded" class="px-3 pt-3 pb-1">
           <div *ngFor="let location of allLocations">
             <section class="example-section">
-              <mat-checkbox class="example-margin text-uppercase" (change)="updateLocation($event, location)">
+              <mat-checkbox class="example-margin text-uppercase" [checked]="checkLocation(location)" (change)="updateLocation($event, location)">
                 {{location}}
               </mat-checkbox>
             </section>

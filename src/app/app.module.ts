@@ -85,7 +85,6 @@ firebase.initializeApp(environment.firebaseConfig);
 @NgModule({
   declarations: [
     AppComponent,
-    EmployerSigninComponent,
     PartnersComponent,
     ReferAndEarnComponent
   ],
@@ -157,6 +156,7 @@ firebase.initializeApp(environment.firebaseConfig);
     SharedModule,
     NgbModule,
   ],
+  
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

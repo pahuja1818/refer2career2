@@ -1,5 +1,5 @@
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserRole } from 'src/app/shared/models/enums';
@@ -25,6 +25,8 @@ export class EmployerSigninComponent implements OnInit {
     private toast: ToastService,
     private modalService: BsModalService,
   ) { }
+
+  @Output() close = new EventEmitter();
 
   loginForm: FormGroup;
   message = '';
@@ -132,6 +134,10 @@ export class EmployerSigninComponent implements OnInit {
   showLogin() {
     this.hideAll();
     this.isLogin = true;
+  }
+
+  closeModal(){
+    this.close.emit();
   }
 
   hideAll() {

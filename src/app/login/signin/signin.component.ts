@@ -11,6 +11,7 @@ import { timer } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 @Component({
   selector: 'app-signin',
@@ -19,6 +20,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
+  isEmployer = false;
 
   otp = '';
   isOTPCorrect = true;
@@ -94,6 +96,11 @@ export class SigninComponent implements OnInit {
       emailLogin: new FormControl(null, [Validators.required, Validators.email]),
       passwordLogin: new FormControl(null, [Validators.required]),
     });
+  }
+
+  hideEmployerpahe() {
+    this.loginVisible();
+    setTimeout(() => { this.isEmployer = false; }, 500)
   }
 
   resendOTP() {
@@ -330,8 +337,10 @@ export class SigninComponent implements OnInit {
   }
 
   openEmployerModal() {
-    this.modalRef.hide();
-    this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'full-modal', ignoreBackdropClick: true, animated: true });
+    this.isEmployer = true;
+    setTimeout(() => { this.registrationVisible(); }, 100)
+    //this.modalRef.hide();
+    //this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'full-modal', ignoreBackdropClick: true, animated: true });
   }
 
 
@@ -339,5 +348,10 @@ export class SigninComponent implements OnInit {
     const element = document.getElementById('cardToFlip');
     element.classList.toggle('flipped');
   }
+
+
+
+
+
 
 }

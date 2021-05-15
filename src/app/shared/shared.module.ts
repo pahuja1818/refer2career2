@@ -1,3 +1,5 @@
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { EmployerSigninComponent } from './../login/signin/employer-signin/employer-signin.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { ManageApplicantsComponent } from './components/manage-applicants/manage-applicants.component';
@@ -77,7 +79,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ManageApplicantsComponent,
     ApplicationsComponent,
     SigninComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    EmployerSigninComponent,
+    ViewProfileComponent
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -143,6 +147,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
   exports: [
     NotFoundComponent,
     SpinnerComponentComponent,
+    EmployerSigninComponent,
+    ViewProfileComponent,
     MatProgressSpinnerModule,
     AlertModule,
     NgOtpInputModule,

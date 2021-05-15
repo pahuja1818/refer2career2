@@ -39,7 +39,7 @@ export class AddJobPostComponent implements OnInit {
   skillsOptions: string[] = ['Java', 'Event Management', 'Angular 10', 'HTML', 'CSS',
     'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
 
-  skillName = new FormControl(null, Validators.required);
+  skillName: FormControl = new FormControl(null, Validators.required);
   skillsArray: any[] = [];
   filteredSkills: Observable<string[]>;
 
@@ -66,12 +66,12 @@ export class AddJobPostComponent implements OnInit {
       title: new FormControl('', [Validators.required]),
       vacancy: new FormControl('', [Validators.required, Validators.minLength(1)]),
       salary: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      location: new FormControl('Banglore', [Validators.required]),
+      location: new FormControl('', [Validators.required]),
       lastDateToApply: new FormControl(null, [Validators.required]),
       startDate: new FormControl(null, [Validators.required]),
       jobType: new FormControl('In office', [Validators.required]),
       jobInternship: new FormControl('Job', [Validators.required]),
-      salaryType: new FormControl('0', [Validators.required]),
+      salaryType: new FormControl('per month', [Validators.required]),
       partTime: new FormControl(false),
       experience: new FormControl(6),
     });
@@ -98,25 +98,28 @@ export class AddJobPostComponent implements OnInit {
   }
 
   closeModal() {
+    this.isServiceRunning = false;
     this.modalService.hide(2);
   }
 
   openSkillModal(template: any) {
     this.skillName.patchValue('');
     this.modalRef = this.modalService.show(template, { id: 2, ignoreBackdropClick: true, animated: true });
+    this.isServiceRunning = true;
   }
 
   private _filterSkills(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    if (value !== null) {
+      const filterValue = value.toLowerCase();
 
-    return this.skillsOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+      return this.skillsOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    }
   }
 
   addFieldValueToSkillArray() {
     this.skillName.markAsTouched();
     if (this.skillName.value) {
-      this.isServiceRunning = true;
-      if (!this.skillsArray.includes(this.skillName.value)) {
+      if (!this.skillsArray.find(data => data.skillName === this.skillName.value)) {
         this.skillsArray.push({ skillName: this.skillName.value });
       }
       this.closeModal();

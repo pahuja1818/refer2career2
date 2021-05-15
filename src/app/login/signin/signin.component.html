@@ -5,7 +5,7 @@
 <div class="flipCard w-100">
   <div class="card vh-100 w-100 vertical-center bg-transparent" id="cardToFlip">
     <div class="side front w-100 row p-0 m-0 vertical-center justify-content-center">
-      <div class="col-sm-9 p-2" style="max-height: 96vh !important;">
+      <div class="col-sm-9 p-2" style="min-height: 90vh !important; max-height: 92vh !important;">
         <div class="w-100 row vertical-center h-100 mx-auto bg-violet border-7">
           <div *ngIf="isScreenBig" style="height: 100% !important;"
             class="col-sm-5 bg-violet w-100 border-left-7 vertical-center">
@@ -158,9 +158,14 @@
       </div>
     </div>
     <div class="side back w-100 row p-0 m-0 vertical-center justify-content-center">
-      <div class="col-sm-9 p-2" style="max-height: 96vh !important;">
-        <div class="w-100 row vertical-center h-100 mx-auto bg-violet border-7">
-          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'" class="p-3 bg-white border-7">
+      <div class="col-sm-9" *ngIf="isEmployer" style="min-height: 90vh !important;max-height: 92vh !important;">
+        <app-employer-signin (close)="hideEmployerpahe()"></app-employer-signin>
+      </div>
+      <div class="col-sm-9 p-2" *ngIf="!isEmployer" style="min-height: 90vh !important; max-height: 96vh !important;">
+        <div class="w-100 row vertical-center mx-auto bg-violet border-7"
+          style="min-height: 90vh !important; max-height: 96vh !important;">
+          <div [ngClass]="isScreenBig ? 'col-sm-7' : 'col-sm-12'" class="p-3 bg-white border-7"
+            style="min-height: 90vh !important; max-height: 96vh !important;">
             <div class="">
               <div class="d-flex justify-content-center mb-4">
                 <img *ngIf="!isVerifyOTP"
@@ -244,7 +249,8 @@
               </div>
             </div>
           </div>
-          <div *ngIf="isScreenBig" class="col-sm-5 bg-violet w-100 h-100 border-right-7 vertical-center">
+          <div *ngIf="isScreenBig" style="height: 100% !important;"
+            class="col-sm-5 bg-violet w-100 h-100 border-right-7 vertical-center">
             <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">Hello friend!!</span>
               <span class="text-ssmd d-block text-center">
                 Enter your details and start applying for job.
