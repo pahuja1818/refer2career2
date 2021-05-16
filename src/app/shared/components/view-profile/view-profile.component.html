@@ -59,8 +59,8 @@
               <input class="form-control my-3" *ngIf="isCVHeadEditing" type="text" placeholder=""
                 [(ngModel)]="cvHeadLine">
               <div class="d-flex justify-content-start vertical-center" *ngIf="isCVHeadEditing">
-                <button class="btn btn-primary px-3 py-1 rounded-button mr-2" (click)='saveCVHeadLine()'>Save</button>
-                <button class="btn btn-secondary px-3 py-1 rounded-button" (click)='editCVHead()'>Cancel</button>
+                <button class="btn btn-primary px-3 py-1 rounded-button mr-2">Save</button>
+                <button class="btn btn-secondary px-3 py-1 rounded-button">Cancel</button>
               </div>
               <hr>
             </div>
@@ -140,7 +140,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-end" *ngIf="isBasiDetailEditing">
-                    <button class="btn btn-primary bg-violet px-3 py-1" (click)='saveBasicInfo()'>Save</button>
+                    <button class="btn btn-primary bg-violet px-3 py-1">Save</button>
                   </div>
                 </div>
               </div>

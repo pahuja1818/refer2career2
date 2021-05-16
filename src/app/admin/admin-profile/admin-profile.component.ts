@@ -16,7 +16,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 export class AdminProfileComponent implements OnInit {
 
   user: any = {};
-
+  isServiceRunning = false;
   isEditing = false;
   organizationLogo: any;
   organizationLogoData: any;

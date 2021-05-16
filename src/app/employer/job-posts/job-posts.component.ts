@@ -13,6 +13,8 @@ export class JobPostsComponent implements OnInit {
 
   allJobPost: any[] = [];
 
+  isServiceRunning = false;
+
   constructor(
     private router: Router,
     public modalRef: BsModalRef,

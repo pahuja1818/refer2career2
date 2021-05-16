@@ -13,6 +13,8 @@ export class UsermenuComponent implements OnInit {
 
   modalRef: BsModalRef;
   user: any;
+  isServiceRunning = false;
+
 
   scroll() {
     document.getElementById('jobs').scrollIntoView({
