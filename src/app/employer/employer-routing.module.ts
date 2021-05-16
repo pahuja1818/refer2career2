@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployerMenuComponent } from './employer-menu/employer-menu.component';
 import { JobPostsComponent } from './job-posts/job-posts.component';
+import { ViewProfileComponent } from '../shared/components/view-profile/view-profile.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,9 @@ const routes: Routes = [
       },
       {
         path: 'applicants', component: ApplicantsComponent
+      },
+      {
+        path: 'applicants/profile/:id', component: ViewProfileComponent
       },
       {
         path: 'applicants/:jobId', component: ApplicationsComponent

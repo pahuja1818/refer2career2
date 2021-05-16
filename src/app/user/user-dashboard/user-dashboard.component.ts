@@ -19,7 +19,7 @@ import { NgbDatepickerKeyboardService } from '@ng-bootstrap/ng-bootstrap';
 export class UserDashboardComponent implements OnInit {
   modalRef: BsModalRef;
 
-  type = '';
+  type = null;
   description: string = '';
 
   constructor(
@@ -55,7 +55,6 @@ export class UserDashboardComponent implements OnInit {
 
     if (this.type) {
       let arr: any[] = this.description.split(" ");
-      console.log(arr.length);
       if (arr.length > 9) {
         let db: DbOperation = {
           collection: "feedback",
@@ -68,7 +67,6 @@ export class UserDashboardComponent implements OnInit {
           }
         }
         this.dbService.create(db).then((data: any) => {
-          console.log(data);
           if (data.data) {
             this.toast.showToast("Sent Successfully!");
             this.cancel();

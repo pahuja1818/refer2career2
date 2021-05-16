@@ -79,11 +79,15 @@ export class ApplicationsComponent implements OnInit {
       }
     });
 
+    
     this.filteredSkills = this.skillName.valueChanges.pipe(
       startWith(''),
       map(value => this._filterSkills(value))
     );
   }
+
+
+
 
   private _filterSkills(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -183,7 +187,7 @@ export class ApplicationsComponent implements OnInit {
                 isChecked: false,
                 profileCompleted: a.profileCompleted ? a.profileCompleted : 20
               }
-              if (!this.allCandidates.find(data => data._id === user._id))
+              if (!this.allCandidates.find(data => data.applyId === user.applyId))
                 this.allCandidates.push(user);
               this.changeTopMenu(0);
               this.calculateApplocants();
@@ -200,7 +204,7 @@ export class ApplicationsComponent implements OnInit {
                 isChecked: false,
                 profileCompleted: cand.profileCompleted ? a.profileCompleted : 20
               }
-              if (!this.allCandidates.find(data => data._id === user._id))
+              if (!this.allCandidates.find(data => data.applyId === user.applyId))
                 this.allCandidates.push(user);
               this.changeTopMenu(0);
               this.calculateApplocants();
@@ -370,13 +374,14 @@ export class ApplicationsComponent implements OnInit {
     }
   }
 
-  shortlistApplicant() {
+  updateStatus(status: string) {
     this.isServiceRunning = true;
-    this.allCandidates.forEach((user: any, index) => {
+    this.modalRef.hide();
+    this.filteredCandidates.forEach((user: any, index) => {
       if (user.isChecked === true) {
         const db: DbOperation = {
           collection: user.refered === true ? 'referedProfiles' : 'applyJob',
-          data: { status: 'Shortlisted' },
+          data: { status: status },
           query: { _id: user.applyId },
         };
         this.dbService.update(db).then((data: any) => {
@@ -387,75 +392,13 @@ export class ApplicationsComponent implements OnInit {
           else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
         });
       }
-      if (index = this.allCandidates.length - 1) {
+      if (index === this.filteredCandidates.length - 1) {
         this.isServiceRunning = false;
-        this.modalRef.hide();
-        this.allCandidates = [];
-        this.filteredCandidates = [];
+        this.toast.showToast(`${status} Successfully!`);
         this.getApplicants();
         this.getReferedProfiles();
-        this.toast.showToast('Shortlisted Successfully!');
       }
     })
-  }
-
-  hireApplicant(id: any) {
-    this.isServiceRunning = true;
-    this.allCandidates.forEach((user: any, index) => {
-      if (user.isChecked === true) {
-        const db: DbOperation = {
-          collection: user.refered ? 'referedProfiles' : 'applyJob',
-          data: { status: 'Hired' },
-          query: { _id: user.applyId },
-        };
-        this.dbService.update(db).then((data: any) => {
-          if (data.data === true) {
-            user.isChecked = false;
-            this.isServiceRunning = false;
-          }
-          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
-        });
-      }
-      if (index = this.allCandidates.length - 1) {
-        this.isServiceRunning = false;
-        this.modalRef.hide();
-        this.allCandidates = [];
-        this.filteredCandidates = [];
-        this.getApplicants();
-        this.getReferedProfiles();
-        this.toast.showToast('Hired Successfully!');
-      }
-    })
-  }
-
-  rejectApplicant(id: any) {
-    this.isServiceRunning = true;
-    this.allCandidates.forEach((user: any, index) => {
-      if (user.isChecked === true) {
-        const db: DbOperation = {
-          collection: user.refered ? 'referedProfiles' : 'applyJob',
-          data: { status: 'Rejected' },
-          query: { _id: user.applyId },
-        };
-        this.dbService.update(db).then((data: any) => {
-          if (data.data === true) {
-            user.isChecked = false;
-            this.isServiceRunning = false;
-          }
-          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
-        });
-      }
-      if (index = this.allCandidates.length - 1) {
-        this.isServiceRunning = false;
-        this.modalRef.hide();
-        this.allCandidates = [];
-        this.filteredCandidates = [];
-        this.getApplicants();
-        this.getReferedProfiles();
-        this.toast.showToast('Rejected Successfully!');
-      }
-    })
-
   }
 
   openConfirmModal(template: any, status: any) {
@@ -466,17 +409,22 @@ export class ApplicationsComponent implements OnInit {
   checkAll() {
     this.isAllChecked = !this.isAllChecked;
     if (this.isAllChecked) {
-      this.totalChecked = this.allCandidates.length;
+      this.totalChecked = this.filteredCandidates.length;
     }
     else this.totalChecked = 0;
-    this.allCandidates.map((cand: any) => {
+    this.filteredCandidates.map((cand: any) => {
       cand.isChecked = this.isAllChecked;
     })
   }
 
   checkedUser(index: number) {
     this.filteredCandidates[index].isChecked = !this.filteredCandidates[index].isChecked
-    if (this.filteredCandidates[index].isChecked) this.totalChecked++;
+    if (this.filteredCandidates[index].isChecked) {
+      this.totalChecked++;
+      if(this.totalChecked === this.filteredCandidates.length){
+        this.isAllChecked = true;
+      }
+    }
     else {
       this.totalChecked--;
       this.isAllChecked = false;
@@ -484,6 +432,7 @@ export class ApplicationsComponent implements OnInit {
   }
 
   filterApplicants(status) {
+    this.filteredCandidates = [];
     this.filteredCandidates = this.allCandidates.filter(data => data.status === status);
     this.filteredCandidates.sort((a, b) => b.profileCompleted - a.profileCompleted);
   }

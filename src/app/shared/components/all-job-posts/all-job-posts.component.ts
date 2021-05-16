@@ -98,6 +98,31 @@ export class AllJobPostsComponent implements OnInit {
     }
   }
 
+  allMyApplications: any[] = [];
+  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+
+  getMyApplication() {
+    let db = {
+      collection: 'applyJob',
+      query: { candidateId: this.user._id },
+      selectedFields: { 'jobPostId': 1, '_id': 0 },
+    }
+    this.authService.find(db).subscribe((data: any) => {
+      if (data.data) {
+        this.allMyApplications = data.data;
+        this.checkJobPosts();
+      }
+    })
+  }
+
+  checkJobPosts(){
+    this.allJobPost.forEach((post: any) => {
+      if(this.allMyApplications.find(data => data.jobPostId === post._id)){
+        post.isApplied = true;
+      }
+    })
+  }
+
   clearFilter() {
     this.refineInitial.partTime = this.refineDefaultInitial.partTime;
     this.refineInitial.fullTime = this.refineDefaultInitial.fullTime;
@@ -140,6 +165,7 @@ export class AllJobPostsComponent implements OnInit {
       if (data.data.length > 0) {
         this.filteredJobPosts = data.data;
         this.allJobPost = data.data;
+        this.getMyApplication();
         this.sortByDate();
         this.isServiceRunning = false;
       }
@@ -278,6 +304,7 @@ export class AllJobPostsComponent implements OnInit {
       if (data.data) {
         this.filteredJobPosts = data.data;
         this.allJobPost = data.data;
+        this.checkJobPosts();
         this.refineInitial.partTime = this.refine.partTime,
           this.refineInitial.fullTime = this.refine.fullTime,
           this.refineInitial.jobs = this.refine.jobs,

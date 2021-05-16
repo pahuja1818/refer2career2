@@ -67,7 +67,8 @@
               </div>
               <div class="vertical-center justify-content-between mt-1">
                 <span class="text-smd py-2"
-                  [ngClass]="jobPost.status === 'Shortlisted' ? 'text-primary' : jobPost.status === 'Hired' ? 'text-success' : jobPost.status === 'Rejected' ? 'text-danger' : ''">{{jobPost.status}}</span>
+                  [ngClass]="jobPost.status === 'Shortlisted' ? 'text-primary' : jobPost.status === 'Hired' ? 'text-success' : jobPost.status === 'Rejected' ? 'text-danger' : ''">{{jobPost.status
+                  === 'Rejected' ? 'Closed' : jobPost.status}}</span>
                 <span class="text-grey text-sm text-break">Submitted on &nbsp; {{jobPost.appliedDate | date: 'dd
                   MMMM
                   yyyy'}}</span>

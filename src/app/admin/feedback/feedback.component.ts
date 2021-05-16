@@ -31,7 +31,6 @@ export class FeedbackComponent implements OnInit {
           this.allFeedBacks = data.data;
           this.sort();
         }
-        console.log(data.data);
         this.isServiceRunning = false;
       }
     })

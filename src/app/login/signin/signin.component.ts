@@ -72,7 +72,6 @@ export class SigninComponent implements OnInit {
           query: { providerId: this.socialUser }
         };
         this.authService.find(db).subscribe((data: any) => {
-          console.log(data);
           if (data.data) {
             if (data.data.length > 0) {
               window.localStorage.setItem('id', window.btoa(JSON.stringify(data.data[0])));

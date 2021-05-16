@@ -86,7 +86,7 @@
         <div class="p-4 bg-white mb-3 col-sm-11">
           <div class="mt-2 w-100">
             <div class="ml-4 mb-3 d-flex justify-content-between">
-              <span class="bold text-dark text-ssmd">Skills </span>
+              <span class="text-grey semi-bold">Skills </span>
               <span class="text-violet text-link" (click)="openSkillModal(skillModal)">Add Skill +</span>
             </div>
             <div class="row col-sm-11 d-flex justify-content-start">
@@ -134,9 +134,25 @@
         </div>
         <div class="col-sm-11 d-flex justify-content-center p-0 m-0">
           <div class="col-sm-11 p-0 my-3 mx-4">
-            <label for="exampleFormControlTextarea1">About us</label>
+            <label class="text-grey semi-bold">About us</label>
             <textarea class="form-control" [(ngModel)]="aboutUs" [ngModelOptions]="{standalone: true}"
               id="exampleFormControlTextarea1" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-11 d-flex justify-content-center p-0 m-0">
+          <div class="col-sm-11 p-0 my-3 mx-4">
+            <div class="d-flex justify-content-between vertical-center my-3">
+              <label class="text-grey semi-bold">Custom Questions</label>
+              <span class="text-primary text-link semi-bold d-block" (click)="addQuestion()">+ Add Question</span>
+            </div>
+            <div class="mb-4" *ngFor="let question of questionsArray; index as i">
+              <div class="d-flex justify-content-between vertical-center my-3">
+                <label class="d-block text-grey">Question {{i + 1}}</label>
+                <span class="material-icons-outlined text-grey text-link" (click)="deleteQuestion(i)">delete</span>
+              </div>
+              <textarea class="form-control my-2" [(ngModel)]="question.question" [ngModelOptions]="{standalone: true}"
+                rows="3"></textarea>
+            </div>
           </div>
         </div>
         <div class="w-100 d-flex justify-content-center mb-4 mt-5 mr-2">

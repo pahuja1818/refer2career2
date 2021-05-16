@@ -127,7 +127,6 @@ module.exports.updateAdminDetails = (req, res) => {
 module.exports.find = (req, res) => {
     const query = req.body.query ? req.body.query : {};
     const selectedFields = req.body.selectedFields ? req.body.selectedFields : {};
-    console.log(selectedFields);
     const collection = req.body.collection;
     if (query._id) {
         query._id = new ObjectId(query._id)

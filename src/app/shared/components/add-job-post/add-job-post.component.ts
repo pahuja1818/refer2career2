@@ -30,6 +30,7 @@ export class AddJobPostComponent implements OnInit {
   message = '';
 
   jobDetailsArray: any[] = [];
+  questionsArray: any[] = [];
   newAttribute: any = {};
 
   firstField = true;
@@ -56,6 +57,14 @@ export class AddJobPostComponent implements OnInit {
     private router: Router,
   ) { }
 
+  addQuestion() {
+    this.questionsArray.push({ question: '' });
+  }
+
+  deleteQuestion(index: number) {
+    this.questionsArray.splice(index, 1);
+  }
+
   ngOnInit() {
     this.filteredSkills = this.skillName.valueChanges.pipe(
       startWith(''),
@@ -69,9 +78,9 @@ export class AddJobPostComponent implements OnInit {
       location: new FormControl('', [Validators.required]),
       lastDateToApply: new FormControl(null, [Validators.required]),
       startDate: new FormControl(null, [Validators.required]),
-      jobType: new FormControl('In office', [Validators.required]),
-      jobInternship: new FormControl('Job', [Validators.required]),
-      salaryType: new FormControl('per month', [Validators.required]),
+      jobType: new FormControl('', [Validators.required]),
+      jobInternship: new FormControl('', [Validators.required]),
+      salaryType: new FormControl('', [Validators.required]),
       partTime: new FormControl(false),
       experience: new FormControl(6),
     });
@@ -94,6 +103,7 @@ export class AddJobPostComponent implements OnInit {
       this.skillsArray = this.jobPost.jobPost.skills;
       this.jobDetailsArray = this.jobPost.jobPost.details;
       this.aboutUs = this.jobPost.jobPost.aboutUs;
+      this.questionsArray = this.jobPost.jobPost.question;
     }
   }
 
@@ -148,6 +158,20 @@ export class AddJobPostComponent implements OnInit {
   save() {
     this.message = '';
     this.jobPostForm.markAllAsTouched();
+    if (this.questionsArray.length > 0) {
+      this.questionsArray.forEach((question, index) => {
+        if (question.question === '') {
+          this.toastService.showToast('Please enter question');
+          return;
+        }
+        if (index === this.questionsArray.length - 1) {
+          this.addPost();
+        }
+      });
+    }
+    else this.addPost();
+  }
+  addPost() {
     if (this.skillsArray.length > 1) {
       if (this.jobDetailsArray.length > 1) {
         if (this.jobPostForm.valid) {
@@ -171,6 +195,7 @@ export class AddJobPostComponent implements OnInit {
               experience: this.jobPostForm.get('experience').value,
               startDate: this.jobPostForm.get('startDate').value,
               skills: this.skillsArray,
+              question: this.questionsArray,
               details: this.description,
               aboutUs: this.aboutUs,
               verified: this.jobPost ? this.jobPost.status === 'approved' : false

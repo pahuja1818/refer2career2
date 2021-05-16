@@ -150,7 +150,6 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
         query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
       };
       this.dbService.find(db).subscribe(async (data: any) => {
-        console.log(data);
         if (data.data.length === 0) {
           const storageRef: any = firebase.storage().ref();
           const time = new Date().getTime();

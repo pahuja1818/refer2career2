@@ -60,21 +60,21 @@
             </div>
             <div class="mt-4 row p-3 justify-content-center">
               <div class="col-sm-8 d-flex justify-content-center p-3" *ngIf="isApplicationRecieved">
-                <button class="btn btn-primary fall-animation" style="background-color: rgb(38, 104, 180);"
-                  *ngIf="totalChecked" (click)="openConfirmModal(confirmModal, 'Shortlist')">Shortlist</button>
+                <button class="btn btn-primary fall-animation" *ngIf="totalChecked"
+                  (click)="openConfirmModal(confirmModal, 'Shortlist')">Shortlist</button>
               </div>
               <div class="col-sm-8 d-flex justify-content-center p-3" *ngIf="isShortlisted">
-                <button class="btn btn-success fall-animation mr-2" style="background-color: rgb(48, 196, 151);"
-                  *ngIf="totalChecked" (click)="openConfirmModal(confirmModal, 'Hire')">Hire</button>
-                <button class="btn btn-danger fall-animation" style="background-color: rgb(161, 58, 54);"
-                  *ngIf="totalChecked" (click)="openConfirmModal(confirmModal, 'Reject')">Reject</button>
+                <button class="btn btn-primary fall-animation mr-2" *ngIf="totalChecked"
+                  (click)="openConfirmModal(confirmModal, 'Hire')">Hire</button>
+                <button class="btn btn-primary fall-animation" *ngIf="totalChecked"
+                  (click)="openConfirmModal(confirmModal, 'Reject')">Reject</button>
               </div>
               <table class="table col-sm-11 mt-3" *ngIf="filteredCandidates.length > 0">
                 <thead>
                   <tr>
                     <th scope="col">
                       <mat-checkbox *ngIf="!isRejected && !isHired" class="example-margin text-uppercase"
-                        [checked]="totalChecked == allCandidates.length" (change)="checkAll()">
+                        [checked]="totalChecked == filteredCandidates.length" (change)="checkAll()">
                       </mat-checkbox>
                     </th>
                     <th scope="col">SN</th>
@@ -182,12 +182,12 @@
       </span>
     </div>
     <div class="mt-4 vertical-center justify-content-center">
-      <button class="btn btn-outline-primary text-sm" *ngIf="confirmModalStatus === 'Shortlist'"
-        (click)="shortlistApplicant(curentUserId)">Shortlist</button>
-      <button class="btn btn-outline-success text-sm" *ngIf="confirmModalStatus === 'Hire'"
-        (click)="hireApplicant(curentUserId)">Hire</button>
-      <button class="btn btn-outline-danger text-sm" *ngIf="confirmModalStatus === 'Reject'"
-        (click)="rejectApplicant(curentUserId)">Reject</button>
+      <button class="btn btn-primary text-sm" *ngIf="confirmModalStatus === 'Shortlist'"
+        (click)="updateStatus('Shortlisted')">Shortlist</button>
+      <button class="btn btn-primary text-sm" *ngIf="confirmModalStatus === 'Hire'"
+        (click)="updateStatus('Hired')">Hire</button>
+      <button class="btn btn-primary text-sm" *ngIf="confirmModalStatus === 'Reject'"
+        (click)="updateStatus('Rejected')">Reject</button>
     </div>
   </div>
 </ng-template>

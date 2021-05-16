@@ -353,7 +353,6 @@ export class UserProfileComponent implements OnInit {
         data: { workExperience: this.workExpArray, totalWorkExp: +totalWorkExp },
         query: { _id: this.user._id }
       };
-      console.log(dbOpeartion);
       this.authService.update(dbOpeartion).then((data: any) => {
         if (data.data === true) {
           this.getUser();

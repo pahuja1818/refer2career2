@@ -151,7 +151,6 @@ export class AddOrganizationComponent implements OnInit {
           data: details,
           query: { _id: this.organization._id }
         };
-        console.log(db);
         this.authService.update(db).then((data: any) => {
           if (data.data) {
             this.toastService.showToast('Organization updated Successfully!');

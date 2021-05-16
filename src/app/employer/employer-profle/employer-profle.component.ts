@@ -32,7 +32,6 @@ export class EmployerProfleComponent implements OnInit {
     this.authService.getCurrentUser();
     this.authService.currentUser.subscribe((data: any) => {
       this.user = data;
-      console.log(this.user);
       this.isServiceRunning = false;
       this.initializeDetails();
     });
