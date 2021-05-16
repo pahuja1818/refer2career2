@@ -20,7 +20,7 @@ export class UserDashboardComponent implements OnInit {
   modalRef: BsModalRef;
 
   type = null;
-  description: string = '';
+  description = '';
 
   constructor(
     private menu: MenuController,
@@ -54,10 +54,10 @@ export class UserDashboardComponent implements OnInit {
   send() {
 
     if (this.type) {
-      let arr: any[] = this.description.split(" ");
+      const arr: any[] = this.description.split(' ');
       if (arr.length > 9) {
-        let db: DbOperation = {
-          collection: "feedback",
+        const db: DbOperation = {
+          collection: 'feedback',
           data: {
             email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email,
             name: JSON.parse(window.atob(window.localStorage.getItem('id'))).name,
@@ -65,21 +65,21 @@ export class UserDashboardComponent implements OnInit {
             description: this.description,
             createdAt: new Date(),
           }
-        }
+        };
         this.dbService.create(db).then((data: any) => {
           if (data.data) {
-            this.toast.showToast("Sent Successfully!");
+            this.toast.showToast('Sent Successfully!');
             this.cancel();
           }
-          else this.toast.showToast("Something went wrong!", "bg-danger")
-        })
+          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
+        });
       }
       else {
-        this.toast.showToast("Please enter description of minimum 10 words!", "bg-danger")
+        this.toast.showToast('Please enter description of minimum 10 words!', 'bg-danger');
       }
     }
     else {
-      this.toast.showToast("Please Select Type!", "bg-danger")
+      this.toast.showToast('Please Select Type!', 'bg-danger');
     }
   }
 

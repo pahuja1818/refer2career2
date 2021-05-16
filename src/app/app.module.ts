@@ -156,7 +156,7 @@ firebase.initializeApp(environment.firebaseConfig);
     SharedModule,
     NgbModule,
   ],
-  
+
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

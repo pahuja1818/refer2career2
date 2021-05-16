@@ -79,6 +79,9 @@ export class AllJobPostsComponent implements OnInit {
 
   refineJobsDropDown = false;
 
+  allMyApplications: any[] = [];
+  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+
   isChanged(): boolean {
     return !(JSON.stringify(this.refine) === JSON.stringify(this.refineInitial));
   }
@@ -98,29 +101,26 @@ export class AllJobPostsComponent implements OnInit {
     }
   }
 
-  allMyApplications: any[] = [];
-  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
-
   getMyApplication() {
-    let db = {
+    const db = {
       collection: 'applyJob',
       query: { candidateId: this.user._id },
-      selectedFields: { 'jobPostId': 1, '_id': 0 },
-    }
+      selectedFields: { jobPostId: 1, _id: 0 },
+    };
     this.authService.find(db).subscribe((data: any) => {
       if (data.data) {
         this.allMyApplications = data.data;
         this.checkJobPosts();
       }
-    })
+    });
   }
 
   checkJobPosts(){
     this.allJobPost.forEach((post: any) => {
-      if(this.allMyApplications.find(data => data.jobPostId === post._id)){
+      if (this.allMyApplications.find(data => data.jobPostId === post._id)){
         post.isApplied = true;
       }
-    })
+    });
   }
 
   clearFilter() {
@@ -174,7 +174,7 @@ export class AllJobPostsComponent implements OnInit {
     const dbOpeartion: DbOperation = {
       collection: 'jobposts',
       query: { 'jobPost.verified': true },
-      selectedFields: { 'jobPost.location': 1, '_id': 0 },
+      selectedFields: { 'jobPost.location': 1, _id: 0 },
     };
     this.authService.find(dbOpeartion).subscribe((data: any) => {
       if (data.data.length > 0) {

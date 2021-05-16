@@ -18,6 +18,29 @@ import * as firebase from 'firebase';
 })
 export class ViewProfileComponent implements OnInit {
 
+  constructor(
+    private storage: AngularFireStorageModule,
+    private menu: MenuController,
+    private route: ActivatedRoute,
+    private modalRef: BsModalRef,
+    private modalService: BsModalService,
+    private authService: AuthService,
+    private toastService: ToastService) {
+  }
+
+  get profileCompleted() {
+    let percent = 12;
+    if (this.cvHeadLine) { percent += 10; }
+    if (this.workExpArray.length > 0) { percent += 15; }
+    if (this.skillsArray.length > 0) { percent += 12; }
+    if (this.educationArray.length > 0) { percent += 11; }
+    if (this.user.resume) { percent += 15; }
+    if (this.user.basicInfo) { percent += 15; }
+    if (this.user.photo) { percent += 10; }
+    document.getElementById('progress-bar').style.width = percent + '%';
+    return percent;
+  }
+
   basePath = '/profile-resumes';
   uploadTask: firebase.storage.UploadTask;
 
@@ -57,21 +80,11 @@ export class ViewProfileComponent implements OnInit {
 
   maxDob = new Date(2006, 11, 31);
 
+  userId: any = '';
+
 
   openResume() {
     window.open(this.user.resume, '_blank');
-  }
-
-  userId: any = '';
-
-  constructor(
-    private storage: AngularFireStorageModule,
-    private menu: MenuController,
-    private route: ActivatedRoute,
-    private modalRef: BsModalRef,
-    private modalService: BsModalService,
-    private authService: AuthService,
-    private toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -79,7 +92,7 @@ export class ViewProfileComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       if (params.id) {
         this.userId = params.id;
-        //this.getDetails();
+        // this.getDetails();
         this.getUser();
       }
     });
@@ -155,9 +168,9 @@ export class ViewProfileComponent implements OnInit {
           query: {
             _id: this.userId,
           }
-        }).subscribe((data: any) => {
-          if (data.data.length > 0) {
-            this.user = data.data[0];
+        }).subscribe((pata: any) => {
+          if (pata.data.length > 0) {
+            this.user = pata.data[0];
             this.setBasicInfo();
             if (this.user.cvHead) {
               this.cvHeadLine = this.user.cvHead;
@@ -170,19 +183,6 @@ export class ViewProfileComponent implements OnInit {
         });
       }
     });
-  }
-
-  get profileCompleted() {
-    let percent = 12;
-    if (this.cvHeadLine) { percent += 10; }
-    if (this.workExpArray.length > 0) { percent += 15; }
-    if (this.skillsArray.length > 0) { percent += 12; }
-    if (this.educationArray.length > 0) { percent += 11; }
-    if (this.user.resume) { percent += 15; }
-    if (this.user.basicInfo) { percent += 15; }
-    if (this.user.photo) { percent += 10; }
-    document.getElementById('progress-bar').style.width = percent + '%';
-    return percent;
   }
 
 

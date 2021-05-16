@@ -21,9 +21,9 @@ export class FeedbackComponent implements OnInit {
   }
 
   getFeedBacks() {
-    let db: DbOperation = {
-      collection: "feedback",
-    }
+    const db: DbOperation = {
+      collection: 'feedback',
+    };
     this.isServiceRunning = true;
     this.dbService.find(db).subscribe((data: any) => {
       if (data.data) {
@@ -33,13 +33,13 @@ export class FeedbackComponent implements OnInit {
         }
         this.isServiceRunning = false;
       }
-    })
+    });
   }
 
   sort() {
     this.allFeedBacks.sort((a: any, b: any) => {
-      let c: any = new Date(a.createdAt);
-      let d: any = new Date(b.createdAt);
+      const c: any = new Date(a.createdAt);
+      const d: any = new Date(b.createdAt);
       return d - c;
     });
   }

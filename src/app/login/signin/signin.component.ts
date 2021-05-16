@@ -99,7 +99,7 @@ export class SigninComponent implements OnInit {
 
   hideEmployerpahe() {
     this.loginVisible();
-    setTimeout(() => { this.isEmployer = false; }, 500)
+    setTimeout(() => { this.isEmployer = false; }, 500);
   }
 
   resendOTP() {
@@ -337,9 +337,9 @@ export class SigninComponent implements OnInit {
 
   openEmployerModal() {
     this.isEmployer = true;
-    setTimeout(() => { this.registrationVisible(); }, 100)
-    //this.modalRef.hide();
-    //this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'full-modal', ignoreBackdropClick: true, animated: true });
+    setTimeout(() => { this.registrationVisible(); }, 100);
+    // this.modalRef.hide();
+    // this.modalRef = this.modalService.show(EmployerSigninComponent, { class: 'full-modal', ignoreBackdropClick: true, animated: true });
   }
 
 

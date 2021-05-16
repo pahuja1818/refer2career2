@@ -159,7 +159,7 @@
     </div>
     <div class="side back w-100 row p-0 m-0 vertical-center justify-content-center">
       <div class="col-sm-9" *ngIf="isEmployer" style="min-height: 90vh !important;max-height: 92vh !important;">
-        <app-employer-signin (close)="hideEmployerpahe()"></app-employer-signin>
+        <app-employer-signin (closeEmployer)="hideEmployerpahe()"></app-employer-signin>
       </div>
       <div class="col-sm-9 p-2" *ngIf="!isEmployer" style="min-height: 90vh !important; max-height: 96vh !important;">
         <div class="w-100 row vertical-center mx-auto bg-violet border-7"

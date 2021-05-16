@@ -169,7 +169,7 @@ export class AddJobPostComponent implements OnInit {
         }
       });
     }
-    else this.addPost();
+    else { this.addPost(); }
   }
   addPost() {
     if (this.skillsArray.length > 1) {

@@ -79,7 +79,7 @@ export class ApplicationsComponent implements OnInit {
       }
     });
 
-    
+
     this.filteredSkills = this.skillName.valueChanges.pipe(
       startWith(''),
       map(value => this._filterSkills(value))
@@ -120,7 +120,7 @@ export class ApplicationsComponent implements OnInit {
           this.dbService.find(dbOperation).subscribe((a: any) => {
             if (a.data.length > 0) {
               a = a.data[0];
-              let user = {
+              const user = {
                 applyId: cand._id,
                 _id: a._id,
                 name: a.name,
@@ -129,9 +129,10 @@ export class ApplicationsComponent implements OnInit {
                 status: cand.status ? cand.status : null,
                 isChecked: false,
                 profileCompleted: a.profileCompleted ? a.profileCompleted : 20
-              }
-              if (!this.allCandidates.find(data => data._id === user._id))
+              };
+              if (!this.allCandidates.find(data => data._id === user._id)) {
                 this.allCandidates.push(user);
+              }
               this.changeTopMenu(0);
               this.calculateApplocants();
               this.isServiceRunning = false;
@@ -176,7 +177,7 @@ export class ApplicationsComponent implements OnInit {
           this.dbService.find(dbOperation).subscribe((a: any) => {
             if (a.data.length > 0) {
               a = a.data[0];
-              let user = {
+              const user = {
                 applyId: cand._id,
                 refered: true,
                 _id: a._id,
@@ -186,14 +187,15 @@ export class ApplicationsComponent implements OnInit {
                 status: cand.status ? cand.status : null,
                 isChecked: false,
                 profileCompleted: a.profileCompleted ? a.profileCompleted : 20
-              }
-              if (!this.allCandidates.find(data => data.applyId === user.applyId))
+              };
+              if (!this.allCandidates.find(data => data.applyId === user.applyId)) {
                 this.allCandidates.push(user);
+              }
               this.changeTopMenu(0);
               this.calculateApplocants();
             }
             else {
-              let user = {
+              const user = {
                 applyId: cand._id,
                 _id: cand._id,
                 name: cand.name,
@@ -203,9 +205,10 @@ export class ApplicationsComponent implements OnInit {
                 status: cand.status ? cand.status : null,
                 isChecked: false,
                 profileCompleted: cand.profileCompleted ? a.profileCompleted : 20
-              }
-              if (!this.allCandidates.find(data => data.applyId === user.applyId))
+              };
+              if (!this.allCandidates.find(data => data.applyId === user.applyId)) {
                 this.allCandidates.push(user);
+              }
               this.changeTopMenu(0);
               this.calculateApplocants();
             }
@@ -333,7 +336,7 @@ export class ApplicationsComponent implements OnInit {
   removeChecked() {
     this.allCandidates.map((data: any) => {
       data.isChecked = false;
-    })
+    });
   }
 
   changeTopMenu(id: number) {
@@ -381,7 +384,7 @@ export class ApplicationsComponent implements OnInit {
       if (user.isChecked === true) {
         const db: DbOperation = {
           collection: user.refered === true ? 'referedProfiles' : 'applyJob',
-          data: { status: status },
+          data: { status },
           query: { _id: user.applyId },
         };
         this.dbService.update(db).then((data: any) => {
@@ -398,7 +401,7 @@ export class ApplicationsComponent implements OnInit {
         this.getApplicants();
         this.getReferedProfiles();
       }
-    })
+    });
   }
 
   openConfirmModal(template: any, status: any) {
@@ -411,17 +414,17 @@ export class ApplicationsComponent implements OnInit {
     if (this.isAllChecked) {
       this.totalChecked = this.filteredCandidates.length;
     }
-    else this.totalChecked = 0;
+    else { this.totalChecked = 0; }
     this.filteredCandidates.map((cand: any) => {
       cand.isChecked = this.isAllChecked;
-    })
+    });
   }
 
   checkedUser(index: number) {
-    this.filteredCandidates[index].isChecked = !this.filteredCandidates[index].isChecked
+    this.filteredCandidates[index].isChecked = !this.filteredCandidates[index].isChecked;
     if (this.filteredCandidates[index].isChecked) {
       this.totalChecked++;
-      if(this.totalChecked === this.filteredCandidates.length){
+      if (this.totalChecked === this.filteredCandidates.length){
         this.isAllChecked = true;
       }
     }

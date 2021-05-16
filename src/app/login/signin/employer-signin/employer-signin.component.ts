@@ -26,7 +26,7 @@ export class EmployerSigninComponent implements OnInit {
     private modalService: BsModalService,
   ) { }
 
-  @Output() close = new EventEmitter();
+  @Output() closeEmployer = new EventEmitter();
 
   loginForm: FormGroup;
   message = '';
@@ -137,7 +137,7 @@ export class EmployerSigninComponent implements OnInit {
   }
 
   closeModal(){
-    this.close.emit();
+    this.closeEmployer.emit();
   }
 
   hideAll() {
