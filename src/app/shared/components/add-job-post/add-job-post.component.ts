@@ -101,7 +101,8 @@ export class AddJobPostComponent implements OnInit {
         experience: this.jobPost.jobPost.experience,
       });
       this.skillsArray = this.jobPost.jobPost.skills;
-      this.jobDetailsArray = this.jobPost.jobPost.details;
+      this.description = this.jobPost.jobPost.details,
+        this.jobDetailsArray = this.jobPost.jobPost.details;
       this.aboutUs = this.jobPost.jobPost.aboutUs;
       this.questionsArray = this.jobPost.jobPost.question;
     }
@@ -173,7 +174,7 @@ export class AddJobPostComponent implements OnInit {
   }
   addPost() {
     if (this.skillsArray.length > 1) {
-      if (this.jobDetailsArray.length > 1) {
+      if (this.description) {
         if (this.jobPostForm.valid) {
           this.isServiceRunning = true;
           const post: any = {

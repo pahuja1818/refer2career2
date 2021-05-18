@@ -21,7 +21,7 @@ module.exports.addJobPost = (req, res) => {
 module.exports.updateJobPost = (req, res) => {
     const data = req.body;
     let d = { 'jobPost': data.jobPost };
-    mongoUtil.collection("jobposts").update({ '_id': new ObjectId(data._id) }, { $set: d }, function (err, result) {
+    mongoUtil.collection("jobposts").updateOne({ '_id': new ObjectId(data._id) }, { $set: d }, function (err, result) {
         if (err) return res.status(200).json({ 'data': false });
         return res.status(200).json({ 'data': true });
     });

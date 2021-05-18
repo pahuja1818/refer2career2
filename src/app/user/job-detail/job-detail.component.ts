@@ -8,7 +8,7 @@ import { ToastService } from './../../shared/services/toast.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { JobPostServiceService } from './../../shared/services/job-post-service.service';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Status } from 'src/app/shared/models/enums';
 import * as firebase from 'firebase';
 import { Db } from 'mongodb';
@@ -29,7 +29,8 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     private modalService: BsModalService,
     private toastService: ToastService,
     private referService: ReferJobPostService,
-    private dbService: AuthService
+    private dbService: AuthService,
+    private router: Router,
   ) { }
 
   user = JSON.parse(window.atob(window.localStorage.getItem('id')));
@@ -108,6 +109,77 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
   }
 
+  checkProfileDetails(template: any, template1: any) {
+    this.modalRef.hide();
+    if (this.user) {
+      if (this.user.skills) {
+        if (this.user.skills.length > 0) {
+          if (this.user.resume) {
+            this.checkQuestion(template1);
+          }
+          else {
+            this.openProfileError(template);
+          }
+        }
+        else {
+          this.openProfileError(template);
+        }
+      }
+      else {
+        this.openProfileError(template);
+      }
+    }
+    else {
+      this.openProfileError(template);
+    }
+  }
+
+  openProfileError(template: any) {
+    this.modalRef = this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
+  }
+
+  questionsAnswers: any[] = [];
+
+  checkQuestion(template: any) {
+    if (this.jobPost.jobPost.question) {
+      if (this.jobPost.jobPost.question.length > 0) {
+        this.jobPost.jobPost.question.map((data: any) => {
+          this.questionsAnswers.push({ question: data.question, answer: '' })
+        })
+        this.modalRef = this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
+      }
+      else {
+        //this.applyJob();
+      }
+    }
+    else {
+      //this.applyJob();
+    }
+  }
+
+  submit() {
+    let flag = true;
+    this.questionsAnswers.map((data: any, index: number) => {
+      if (!data.answer) {
+        flag = false;
+      }
+      if (this.questionsAnswers.length === index + 1) {
+        if (flag) {
+          this.applyJob();
+        }
+        else {
+          this.toastService.showToast('Enter Answers', 'bg-danger');
+        }
+      }
+    })
+  }
+
+  navigate() {
+    this.modalRef.hide();
+    this.modalService.hide();
+    this.router.navigateByUrl('/referer/profile');
+  }
+
   referJobModal(template: any) {
     this.referTemplate = template;
     this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
@@ -137,6 +209,8 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+
 
 
 

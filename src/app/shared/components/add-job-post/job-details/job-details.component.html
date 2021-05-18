@@ -82,14 +82,14 @@
             style="border-radius: 20px; margin: 8px;">{{skill.skillName}}</span>
         </div>
       </div>
-      <div *ngIf="jobPost.jobPost.details.length > 1">
+      <div *ngIf="jobPost.jobPost.details">
         <span class="text-dark text-ssmd semi-bold d-block my-3">Job Description</span>
-        <div *ngIf="jobPost.jobPost.details.length > 0">
+        <!--<div *ngIf="jobPost.jobPost.details.length > 0">
           <div *ngFor="let detail of jobPost.jobPost.details">
             <span *ngIf="detail.detail" class="vertical-center text-ssmd text-grey px-3 py-2  m-2 bg-light"> <span
                 class="material-icons-outlined text-sm text-grey mr-2">circle</span> &nbsp; {{detail.detail}}</span>
           </div>
-        </div>
+        </div>-->
         <div *ngIf="jobPost.jobPost.details">
           <p class="text-greay text-sm text-break" style="white-space: pre;">{{jobPost.jobPost.details}}</p>
         </div>

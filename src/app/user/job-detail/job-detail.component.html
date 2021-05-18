@@ -91,14 +91,14 @@
             style="border-radius: 20px; margin: 8px;">{{skill.skillName}}</span>
         </div>
       </div>
-      <div *ngIf="jobPost.jobPost.details.length > 1">
+      <div *ngIf="jobPost.jobPost.details">
         <span class="text-dark text-ssmd semi-bold d-block my-3">Job Description</span>
-        <div *ngIf="jobPost.jobPost.details.length > 0">
+        <!--<div *ngIf="jobPost.jobPost.details.length > 0">
           <div *ngFor="let detail of jobPost.jobPost.details">
             <span *ngIf="detail.detail" class="vertical-center text-ssmd text-grey px-3 py-2  m-2 bg-light"> <span
                 class="material-icons-outlined text-sm text-grey mr-2">circle</span> &nbsp; {{detail.detail}}</span>
           </div>
-        </div>
+        </div>-->
         <div *ngIf="jobPost.jobPost.details">
           <p class="text-greay text-sm text-break" style="white-space: pre;">{{jobPost.jobPost.details}}</p>
         </div>
@@ -125,7 +125,33 @@
     <span class="d-block text-dark">Your profile data and resume will be shared with the
       {{jobPost.jobPost.companyName}}</span>
     <div class="w-100 d-flex justify-content-center my-4 pt-5">
-      <button class="btn btn-primary bg-violet px-4 py-2" (click)="applyJob()">Apply now</button>
+      <button class="btn btn-primary bg-violet px-4 py-2"
+        (click)="checkProfileDetails(errorModal, questionModal)">Proceed</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="p-2" #errorModal>
+  <div class="bg-white p-3" style="border-radius: 5px;">
+    <span class="d-block material-icons text-grey text-link text-right" (click)="closeModal()">close</span>
+    <span class="d-block text-dark">Your profile does not have enough details to apply.</span>
+    <span class="d-block text-dark">Complete your profile in my profile section.
+    </span>
+    <div class="w-100 d-flex justify-content-center my-4 pt-5">
+      <button class="btn btn-primary px-4 py-2" (click)="navigate()">Add Details</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="p-2" #questionModal>
+  <div class="bg-white p-3" style="border-radius: 5px;">
+    <div class="mb-4" *ngFor="let data of questionsAnswers; index as i">
+      <span class="text-dark text-sm d-block mb-3">Question {{ i + 1}}. &nbsp;{{data.question}}</span>
+      <textarea class="form-control my-2" placeholder="Type your answer" [(ngModel)]="data.answer" [ngModelOptions]="{standalone: true}"
+        rows="3"></textarea>
+    </div>
+    <div class="w-100 d-flex justify-content-center my-4 pt-5">
+      <button class="btn btn-primary px-4 py-2" (click)="submit()">Submit</button>
     </div>
   </div>
 </ng-template>
