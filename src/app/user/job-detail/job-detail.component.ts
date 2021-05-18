@@ -20,9 +20,6 @@ import { Db } from 'mongodb';
 })
 export class JobDetailComponent implements OnInit, AfterViewInit {
 
-  isServiceRunning = false;
-  maxDob = new Date(2006, 11, 31);
-
   constructor(
     private jobPostService: JobPostServiceService,
     private route: ActivatedRoute,
@@ -32,6 +29,9 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     private dbService: AuthService,
     private router: Router,
   ) { }
+
+  isServiceRunning = false;
+  maxDob = new Date(2006, 11, 31);
 
   user = JSON.parse(window.atob(window.localStorage.getItem('id')));
   jobPost: any = {};
@@ -69,6 +69,8 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   workExpForm: FormGroup;
 
   referTemplate: any;
+
+  questionsAnswers: any[] = [];
 
   ngOnInit() {
     this.referJobPostForm = new FormGroup({
@@ -138,22 +140,20 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     this.modalRef = this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
   }
 
-  questionsAnswers: any[] = [];
-
   checkQuestion(template: any) {
     if (this.jobPost.jobPost.question) {
       if (this.jobPost.jobPost.question.length > 0) {
         this.jobPost.jobPost.question.map((data: any) => {
-          this.questionsAnswers.push({ question: data.question, answer: '' })
-        })
+          this.questionsAnswers.push({ question: data.question, answer: '' });
+        });
         this.modalRef = this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
       }
       else {
-        //this.applyJob();
+        // this.applyJob();
       }
     }
     else {
-      //this.applyJob();
+      // this.applyJob();
     }
   }
 
@@ -171,7 +171,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           this.toastService.showToast('Enter Answers', 'bg-danger');
         }
       }
-    })
+    });
   }
 
   navigate() {

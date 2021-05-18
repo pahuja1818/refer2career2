@@ -27,7 +27,7 @@ export class ViewProfileComponent implements OnInit {
     private authService: AuthService,
     private toastService: ToastService) {
   }
-  
+
 
   get profileCompleted() {
     let percent = 12;
