@@ -10,7 +10,7 @@
           <div *ngIf="isScreenBig" style="height: 100% !important;"
             class="col-sm-5 bg-violet w-100 border-left-7 vertical-center">
             <span class="text-white text-lg mx-auto w-75"><span class="d-block text-center mb-4">{{ !isLogin ? "Don't
-                worry!!": 'Welcome Back!!'}}</span>
+                worry!!": 'Welcome!!'}}</span>
               <span class="text-ssmd d-block text-center">
                 {{ !isLogin ? 'We will help you to reset your account password.' : 'To keep connected with us
                 please signin with your credentials.'}}
@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="vertical-center w-100 justify-content-center mb-2">
-              <span class="text-primary text-md semi-bold">{{ isLogin?'Signin to Refer2Career': isRegistration
+              <span class="text-primary text-md semi-bold">{{ isLogin?'Sign in to Refer2Career': isRegistration
                 ?'Registration':
                 isForgotPassword ?
                 'Forgot Password' : isResetPassword ? 'Reset Password' : ''}}</span>
@@ -85,7 +85,7 @@
                 Account</a>
             </div>
             <div class="w-100 text-center pt-1 mb-2">
-              <a class="text-primary text-link semi-bold" *ngIf="isLogin" (click)="openEmployerModal()">Sign-in as
+              <a class="text-primary text-link semi-bold" *ngIf="isLogin" (click)="openEmployerModal()">Sign in as
                 Employer</a>
             </div>
             <div *ngIf="isVerifyOTP" class="w-100 p-3 d-flex justify-content-center">

@@ -227,14 +227,15 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
         if (data.data.length === 0) {
           const storageRef: any = firebase.storage().ref();
           const time = new Date().getTime();
-          await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.fileData);
-          storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
+          await storageRef.child(`${this.basePath}/${this.referJobPostForm.get('name').value}${time}${this.filename}`).put(this.fileData);
+          storageRef.child(`${this.basePath}/${this.referJobPostForm.get('name').value}${time}${this.filename}`).getDownloadURL().then(async (url) => {
             resume = url;
             this.fileData = undefined;
             if (resume && this.fileData === undefined) {
               const refer: any = {
                 resume,
                 jobTitle: this.jobPost.jobPost.title,
+                companyName: this.jobPost.jobPost.companyName,
                 name: this.referJobPostForm.get('name').value,
                 email: this.referJobPostForm.get('email').value,
                 fatherName: this.referJobPostForm.get('fatherName').value,

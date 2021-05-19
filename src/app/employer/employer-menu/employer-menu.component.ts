@@ -29,4 +29,7 @@ export class EmployerMenuComponent implements OnInit {
       { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
   }
 
+  getName(name: string){
+    return name.split(' ')[0];
+  }
 }

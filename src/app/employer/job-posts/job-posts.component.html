@@ -36,7 +36,7 @@
                 <span class="material-icons-outlined text-md text-grey mr-2 text-violet">home</span>
                 <span class="text-grey semi-bold text-smd  d-inline">Work from home</span>
               </div>
-              <div class="col-sm-6 vertical-center" *ngIf="jobPost.jobPost.skills.length > 0">
+              <div class="col-sm-6 my-2 vertical-center" *ngIf="jobPost.jobPost.skills.length > 0">
                 <span class="material-icons-outlined text-grey mr-2 text-md text-violet">psychology</span>
                 <span class="text-grey semi-bold text-smd  d-inline">Skills : &nbsp;</span>
                 <span class="text-grey text-smd text-wrap">{{jobPost.jobPost.skills[0].skillName }}
@@ -54,9 +54,9 @@
               <span class="text-grey">&nbsp; &#8377; {{jobPost.jobPost.salary}} {{jobPost.jobPost.salaryType}}</span>
             </div>
             <div class="my-2 vertical-center">
-              <span class="material-icons-outlined text-grey text-ssmd mr-2 text-violet">work</span>
-              <span class="text-grey semi-bold text-smd  d-inline">Experience : </span>
-              <span class="text-grey text-smd">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
+              <span class="material-icons-outlined text-grey mr-2 text-violet">work</span>
+              <span class="text-grey semi-bold d-inline">Experience : </span>
+              <span class="text-grey">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
                 }}
                 year{{jobPost.jobPost.experience > 1 ? 's': ''}}</span>
             </div>

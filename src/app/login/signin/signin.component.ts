@@ -12,6 +12,7 @@ import { takeWhile, tap } from 'rxjs/operators';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-signin',
@@ -57,7 +58,10 @@ export class SigninComponent implements OnInit {
     private routing: ActivatedRoute,
     private toast: ToastService,
     private modalService: BsModalService,
-  ) { }
+    private location: Location,
+  ) {
+    
+   }
 
   isScreenBig = false;
   socialUser: any = {};

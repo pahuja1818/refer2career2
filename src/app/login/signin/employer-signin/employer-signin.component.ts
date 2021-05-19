@@ -10,6 +10,7 @@ import { takeWhile, tap } from 'rxjs/operators';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { DbOperation } from 'src/app/shared/models/dbOperation';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -24,7 +25,10 @@ export class EmployerSigninComponent implements OnInit {
     private router: Router,
     private toast: ToastService,
     private modalService: BsModalService,
-  ) { }
+    private location: Location,
+  ) { 
+    
+  }
 
   @Output() closeEmployer = new EventEmitter();
 
@@ -81,8 +85,8 @@ export class EmployerSigninComponent implements OnInit {
           else if (data.email) {
             if (data.role !== 2) {
               this.modalRef.hide();
-              window.location.reload();
               window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
+              window.location.reload();
             }
             else { this.message = 'User not found!'; }
           }

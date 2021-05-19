@@ -48,7 +48,7 @@
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>{{ jobPostForm.get('jobInternship').value === "Job" ? 'Salary' : 'Stipend'}} <span
+            <mat-label>{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
                 class="text-danger">*</span></mat-label>
             <input matInput formControlName='salary' name="salary" type="number" class="p-0">
             <span matPrefix>&#8377;&nbsp;</span>
@@ -108,7 +108,7 @@
               [ngModelOptions]="{standalone: true}" rows="8"></textarea>
           </div>
         </div>
-        <div class="col-sm-5 m-3">
+        <div class="col-sm-5 my-3">
           <label class="text-grey semi-bold d-block mb-3">Last date to apply</label>
           <div class="input-group mb-2">
             <div class="input-group-prepend bg-white">
@@ -116,18 +116,6 @@
               </span>
             </div>
             <input type="text" formControlName="lastDateToApply" autocomplete="nope" placeholder="Choose Date"
-              class="form-control semi-bold text-grey bg-white" bsDatepicker readonly
-              [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
-          </div>
-        </div>
-        <div class="col-sm-5 m-3">
-          <label class="text-grey semi-bold d-block mb-3">Start date</label>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend bg-white">
-              <span class="material-icons input-group-text text-secondary bg-white">date_range
-              </span>
-            </div>
-            <input type="text" formControlName="startDate" autocomplete="nope" placeholder="Choose Date"
               class="form-control semi-bold text-grey bg-white" bsDatepicker readonly
               [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
           </div>

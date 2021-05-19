@@ -123,8 +123,8 @@ export class UserProfileComponent implements OnInit {
     this.isServiceRunning = true;
     const storageRef: any = firebase.storage().ref();
     const time = new Date().getTime();
-    await storageRef.child(`${this.basePath}/${time}${this.filename}`).put(this.blob);
-    storageRef.child(`${this.basePath}/${time}${this.filename}`).getDownloadURL().then(async (url) => {
+    await storageRef.child(`${this.basePath}/${this.user.name}${time}${this.filename}`).put(this.blob);
+    storageRef.child(`${this.basePath}/${this.user.name}${time}${this.filename}`).getDownloadURL().then(async (url) => {
       const dbOpeartion: DbOperation = {
         collection: 'users',
         query: { _id: this.user._id },
@@ -541,8 +541,9 @@ export class UserProfileComponent implements OnInit {
       if (data.data.length > 0) {
         this.user = data.data[0];
         this.setBasicInfo();
-        this.updateProfileCompletion();
         this.isServiceRunning = false;
+        this.profileCompleted;
+        this.updateProfileCompletion();
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }
     });
@@ -551,16 +552,22 @@ export class UserProfileComponent implements OnInit {
   otpRequest() {
   }
 
+  percent = 12;
+
   get profileCompleted() {
     let percent = 12;
     if (this.cvHeadLine) { percent += 10; }
-    if (this.workExpArray.length > 0) { percent += 15; }
-    if (this.skillsArray.length > 0) { percent += 12; }
-    if (this.educationArray.length > 0) { percent += 11; }
+    if (this.workExpArray)
+      if (this.workExpArray.length > 0) { percent += 15; }
+    if (this.skillsArray)
+      if (this.skillsArray.length > 0) { percent += 12; }
+    if (this.educationArray)
+      if (this.educationArray.length > 0) { percent += 11; }
     if (this.user.resume) { percent += 15; }
     if (this.user.basicInfo) { percent += 15; }
     if (this.user.photo) { percent += 10; }
     document.getElementById('progress-bar').style.width = percent + '%';
+    this.percent = percent;
     return percent;
   }
 
@@ -568,7 +575,7 @@ export class UserProfileComponent implements OnInit {
     this.isServiceRunning = true;
     const dbOpeartion: DbOperation = {
       collection: 'users',
-      data: { profileCompleted: this.profileCompleted },
+      data: { profileCompleted: this.percent },
       query: { _id: this.user._id }
     };
     this.authService.update(dbOpeartion).then((data: any) => {

@@ -1,15 +1,10 @@
+import { UserRole } from 'src/app/shared/models/enums';
 import { AuthService } from './../../shared/services/auth.service';
 import { DbOperation } from './../../shared/models/dbOperation';
 import { ToastService } from './../../shared/services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
-import { ModalController } from '@ionic/angular';
-import { AllJobPostsComponent } from 'src/app/shared/components/all-job-posts/all-job-posts.component';
-import { NgbDatepickerKeyboardService } from '@ng-bootstrap/ng-bootstrap';
-
-
 
 @Component({
   selector: 'app-user-dashboard',
@@ -52,7 +47,6 @@ export class UserDashboardComponent implements OnInit {
   }
 
   send() {
-
     if (this.type) {
       const arr: any[] = this.description.split(' ');
       if (arr.length > 9) {
@@ -64,6 +58,7 @@ export class UserDashboardComponent implements OnInit {
             type: this.type,
             description: this.description,
             createdAt: new Date(),
+            from: UserRole.CANDIDATE
           }
         };
         this.dbService.create(db).then((data: any) => {

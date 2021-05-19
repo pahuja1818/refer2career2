@@ -22,6 +22,10 @@ export class UsermenuComponent implements OnInit {
     });
   }
 
+  getName(name: string){
+    return name.split(' ')[0];
+  }
+
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,

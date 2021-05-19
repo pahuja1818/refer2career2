@@ -69,6 +69,7 @@ import { SpinnerComponentComponent } from './components/spinner-component/spinne
 import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.component';
 import { SigninComponent } from '../login/signin/signin.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
@@ -143,6 +144,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HttpClientModule,
     IonicModule.forRoot(),
     ModalModule.forRoot(),
+    CollapseModule.forRoot(),
   ],
   exports: [
     NotFoundComponent,
@@ -207,7 +209,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ManageApplicantsComponent,
     ApplicationsComponent,
     SigninComponent,
-    NgSelectModule
+    NgSelectModule,
+    CollapseModule
   ],
   providers: [
     StatusBar,

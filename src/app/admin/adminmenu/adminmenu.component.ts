@@ -20,4 +20,8 @@ export class AdminmenuComponent implements OnInit {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
   }
 
+  getName(name: string){
+    return name.split(' ')[0];
+  }
+
 }

@@ -77,7 +77,6 @@ export class AddJobPostComponent implements OnInit {
       salary: new FormControl('', [Validators.required, Validators.minLength(1)]),
       location: new FormControl('', [Validators.required]),
       lastDateToApply: new FormControl(null, [Validators.required]),
-      startDate: new FormControl(null, [Validators.required]),
       jobType: new FormControl('', [Validators.required]),
       jobInternship: new FormControl('', [Validators.required]),
       salaryType: new FormControl('', [Validators.required]),
@@ -97,7 +96,6 @@ export class AddJobPostComponent implements OnInit {
         salaryType: this.jobPost.jobPost.salaryType,
         partTime: this.jobPost.jobPost.partTime,
         lastDateToApply: new Date(this.jobPost.jobPost.lastDateToApply),
-        startDate: new Date(this.jobPost.jobPost.startDate),
         experience: this.jobPost.jobPost.experience,
       });
       this.skillsArray = this.jobPost.jobPost.skills;
@@ -194,7 +192,6 @@ export class AddJobPostComponent implements OnInit {
               partTime: this.jobPostForm.get('partTime').value,
               lastDateToApply: this.jobPostForm.get('lastDateToApply').value,
               experience: this.jobPostForm.get('experience').value,
-              startDate: this.jobPostForm.get('startDate').value,
               skills: this.skillsArray,
               question: this.questionsArray,
               details: this.description,

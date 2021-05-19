@@ -24,7 +24,14 @@ export class ReferedProfilesComponent implements OnInit {
         (JSON.parse(window.atob(window.localStorage.getItem('id')))).email
     })
       .subscribe((data: any) => {
-        this.allReferedProfiles = data.data;
+        if (data.data) {
+          if (data.data.length > 0) {
+            this.allReferedProfiles = data.data;
+            this.allReferedProfiles.map((pr : any) => {
+              pr.isStatus = false;
+            });
+          }
+        }
         this.isServiceRunning = false;
       });
   }

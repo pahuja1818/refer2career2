@@ -7,36 +7,56 @@
       <ion-title>Referred Profiles</ion-title>
     </ion-toolbar>
   </ion-header>
+  <app-not-found *ngIf="allReferedProfiles.length === 0 && !isServiceRunning" style="margin-top: 200px !important;"
+    class="center-parent">
+  </app-not-found>
   <div class="row justify-content-center" *ngIf="!isServiceRunning" style=" margin-top: 70px !important;">
     <div class="col-sm-5 m-3 pt-4" *ngFor="let profile of allReferedProfiles">
-      <div class="card box-shadow w-100 p-3 btn btn-light">
-        <span class="badge badge-success p-2 mb-3" style="width: max-content;">Submitted
-        </span>
-        <div class="my-2 vertical-center justify-content-start">
-          <span class="text-grey"><b>Job Title :</b> &nbsp; {{profile.jobTitle}}</span>
+      <div class="card box-shadow w-100 p-3">
+        <div class="text-left text-link" (click)="seeDetails(profile.jobId)">
+          <span class="text-dark text-ssmd semi-bold d-block">{{profile.jobTitle}}</span>
+          <span class="semi-bold d-block w-100 text-left"
+            style="color: rgb(93, 35, 141);">{{profile.companyName}}</span>
         </div>
-        <div class="my-2 vertical-center justify-content-start">
-          <span class="material-icons-outlined text-grey mr-2 text-violet">account_circle</span>
-          <span class="text-grey"><b>Name :</b> &nbsp; {{profile.name}}</span>
+        <div class="p-2">
+          <div class="my-2 vertical-center justify-content-start">
+            <span class="material-icons-outlined text-grey mr-2 text-violet">account_circle</span>
+            <span class="text-grey"><b>Name :</b> &nbsp; {{profile.name}}</span>
+          </div>
+          <div class="my-2 vertical-center justify-content-start">
+            <span class="material-icons-outlined text-grey mr-2 text-violet">email</span>
+            <span class="text-grey"><b>Email :</b> &nbsp; {{profile.email}}</span>
+          </div>
+          <div class="my-2 vertical-center justify-content-start">
+            <span class="material-icons-outlined text-grey mr-2 text-violet">today</span>
+            <span class="text-grey"><b>Referred on :</b> &nbsp; {{profile.createdAt | date: 'dd MMMM yyyy'}}</span>
+          </div>
         </div>
-        <div class="my-2 vertical-center justify-content-start">
-          <span class="material-icons-outlined text-grey mr-2 text-violet">email</span>
-          <span class="text-grey"><b>Email :</b> &nbsp; {{profile.email}}</span>
-        </div>
-        <div class="my-2 vertical-center justify-content-start">
-          <span class="material-icons-outlined text-grey mr-2 text-violet">today</span>
-          <span class="text-grey"><b>Referred on :</b> &nbsp; {{profile.createdAt | date: 'dd MMMM yyyy'}}</span>
-        </div>
-        <div class="d-flex mt-4 mb-2 justify-content-between">
-          <button class="btn btn-info text-sm bg-violet py-1 px-2" (click)="seeDetails(profile.jobId)">See job
-            details</button>
-          <button class="btn btn-warning text-sm py-1 px-2 text-white bg-yellow"
-            (click)=" openResume(profile.resume)"><span class="material-icons text-sm vertical-center"><span
-                class="material-icons-outlined">
+        <div class="d-flex mb-2 justify-content-between">
+          <a class="text-warning text-sm text-link py-1 px-2 " (click)=" openResume(profile.resume)"><span
+              class="material-icons text-sm vertical-center"><span class="material-icons-outlined">
                 cloud_download
-              </span><span class="ml-2">Resume</span></span></button>
+              </span><span class="ml-2">Resume</span></span></a>
+          <a class="text-primary text-sm text-link py-1 px-2 " (click)="profile.isStatus = !profile.isStatus"><span
+              class="material-icons text-sm vertical-center"><span class="material-icons-outlined">
+                expand_more
+              </span><span class="ml-2">Status</span></span></a>
+        </div>
+        <div class="w-100" id="collapseBasic" [collapse]="  profile.isStatus" [isAnimated]="true">
+          <mat-vertical-stepper [linear]="true" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+              <span>sfbasfg</span>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+              <span>safhgAJF ajdgyaGD</span>
+            </mat-step>
+            <mat-step>
+              <span>sfjkkasf asfhashfiu afkAGFH</span>
+            </mat-step>
+          </mat-vertical-stepper>
         </div>
       </div>
+  
     </div>
   </div>
 </div>
