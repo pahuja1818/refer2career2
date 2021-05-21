@@ -1,3 +1,4 @@
+import { EncashmentComponent } from './encashment/encashment.component';
 import { ViewProfileComponent } from './../shared/components/view-profile/view-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ApplicationsComponent } from './../shared/components/applications/applications.component';
@@ -43,6 +44,9 @@ const routes: Routes = [
       },
       {
         path: 'feedback', component: FeedbackComponent
+      },
+      {
+        path: 'encashment', component: EncashmentComponent
       },
       {
         path: 'messages', component: MessagesComponent

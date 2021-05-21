@@ -127,6 +127,7 @@ export class ApplicationsComponent implements OnInit {
                 resume: a.resume,
                 email: a.email,
                 status: cand.status ? cand.status : null,
+                statusArray: cand.statusArray ? cand.statusArray : [],
                 isChecked: false,
                 profileCompleted: a.profileCompleted ? a.profileCompleted : 20
               };
@@ -181,10 +182,11 @@ export class ApplicationsComponent implements OnInit {
                 applyId: cand._id,
                 refered: true,
                 _id: a._id,
-                name: a.name,
+                name: cand.name,
                 resume: cand.resume,
                 email: a.email,
                 status: cand.status ? cand.status : null,
+                statusArray: cand.statusArray ? cand.statusArray : [],
                 isChecked: false,
                 profileCompleted: a.profileCompleted ? a.profileCompleted : 20
               };
@@ -203,6 +205,7 @@ export class ApplicationsComponent implements OnInit {
                 resume: cand.resume,
                 email: cand.email,
                 status: cand.status ? cand.status : null,
+                statusArray: cand.statusArray ? cand.statusArray : [],
                 isChecked: false,
                 profileCompleted: cand.profileCompleted ? a.profileCompleted : 20
               };
@@ -382,9 +385,10 @@ export class ApplicationsComponent implements OnInit {
     this.modalRef.hide();
     this.filteredCandidates.forEach((user: any, index) => {
       if (user.isChecked === true) {
+        user.statusArray.push({ 'name': status, date: new Date() });
         const db: DbOperation = {
           collection: user.refered === true ? 'referedProfiles' : 'applyJob',
-          data: { status },
+          data: { status, statusArray: user.statusArray },
           query: { _id: user.applyId },
         };
         this.dbService.update(db).then((data: any) => {
@@ -424,7 +428,7 @@ export class ApplicationsComponent implements OnInit {
     this.filteredCandidates[index].isChecked = !this.filteredCandidates[index].isChecked;
     if (this.filteredCandidates[index].isChecked) {
       this.totalChecked++;
-      if (this.totalChecked === this.filteredCandidates.length){
+      if (this.totalChecked === this.filteredCandidates.length) {
         this.isAllChecked = true;
       }
     }

@@ -1,4 +1,4 @@
-<div class="w-100 bg-white vh-100" style="overflow-y: auto; overflow-x: hidden;">
+<div class="w-100 vh-100" style="overflow-y: auto; overflow-x: hidden;">
   <ion-header style="position: fixed">
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -11,8 +11,8 @@
     class="center-parent">
   </app-not-found>
   <div class="row justify-content-center" *ngIf="!isServiceRunning" style=" margin-top: 70px !important;">
-    <div class="col-sm-5 m-3 pt-4" *ngFor="let profile of allReferedProfiles">
-      <div class="card box-shadow w-100 p-3">
+    <div class="col-sm-6 m-3 pt-4" *ngFor="let profile of allReferedProfiles; index as index">
+      <div class="border-10 bg-white w-100 p-3">
         <div class="text-left text-link" (click)="seeDetails(profile.jobId)">
           <span class="text-dark text-ssmd semi-bold d-block">{{profile.jobTitle}}</span>
           <span class="semi-bold d-block w-100 text-left"
@@ -37,26 +37,92 @@
               class="material-icons text-sm vertical-center"><span class="material-icons-outlined">
                 cloud_download
               </span><span class="ml-2">Resume</span></span></a>
-          <a class="text-primary text-sm text-link py-1 px-2 " (click)="profile.isStatus = !profile.isStatus"><span
+          <a class="text-grey bold text-sm text-link py-1 px-2" (click)="profile.isStatus = !profile.isStatus"><span
               class="material-icons text-sm vertical-center"><span class="material-icons-outlined">
                 expand_more
-              </span><span class="ml-2">Status</span></span></a>
+              </span><span class="text-grey bold">Status: <span class="text-primary text-sm">{{profile.status ?
+                  profile.status : 'Submitted'}}</span></span></span></a>
         </div>
-        <div class="w-100" id="collapseBasic" [collapse]="  profile.isStatus" [isAnimated]="true">
-          <mat-vertical-stepper [linear]="true" #stepper>
-            <mat-step [stepControl]="firstFormGroup">
-              <span>sfbasfg</span>
-            </mat-step>
-            <mat-step [stepControl]="secondFormGroup">
-              <span>safhgAJF ajdgyaGD</span>
-            </mat-step>
-            <mat-step>
-              <span>sfjkkasf asfhashfiu afkAGFH</span>
-            </mat-step>
-          </mat-vertical-stepper>
+        <div class="w-100 pt-3" id="collapseBasic" [collapse]="profile.isStatus" [isAnimated]="true">
+          <hr class="w-100">
+          <div class="d-flex justify-content-start mt-3">
+            <span class="material-icons mt-1 text-xs text-primary mr-2">circle</span>
+            <div>
+              <span class="text-dark d-block text-sm semi-bold">Submitted</span>
+              <span class="text-grey d-block text-sm">{{profile.createdAt | date: 'dd MMMM yyyy'}}</span>
+            </div>
+          </div>
+          <div *ngIf="profile.statusArray">
+            <div *ngIf="profile.statusArray.length > 0">
+              <div *ngFor="let status of profile.statusArray" class="mt-3">
+                <div class="d-flex justify-content-start w-100">
+                  <span class="material-icons mt-1 text-xs text-primary mr-2">circle</span>
+                  <div>
+                    <span class="text-dark d-block text-sm semi-bold">{{status.name}}</span>
+                    <span class="text-grey d-block text-sm">{{status.date | date: 'dd MMMM yyyy'}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex mt-3 justify-content-end"
+                *ngIf="profile.statusArray[profile.statusArray.length - 1].name !== 'Rejected'">
+                <button class="btn btn-primary border-8 px-4 text-sm py-1"
+                  (click)="openModal(form, index)">Encashment</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-  
     </div>
   </div>
 </div>
+
+<app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>
+
+
+<ng-template #error>
+  <div class="bg-white box-shadow p-3 m-3 text-center" style="border-radius: 10px;">
+    <span class="">You can only make encashment request after 90 days of Hire. </span>
+    <div class="d-flex justify-content-center px-2 mt-4">
+      <button class="btn btn-outline-primary p-0 text-smd px-2 mr-3" (click)="close()">OKAY</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #form>
+  <div class="bg-white box-shadow p-3 m-3" style="border-radius: 10px;">
+    <div class="d-flex justify-content-between">
+      <span class="">Enter your bank details</span>
+      <span class="material-icons text-grey text-link" (click)="close()">close</span>
+    </div>
+    <div class="p-2" [formGroup]="myForm">
+      <mat-form-field class="p-0 w-100 my-3 mat-form-field">
+        <mat-label class="p-0 text-grey">Bank name</mat-label>
+        <input matInput placeholder="Enter bank name" name="none" autocomplete="nope" class="p-0"
+          formControlName='bankName'>
+        <mat-error>Enter valid field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="p-0 w-100 my-3 mat-form-field">
+        <mat-label class="p-0 text-grey">IFSC Code</mat-label>
+        <input matInput placeholder="Enter IFSC code" name="none" autocomplete="nope" class="p-0"
+          formControlName='IFSCCode'>
+        <mat-error>Enter valid field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="p-0 w-100 my-3 mat-form-field">
+        <mat-label class="p-0 text-grey">Account Holder Name</mat-label>
+        <input matInput placeholder="Enter holder name" name="none" autocomplete="nope" class="p-0"
+          formControlName='accountHolderName'>
+        <mat-error>Enter valid field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="p-0 w-100 my-3 mat-form-field">
+        <mat-label class="p-0 text-grey">Account Number</mat-label>
+        <input matInput placeholder="Enter account number" name="none" autocomplete="nope" class="p-0"
+          formControlName='accountNumber'>
+        <mat-error>Enter valid field</mat-error>
+      </mat-form-field>
+
+      <div class="my-4 d-flex justify-content-center">
+        <button class="btn btn-primary px-4 py-1" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

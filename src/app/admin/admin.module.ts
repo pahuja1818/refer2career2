@@ -1,3 +1,4 @@
+import { EncashmentComponent } from './encashment/encashment.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { JobDetailsAdminComponent } from './job-details-admin/job-details-admin.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ import { ApplicantsComponent } from './applicants/applicants.component';
     AddOrganizationComponent,
     JobDetailsAdminComponent,
     ApplicantsComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    EncashmentComponent
   ],
   imports: [
     CommonModule,

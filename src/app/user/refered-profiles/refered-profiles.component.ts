@@ -1,3 +1,8 @@
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { DbOperation } from 'src/app/shared/models/dbOperation';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { ReferJobPostService } from './../../shared/services/refer-job-post.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,13 +16,27 @@ export class ReferedProfilesComponent implements OnInit {
 
   allReferedProfiles: any[] = [];
   isServiceRunning = false;
+  myForm: FormGroup;
+
+  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+
 
   constructor(
     private referService: ReferJobPostService,
-    private router: Router
+    private router: Router,
+    public modalRef: BsModalRef,
+    private modalService: BsModalService,
+    private dbService: AuthService,
+    private toast: ToastService
   ) { }
 
   ngOnInit() {
+    this.myForm = new FormGroup({
+      'bankName': new FormControl(null, Validators.required),
+      'IFSCCode': new FormControl(null, Validators.required),
+      'accountHolderName': new FormControl(null, Validators.required),
+      'accountNumber': new FormControl(null, Validators.required),
+    });
     this.isServiceRunning = true;
     this.referService.getReferedJobPosts({
       email:
@@ -27,8 +46,8 @@ export class ReferedProfilesComponent implements OnInit {
         if (data.data) {
           if (data.data.length > 0) {
             this.allReferedProfiles = data.data;
-            this.allReferedProfiles.map((pr : any) => {
-              pr.isStatus = false;
+            this.allReferedProfiles.map((pr: any) => {
+              pr.isStatus = true;
             });
           }
         }
@@ -42,6 +61,73 @@ export class ReferedProfilesComponent implements OnInit {
 
   openResume(resume: any) {
     window.open(resume);
+  }
+
+  currProfile;
+  openModal(template: any, index: number) {
+    this.currProfile = index,
+      this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
+  }
+
+  close() {
+    this.modalRef.hide();
+  }
+
+
+  submit() {
+    this.myForm.markAllAsTouched();
+    if (this.myForm.valid) {
+      this.isServiceRunning = true;
+      const time = new Date().getTime();
+      const email = {
+        email: 'refer2career@gmail.com',
+        subject: `Encashment Request ${time}!`,
+        content: `<p>Hello </p><p>Enacashment request from  ${this.user.name}.</p><h3>Bank details</h3>
+        <ul>
+          <li>Bank Name: ${this.myForm.get('bankName').value}</li>
+          <li>IFSC Code: ${this.myForm.get('IFSCCode').value}</li></li>
+          <li>Account Holder Name: ${this.myForm.get('accountHolderName').value}</li></li>
+          <li>Account Number: ${this.myForm.get('accountNumber').value}</li></li>
+        </ul>
+        <p></p><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+      };
+      this.dbService.sendMail(email).subscribe((jata: any) => {
+        if (jata.data) {
+
+          let db: DbOperation = {
+            collection: 'encashment',
+            data: {
+              'referenceNumber': time,
+              'name': this.user.name,
+              'email': this.user.email,
+              'referedName': this.allReferedProfiles[this.currProfile].name,
+              'referedEmail': this.allReferedProfiles[this.currProfile].email,
+              'jobTitle': this.allReferedProfiles[this.currProfile].jobTitle,
+              'jobId': this.allReferedProfiles[this.currProfile].jobId,
+              'refredProfileId': this.allReferedProfiles[this.currProfile]._id,
+              'companyName': this.allReferedProfiles[this.currProfile].companyName,
+              'referedOn': this.allReferedProfiles[this.currProfile].createdAt,
+              'createdAt': new Date(),
+            }
+          }
+          this.dbService.create(db).then((data: any) => {
+            if (data.data) {
+              this.toast.showToast('Request Submitted Successfully!')
+            }
+            else {
+              this.toast.showToast('Something went worng', 'bg-red');
+            }
+            this.close();
+            this.isServiceRunning = false;
+          })
+        }
+        else {
+          this.close();
+          this.isServiceRunning = false;
+          this.toast.showToast('Something went worng', 'bg-red');
+        }
+      });
+    }
   }
 
 }
