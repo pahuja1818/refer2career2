@@ -30,14 +30,13 @@ export class EncashmentComponent implements OnInit {
         if (data.data.length > 0) {
           this.allRequests = data.data;
           this.isServiceRunning = false;
-          console.log(this.allRequests);
         }
       }
     });
   }
 
   openInGmail(id: any) {
-    window.open(`https://mail.google.com/mail/u/0/?q=Encashment+Request+${id}%21#inbox`);
+    window.open(`https://mail.google.com/mail/u/0/#search/Encashment+Request+${id}!`);
   }
 
 }
