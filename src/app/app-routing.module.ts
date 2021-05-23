@@ -1,19 +1,8 @@
 import { SigninComponent } from './login/signin/signin.component';
-import { ReferAndEarnComponent } from './refer-and-earn/refer-and-earn.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { PartnersComponent } from './partners/partners.component';
 
 const routes: Routes = [
-  {
-    path: 'partners',
-    component: PartnersComponent
-  },
-  {
-    path: 'refer-and-earn',
-    component: ReferAndEarnComponent
-  },
-
   {
     path: 'login',
     component: SigninComponent

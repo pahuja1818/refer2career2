@@ -1,9 +1,6 @@
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
-import { ReferAndEarnComponent } from './refer-and-earn/refer-and-earn.component';
 import { EmployerSigninComponent } from './login/signin/employer-signin/employer-signin.component';
-import { HomePageModule } from './home/home.module';
-import { SpinnerComponent } from './spinner/spinner.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -77,7 +74,6 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 import * as $ from 'jquery';
 import { SpinnerComponentComponent } from './shared/components/spinner-component/spinner-component.component';
-import { PartnersComponent } from './partners/partners.component';
 import { environment } from './../environments/environment';
 import * as firebase from 'firebase';
 firebase.initializeApp(environment.firebaseConfig);
@@ -85,15 +81,12 @@ firebase.initializeApp(environment.firebaseConfig);
 @NgModule({
   declarations: [
     AppComponent,
-    PartnersComponent,
-    ReferAndEarnComponent
   ],
   entryComponents: [
   ],
   imports: [
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    HomePageModule,
     BrowserModule,
     AppRoutingModule,
     SharedModule,
