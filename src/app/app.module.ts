@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SigninComponent } from './login/signin/signin.component';
+import { LogInComponent } from './log-in/log-in.component';
 import { SharedModule } from './shared/shared.module';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicRouteStrategy } from '@ionic/angular';
@@ -13,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { CommonModule } from '@angular/common';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -80,7 +82,7 @@ firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,LogInComponent
   ],
   entryComponents: [
   ],
@@ -89,6 +91,7 @@ firebase.initializeApp(environment.firebaseConfig);
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
    
     AppRoutingModule,
     SharedModule,

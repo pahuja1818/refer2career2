@@ -1,11 +1,12 @@
 import { SigninComponent } from './login/signin/signin.component';
+import {LogInComponent} from './log-in/log-in.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: SigninComponent
+    component: LogInComponent
   },
   {
     path: '',
