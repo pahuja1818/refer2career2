@@ -1,112 +1,112 @@
-<div class="w-100 overflow-x-hidden bg-lightest-blue">
-  <div class="col-sm-12 mt-2 ml-5"style="padding-top:120px;" >
-  <div class="row col-sm-10 justify-content-between mx-1" >
-    <div class="mx-2">
-    <h2>Recent Jobs</h2>
+<div class="row p-0 m-0 pt-5 overflow-x-hidden">
+  <div class="row col-sm-12 justify-content-center p-0 m-0">
+    <div class="col-sm-12 d-flex justify-content-between mx-1 mb-4">
+      <div class="mx-2">
+        <h2>Recent Jobs</h2>
+      </div>
+      <div class="px-2 d-flex justify-content-center vertical-center text-link ">
+        <div class="px-4 py-2 btn btn-primary text-sm" (click)="navigateToAllJobs()">Browse All Jobs</div>
+      </div>
     </div>
-    <div class="px-2 d-flex justify-content-center vertical-center text-link " >
-      <div class="px-2 py-1 text-lato text-xs text-white bg-navy-blue border-6" >Browse All Jobs</div>
-    </div>
-  </div>
-  <div class="row col-sm-10 pr-0" >
-    <div class="col-sm-9 mx-0 mt-2 ">
-  <app-not-found *ngIf="filteredJobPosts.length === 0" style="margin-top: 200px !important;" class="center-parent">
-  </app-not-found>
+    <div class="col-sm-9 m-0 p-0 mx-0 mt-2 ">
+      <app-not-found *ngIf="filteredJobPosts.length === 0" style="margin-top: 200px !important;" class="center-parent">
+      </app-not-found>
 
-  <div class="mr-2 mb-3 job-card" *ngFor="let jobPost of filteredJobPosts" (click)="seeDetails(jobPost)">
-    <div class="card border-4 shadow-lg p-3 text-link" >
-      <div class="d-flex mb-3 justify-content-between">
-        <div class="d-flex flex-wrap">
-        <div class="mr-3 mb-2">
-          <span >
-        <img class="border-6" *ngIf="jobPost.jobPost.companyLogo" src="{{jobPost.jobPost.companyLogo}}"
-          style="height: 60px; width: 58.2px;">
-        </span>
-        </div>
-        <div class="text-left">
-          <h4>{{jobPost.jobPost.title}}</h4>
-          
-
-          <div class="column">
-            <div class="d-flex vertical-center flex-wrap">
-            <div class=" vertical-center justify-content-start mr-3">
-              <span class="material-icons-outlined  mr-2 text-navy-blue">work</span>
-              <span class=" text-lato text-navy-blue d-inline">Experience : </span>
-              <span class="text-lato text-navy-blue">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
-                }}
-                years</span>
-            </div>
-            
-            <div class=" vertical-center justify-content-start mr-3">
-              <span class="material-icons  mr-2 text-navy-blue">business</span>
-              <span class=" text-lato text-navy-blue d-inline">Company : </span>
-              <span class=" text-lato text-navy-blue">&nbsp; {{jobPost.jobPost.companyName}}</span>
-            </div>
-          </div>
-            <div class="d-flex flex-wrap mt-1">
-              <div *ngIf="jobPost.jobPost.jobType === 'In office'"
-              class=" vertical-center justify-content-start mr-2">
-              <span class="material-icons-outlined text-md  mr-2 text-navy-blue">location_on</span>
-              <span class=" text-lato text-smd text-navy-blue">&nbsp;{{jobPost.jobPost.location}}</span>
-            </div>
-
-            <div *ngIf="jobPost.jobPost.jobType !== 'In office'"
-              class=" vertical-center justify-content-start mr-2">
-              <span class="material-icons-outlined text-md  mr-2 text-navy-blue">home</span>
-              <span class=" text-lato text-smd text-navy-blue d-inline">Work from home</span>
-            </div>
-            
-            <div class="vertical-center justify-content-start mr-2">
-              <span class="material-icons text-md  mr-2 text-navy-blue">
-                schedule
+      <div class="mr-2 mb-3 job-card" *ngFor="let jobPost of filteredJobPosts" (click)="seeDetails(jobPost)">
+        <div class="card border-4 shadow-lg p-3 text-link border-8">
+          <div class="d-flex mb-3 justify-content-between">
+            <div class="d-flex flex-wrap">
+              <div class="mr-3 mb-2">
+                <span>
+                  <img class="border-6" *ngIf="jobPost.jobPost.companyLogo" src="{{jobPost.jobPost.companyLogo}}"
+                    style="height: 60px; width: 58.2px;">
                 </span>
-              <span class=" text-smd text-lato text-navy-blue">Published on&nbsp;{{jobPost.jobPost.createdAt | date: 'dd
-                MMMM
-                yyyy'}}</span>
+              </div>
+              <div class="text-left">
+                <h4>{{jobPost.jobPost.title}}</h4>
+                <div class="column">
+                  <div class="d-flex vertical-center flex-wrap">
+                    <div class=" vertical-center justify-content-start mr-3">
+                      <span class="material-icons-outlined  mr-2 text-navy-blue">work</span>
+                      <span class=" text-lato text-navy-blue d-inline">Experience : </span>
+                      <span class="text-lato text-navy-blue">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience :
+                        ''
+                        }}
+                        years</span>
+                    </div>
+
+                    <div class=" vertical-center justify-content-start mr-3">
+                      <span class="material-icons  mr-2 text-navy-blue">business</span>
+                      <span class=" text-lato text-navy-blue d-inline">Company : </span>
+                      <span class=" text-lato text-navy-blue">&nbsp; {{jobPost.jobPost.companyName}}</span>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-wrap mt-1">
+                    <div *ngIf="jobPost.jobPost.jobType === 'In office'"
+                      class=" vertical-center justify-content-start mr-2">
+                      <span class="material-icons-outlined text-md  mr-2 text-navy-blue">location_on</span>
+                      <span class=" text-lato text-smd text-navy-blue">&nbsp;{{jobPost.jobPost.location}}</span>
+                    </div>
+
+                    <div *ngIf="jobPost.jobPost.jobType !== 'In office'"
+                      class=" vertical-center justify-content-start mr-2">
+                      <span class="material-icons-outlined text-md  mr-2 text-navy-blue">home</span>
+                      <span class=" text-lato text-smd text-navy-blue d-inline">Work from home</span>
+                    </div>
+
+                    <div class="vertical-center justify-content-start mr-2">
+                      <span class="material-icons text-md  mr-2 text-navy-blue">
+                        schedule
+                      </span>
+                      <span class=" text-smd text-lato text-navy-blue">Published on&nbsp;{{jobPost.jobPost.createdAt |
+                        date: 'dd
+                        MMMM
+                        yyyy'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="jobPost.isApplied" class=" d-flex align-items-start justify-content-center">
+              <div class="p-2 bg-light " style="border-radius: 25px !important;">Applied</div>
             </div>
           </div>
-          </div>
-        </div>
-      </div>
-        
-        <div *ngIf="jobPost.isApplied"  class=" d-flex align-items-start justify-content-center">
-        <div  class="p-2 bg-light "
-            style="border-radius: 25px !important;">Applied</div>
-          </div>
-      </div>
-      <div class="d-flex justify-content-between flex-wrap vertical-center">
-        <div class="my-2 d-flex vertical-center flex-wrap" *ngIf="jobPost.jobPost.skills.length > 0">
-          <!-- <span class="material-icons-outlined text-grey mr-2 text-md text-violet">psychology</span> -->
-          <!-- <span class="text-grey semi-bold text-smd  d-inline">Skills : &nbsp;</span> -->
-          <!-- <span class="text-grey text-smd text-wrap">{{jobPost.jobPost.skills[0].skillName }}
+          <div class="d-flex justify-content-between flex-wrap vertical-center">
+            <div class="my-2 d-flex vertical-center flex-wrap" *ngIf="jobPost.jobPost.skills.length > 0">
+              <!-- <span class="material-icons-outlined text-grey mr-2 text-md text-violet">psychology</span> -->
+              <!-- <span class="text-grey semi-bold text-smd  d-inline">Skills : &nbsp;</span> -->
+              <!-- <span class="text-grey text-smd text-wrap">{{jobPost.jobPost.skills[0].skillName }}
             {{ jobPost.jobPost.skills.length > 1 ? ' , ' +
             jobPost.jobPost.skills[1].skillName : ''}}</span> -->
 
-            <div class="px-2 py-1 text-navy-blue bg-lightest-blue mr-2 border-6 text-lato text-sm" >
-              {{jobPost.jobPost.skills[0].skillName }}
+              <div class="px-2 py-1 text-navy-blue bg-lightest-blue mr-2 border-6 text-lato text-sm">
+                {{jobPost.jobPost.skills[0].skillName }}
+              </div>
+              <div class="px-2 py-1 text-navy-blue bg-lightest-blue mr-2 border-6 text-lato text-sm"
+                *ngIf="jobPost.jobPost.skills.length > 1">
+                {{jobPost.jobPost.skills[1].skillName }}
+              </div>
             </div>
-            <div class="px-2 py-1 text-navy-blue bg-lightest-blue mr-2 border-6 text-lato text-sm" *ngIf="jobPost.jobPost.skills.length > 1">
-              {{jobPost.jobPost.skills[1].skillName }}
-            </div>
-        </div>
-      
-      <div class="d-flex vertical-center flex-wrap justify-content-between">
-        <div class="justify-content-between vertical-center mr-2">
-            <div class="bg-navy-blue px-2 py-1 mr-2 border-6 text-white text-lato text-sm">REWARD : ₹{{jobPost.referReward}}</div>
-        </div>
-        <div class="my-2 vertical-center justify-content-start">
-          <!-- <span class="material-icons-outlined text-grey mr-2 text-violet">payments</span>
+
+            <div class="d-flex vertical-center flex-wrap justify-content-between">
+              <div class="justify-content-between vertical-center mr-2">
+                <div class="bg-navy-blue px-2 py-1 mr-2 border-6 text-white text-lato text-sm">REWARD :
+                  ₹{{jobPost.referReward}}</div>
+              </div>
+              <div class="my-2 vertical-center justify-content-start">
+                <!-- <span class="material-icons-outlined text-grey mr-2 text-violet">payments</span>
           <span class="text-grey semi-bold d-inline">{{jobPost.jobPost.jobInternship === 'Job' ? 'Salary'
             :
             'Stipend'}}
             :
           </span> -->
-          <span class="text-black text-slmd">&nbsp; ₹ {{jobPost.jobPost.salary}}</span>
-          <span class="text-fluid">{{jobPost.jobPost.salaryType}}</span>
-        </div>
-      </div>
-    </div>
-      <!-- <div class="row">
+                <span class="text-black text-slmd">&nbsp; ₹ {{jobPost.jobPost.salary}}</span>
+                <span class="text-fluid">{{jobPost.jobPost.salaryType}}</span>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
         <div *ngIf="jobPost.jobPost.jobType === 'In office'"
           class="col-sm-6 my-2 vertical-center justify-content-start">
           <span class="material-icons-outlined text-md text-grey mr-2 text-violet">location_on</span>
@@ -143,7 +143,7 @@
         </div>
       </div> -->
 
-      <!-- <div class="row justify-content-between vertical-center mt-3">
+          <!-- <div class="row justify-content-between vertical-center mt-3">
         <span class="text-sm text-grey semi-bold col-auto">Refer reward: <span
             class="badge badge-primary text-sm bg-violet">₹{{jobPost.referReward}}</span></span>
         <span *ngIf="jobPost.isApplied" class="p-1 px-4 bg-light"
@@ -151,45 +151,46 @@
       </div> -->
 
 
-      <!-- <div class="vertical-center justify-content-end mt-1">
+          <!-- <div class="vertical-center justify-content-end mt-1">
         <span class="text-grey text-sm text-break col-auto">Posted on&nbsp;{{jobPost.jobPost.createdAt | date: 'dd
           MMMM
           yyyy'}}</span>
       </div> -->
+        </div>
+      </div>
     </div>
-  </div>
-    </div>
-    <div class="col-sm-3 mt-2 pl-2 pr-0" >
-      <div class="card border-4 d-flex flex-column justify-content-between p-3 mb-5 shadow-lg " > 
+    <div class="col-sm-3 mt-2 pl-2 pr-0">
+      <div class="card border-8 d-flex flex-column justify-content-between p-3 mb-5 shadow-lg ">
         <div class="m-2 mb-3">
           <div class="avatar-div">
-          <img class="avatar-image" src="../../../../assets/Group 2.png" alt="">
-        </div>
+            <img class="avatar-image" src="../../../../assets/Group 2.png" alt="">
+          </div>
         </div>
         <div class="d-flex text-dark">
-            <p>I just got a job that I applied for via careerfy! I used the site all the time during my job hunt.
-            </p>
+          <p>I just got a job that I applied for via careerfy! I used the site all the time during my job hunt.
+          </p>
         </div>
         <div class="d-flex flex-column ">
           <span class="text-sm text-navy-blue">Richard Anderson</span>
-          <span class="text-grey text-sm" >California, USA</span>
+          <span class="text-grey text-sm">California, USA</span>
         </div>
       </div>
-      <div class="card border-4 d-flex flex-column justify-content-between p-3 shadow-lg " style="background-color: #000930;" > 
+      <div class="card border-8 d-flex flex-column justify-content-between p-3 shadow-lg "
+        style="background-color: #000930;">
         <div class="d-flex text-dark">
-            <h4 class="text-white">Make a Difference with Your Online Resume! </h4>
+          <h4 class="text-white">Make a Difference with Your Online Resume! </h4>
         </div>
         <div class="d-flex text-white">
           <p>Your resume in minutes with JobBoard resume assistant is ready!
           </p>
-      </div>
+        </div>
         <div class="d-flex">
-          <div (click)="openModal(logout)" class="d-flex vertical-center px-2 py-1 border-6 text-link bg-navy-blue text-white text-lato text-smd">
+          <div (click)="navigateToMyProfile()"
+            class="d-flex vertical-center px-2 py-1 border-6 text-link bg-navy-blue text-white text-lato text-smd">
             Update Profile
-            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>

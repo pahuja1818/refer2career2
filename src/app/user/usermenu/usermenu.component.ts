@@ -1,4 +1,6 @@
-import { element } from 'protractor';
+import { UserRole } from 'src/app/shared/models/enums';
+import { DbOperation } from './../../shared/models/dbOperation';
+import { ToastService } from 'src/app/shared/services/toast.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
@@ -15,21 +17,42 @@ export class UsermenuComponent implements OnInit {
   user: any;
   isServiceRunning = false;
 
+  
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/referer/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/referer/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/referer/jobs"
+    },
+    {
+      name: 'APPLIED JOB',
+      route: "/referer/my-applications"
+    }
+  ]
 
-  scroll() {
+
+  scrollToJobs() {
     document.getElementById('jobs').scrollIntoView({
       behavior: 'smooth'
     });
   }
 
-  getName(name: string){
+  getName(name: string) {
     return name.split(' ')[0];
   }
 
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
-    private authService: AuthService,
+    private toast: ToastService,
+    private dbService: AuthService,
   ) {
   }
 
@@ -47,7 +70,7 @@ export class UsermenuComponent implements OnInit {
 
   getUser() {
     // this.isServiceRunning = true;
-    this.authService.find({
+    this.dbService.find({
       collection: 'users', query: {
         _id: this.user._id
       }
@@ -62,4 +85,55 @@ export class UsermenuComponent implements OnInit {
   }
 
 
+  //feedback------------------
+
+
+  type = null;
+  description = '';
+
+  openModal(template: any) {
+    this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
+  }
+
+  cancel() {
+    this.modalRef.hide();
+  }
+
+  loggedOut() {
+    this.modalRef.hide();
+    window.localStorage.removeItem('id');
+    window.location.reload();
+  }
+
+  send() {
+    if (this.type) {
+      const arr: any[] = this.description.split(' ');
+      if (arr.length > 9) {
+        const db: DbOperation = {
+          collection: 'feedback',
+          data: {
+            email: JSON.parse(window.atob(window.localStorage.getItem('id'))).email,
+            name: JSON.parse(window.atob(window.localStorage.getItem('id'))).name,
+            type: this.type,
+            description: this.description,
+            createdAt: new Date(),
+            from: UserRole.CANDIDATE
+          }
+        };
+        this.dbService.create(db).then((data: any) => {
+          if (data.data) {
+            this.toast.showToast('Sent Successfully!');
+            this.cancel();
+          }
+          else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
+        });
+      }
+      else {
+        this.toast.showToast('Please enter description of minimum 10 words!', 'bg-danger');
+      }
+    }
+    else {
+      this.toast.showToast('Please Select Type!', 'bg-danger');
+    }
+  }
 }

@@ -115,9 +115,9 @@ export class RecentJobsComponent implements OnInit {
     });
   }
 
-  checkJobPosts(){
+  checkJobPosts() {
     this.allJobPost.forEach((post: any) => {
-      if (this.allMyApplications.find(data => data.jobPostId === post._id)){
+      if (this.allMyApplications.find(data => data.jobPostId === post._id)) {
         post.isApplied = true;
       }
     });
@@ -320,6 +320,14 @@ export class RecentJobsComponent implements OnInit {
         this.isServiceRunning = false;
       }
     });
+  }
+
+  navigateToAllJobs() {
+    this.router.navigateByUrl(`/referer/jobs`);
+  }
+
+  navigateToMyProfile() {
+    this.router.navigateByUrl(`/referer/profile`);
   }
 
 }

@@ -2,6 +2,18 @@
     font-family: 'Lato', sans-serif;
 }
 
+.active-button:hover{
+    background-color: #0E2043; 
+    color: white !important;
+    border-radius: 6px;
+}
+
+.logo-header{
+    height: auto;
+    width: auto;
+    max-width: 180px !important;
+}
+
 .linked-in-color{
     color: #0077b7 !important;
 }
