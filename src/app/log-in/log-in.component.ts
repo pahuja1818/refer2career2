@@ -62,8 +62,8 @@ export class LogInComponent implements OnInit {
     private modalService: BsModalService,
     private location: Location,
   ) {
-    
-   }
+
+  }
 
   isScreenBig = false;
   socialUser: any = {};
@@ -110,7 +110,7 @@ export class LogInComponent implements OnInit {
 
   resendOTP() {
     this.isServiceRunning = true;
-    this.authService.getOTP({ email: this.signupForm.get('email').value }).subscribe((data: any) => {
+    this.authService.getOTP({ email: this.signupForm.get('email').value ? this.signupForm.get('email').value : this.email.value }).subscribe((data: any) => {
       if (data.data === true) {
         this.toast.showToast('Passcode Sent Successfully!');
         let counter = 30;
@@ -136,8 +136,18 @@ export class LogInComponent implements OnInit {
   }
 
   forgotPasswordVisible() {
-    this.isLoginCard=false;
+    this.hideAll();
     this.isForgotPassword = true;
+  }
+
+  goToLogin(){
+    this.hideAll();
+    this.isLogin = true;
+  }
+
+  goToSignUp(){
+    this.hideAll();
+    this.isSignUp = true;
   }
 
   registrationVisible() {
@@ -152,15 +162,15 @@ export class LogInComponent implements OnInit {
     setTimeout(() => {
       this.hideAll();
       this.isLogin = true;
-      this.isLoginCard=true;
+      this.isLoginCard = true;
     }, 300);
   }
 
   showLogin() {
     this.hideAll();
-    this.isForgotPassword=false;
+    this.isForgotPassword = false;
     this.isLogin = true;
-    this.isLoginCard=false;
+    this.isLoginCard = false;
   }
 
   hideAll() {
@@ -171,13 +181,17 @@ export class LogInComponent implements OnInit {
     this.isVerifyOTP = false;
     this.isPasswordReset = false;
     this.message = '';
+    this.isSignUp = false;
+
+    this.signupForm.reset;
+    this.loginForm.reset;
   }
 
   initializeSignupForm() {
     this.signupForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(7)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
     });
   }
 
@@ -216,6 +230,19 @@ export class LogInComponent implements OnInit {
         this.isServiceRunning = false;
       });
     }
+    else {
+      if (!this.signupForm.get('email').valid) {
+        this.toast.showToast("Enter valid email!", "bg-danger");
+      }
+
+      else if (!this.signupForm.get('name').valid) {
+        this.toast.showToast("Enter name!", "bg-danger");
+      }
+
+      else if (!this.signupForm.get('password').valid) {
+        this.toast.showToast("Password atleast contain 6 characters!", "bg-danger");
+      }
+    }
   }
 
   verifyOTP() {
@@ -244,9 +271,9 @@ export class LogInComponent implements OnInit {
         if (res.data === true) {
           this.isVerified = true;
           this.hideAll();
-          this.loginVisible();
+          this.isLogin = true;
         }
-        else { this.isOTPCorrect = true; }
+        else { this.isOTPCorrect = false; }
         this.isServiceRunning = false;
       });
     }
@@ -301,8 +328,6 @@ export class LogInComponent implements OnInit {
 
 
   forgotPassword() {
-    this.isForgotPassword=false;
-    this.isResetPassword=true;
     if (this.email.valid) {
       this.isServiceRunning = true;
       this.authService.getOTP({ email: this.email.value }).subscribe((data: any) => {
@@ -323,6 +348,7 @@ export class LogInComponent implements OnInit {
         this.isServiceRunning = false;
       });
     }
+    else this.toast.showToast("Enter valid email", "bg-danger");
   }
 
   restPassword() {
