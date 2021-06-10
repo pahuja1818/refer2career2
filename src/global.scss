@@ -11,6 +11,10 @@
 
 /* Core CSS required for Ionic components to work properly */
 
+// Font
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
 @import '~bootstrap/scss/bootstrap';
 
 @import '../node_modules/bootstrap/scss/variables';
@@ -359,6 +363,10 @@
   .text-light-blue{
     color: #ACBEE0;
   }
+ 
+  .text-black{
+    color: #000000;
+  }
 
   .bg-dark-blue{
     background-color: #193BD0;
@@ -372,7 +380,13 @@
     background-color: #504A62 !important;
   }
   
+  .bg-navy-blue{
+    background-color: #0e2043;
+  }
 
+  .bg-lightest-blue{
+    background-color: #E1E7FF;
+  }
   .no-border-t{
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
@@ -394,7 +408,7 @@
 
 
   html, body { height: 100%; }
-  body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #f8f8f8; }
+  body { margin: 0; font-family: 'Rubik', sans-serif; background-color: #f8f8f8; }
   
   @keyframes fall {
     from {
@@ -568,7 +582,11 @@ ion-item.selected {
   --color: var(--ion-color-primary);
 }
 *{
-  font-family: lato;
+  font-family: 'Rubik', sans-serif;
+}
+
+.text-lato{
+  font-family: 'lato', sans-serif;
 }
 
 .menu-header-bg{
@@ -660,11 +678,14 @@ background:  linear-gradient(90deg, rgba(116,109,241,1) 0%, rgb(101, 197, 214) 0
 .min-overlay{
   z-index: 9999 !important;
 
-
 }
 
 .text-white-x{
   color: #FFFFFF !important;
+}
+
+.text-navy-blue{
+  color: #0e2043;
 }
 
 .wrap-text {
@@ -743,7 +764,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 body {
-  font-family: 'Open Sans' !important;
+  font-family: 'Rubik', sans-serif !important;
 }
 
 .overflow-x-hidden{
@@ -755,3 +776,8 @@ body {
   animation-duration: 500ms;
 }
 
+.footer-bottom{
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

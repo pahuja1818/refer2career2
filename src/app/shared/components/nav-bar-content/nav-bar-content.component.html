@@ -1,0 +1,26 @@
+<div class="w-100 shadow-lg">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mx-5 ">
+  <div class="container-fluid ">
+    <a href="">
+    <img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
+  </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <div  class=" vertical-center ">
+        <div class="d-flex justify-content-around">
+        <div *ngFor="let navItems of navBarComponents"  class="active-button mx-2 px-2 py-1 text-black text-link text-smd  text-lato">  
+          {{navItems.name}}
+        </div>
+        <div (click)="openModal(logout)" class="d-flex vertical-center px-2 py-1 border-6 text-link bg-navy-blue text-white text-lato text-smd">
+          <span class="material-icons">
+            lock
+            </span>LOGOUT
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</nav>
+</div>

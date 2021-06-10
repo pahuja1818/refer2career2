@@ -70,6 +70,7 @@ import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.c
 import { SigninComponent } from '../login/signin/signin.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import {NavBarContentComponent} from './components/nav-bar-content/nav-bar-content.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     SigninComponent,
     NotFoundComponent,
     EmployerSigninComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    NavBarContentComponent
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -210,7 +212,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     ApplicationsComponent,
     SigninComponent,
     NgSelectModule,
-    CollapseModule
+    CollapseModule,
+    NavBarContentComponent
   ],
   providers: [
     StatusBar,
