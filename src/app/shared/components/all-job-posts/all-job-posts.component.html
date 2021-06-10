@@ -146,37 +146,37 @@
               <div class="column">
                 <div class="d-flex vertical-center">
                 <div class=" vertical-center justify-content-start mr-3">
-                  <span class="material-icons-outlined text-grey mr-2 text-violet">work</span>
-                  <span class="text-grey text-lato d-inline">Experience : </span>
-                  <span class="text-grey text-lato">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
+                  <span class="material-icons-outlined  mr-2 text-navy-blue">work</span>
+                  <span class=" text-lato text-navy-blue d-inline">Experience : </span>
+                  <span class="text-lato">&nbsp; {{ jobPost.jobPost ? jobPost.jobPost.experience : ''
                     }}
                     years</span>
                 </div>
                 
                 <div class=" vertical-center justify-content-start mr-3">
-                  <span class="material-icons text-grey mr-2 text-violet">business</span>
-                  <span class="text-grey text-lato d-inline">Company : </span>
-                  <span class="text-grey text-lato">&nbsp; {{jobPost.jobPost.companyName}}</span>
+                  <span class="material-icons  mr-2 text-navy-blue">business</span>
+                  <span class=" text-lato text-navy-blue d-inline">Company : </span>
+                  <span class=" text-lato">&nbsp; {{jobPost.jobPost.companyName}}</span>
                 </div>
               </div>
                 <div class="d-flex">
                   <div *ngIf="jobPost.jobPost.jobType === 'In office'"
                   class=" vertical-center justify-content-start mr-2">
-                  <span class="material-icons-outlined text-md text-grey mr-2 text-violet">location_on</span>
-                  <span class="text-grey text-lato text-smd">&nbsp;{{jobPost.jobPost.location}}</span>
+                  <span class="material-icons-outlined text-md  mr-2 text-navy-blue">location_on</span>
+                  <span class=" text-lato text-smd text-navy-blue">&nbsp;{{jobPost.jobPost.location}}</span>
                 </div>
 
                 <div *ngIf="jobPost.jobPost.jobType !== 'In office'"
                   class=" vertical-center justify-content-start mr-2">
-                  <span class="material-icons-outlined text-md text-grey mr-2 text-violet">home</span>
-                  <span class="text-grey text-lato text-smd  d-inline">Work from home</span>
+                  <span class="material-icons-outlined text-md  mr-2 text-navy-blue">home</span>
+                  <span class=" text-lato text-smd text-navy-blue d-inline">Work from home</span>
                 </div>
                 
                 <div class="vertical-center justify-content-start my-2 mr-2">
-                  <span class="material-icons text-md text-grey mr-2 text-violet">
+                  <span class="material-icons text-md  mr-2 text-navy-blue">
                     schedule
                     </span>
-                  <span class="text-grey text-smd text-lato">Published on&nbsp;{{jobPost.jobPost.createdAt | date: 'dd
+                  <span class=" text-smd text-lato text-navy-blue">Published on&nbsp;{{jobPost.jobPost.createdAt | date: 'dd
                     MMMM
                     yyyy'}}</span>
                 </div>
@@ -276,10 +276,10 @@
       </div>
     </div>
   </div>
-  <div class="footer-bottom bg-navy-blue ">
+  <!-- <div class="footer-bottom bg-navy-blue ">
     <div class="text-center text-white py-3">© 2021 Refer 2 Career. All Rights Reserved.
     </div>
-  </div>
+  </div> -->
 </div>
 
 <app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>
