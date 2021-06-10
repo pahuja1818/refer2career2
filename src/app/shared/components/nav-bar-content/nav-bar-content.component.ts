@@ -8,16 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class NavBarContentComponent implements OnInit {
  
   navBarComponents=[
-    { name:'Dashboard',
+    { name:'DASHBOARD',
       route:"/referer/dashboard"
     },
-    { name:'My Profile',
+    { name:'MY PROFILE',
       route:"/referer/profile"
     },
-    { name:'Job Posts',
+    { name:'JOB POSTS',
       route:"/referer/jobs"
     },
-    { name:'Applied Jobs',
+    { name:'APPLIED JOB',
       route:"/referer/my-applications"
     }
   ]
