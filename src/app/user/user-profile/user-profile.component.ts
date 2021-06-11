@@ -115,6 +115,25 @@ export class UserProfileComponent implements OnInit {
     'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
   filteredSkills: Observable<string[]>;
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/referer/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/referer/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/referer/jobs"
+    },
+    {
+      name: 'APPLIED JOB',
+      route: "/referer/my-applications"
+    }
+  ]
+
   openResume() {
     window.open(this.user.resume, '_blank');
   }
