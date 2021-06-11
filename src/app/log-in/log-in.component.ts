@@ -296,13 +296,11 @@ export class LogInComponent implements OnInit {
             this.message = 'Invalid email or password!';
           }
           else if (data.email) {
-            if (data.role === 2) {
               this.modalRef.hide();
               window.location.reload();
               window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
-            }
-            else { this.message = 'User not found!'; }
           }
+          else { this.message = 'User not found!'; }
           this.isServiceRunning = false;
         });
     }
