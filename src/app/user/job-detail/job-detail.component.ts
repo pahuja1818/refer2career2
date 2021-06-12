@@ -72,6 +72,25 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
 
   questionsAnswers: any[] = [];
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/referer/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/referer/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/referer/jobs"
+    },
+    {
+      name: 'APPLIED JOB',
+      route: "/referer/my-applications"
+    }
+  ]
+
   ngOnInit() {
     this.referJobPostForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),

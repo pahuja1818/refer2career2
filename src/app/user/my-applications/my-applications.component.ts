@@ -20,6 +20,25 @@ export class MyApplicationsComponent implements OnInit {
   allAppliedPosts: any[] = [];
   allJobPosts: any[] = [];
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/referer/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/referer/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/referer/jobs"
+    },
+    {
+      name: 'APPLIED JOB',
+      route: "/referer/my-applications"
+    }
+  ]
+
   ngOnInit() {
     this.isServiceRunning = true;
     this.jobService.getMyApplications();

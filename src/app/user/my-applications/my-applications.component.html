@@ -1,15 +1,8 @@
+<app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
 <div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
-  <ion-header style="position: fixed">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Applied Jobs</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="w-100 h-100 m-0 p-0 " *ngIf="!isServiceRunning">
-    <div class="row justify-content-center bg-lightest-blue p-2" style=" margin-top: 50px !important;">
-      <div class="col-sm-9 mx-0 mt-2 p-0  ">
+  <div class="w-100 h-100 m-0 p-0" *ngIf="!isServiceRunning" style="border-radius: 7px; background-color: #f8f8f8">
+    <div class="row justify-content-center p-2 bg-white" style=" margin-top: 50px !important;">
+      <div class="col-sm-6 mx-0 mt-2 p-0">
         <app-not-found *ngIf="allAppliedPosts.length === 0" style="margin-top: 200px !important;" class="center-parent">
         </app-not-found>
 

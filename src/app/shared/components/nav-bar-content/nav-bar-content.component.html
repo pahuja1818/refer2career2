@@ -1,20 +1,20 @@
-<div class="row justify-content-center p-0 m-0">
+<div class="row shadow justify-content-center p-0 m-0">
   <div class="col-sm-11">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
-      <a class="nav-link mr-5" href="#"><img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 ">
+      <a class="nav-link" href="#"><img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse vertical-center justify-content-between" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="ml-5 navbar-nav">
           <li class="nav-item mr-4" *ngFor="let item of navItems">
-            <a class="nav-link text-slmd text-dark semi-bold text-link active-button"
+            <a class="nav-link text-dark myfont-size text-link active-button"
               [ngClass]="url.includes(item.route) ? 'active-url' : ''" (click)="navigate(item.route)"> {{item.name}}</a>
           </li>
         </ul>
-        <ul class="navbar-nav ">
+        <ul class="navbar-nav">
           <li>
             <a (click)="openModal(logout)"><button class="btn btn-primary"><span class="vertical-center">
               <ion-icon name="lock-closed" class="mr-1"></ion-icon>LOGOUT

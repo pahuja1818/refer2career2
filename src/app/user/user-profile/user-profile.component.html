@@ -1,19 +1,6 @@
-<div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
-  <ion-header style="position: fixed">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-buttons slot="primary" class="mr-4" *ngIf="user.name">
-        <span class="material-icons-outlined vertical-center text-ssmd">account_circle<span
-            class="ml-1k'">{{user.name}}</span></span>
-      </ion-buttons>
-      <ion-title>
-        My Profile
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="h-100 w-100" style="overflow-y: auto;" *ngIf="!isServiceRunning">
+<app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
+<div class="h-100 w-100 overflow-x-hidden" style="overflow-y: auto;" *ngIf="!isServiceRunning">
+  
     <div class="bg-primary w-100 text-white"
       style="min-height: 220px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
     </div>
@@ -21,9 +8,9 @@
       <div class="col-sm-10 p-2 mt-5" style="overflow-y: auto !important; overflow-x: hidden;">
         <div class="bg-white border-8">
           <div class="row">
-            <div class="col-sm-10 align-self-center">
+            <div class="col-sm-12 align-self-center">
               <div class="p-3 m-2 row vertical-center justify-content-start">
-                <div class="col-sm-2 d-flex justify-content-start mb-2">
+                <div class="col-12 col-md-3 col-lg-2 d-flex justify-content-start mb-2">
                   <div>
                     <input type="file" accept=".png, .jpg, .jpeg" (change)='uploadImage($event,1)'
                       class="position-absolute"
@@ -39,14 +26,14 @@
                       src="{{user.photo}}" alt="">
                   </div>
                 </div>
-                <div class="text-dark col-sm-10">
-                  <div class="w-100 bold text-md mb-2">{{user.name}}</div>
-                  <div class="w-100 row vertical-center">
-                    <div class="col-sm-6 my-2">
+                <div class="text-dark col-12 col-md-9 col-sm-10">
+                  <div class="text-black semi-bold" style="font-size: 30px;">{{user.name}}</div>
+                  <div class="row vertical-center">
+                    <div class="col-12 col-lg-5 my-2">
                       <span class="material-icons-outlined vertical-center text-smd mr-5">mail
                         <span class="ml-2">{{user.email}}</span></span>
                     </div>
-                    <div class="col-sm-6 my-2">
+                    <div class="col-12 col-lg-7 my-2">
                       <span *ngIf="user.basicInfo" class="material-icons-outlined vertical-center text-smd mr-4">call
                         <span class="ml-2">{{user.basicInfo.mobile}}</span></span>
                     </div>
@@ -118,7 +105,7 @@
           <div class="col-sm-8 m-0 p-2">
             <div class="p-3 mx-0 mb-3 bg-white border-8">
               <div class="vertical-center justify-content-between">
-                <span class="bold text-dark text-ssmd">CV Headline</span>
+                <span class="text-black semi-bold myfont-size">CV Headline</span>
                 <span class="text-violet text-link" *ngIf="!isCVHeadEditing" (click)="editCVHead()"> {{!cvHeadLine ?
                   'Add' : 'Edit'}}</span>
               </div>
@@ -136,7 +123,7 @@
             <div class="p-3 mx-0 mb-3 bg-white w-100 border-8" [formGroup]="profileForm">
               <div class="w-100">
                 <div class="mb-3 d-flex justify-content-between">
-                  <span class="bold text-dark text-ssmd">Personal Details </span>
+                  <span class="text-black semi-bold myfont-size">Personal Details </span>
                   <span class="material-icons-outlined vertical-center text-violet text-md text-link"
                     (click)="basicInfoEdit()">{{isBasiDetailEditing ? '' : 'edit'}} <span
                       class="text-sm">{{isBasiDetailEditing ? 'Cancel' : 'Edit'}}</span></span>
@@ -220,7 +207,7 @@
             <div class="p-2 bg-white mb-3 w-100 border-8">
               <div class="mt-2 w-100">
                 <div class="ml-4 mb-3 d-flex justify-content-between">
-                  <span class="bold text-dark text-ssmd">Skills </span>
+                  <span class="text-black semi-bold myfont-size">Skills </span>
                   <span class="text-violet text-link" (click)="openSkillModal(skillModal)">Add Skill +</span>
                 </div>
                 <div class="row col-sm-11 d-flex justify-content-start">
@@ -233,14 +220,14 @@
                     </div>
                   </div>
                 </div>
-                <span class="text-sm text-light-grey w-100 mx-3 mt-4">Skills plays a major role to match a Job
+                <span class="text-sm text-fluid text-light-grey w-100 mx-3 mt-4">Skills plays a major role to match a Job
                   profile.</span>
               </div>
             </div>
             <div class="p-2 bg-white mb-3 w-100 border-8">
               <div class="mt-2 w-100">
-                <div class="ml-4 mb-3 d-flex justify-content-between">
-                  <span class="bold text-dark text-ssmd">Work Experience </span>
+                <div class="ml-3 mb-3 d-flex justify-content-between">
+                  <span class="text-black semi-bold myfont-size">Work Experience </span>
                   <span class="text-violet text-link" (click)="openWorkExpModal(workExp)">Add Experience +</span>
                 </div>
                 <div class="w-100">
@@ -273,7 +260,7 @@
             <div class="p-2 bg-white mb-3 w-100 border-8">
               <div class="mt-2 w-100">
                 <div class="ml-3 mb-3 d-flex justify-content-between">
-                  <span class="bold text-dark text-ssmd">Education </span>
+                  <span class="text-black semi-bold myfont-size">Education </span>
                   <span class="text-violet text-link" (click)="openEducationModal(education)">Add Education +</span>
                 </div>
                 <div class="w-100">
@@ -304,7 +291,7 @@
             </div>
             <div class="p-2 bg-white mb-3 w-100 border-8">
               <div class="vertical-center justify-content-between">
-                <span class="bold text-dark text-ssmd vertical-center ml-3">Attach CV <span
+                <span class="text-black semi-bold myfont-size vertical-center ml-3">Attach CV <span
                     class="material-icons-outlined bold text-dark text-ssmd ml-2">attachment</span></span>
                 <span class="text-violet text-link text-sm" *ngIf="user.resume" (click)="openResume()"><u>Open
                     Resume</u></span>
@@ -331,6 +318,9 @@
           </div>
         </div>
       </div>
+    </div>
+  <div class="footer-bottom bg-navy-blue ">
+    <div class="text-center text-white py-3">© 2021 Refer 2 Career. All Rights Reserved.
     </div>
   </div>
 </div>
