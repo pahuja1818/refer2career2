@@ -1,7 +1,7 @@
 <div class="w-100 h-100 m-0 p-0" style="border-radius: 7px; background-color: #f8f8f8" *ngIf="!isServiceRunning">
   <!-- <div class="w-100  mt-5 no-border-t" style="min-height: 275px !important; border-radius: 30px;">
   </div> -->
-  <div class="row col-sm-10 justify-content-center px-0 pt-2 mx-auto" style="margin-top: 100px;">
+  <div class="row col-sm-10 justify-content-center px-0 pt-2 mx-auto">
     <div class="col-sm-3 d-flex justify-content-center">
     <div class="m-2 d-flex justify-content-center vertical-center" >
       <h5 class="text-bold p-3" >Showing
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col-sm-9 justify-content-center">
-      <div class="row col-sm-12  vertical-center shadow bg-white p-2 border-6 mr-3" >
+      <div class="row col-sm-12 justify-content-center vertical-center shadow bg-white p-2 border-6 mx-auto " >
         <div class="col-sm-10 vertical-center justify-content-center">
           <input type="text" (input)="filterJobPosts()" placeholder="Search by skills or job title"
             class="no-border bg-white text-black" style="width: 95%;" [formControl]="myControl">
@@ -223,7 +223,9 @@
               </div>
               <div class="my-2 vertical-center justify-content-start">
                 <span class="text-black text-slmd">&nbsp; ₹ {{jobPost.jobPost.salary}}</span>
-                <span class="text-fluid">{{jobPost.jobPost.salaryType}}</span>
+                <div class="d-flex ml-1 align-self-end" >
+                  <span class="text-fluid ">{{jobPost.jobPost.salaryType}}</span>
+                </div>
               </div>
             </div>
           </div>

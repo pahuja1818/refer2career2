@@ -1,6 +1,7 @@
+
 <div class="row p-0 m-0 pt-5 overflow-x-hidden">
   <div class="row col-sm-12 justify-content-center p-0 m-0">
-    <div class="col-sm-12 d-flex justify-content-between mx-1 mb-4">
+    <div class="row col-sm-12 d-flex justify-content-between mx-1 mb-4">
       <div class="mx-2">
         <h2>Recent Jobs</h2>
       </div>
@@ -8,11 +9,11 @@
         <div class="px-2 align-self-end py-1 text-lato btn btn-primary text-xs" (click)="navigateToAllJobs()">Browse All Jobs</div>
       </div>
     </div>
-    <div class="col-sm-9 m-0 p-0 mx-0 mt-2 ">
+    <div class="col-sm-9 p-0  mt-2 ">
       <app-not-found *ngIf="filteredJobPosts.length === 0" style="margin-top: 200px !important;" class="center-parent">
       </app-not-found>
 
-      <div class="mr-2 mb-3" *ngFor="let jobPost of filteredJobPosts; index as i;" (click)="seeDetails(jobPost)">
+      <div class=" mb-3" *ngFor="let jobPost of filteredJobPosts; index as i;" (click)="seeDetails(jobPost)">
         <div *ngIf="i<5" class="card border-4 shadow-lg p-3 text-link border-8">
           <div class="d-flex mb-3 justify-content-between">
             <div class="d-flex flex-wrap">
@@ -91,7 +92,9 @@
               </div>
               <div class="my-2 vertical-center justify-content-start">
                 <span class="text-black text-slmd">&nbsp; ₹ {{jobPost.jobPost.salary}}</span>
-                <span class="text-fluid">{{jobPost.jobPost.salaryType}}</span>
+                <div class="d-flex ml-1 align-self-end" >
+                <span class="text-fluid ">{{jobPost.jobPost.salaryType}}</span>
+              </div>
               </div>
             </div>
           </div>
