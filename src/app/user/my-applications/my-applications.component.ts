@@ -36,6 +36,10 @@ export class MyApplicationsComponent implements OnInit {
     {
       name: 'APPLIED JOB',
       route: "/referer/my-applications"
+    },
+    {
+      name: 'REFERRED PROFILE',
+      route: "/referer/referred"
     }
   ]
 

@@ -133,7 +133,7 @@ export class UserProfileComponent implements OnInit {
       route: "/referer/my-applications"
     },
     {
-      name: 'REFERRED',
+      name: 'REFERRED PROFILE',
       route: "/referer/referred"
     }
   ]
