@@ -11,7 +11,6 @@ import { EmployerProfleComponent } from './employer-profle/employer-profle.compo
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
 import { EmployerMenuComponent } from './employer-menu/employer-menu.component';
 import { JobDetailsComponent } from '../shared/components/add-job-post/job-details/job-details.component';
-import { EmployerNavbarComponent } from './employer-navbar/employer-navbar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { EmployerNavbarComponent } from './employer-navbar/employer-navbar.compo
     ApplicantsComponent,
     EmployerMessagesComponent,
     JobDetailsEmployerComponent,
-    EmployerNavbarComponent,
   ],
   imports: [
     CommonModule,
