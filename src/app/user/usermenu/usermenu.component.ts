@@ -14,10 +14,9 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class UsermenuComponent implements OnInit {
 
   modalRef: BsModalRef;
-  user: any;
+  user: any; 
   isServiceRunning = false;
 
-  
   navItems: any[] = [
     {
       name: 'DASHBOARD',
@@ -34,6 +33,10 @@ export class UsermenuComponent implements OnInit {
     {
       name: 'APPLIED JOB',
       route: "/referer/my-applications"
+    },
+    {
+      name: 'REFERRED PROFILE',
+      route: "/referer/referred"
     }
   ]
 

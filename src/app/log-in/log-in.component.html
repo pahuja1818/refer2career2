@@ -1,13 +1,14 @@
+<div style="overflow-y: auto;overflow-x: auto;">
 <div class="row justify-content-center p-0 m-0">
   <div class="col-sm-11">
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
-      <a class="nav-link" href="#"><img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
+      <a class="nav-link"><img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="ml-5 collapse navbar-collapse vertical-center justify-content-between" id="navbarNav">
+      <div class="ml-3 collapse navbar-collapse vertical-center justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item mr-4">
             <a class="nav-link text-dark myfont-size text-link active-button" (click)="navigate(item.route)">
@@ -28,10 +29,10 @@
         </ul>
         <ul class="navbar-nav">
           <li class="vertical-center">
-            <a (click)="goToSignUp()"><button class="btn btn-primary mr-2"><span class="vertical-center">
+            <a (click)="goToSignUp()" *ngIf="isLogin || isForgotPassword || isVerifyOTP"><button class="btn btn-primary mr-2"><span class="vertical-center">
               <ion-icon name="lock-closed" class="mr-1"></ion-icon>SIGNUP
             </span></button></a>
-            <a (click)="openModal(logout)" (click)="goToLogin()"><button class="btn btn-primary"><span
+            <a (click)="openModal(logout)" *ngIf="isSignUp" (click)="goToLogin()"><button class="btn btn-primary"><span
                   class="vertical-center">
                   <ion-icon name="person" class="mr-1"></ion-icon>LOGIN
                 </span></button></a>
@@ -41,7 +42,7 @@
     </nav>
   </div>
 </div>
-<div style="overflow-y: auto;overflow-x: auto;">
+
   <div class="bg-white vertical-center" style="overflow-y: auto;">
     <div class="container mt-5">
       <div *ngIf="isLogin" class="row mt-8 mb-5">
@@ -68,8 +69,8 @@
                 <div class="text-left mb-2 col-sm-12">
                   <span class="text-sm text-danger" *ngIf="message"><b>{{message}}</b></span>
                 </div>
-                <div class="text-left mt-3 vertical-center">
-                  <button *ngIf="!isServiceRunning" class="btn btn-primary site-button mr-5 btn-lg"
+                <div class="mt-3 vertical-center">
+                  <button *ngIf="!isServiceRunning" class="btn btn-primary text-center site-button mr-5 btn-lg"
                     (click)="login()">LOGIN</button>
                   <div class="vertical-center text-link " (click)="forgotPasswordVisible()">
                     <ion-icon name="lock-open-outline"></ion-icon>
@@ -221,7 +222,7 @@
       </div>
     </div>
   </div>
-  <div class="footer-bottom bg-navy-blue ">
+  <div class="footer-bottom bg-primary">
     <div class="text-center text-white py-3">© 2021 Refer 2 Career. All Rights Reserved.
     </div>
   </div>

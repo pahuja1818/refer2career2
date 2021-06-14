@@ -360,6 +360,10 @@
     color:#504A62 !important;
   }
 
+  .text-light-blue{
+    color: #ACBEE0;
+  }
+
   .text-dark-blue{
     color: #193BD0;
   }
@@ -605,6 +609,13 @@ ion-item.selected {
   margin-bottom: 60px;
 }
 
+.myfont-size{
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Lato', sans-serif;
+  color: #000;;
+}
+
 .header-content{
 position: absolute;
 top: 30px;
@@ -816,12 +827,19 @@ body {
     border-radius: 0;
     margin-top: -130px;
 }
+
 .special-card:hover .text-trans {
     color: #fff;
-    margin-top: 100px;
+    margin-top: 110px;
     padding: 5px;
 }
+
 .special-card:hover .text-trans small { color: #fff }
+
+.special-card:hover .icon-trans {
+  color: #ffffff;
+  margin-top: 25px;
+}
 
 .card_circle {
     background-color: #0E2043;
@@ -830,10 +848,11 @@ body {
     height: 400px;
     margin-left: -50px;
     margin-right: 75px;
-    margin-top: 70px;
+    margin-top: 77px;
     // position: absolute;
     width: 450px;
 }
+
 .text-trans {
   overflow: hidden;
     color: #ffffff;
@@ -844,6 +863,22 @@ body {
     text-align: center;
     width: 100%;
     z-index: 9999;
+}
+
+.icon-trans {
+    width: fit-content;
+    color: #0E2043;
+    margin-top: 20px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 9999;
+}
+
+.display-icon {
+    font-size: 2.5rem;
+    font-weight: 50;
+    line-height: 1.2;
 }
 
 .avatar-image{
