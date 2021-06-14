@@ -1,33 +1,34 @@
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-nav-bar-content',
-  templateUrl: './nav-bar-content.component.html',
-  styleUrls: ['./nav-bar-content.component.scss'],
+  selector: 'app-employer-navbar',
+  templateUrl: './employer-navbar.component.html',
+  styleUrls: ['./employer-navbar.component.scss'],
 })
-export class NavBarContentComponent implements OnInit {
-
-  @Input() navItems: any[] = [];
-
-  url = '';
-
-  isCollapsed = true;
+export class EmployerNavbarComponent implements OnInit {
 
   constructor(
+    private menu: MenuController,
     private modalRef: BsModalRef,
     private modalService: BsModalService,
     private router: Router,
   ) { }
 
-  navigate(url: string) {
-    this.isCollapsed = true;
+  url = '';
+
+  navigate(url: string){
     this.router.navigateByUrl(url);
   }
 
   ngOnInit() {
     this.url = this.router.url;
+  }
+
+  toggle() {
+    this.menu.toggle();
   }
 
   openModal(template: any) {

@@ -36,7 +36,7 @@ const routes: Routes = [
         path: 'my-applications', component: MyApplicationsComponent
       },
       {
-        path: 'my-applications/refered', component: ReferedProfilesComponent
+        path: 'referred', component: ReferedProfilesComponent
       },
       {
         path: 'messages', component: UserMessagesComponent

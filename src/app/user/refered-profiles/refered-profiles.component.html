@@ -1,12 +1,5 @@
 <div class="w-100 vh-100" style="overflow-y: auto; overflow-x: hidden;">
-  <ion-header style="position: fixed">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Referred Profiles</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
   <div class="w-100 h-100 m-0 p-0 bg-lightest-blue" *ngIf="!isServiceRunning">
     <div class="row justify-content-center bg-lightest-blue p-2 mb-2">
       <div class="col-sm-9 mx-0 mt-2 p-0  ">

@@ -88,6 +88,10 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     {
       name: 'APPLIED JOB',
       route: "/referer/my-applications"
+    },
+    {
+      name: 'REFERRED PROFILE',
+      route: "/referer/referred"
     }
   ]
 

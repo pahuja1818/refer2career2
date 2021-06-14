@@ -1,6 +1,5 @@
 <app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
-<div class="h-100 w-100 overflow-x-hidden" style="overflow-y: auto;" *ngIf="!isServiceRunning">
-  
+<div class="h-100 w-100 bg-lightest-blue overflow-x-hidden" style="overflow-y: auto;" *ngIf="!isServiceRunning">
     <div class="bg-primary w-100 text-white"
       style="min-height: 220px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
     </div>
@@ -55,31 +54,31 @@
                 <label class="text-dark semi-bold">Complete your profile</label>
                 <div *ngIf="!cvHeadLine" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">CV Headline</span>
-                  <span class="badge badge-info">Adds 10%</span>
+                  <span class="badge bg-light-blue py-1">Adds 10%</span>
                 </div>
                 <div *ngIf="!user.basicInfo" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Personal Details</span>
-                  <span class="badge badge-info">Adds 15%</span>
+                  <span class="badge bg-light-blue py-1">Adds 15%</span>
                 </div>
                 <div *ngIf="!user.photo" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Profile photo</span>
-                  <span class="badge badge-info">Adds 10%</span>
+                  <span class="badge bg-light-blue py-1">Adds 10%</span>
                 </div>
                 <div *ngIf="!user.resume" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Resume</span>
-                  <span class="badge badge-info">Adds 15%</span>
+                  <span class="badge bg-light-blue py-1">Adds 15%</span>
                 </div>
                 <div *ngIf="skillsArray.length === 0" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Skills</span>
-                  <span class="badge badge-info">Adds 12%</span>
+                  <span class="badge bg-light-blue py-1">Adds 12%</span>
                 </div>
                 <div *ngIf="educationArray.length === 0" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Education</span>
-                  <span class="badge badge-info">Adds 11%</span>
+                  <span class="badge bg-light-blue py-1">Adds 11%</span>
                 </div>
                 <div *ngIf="workExpArray.length === 0" class="my-2">
                   <span class="text-grey text-sm semi-bold mr-2">Experience</span>
-                  <span class="badge badge-info">Adds 15%</span>
+                  <span class="badge bg-light-blue py-1">Adds 15%</span>
                 </div>
               </div>
               <div class="my-3" *ngIf="profileCompleted === 100">
@@ -213,7 +212,7 @@
                 <div class="row col-sm-11 d-flex justify-content-start">
                   <div class="col-sm-12 my-4">
                     <div *ngFor="let data of skillsArray; index as i"
-                      class="p-1 px-2 bg-light border-violet vertical-center"
+                      class="px-3 py-2 text-primary bg-lightest-blue mr-1 border-6 text-lato text-sm vertical-center"
                       style="display: inline-block; border-radius: 15px; width: max-content; margin: 3px !important; white-space:nowrap;">
                       <span class="text-grey mr-3 text-violet">{{data}}</span>
                       <span class="material-icons text-xs text-link" (click)="removeTag(i)">close</span>
@@ -301,8 +300,8 @@
                   <div class="col-sm-12 d-flex justify-content-center">
                     <div class="my-4">
                       <label for="upload">
-                        <span class="btn btn-outline-primary vertical-center glyphicon glyphicon-folder-open"
-                          aria-hidden="true"><span class="material-icons text-danger mx-auto">backup</span>&nbsp;
+                        <span class="btn btn-primary vertical-center glyphicon glyphicon-folder-open"
+                          aria-hidden="true"><span class="material-icons text-primarymx-auto">backup</span>&nbsp;
                           &nbsp;{{user.resume
                           ? "Update Resume" : "Upload Resume"}}</span>
                         <input type="file" id="upload" style="display:none" accept=".pdf,.docx"
@@ -319,10 +318,6 @@
         </div>
       </div>
     </div>
-  <div class="footer-bottom bg-navy-blue ">
-    <div class="text-center text-white py-3">© 2021 Refer 2 Career. All Rights Reserved.
-    </div>
-  </div>
 </div>
 
 <ng-template #workExp>
@@ -330,7 +325,7 @@
     <div class="d-block text-right">
       <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
     </div>
-    <span class="text-grey semi-bold d-block text-center my-2">{{workExpToUpdate !== undefined ? 'UPDATE' : 'ADD'}}
+    <span class="text-grey semi-bold d-block text-center mb-2">{{workExpToUpdate !== undefined ? 'UPDATE' : 'ADD'}}
       EXPERIENCE DETAILS</span>
     <div class="row p-0 px-2 m-3" [formGroup]="workExpForm">
       <div class="col-sm-12 mt-3">
@@ -411,7 +406,7 @@
       </div>
     </div>
     <div class="w-100 d-flex justify-content-end mt-4">
-      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addWorkExp()">Save</button>
+      <button class="btn btn-primary py-1 px-2" (click)="addWorkExp()">Save</button>
     </div>
   </div>
 </ng-template>
@@ -487,7 +482,7 @@
       </div>
     </div>
     <div class="w-100 d-flex justify-content-end mt-4">
-      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addEducation()">Save</button>
+      <button class="btn btn-primary py-1 px-2" (click)="addEducation()">Save</button>
     </div>
   </div>
 </ng-template>
@@ -498,7 +493,7 @@
     <div class="d-block text-right">
       <span class="material-icons text-grey text-right text-link" (click)="closeModal()">close</span>
     </div>
-    <span class="text-grey semi-bold d-block text-center my-2">ADD SKILL</span>
+    <span class="text-lato semi-bold d-block text-center my-2">ADD SKILL</span>
     <div class="row p-0 px-2 m-3" [formGroup]="educationDetailsForm">
       <div class="col-sm-12 mt-3">
         <mat-form-field class="p-0 w-100 mat-form-field">
@@ -515,7 +510,7 @@
       </div>
     </div>
     <div class="w-100 d-flex justify-content-end mt-4">
-      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addSkill()">ADD SKILL</button>
+      <button class="btn btn-primary py-1 px-2" (click)="addSkill()">ADD SKILL</button>
     </div>
   </div>
 </ng-template>
