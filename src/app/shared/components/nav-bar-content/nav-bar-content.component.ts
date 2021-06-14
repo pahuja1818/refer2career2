@@ -13,19 +13,22 @@ export class NavBarContentComponent implements OnInit {
 
   url = '';
 
+  isCollapsed = true;
+
   constructor(
     private modalRef: BsModalRef,
     private modalService: BsModalService,
     private router: Router,
   ) { }
 
-  navigate(url: string){
+  navigate(url: string) {
+    this.isCollapsed = true;
     this.router.navigateByUrl(url);
   }
 
   ngOnInit() {
     this.url = this.router.url;
-   }
+  }
 
   openModal(template: any) {
     this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });
