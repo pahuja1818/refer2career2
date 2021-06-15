@@ -38,7 +38,7 @@ export class ReferedProfilesComponent implements OnInit {
       route: "/referer/my-applications"
     },
     {
-      name: 'REFERRED',
+      name: 'REFERRED PROFILE',
       route: "/referer/referred"
     }
   ]

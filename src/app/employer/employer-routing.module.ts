@@ -4,7 +4,6 @@ import { EmployerMessagesComponent } from './employer-messages/employer-messages
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { EmployerProfleComponent } from './employer-profle/employer-profle.component';
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
-import { EmployerNavbarComponent } from './employer-navbar/employer-navbar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
