@@ -1,5 +1,5 @@
-<div class="w-100 h-100 m-0 p-0" style="border-radius: 7px; background-color: #f8f8f8">
-  <div class="w-100 bg-violet no-border-t" style="min-height: 240px !important; border-radius: 30px;">
+<div class="w-100 h-100 m-0 p-0 bg-lightest-blue">
+  <div class="w-100 bg-primary no-border-t" style="min-height: 240px !important; border-radius: 30px;">
   </div>
   <div class="row justify-content-center px-0 pt-2 mx-0" style="margin-top: -220px;">
     <div class="col-sm-12">
@@ -16,30 +16,31 @@
       <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
         <div class="col-sm-5 m-3">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Title/Designation <span class="text-danger">*</span></mat-label>
+            <mat-label class="p-0">Job Title/Designation <span class="text-primary">*</span></mat-label>
             <input matInput placeholder="ex Software Developer" class="p-0" formControlName='title'>
             <mat-error>Enter valid title</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Total Vacancies <span class="text-danger">*</span></mat-label>
+            <mat-label class="p-0">Total Vacancies <span class="text-primary">*</span></mat-label>
             <input matInput type="number" placeholder="ex 10" class="p-0" formControlName='vacancy'>
             <mat-error>Enter valid number</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>Job/Internship <span class="text-danger">*</span></mat-label>
+            <mat-label>Permanent Job/Contractual Job/Internship <span class="text-primary">*</span></mat-label>
             <mat-select formControlName='jobInternship'>
-              <mat-option value="Job">Job</mat-option>
+              <mat-option value="Permanent Job">Permanent Job</mat-option>
+              <mat-option value="Contractual Job">Contractual Job</mat-option>
               <mat-option value="Internship">Internship</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label>Job Type <span class="text-danger">*</span></mat-label>
+            <mat-label>Job Type <span class="text-primary">*</span></mat-label>
             <mat-select formControlName='jobType'>
               <mat-option value="In office">In office</mat-option>
               <mat-option value="Work from home">Work from home</mat-option>
@@ -49,7 +50,7 @@
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
             <mat-label>{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
-                class="text-danger">*</span></mat-label>
+                class="text-primary">*</span></mat-label>
             <input matInput formControlName='salary' name="salary" type="number" class="p-0">
             <span matPrefix>&#8377;&nbsp;</span>
             <span matSuffix>.00</span>
@@ -57,7 +58,7 @@
         </div>
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>Salary type <span class="text-danger">*</span></mat-label>
+            <mat-label>Salary type <span class="text-primary">*</span></mat-label>
             <mat-select formControlName='salaryType'>
               <mat-option value="per week">per week</mat-option>
               <mat-option value="per month">per month</mat-option>
@@ -67,7 +68,7 @@
         </div>
         <div class="col-sm-5 m-" *ngIf="jobPostForm.get('jobType').value === 'In office'">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Location <span class="text-danger">*</span></mat-label>
+            <mat-label class="p-0">Job Location <span class="text-primary">*</span></mat-label>
             <input matInput placeholder="ex Bengaluru" class="p-0" formControlName='location'>
             <mat-error>Enter valid location</mat-error>
           </mat-form-field>
@@ -78,8 +79,8 @@
           </section>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-label class="p-0">Work Experience (Minimum) <span class="text-danger">*</span></mat-label>
-          <mat-slider class="w-100" formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
+          <mat-label class="p-0">Work Experience (Minimum) <span class="text-primary">*</span></mat-label>
+          <mat-slider class="w-100 " formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
           </mat-slider>
         </div>
         <div class="col-sm-5 m-3"></div>
@@ -91,11 +92,11 @@
             </div>
             <div class="row col-sm-11 d-flex justify-content-start">
               <div class="col-sm-12 my-4">
-                <div *ngFor="let data of skillsArray; index as i"
-                  class="p-1 px-2 bg-light border-violet vertical-center"
-                  style="display: inline-block; border-radius: 15px; width: max-content; margin: 7px !important; white-space:nowrap;">
-                  <span class="text-grey mr-3 text-violet">{{data.skillName}}</span>
-                  <span class="material-icons text-xs text-link" (click)="deleteFieldValueToSkillArray(i)">close</span>
+                <div class="bg-lightest-blue" *ngFor="let data of skillsArray; index as i"
+                  class="p-1 px-2 bg-lightest-blue vertical-center"
+                  style="display: inline-block; border-radius: 8px; width: max-content; margin: 7px !important; white-space:nowrap;">
+                  <span class="text-primary mr-2">{{data.skillName}}</span>
+                  <span class="material-icons text-xs text-link text-primary" (click)="deleteFieldValueToSkillArray(i)">close</span>
                 </div>
               </div>
             </div>
@@ -147,9 +148,13 @@
           <span class="text-danger text-sm semi-bold">{{message}}</span>
           <ion-spinner color="primary" *ngIf="isServiceRunning"></ion-spinner>
           <button type="submit" *ngIf="!isServiceRunning"
-            class="ml-2 btn btn-primary p-0 text-smd bg-violet px-4 py-1 mr-2" (click)="save()">Publish</button>
+            class="ml-2 btn btn-primary p-0 text-smd px-4 py-1 mr-2" (click)="save()">Publish</button>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="footer-bottom bg-primary mt-2">
+    <div class="text-center text-white py-3 px-2">© 2021 Refer 2 Career. All Rights Reserved.
     </div>
   </div>
 </div>
@@ -192,7 +197,7 @@
       </div>
     </div>
     <div class="w-100 d-flex justify-content-end mt-4">
-      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addFieldValueToSkillArray()">ADD SKILL</button>
+      <button class="btn btn-primary py-1 px-2" (click)="addFieldValueToSkillArray()">ADD SKILL</button>
     </div>
   </div>
 </ng-template>
