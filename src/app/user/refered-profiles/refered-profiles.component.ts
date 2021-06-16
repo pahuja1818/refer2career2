@@ -17,8 +17,7 @@ export class ReferedProfilesComponent implements OnInit {
   allReferedProfiles: any[] = [];
   isServiceRunning = false;
   myForm: FormGroup;
-  hiredJobs=0;
-  shortlistedJobs=0;
+
   user = JSON.parse(window.atob(window.localStorage.getItem('id')));
 
   navItems: any[] = [
@@ -69,15 +68,8 @@ export class ReferedProfilesComponent implements OnInit {
         if (data.data) {
           if (data.data.length > 0) {
             this.allReferedProfiles = data.data;
-            data.data.forEach(element => {
-              if(element.status==='Shortlisted')
-              {this.shortlistedJobs++;}
-            if(element.status==='Hired')
-              {this.hiredJobs++;}
-            });
             this.allReferedProfiles.map((pr: any) => {
               pr.isStatus = true;
-              
             });
           }
         }

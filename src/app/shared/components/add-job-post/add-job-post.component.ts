@@ -44,6 +44,29 @@ export class AddJobPostComponent implements OnInit {
   skillsArray: any[] = [];
   filteredSkills: Observable<string[]>;
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/recruiter/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/recruiter/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/recruiter/job-posts"
+    },
+    {
+      name: 'MANAGE APPLICANTS',
+      route: "/recruiter/applicants"
+    },
+    {
+      name: 'ADD JOB POST',
+      route: "/recruiter/create-job-posts"
+    }
+  ]
+
   formatLabel(value: number) {
     if (value === 10) { return '10+'; }
     return `${value}-${value + 1}`;
@@ -104,6 +127,7 @@ export class AddJobPostComponent implements OnInit {
       this.aboutUs = this.jobPost.jobPost.aboutUs;
       this.questionsArray = this.jobPost.jobPost.question;
     }
+    this.jobPostService.post = undefined;
   }
 
   closeModal() {
