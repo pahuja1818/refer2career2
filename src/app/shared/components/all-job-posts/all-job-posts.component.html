@@ -131,16 +131,8 @@
     </div>
 
     <div class="col-sm-9 mx-0 mt-2 p-0">
-      <app-not-found *ngIf="filteredJobPosts.length === 0" style="margin-top: 200px !important;" class="center-parent">
+      <app-not-found *ngIf="filteredJobPosts.length === 0" message="No Jobs Avaiable with Given Data!" style="margin-top: 200px !important;" class="center-parent">
       </app-not-found>
-      <!-- <div class="mx-2 mb-3 vertical-center justify-content-between shadow bg-white p-2 px-2 border-6" >
-        <div class="w-75 vertical-center justify-content-center">
-          <input type="text" (input)="filterJobPosts()" placeholder="Search by skills or job title"
-            class="no-border bg-white text-black" style="width: 95%;" [formControl]="myControl">
-        </div>
-        <button class="btn btn-primary px-3 w-25 py-2" style="border-radius: 40px;"
-          (click)="filterJobPosts()">Search</button>
-      </div> -->
 
       <div class="m-2 mr-2 mb-3 " *ngFor="let jobPost of filteredJobPosts" (click)="seeDetails(jobPost)">
         <div class="card border-4 shadow-lg p-3 text-link border-8">
