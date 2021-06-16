@@ -7,10 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobDetailsEmployerComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {}
-
   navItems: any[] = [
     {
       name: 'DASHBOARD',
@@ -33,5 +29,9 @@ export class JobDetailsEmployerComponent implements OnInit {
       route: "/recruiter/create-job-posts"
     }
   ]
+
+  constructor() { }
+
+  ngOnInit() {}
 
 }

@@ -24,14 +24,7 @@ export class ApplicationsComponent implements OnInit {
   isAllChecked = false;
 
   totalChecked = 0;
-
-  isServiceRunning = false;
-  skillName = new FormControl(null, Validators.required);
-  postId = '';
-  post: any = {};
-  minExp: number;
-  candidatesArray: any[] = [];
-
+  
   navItems: any[] = [
     {
       name: 'DASHBOARD',
@@ -51,9 +44,16 @@ export class ApplicationsComponent implements OnInit {
     },
     {
       name: 'ADD JOB POST',
-      route: "/recruiter/job-posts/create"
+      route: "/recruiter/create-job-posts"
     }
   ]
+
+  isServiceRunning = false;
+  skillName = new FormControl(null, Validators.required);
+  postId = '';
+  post: any = {};
+  minExp: number;
+  candidatesArray: any[] = [];
 
   public modalRef: BsModalRef;
 

@@ -16,9 +16,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class EmployerMenuComponent implements OnInit {
 
   user: any = {};
-
-  temp: any;
-
+  allJobPost: any[] = [];
   navItems: any[] = [
     {
       name: 'DASHBOARD',
