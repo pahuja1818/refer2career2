@@ -1,7 +1,6 @@
-<div class="w-100 vh-100" style="overflow-y: auto; overflow-x: hidden;">
-  <app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
-  <div class="w-100 h-100 m-0 p-0 bg-lightest-blue" *ngIf="!isServiceRunning">
-    <div class="row justify-content-center bg-lightest-blue p-2 mb-2">
+<app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
+  <div class="w-100 h-100 m-0 p-0 bg-lightest-blue"  style="overflow-y: auto; overflow-x: hidden;" *ngIf="!isServiceRunning">
+    <div class="w-100 h-100 row justify-content-center bg-lightest-blue p-2 mb-2"  style="overflow-y: auto; overflow-x: hidden;">
       <div class="col-sm-9 mx-0 mt-2 p-0  ">
         <app-not-found *ngIf="allReferedProfiles.length === 0" style="margin-top: 200px !important;"
           class="center-parent">
@@ -92,12 +91,10 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom bg-primary ">
-      <div class="text-center text-white py-3 px-2">© 2021 Refer 2 Career. All Rights Reserved.
-      </div>
+  <div class="footer-bottom bg-primary ">
+    <div class="text-center text-white py-3 px-2">© 2021 Refer 2 Career. All Rights Reserved.
     </div>
   </div>
-  
 </div>
 
 <app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

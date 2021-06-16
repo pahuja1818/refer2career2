@@ -49,6 +49,10 @@ export class ApplicationsComponent implements OnInit {
       name: 'MANAGE APPLICANTS',
       route: "/recruiter/applicants"
     },
+    {
+      name: 'ADD JOB POST',
+      route: "/recruiter/job-posts/create"
+    }
   ]
 
   public modalRef: BsModalRef;

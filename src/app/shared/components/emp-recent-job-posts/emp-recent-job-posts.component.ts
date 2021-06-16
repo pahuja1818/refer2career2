@@ -1,42 +1,19 @@
 import { Router } from '@angular/router';
-import { JobPostServiceService } from './../../shared/services/job-post-service.service';
-import { AddJobPostComponent } from './../../shared/components/add-job-post/add-job-post.component';
+import { JobPostServiceService } from './../../services/job-post-service.service';
+import { AddJobPostComponent } from './../../components/add-job-post/add-job-post.component';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-job-posts',
-  templateUrl: './job-posts.component.html',
-  styleUrls: ['./job-posts.component.scss'],
+  selector: 'app-emp-recent-job-posts',
+  templateUrl: './emp-recent-job-posts.component.html',
+  styleUrls: ['./emp-recent-job-posts.component.scss'],
 })
-export class JobPostsComponent implements OnInit {
+export class EmpRecentJobPostsComponent implements OnInit {
 
   allJobPost: any[] = [];
 
   isServiceRunning = false;
-
-  navItems: any[] = [
-    {
-      name: 'DASHBOARD',
-      route: "/recruiter/dashboard"
-    },
-    {
-      name: 'MY PROFILE',
-      route: "/recruiter/profile"
-    },
-    {
-      name: 'JOB POSTS',
-      route: "/recruiter/job-posts"
-    },
-    {
-      name: 'MANAGE APPLICANTS',
-      route: "/recruiter/applicants"
-    },
-    {
-      name: 'ADD JOB POST',
-      route: "/recruiter/create-job-posts"
-    }
-  ]
 
   constructor(
     private router: Router,
@@ -71,5 +48,13 @@ export class JobPostsComponent implements OnInit {
     this.router.navigateByUrl(`/recruiter/job-posts/detail/${data._id}`);
   }
 
-}
+  navigateToAllJobs() {
+    this.router.navigateByUrl(`/recruiter/job-posts`);
+  }
 
+  navigateToMyProfile() {
+    this.router.navigateByUrl(`/recruiter/profile`);
+  }
+
+
+}
