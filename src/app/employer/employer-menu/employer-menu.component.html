@@ -6,17 +6,15 @@
       <div class="col-sm-3 my-3">
         <h2 class="text-black">Hi, {{getName(user.personalDetails.name)}}!</h2>
       </div>
-      <span class="text-white text-md" style="font-family: 'Roboto', sans-serif;">Refer2Career</span>
-    </div>
-    <div class="row justify-content-between mt-5 pb-2 pt-5">
-      <div class="col-sm-4 d-flex justify-content-center mt-3">
-        <span class="text-white text-lg mx-auto">Hi, {{getName(user.personalDetails.name)}}</span>
-      </div>
-      <div class="col-sm-4 d-flex justify-content-center mt-3">
-      </div>
-      <div class="col-sm-4 d-flex justify-content-center mt-3">
-        <button class="btn btn-outline-light py-1 px-5" routerLink="/recruiter/profile" style="border-radius: 30px;">My
-          Profile</button>
+      <div class="col-sm-4 vertical-center justify-content-end my-3">
+        <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
+          <span class="text-black text-lg">{{allJobPost.length}}</span>
+          <h6 class="text-dark thin-font text-ssmd">Total Job Posts</h6>
+        </div>
+        <div class="d-flex flex-column semi-bold m-0 p-0 ">
+          <span class="text-black text-lg">{{user.profileViews ? user.profileViews : 0}}</span>
+          <h6 class="text-dark thin-font text-ssmd">Application Recieved</h6>
+        </div>
       </div>
     </div>
   </div>
