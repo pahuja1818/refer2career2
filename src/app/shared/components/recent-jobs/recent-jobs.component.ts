@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DbOperation } from './../../models/dbOperation';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
@@ -21,10 +21,10 @@ export class RecentJobsComponent implements OnInit {
   ) { }
 
   role = JSON.parse(window.atob(window.localStorage.getItem('id'))).role;
-
+  @Input() isUser=true;
   allJobPost: any[] = [];
   filteredJobPosts: any[] = [];
-
+  
   myControl = new FormControl();
   options: any[] = ['Delivery boy', 'Software engineer', 'UI designer'];
   filteredOptions: Observable<any[]>;
