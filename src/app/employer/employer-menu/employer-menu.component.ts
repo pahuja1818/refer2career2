@@ -17,6 +17,8 @@ export class EmployerMenuComponent implements OnInit {
 
   user: any = {};
 
+  temp: any;
+
   navItems: any[] = [
     {
       name: 'DASHBOARD',
