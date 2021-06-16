@@ -11,7 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class EmployerMenuComponent implements OnInit {
 
   user: any = {};
-
+  allJobPost: any[] = [];
   navItems: any[] = [
     {
       name: 'DASHBOARD',
@@ -39,6 +39,10 @@ export class EmployerMenuComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+    this.jobPostService.getPosts();
+    this.jobPostService.jobPosts.subscribe((data: any) => {
+      this.allJobPost = data;
+    });
   }
 
   addJobPost() {
