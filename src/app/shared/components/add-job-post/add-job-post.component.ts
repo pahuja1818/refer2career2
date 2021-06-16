@@ -18,6 +18,29 @@ export class AddJobPostComponent implements OnInit {
   jobPost: any = undefined;
   lastDateToAppply: Date;
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/recruiter/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/recruiter/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/recruiter/job-posts"
+    },
+    {
+      name: 'MANAGE APPLICANTS',
+      route: "/recruiter/applicants"
+    },
+    {
+      name: 'ADD JOB POST',
+      route: "/recruiter/create-job-posts"
+    }
+  ]
+
   jobPostForm: FormGroup;
   aboutUs = '';
 
@@ -43,29 +66,6 @@ export class AddJobPostComponent implements OnInit {
   skillName: FormControl = new FormControl(null, Validators.required);
   skillsArray: any[] = [];
   filteredSkills: Observable<string[]>;
-
-  navItems: any[] = [
-    {
-      name: 'DASHBOARD',
-      route: "/recruiter/dashboard"
-    },
-    {
-      name: 'MY PROFILE',
-      route: "/recruiter/profile"
-    },
-    {
-      name: 'JOB POSTS',
-      route: "/recruiter/job-posts"
-    },
-    {
-      name: 'MANAGE APPLICANTS',
-      route: "/recruiter/applicants"
-    },
-    {
-      name: 'ADD JOB POST',
-      route: "/recruiter/create-job-posts"
-    }
-  ]
 
   formatLabel(value: number) {
     if (value === 10) { return '10+'; }
