@@ -4,6 +4,7 @@ import { AddJobPostComponent } from './../../shared/components/add-job-post/add-
 import { JobPostServiceService } from './../../shared/services/job-post-service.service';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employer-profle',
@@ -35,9 +36,14 @@ export class EmployerProfleComponent implements OnInit {
       name: 'MANAGE APPLICANTS',
       route: "/recruiter/applicants"
     },
+    {
+      name: 'ADD JOB POST',
+      route: "/recruiter/create-job-posts"
+    }
   ]
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private jobPostService: JobPostServiceService,
     public modalRef: BsModalRef,
@@ -60,6 +66,11 @@ export class EmployerProfleComponent implements OnInit {
     this.jobPostService.post = undefined;
     this.modalRef = this.modalService.show(AddJobPostComponent,
       { class: 'full-modal bg-light-grey', ignoreBackdropClick: true, animated: true });
+  }
+
+  navigateToAddJobs() {
+    this.jobPostService.post = undefined;
+    this.router.navigateByUrl(`/recruiter/create-job-posts`);
   }
 
   initializeDetails() {

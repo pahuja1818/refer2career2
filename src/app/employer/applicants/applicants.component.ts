@@ -28,6 +28,10 @@ export class ApplicantsComponent implements OnInit {
       name: 'MANAGE APPLICANTS',
       route: "/recruiter/applicants"
     },
+    {
+      name: 'ADD JOB POST',
+      route: "/recruiter/create-job-posts"
+    }
   ]
 
 }

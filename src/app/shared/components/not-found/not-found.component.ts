@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NotFoundComponent implements OnInit {
 
   @Input() title = 'Nothing here!';
-  @Input() message = 'Visit after sometime';
+  @Input() message = 'No matches with Given Criteria';
 
   @Input() visibility = true;
   @Input() isError = false;

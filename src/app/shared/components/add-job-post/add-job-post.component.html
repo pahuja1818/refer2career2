@@ -1,46 +1,49 @@
-<div class="w-100 h-100 m-0 p-0 bg-lightest-blue">
+<app-nav-bar-content [navItems]="navItems" *ngIf="!jobPost"></app-nav-bar-content>
+<div class="w-100 h-100 m-0 p-0 bg-lightest-blue" style="overflow-y: auto;">
   <div class="w-100 bg-primary no-border-t" style="min-height: 240px !important; border-radius: 30px;">
   </div>
   <div class="row justify-content-center px-0 pt-2 mx-0" style="margin-top: -220px;">
     <div class="col-sm-12">
       <span class="material-icons d-block text-right text-lg text-link text-white semi-bold"
-        (click)="close()">close</span>
+        (click)="close()" *ngIf="jobPost">close</span>
       <span class="material-icons d-block text-right text-lg mt-3 text-link text-white semi-bold" *ngIf="jobPost"
         (click)="delete(deletePopup)">delete</span>
     </div>
     <div class="col-sm-8">
-      <span class="d-block text-white text-center semi-bold bold text-lg my-3">Post a job</span>
+      <span class="d-block text-white text-center semi-bold bold text-lg my-3" *ngIf="!jobPost">Post a job</span>
+      <span class="d-block text-white text-center semi-bold bold text-lg my-3" *ngIf="jobPost">Edit job</span>
     </div>
     <div class="col-sm-8 mx-2 bg-white"
       style="border-radius: 7px; overflow-y: auto !important; overflow-x: hidden !important;">
       <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
         <div class="col-sm-5 m-3">
-          <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
+          <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
             <mat-label class="p-0">Job Title/Designation <span class="text-primary">*</span></mat-label>
             <input matInput placeholder="ex Software Developer" class="p-0" formControlName='title'>
             <mat-error>Enter valid title</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
+          <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
             <mat-label class="p-0">Total Vacancies <span class="text-primary">*</span></mat-label>
             <input matInput type="number" placeholder="ex 10" class="p-0" formControlName='vacancy'>
             <mat-error>Enter valid number</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field class="p-0 w-100 mat-form-field">
-            <mat-label>Permanent Job/Contractual Job/Internship <span class="text-primary">*</span></mat-label>
+          <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
+            <mat-label>Full time/Part Time/Contractual Job/Internship <span class="text-primary">*</span></mat-label>
             <mat-select formControlName='jobInternship'>
-              <mat-option value="Permanent Job">Permanent Job</mat-option>
+              <mat-option value="Full Time">Full Time</mat-option>
+              <mat-option value="Part Time">Part Time</mat-option>
               <mat-option value="Contractual Job">Contractual Job</mat-option>
               <mat-option value="Internship">Internship</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label>Job Type <span class="text-primary">*</span></mat-label>
+          <mat-form-field appearance="fill"  class="p-0 w-100 mat-form-field">
+            <mat-label style="background-color:#f9faff;">Job Type <span class="text-primary">*</span></mat-label>
             <mat-select formControlName='jobType'>
               <mat-option value="In office">In office</mat-option>
               <mat-option value="Work from home">Work from home</mat-option>
@@ -48,7 +51,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
             <mat-label>{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
                 class="text-primary">*</span></mat-label>
             <input matInput formControlName='salary' name="salary" type="number" class="p-0">
@@ -57,7 +60,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field class="p-0 w-100 mat-form-field">
+          <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
             <mat-label>Salary type <span class="text-primary">*</span></mat-label>
             <mat-select formControlName='salaryType'>
               <mat-option value="per week">per week</mat-option>
@@ -74,13 +77,8 @@
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <section class="p-0 w-100 mat-form-field">
-            <mat-checkbox formControlName='partTime'>Part time allowed</mat-checkbox>
-          </section>
-        </div>
-        <div class="col-sm-5 m-3">
-          <mat-label class="p-0">Work Experience (Minimum) <span class="text-primary">*</span></mat-label>
-          <mat-slider class="w-100 " formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
+          <mat-label class="p-0" >Work Experience (Minimum) <span class="text-primary">*</span></mat-label>
+          <mat-slider class="w-100" style="color: #0e2043;" formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
           </mat-slider>
         </div>
         <div class="col-sm-5 m-3"></div>
@@ -88,7 +86,7 @@
           <div class="mt-2 w-100">
             <div class="ml-4 mb-3 d-flex justify-content-between">
               <span class="text-grey semi-bold">Skills </span>
-              <span class="text-violet text-link" (click)="openSkillModal(skillModal)">Add Skill +</span>
+              <span class="text-primary text-link semi-bold d-block" (click)="openSkillModal(skillModal)">+Add Skill</span>
             </div>
             <div class="row col-sm-11 d-flex justify-content-start">
               <div class="col-sm-12 my-4">
@@ -110,14 +108,14 @@
           </div>
         </div>
         <div class="col-sm-5 my-3">
-          <label class="text-grey semi-bold d-block mb-3">Last date to apply</label>
+          <label class="text-grey semi-bold d-block mb-3" >Last date to apply</label>
           <div class="input-group mb-2">
-            <div class="input-group-prepend bg-white">
+            <div class="input-group-prepend">
               <span class="material-icons input-group-text text-secondary bg-white">date_range
               </span>
             </div>
             <input type="text" formControlName="lastDateToApply" autocomplete="nope" placeholder="Choose Date"
-              class="form-control semi-bold text-grey bg-white" bsDatepicker readonly
+              class="form-control semi-bold text-grey bg-white" style="border-width: 1px;" bsDatepicker readonly
               [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
           </div>
         </div>
@@ -132,7 +130,7 @@
           <div class="col-sm-11 p-0 my-3 mx-4">
             <div class="d-flex justify-content-between vertical-center my-3">
               <label class="text-grey semi-bold">Custom Questions</label>
-              <span class="text-primary text-link semi-bold d-block" (click)="addQuestion()">+ Add Question</span>
+              <span class="text-primary text-link semi-bold d-block" (click)="addQuestion()">+Add Question</span>
             </div>
             <div class="mb-4" *ngFor="let question of questionsArray; index as i">
               <div class="d-flex justify-content-between vertical-center my-3">
@@ -147,8 +145,10 @@
         <div class="w-100 d-flex justify-content-center mb-4 mt-5 mr-2">
           <span class="text-danger text-sm semi-bold">{{message}}</span>
           <ion-spinner color="primary" *ngIf="isServiceRunning"></ion-spinner>
-          <button type="submit" *ngIf="!isServiceRunning"
+          <button type="submit" *ngIf="!isServiceRunning && !jobPost"
             class="ml-2 btn btn-primary p-0 text-smd px-4 py-1 mr-2" (click)="save()">Publish</button>
+            <button type="submit" *ngIf="!isServiceRunning && jobPost"
+            class="ml-2 btn btn-primary p-0 text-smd px-4 py-1 mr-2" (click)="save()">Save</button>
         </div>
       </div>
     </div>
