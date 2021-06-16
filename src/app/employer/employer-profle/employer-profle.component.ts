@@ -18,6 +18,25 @@ export class EmployerProfleComponent implements OnInit {
   userPhoto: any;
   isServiceRunning = false;
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/recruiter/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/recruiter/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/recruiter/job-posts"
+    },
+    {
+      name: 'MANAGE APPLICANTS',
+      route: "/recruiter/applicants"
+    },
+  ]
+
   constructor(
     private authService: AuthService,
     private jobPostService: JobPostServiceService,
