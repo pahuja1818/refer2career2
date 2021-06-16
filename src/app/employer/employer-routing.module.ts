@@ -1,4 +1,5 @@
 import { ApplicationsComponent } from './../shared/components/applications/applications.component';
+import { AddJobPostComponent } from '../shared/components/add-job-post/add-job-post.component';
 import { JobDetailsEmployerComponent } from './job-details-employer/job-details-employer.component';
 import { EmployerMessagesComponent } from './employer-messages/employer-messages.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
@@ -42,6 +43,9 @@ const routes: Routes = [
       {
         path: 'messages', component: EmployerMessagesComponent
       },
+      {
+        path: 'create-job-posts', component: AddJobPostComponent
+      }
     ]
   },
 ];
