@@ -32,6 +32,25 @@ export class ApplicationsComponent implements OnInit {
   minExp: number;
   candidatesArray: any[] = [];
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/recruiter/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/recruiter/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/recruiter/job-posts"
+    },
+    {
+      name: 'MANAGE APPLICANTS',
+      route: "/recruiter/applicants"
+    },
+  ]
+
   public modalRef: BsModalRef;
 
   allAplications: any[] = [];

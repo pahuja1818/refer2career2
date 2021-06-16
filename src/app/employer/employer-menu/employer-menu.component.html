@@ -1,22 +1,20 @@
-<app-employer-navbar></app-employer-navbar>
-<div class="h-100 w-100" style="overflow-y: auto;">
-  <div class="dash-bg w-100 text-white"
-    style="min-height: 290px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
-    <div class="vertical-center justify-content-between p-2">
-      <div class="d-flex justify-content-end vertical-center">
-        <ion-menu-button class="text-white"></ion-menu-button>
+<app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
+<div class="overflow-auto ">
+<div class="vh-100 overflow-x-hidden" style="overflow-y: auto;">
+  <div class="bg-light text-white row p-0 m-0 vertical-center justify-content-center py-5">
+    <div class="col-sm-10 row p-0 m-0 vertical-center justify-content-between">
+      <div class="col-sm-3 my-3">
+        <h2 class="text-black">Hi, {{getName(user.personalDetails.name)}}!</h2>
       </div>
-      <span class="text-white text-md" style="font-family: 'Roboto', sans-serif;">Refer2Career</span>
-    </div>
-    <div class="row justify-content-between mt-5 pb-2 pt-5">
-      <div class="col-sm-4 d-flex justify-content-center mt-3">
-        <span class="text-white text-lg mx-auto">Hi, {{getName(user.personalDetails.name)}}</span>
-      </div>
-      <div class="col-sm-4 d-flex justify-content-center mt-3">
-      </div>
-      <div class="col-sm-4 d-flex justify-content-center mt-3">
-        <button class="btn btn-outline-light py-1 px-5" routerLink="/recruiter/profile" style="border-radius: 30px;">My
-          Profile</button>
+      <div class="col-sm-4 vertical-center justify-content-end my-3">
+        <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
+          <span class="text-black text-lg">{{allJobPost.length}}</span>
+          <h6 class="text-dark thin-font text-ssmd">Total Job Posts</h6>
+        </div>
+        <div class="d-flex flex-column semi-bold m-0 p-0 ">
+          <span class="text-black text-lg">{{user.profileViews ? user.profileViews : 0}}</span>
+          <h6 class="text-dark thin-font text-ssmd">Application Recieved</h6>
+        </div>
       </div>
     </div>
   </div>

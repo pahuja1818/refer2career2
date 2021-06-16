@@ -11,4 +11,23 @@ export class JobDetailsEmployerComponent implements OnInit {
 
   ngOnInit() {}
 
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: "/recruiter/dashboard"
+    },
+    {
+      name: 'MY PROFILE',
+      route: "/recruiter/profile"
+    },
+    {
+      name: 'JOB POSTS',
+      route: "/recruiter/job-posts"
+    },
+    {
+      name: 'MANAGE APPLICANTS',
+      route: "/recruiter/applicants"
+    },
+  ]
+
 }

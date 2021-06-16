@@ -11,7 +11,7 @@ import { analytics } from 'firebase';
 export class MyApplicationsComponent implements OnInit {
 
   isServiceRunning = false;
-
+  hiredJobs=0;
   constructor(
     private jobService: JobPostServiceService,
     private router: Router
@@ -36,6 +36,10 @@ export class MyApplicationsComponent implements OnInit {
     {
       name: 'APPLIED JOB',
       route: "/referer/my-applications"
+    },
+    {
+      name: 'REFERRED PROFILE',
+      route: "/referer/referred"
     }
   ]
 
@@ -59,6 +63,8 @@ export class MyApplicationsComponent implements OnInit {
         if (jobPost.data !== null && jobPost.data !== undefined) {
           jobPost.appliedDate = post.date;
           jobPost.status = post.status;
+          if(jobPost.status==='Hired')
+            {this.hiredJobs++;}
           jobPost.jobPost = jobPost.data.jobPost;
           jobPost.referReward = jobPost.data.referReward;
           this.allAppliedPosts.push(jobPost);
