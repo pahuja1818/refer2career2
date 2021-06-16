@@ -48,4 +48,13 @@ export class EmpRecentJobPostsComponent implements OnInit {
     this.router.navigateByUrl(`/recruiter/job-posts/detail/${data._id}`);
   }
 
+  navigateToAllJobs() {
+    this.router.navigateByUrl(`/recruiter/job-posts`);
+  }
+
+  navigateToMyProfile() {
+    this.router.navigateByUrl(`/recruiter/profile`);
+  }
+
+
 }

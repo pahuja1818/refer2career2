@@ -20,29 +20,53 @@
   </div>
   <div class="row justify-content-center p-0 m-0 py-3 pb-5">
     <div class="col-sm-11 p-0 m-0 row justify-content-between">
-      <div class="col-sm-3 p-2 d-flex justify-content-center"  (click)="addJobPost()">
-        <div class="special-card transition mx-auto"><a>
+      <div class="col-12 col-md-6 col-lg-3 p-2 d-flex justify-content-center"  >
+        <div class="special-card transition mx-auto" (click)="navigateToAddJobs()">
+          <a>
+            <span class="material-icons-outlined icon-trans display-icon transition">
+              post_add
+              </span>
+         </a>
+          <a>
             <span class="text-trans transition">Post a job</span>
             <div class="card_circle transition"></div>
           </a>
         </div>
       </div>
-      <div class="col-sm-3 d-flex justify-content-center p-2">
-        <div class="special-card transition" routerLink="/recruiter/job-posts"><a>
+      <div class="col-12 col-md-6 col-lg-3 p-2 d-flex justify-content-center"  >
+        <div class="special-card transition" routerLink="/recruiter/job-posts">
+          <a>
+            <span class="material-icons icon-trans display-icon transition">
+              autorenew
+              </span>
+         </a>
+          <a>
             <span class="text-trans transition">Job Posts</span>
             <div class="card_circle transition"></div>
           </a>
         </div>
       </div>
-      <div class="col-sm-3 d-flex justify-content-center p-2" routerLink="/recruiter/applicants">
-        <div class="special-card transition"><a>
+      <div class="col-12 col-md-6 col-lg-3 p-2 d-flex justify-content-center"  >
+        <div class="special-card transition" routerLink="/recruiter/applicants">
+          <a>
+            <span class="material-icons icon-trans display-icon transition">
+              task_alt
+              </span>
+         </a>
+          <a>
             <span class="text-trans transition">Manage Applicants</span>
             <div class="card_circle transition"></div>
           </a>
         </div>
       </div>
-      <div class="col-sm-3 d-flex justify-content-center p-2" (click)="openModal(feedback)">
-        <div class="special-card transition"><a>
+      <div class="col-12 col-md-6 col-lg-3 p-2 d-flex justify-content-center"  >
+        <div class="special-card transition"  (click)="openModal(feedback)">
+          <a>
+            <span class="material-icons icon-trans display-icon transition ">
+              chat
+              </span>
+         </a>
+          <a>
             <span class="text-trans transition">Feedback</span>
             <div class="card_circle transition"></div>
           </a>
