@@ -15,9 +15,9 @@
           <tr *ngFor="let post of allPosts; index as i">
             <td>{{i+1}}</td>
             <td class="">{{post.jobPost.title}}</td>
-            <td class="pt-3"><span class="p-2 my-auto px-5 text-success"
+            <td class="pt-3"><span class="p-2 my-auto px-2 text-success"
                 style="background-color: #e2ffd1; border-radius: 10px;">Active</span></td>
-            <td class=""><span (click)="navigate(post._id)" class="p-1 px-5 btn btn-primary bg-violet"
+            <td class=""><span (click)="navigate(post._id)" class="p-1 px-5 btn btn-primary "
                 style="border-radius: 10px;">View
                 Applications</span></td>
           </tr>
@@ -29,5 +29,9 @@
       </div>
     </div>
   </div>
+  <!-- <div class="footer-bottom bg-primary mt-2">
+    <div class="text-center text-white py-3 px-2">© 2021 Refer 2 Career. All Rights Reserved.
+    </div>
+  </div> -->
 </div>
 <app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>

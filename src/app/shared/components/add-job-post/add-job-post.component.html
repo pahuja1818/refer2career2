@@ -53,7 +53,7 @@
         <div class="col-sm-5 m-3">
           <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
             <mat-label>{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
-                class="text-danger">*</span></mat-label>
+                class="text-primary">*</span></mat-label>
             <input matInput formControlName='salary' name="salary" type="number" class="p-0">
             <span matPrefix>&#8377;&nbsp;</span>
             <span matSuffix>.00</span>
@@ -71,7 +71,7 @@
         </div>
         <div class="col-sm-5 m-" *ngIf="jobPostForm.get('jobType').value === 'In office'">
           <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Location <span class="text-danger">*</span></mat-label>
+            <mat-label class="p-0">Job Location <span class="text-primary">*</span></mat-label>
             <input matInput placeholder="ex Bengaluru" class="p-0" formControlName='location'>
             <mat-error>Enter valid location</mat-error>
           </mat-form-field>
@@ -90,11 +90,11 @@
             </div>
             <div class="row col-sm-11 d-flex justify-content-start">
               <div class="col-sm-12 my-4">
-                <div *ngFor="let data of skillsArray; index as i"
-                  class="p-1 px-2 bg-light border-violet vertical-center"
-                  style="display: inline-block; border-radius: 15px; width: max-content; margin: 7px !important; white-space:nowrap;">
-                  <span class="text-grey mr-3 text-violet">{{data.skillName}}</span>
-                  <span class="material-icons text-xs text-link" (click)="deleteFieldValueToSkillArray(i)">close</span>
+                <div class="bg-lightest-blue" *ngFor="let data of skillsArray; index as i"
+                  class="p-1 px-2 bg-lightest-blue vertical-center"
+                  style="display: inline-block; border-radius: 8px; width: max-content; margin: 7px !important; white-space:nowrap;">
+                  <span class="text-primary mr-2">{{data.skillName}}</span>
+                  <span class="material-icons text-xs text-link text-primary" (click)="deleteFieldValueToSkillArray(i)">close</span>
                 </div>
               </div>
             </div>
@@ -153,6 +153,10 @@
       </div>
     </div>
   </div>
+  <div class="footer-bottom bg-primary mt-2">
+    <div class="text-center text-white py-3 px-2">© 2021 Refer 2 Career. All Rights Reserved.
+    </div>
+  </div>
 </div>
 
 <app-spinner-component *ngIf="isServiceRunning"></app-spinner-component>
@@ -193,7 +197,7 @@
       </div>
     </div>
     <div class="w-100 d-flex justify-content-end mt-4">
-      <button class="btn btn-primary bg-violet py-1 px-2" (click)="addFieldValueToSkillArray()">ADD SKILL</button>
+      <button class="btn btn-primary py-1 px-2" (click)="addFieldValueToSkillArray()">ADD SKILL</button>
     </div>
   </div>
 </ng-template>

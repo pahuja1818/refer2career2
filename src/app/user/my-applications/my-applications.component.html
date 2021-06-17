@@ -1,8 +1,23 @@
 <app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
 <div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
-  <div class="w-100 h-100 m-0 p-0" *ngIf="!isServiceRunning" style="border-radius: 7px; background-color: #f8f8f8">
-    <div class="row justify-content-center p-2 bg-white" style=" margin-top: 50px !important;">
-      <div class="col-sm-6 mx-0 mt-2 p-0">
+  <div class="w-100 h-100 m-0 p-0 justify-content-center" *ngIf="!isServiceRunning" style="background-color: #f8f8f8">
+    <div class="col-sm-10 row p-0 mx-auto vertical-center justify-content-around">
+        <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
+          <span class="text-black text-lg">0</span>
+          <h6 class="text-dark thin-font text-ssmd">Total Jobs</h6>
+        </div>
+        <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
+          <span class="text-black text-lg">{{allAppliedPosts.length}}</span>
+          <h6 class="text-dark thin-font text-ssmd">Applied Jobs</h6>
+        </div>
+        <div class="d-flex flex-column semi-bold m-0 p-0 ">
+          <span class="text-black text-lg">{{hiredJobs}}</span>
+          <h6 class="text-dark thin-font text-ssmd">Hired</h6>
+        </div>
+    </div>
+
+    <div class="row justify-content-center p-2 bg-lightest-blue">
+      <div class="col-sm-9 mx-0 mt-2 p-0">
         <app-not-found *ngIf="allAppliedPosts.length === 0" style="margin-top: 200px !important;" class="center-parent">
         </app-not-found>
 
@@ -63,9 +78,10 @@
                     </div>
                   </div>
                 </div>
-    
-                <div *ngIf="jobPost.isApplied" class=" d-flex align-items-start justify-content-center">
-                  <div class="p-2 bg-light border-12" >Applied</div>
+                <div class="d-flex align-items-start justify-content-center">
+                  <span class="text-smd py-2"
+                    [ngClass]="jobPost.status === 'Shortlisted' ? 'text-primary' : jobPost.status === 'Hired' ? 'text-success' : jobPost.status === 'Rejected' ? 'text-danger' : ''">{{jobPost.status
+                    === 'Rejected' ? 'Closed' : jobPost.status}}</span>
                 </div>
               </div>
               <div class="d-flex justify-content-between flex-wrap vertical-center">
@@ -87,7 +103,9 @@
                   </div>
                   <div class="my-2 vertical-center justify-content-start">
                     <span class="text-black text-slmd">&nbsp; ₹ {{jobPost.jobPost.salary}}</span>
-                    <span class="text-fluid">{{jobPost.jobPost.salaryType}}</span>
+                    <div class="d-flex ml-1 align-self-end" >
+                      <span class="text-fluid ">{{jobPost.jobPost.salaryType}}</span>
+                    </div>
                   </div>
                 </div>
               </div>

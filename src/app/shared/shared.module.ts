@@ -72,6 +72,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import {NavBarContentComponent} from './components/nav-bar-content/nav-bar-content.component';
 import {RecentJobsComponent} from './components/recent-jobs/recent-jobs.component';
+import {EmpRecentJobPostsComponent} from './components/emp-recent-job-posts/emp-recent-job-posts.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import {RecentJobsComponent} from './components/recent-jobs/recent-jobs.componen
     ViewProfileComponent,
     NavBarContentComponent,
     RecentJobsComponent,
+    EmpRecentJobPostsComponent,
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -217,6 +219,7 @@ import {RecentJobsComponent} from './components/recent-jobs/recent-jobs.componen
     CollapseModule,
     NavBarContentComponent,
     RecentJobsComponent,
+    EmpRecentJobPostsComponent,
   ],
   providers: [
     StatusBar,
