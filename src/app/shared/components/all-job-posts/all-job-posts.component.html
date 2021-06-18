@@ -35,11 +35,11 @@
         <div *ngIf="isSortByExpanded" class="my-2 row vertical-center justify-content-center">
           <div class="m-2">
             <span style="border-radius: 20px;"
-              [ngClass]="isSortBy === true ? 'sort-by-selected' : 'sort-by-not-selected'" class="px-3 py-1"
+              [ngClass]="isSortBy === true ? 'sort-by-selected' : 'sort-by-not-selected'" class=" px-3 py-1"
               (click)="isSortBy = true">Relevance</span>
           </div>
           <div class="m-2">
-            <span style="border-radius: 20px;" (click)="isSortBy = false"
+            <span  style="border-radius: 20px;" (click)="isSortBy = false"
               [ngClass]="isSortBy === false ? 'sort-by-selected' : 'sort-by-not-selected'" class="px-3 py-1">Date</span>
           </div>
         </div>
@@ -73,6 +73,10 @@
             <span class="text-sm semi-bold text-grey mr-2">Full
               time</span>
             <mat-slide-toggle [(ngModel)]="refine.fullTime"></mat-slide-toggle>
+          </div>
+          <div class="mb-2 vertical-center">
+            <span class="text-sm semi-bold text-grey mr-2">Contractual</span>
+            <mat-slide-toggle [(ngModel)]="refine.contractual"></mat-slide-toggle>
           </div>
         </div>
       </div>
@@ -126,10 +130,6 @@
           style="border-radius: 30px; bottom: 0" (click)="refineJobs()">Refine
           Jobs</button>
           <button *ngIf="isFilterAdded()" class="overlay btn btn-primary text-smd"
-        (click)="clearFilter()" style="border-radius: 30px; bottom: 0" >Clear Filter</button>
-      </div>
-      <div class="d-flex justify-content-center">
-          <button *ngIf="isFilterAdded()" class="overlay btn btn-primary my-2 mb-4 mx-auto text-smd px-5 py-2"
         (click)="clearFilter()" style="border-radius: 30px; bottom: 0" >Clear Filter</button>
       </div>
     </div>
