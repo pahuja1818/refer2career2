@@ -21,8 +21,7 @@
         <app-not-found *ngIf="allReferedProfiles.length === 0" style="margin-top: 200px !important;"
           class="center-parent">
         </app-not-found>
-        <div class="col-sm-12 justify-content-center mx-auto" *ngIf="!isServiceRunning"
-          style=" margin-top: 70px !important;">
+        <div class="col-sm-12 justify-content-center mx-auto" *ngIf="!isServiceRunning">
           <div class="m-2 mr-2 mb-3" *ngFor="let profile of allReferedProfiles; index as index">
             <div class="card  shadow-lg p-3 text-link border-8">
               <div class="col-sm-12 m-auto">

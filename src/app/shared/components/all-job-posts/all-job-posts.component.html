@@ -26,8 +26,6 @@
         Jobs <span class="material-icons" *ngIf="!isScreenBig">
           arrow_drop_down
         </span></div>
-      <a *ngIf="isFilterAdded()" class="d-block text-center bold text-smd text-violet text-link m-2 my-3"
-        (click)="clearFilter()">Clear Filter</a>
       <div class="border-12 text-link m-2 mr-2 w-100 bg-white overlay p-3" *ngIf="refineJobsDropDown">
         <div class="vertical-center justify-content-between" (click)="isSortByExpanded = !isSortByExpanded">
           <span class="text-ssmd">Sort By</span>
@@ -122,11 +120,13 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-center">
+      <div class="row col-sm-12 justify-content-center mx-auto">
         <button *ngIf="isChanged()"
-          class="overlay btn btn-primary position-fixed my-2 mb-4 mx-auto text-smd bg-violet px-5 py-2"
+          class="overlay btn btn-primary mx-auto text-smd"
           style="border-radius: 30px; bottom: 0" (click)="refineJobs()">Refine
           Jobs</button>
+          <button *ngIf="isFilterAdded()" class="overlay btn btn-primary text-smd"
+        (click)="clearFilter()" style="border-radius: 30px; bottom: 0" >Clear Filter</button>
       </div>
     </div>
 
