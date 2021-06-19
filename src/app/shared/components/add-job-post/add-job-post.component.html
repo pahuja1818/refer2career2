@@ -17,24 +17,24 @@
       style="border-radius: 7px; overflow-y: auto !important; overflow-x: hidden !important;">
       <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
         <div class="col-sm-5 m-3">
+          <label for="title" class="label-form">Job Title/Designation<span class="text-primary">*</span></label>
           <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Title/Designation <span class="text-primary">*</span></mat-label>
-            <input matInput placeholder="ex Software Developer" class="p-0" formControlName='title'>
+            <input matInput placeholder="ex Software Developer" id="title" formControlName='title'>
             <mat-error>Enter valid title</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Total Vacancies <span class="text-primary">*</span></mat-label>
-            <input matInput type="number" placeholder="ex 10" class="p-0" formControlName='vacancy'>
+          <label for="vacancy" class="label-form">Total Vacancies <span class="text-primary">*</span></label>
+           <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
+            <input matInput type="number" placeholder="ex 10" class="p-0" id="vacancy" formControlName='vacancy'>
             <mat-error>Enter valid number</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
-            <mat-label>Full time/Part Time/Contractual Job/Internship <span class="text-primary">*</span></mat-label>
-            <mat-select formControlName='jobInternship'>
-              <mat-option value="Full Time">Full Time</mat-option>
+            <label for="type" class="label-form">Full time Permanent/Part Time/Contractual Job/Internship</label>
+           <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
+            <mat-select id="type" formControlName='jobInternship'>
+              <mat-option value="Full Time Permanent Job">Full Time Permanent Job</mat-option>
               <mat-option value="Part Time">Part Time</mat-option>
               <mat-option value="Contractual Job">Contractual Job</mat-option>
               <mat-option value="Internship">Internship</mat-option>
@@ -42,43 +42,43 @@
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field appearance="fill"  class="p-0 w-100 mat-form-field">
-            <mat-label style="background-color:#f9faff;">Job Type <span class="text-primary">*</span></mat-label>
-            <mat-select formControlName='jobType'>
-              <mat-option value="In office">In office</mat-option>
-              <mat-option value="Work from home">Work from home</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <label for="jobType" class="label-form">Job Type <span class="text-primary">*</span></label>
+         <mat-form-field appearance="fill"  class="p-0 w-100 mat-form-field">
+          <mat-select id="jobType" formControlName='jobType'>
+            <mat-option value="In office">In office</mat-option>
+            <mat-option value="Work from home">Work from home</mat-option>
+          </mat-select>
+        </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
-            <mat-label>{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
-                class="text-primary">*</span></mat-label>
-            <input matInput formControlName='salary' name="salary" type="number" class="p-0">
+          <label for="salary" class="label-form">{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
+            class="text-primary">*</span></label>
+          <mat-form-field class="w-100 mat-form-field" appearance="fill">
+            <input matInput formControlName='salary' id="salary" name="salary" type="number" class="p-0">
             <span matPrefix>&#8377;&nbsp;</span>
             <span matSuffix>.00</span>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-form-field class="p-0 w-100 mat-form-field" appearance="fill">
-            <mat-label>Salary type <span class="text-primary">*</span></mat-label>
-            <mat-select formControlName='salaryType'>
-              <mat-option value="per week">per week</mat-option>
-              <mat-option value="per month">per month</mat-option>
-              <mat-option value="per annum">per annum</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <label for="salaryType" class="label-form">Salary type <span class="text-primary">*</span></label>
+         <mat-form-field  class="p-0 w-100 mat-form-field" appearance="fill">
+          <mat-select id="salaryType" formControlName='salaryType'>
+            <mat-option value="per week">per week</mat-option>
+            <mat-option value="per month">per month</mat-option>
+            <mat-option value="per annum">per annum</mat-option>
+          </mat-select>
+        </mat-form-field>
         </div>
         <div class="col-sm-5 m-" *ngIf="jobPostForm.get('jobType').value === 'In office'">
-          <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-            <mat-label class="p-0">Job Location <span class="text-primary">*</span></mat-label>
-            <input matInput placeholder="ex Bengaluru" class="p-0" formControlName='location'>
+          <label for="jobLocation" class="label-form">Job Location <span class="text-primary">*</span></label>
+           <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
+            <input matInput placeholder="ex Bengaluru"  id="jobLocation"  class="p-0" formControlName='location'>
             <mat-error>Enter valid location</mat-error>
           </mat-form-field>
         </div>
         <div class="col-sm-5 m-3">
-          <mat-label class="p-0" >Work Experience (Minimum) <span class="text-primary">*</span></mat-label>
-          <mat-slider class="w-100" style="color: #0e2043;" formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
+          <label for="workExp" class="label-form">Work Experience (Minimum) <span class="text-primary">*</span></label>
+          <mat-slider class="w-100 form-control" id="workExp" style="color: #0e2043;" formControlName="experience" thumbLabel tickInterval="1" min="0" max="10">
           </mat-slider>
         </div>
         <div class="col-sm-5 m-3"></div>
@@ -115,7 +115,7 @@
               </span>
             </div>
             <input type="text" formControlName="lastDateToApply" autocomplete="nope" placeholder="Choose Date"
-              class="form-control semi-bold text-grey bg-white" style="border-width: 1px;" bsDatepicker readonly
+              class="form-control semi-bold text-grey" style="border-width: 1px;" bsDatepicker readonly
               [bsConfig]="{  isAnimated: true, containerClass:'theme-dark-blue', dateInputFormat: 'DD MMMM YYYY'}">
           </div>
         </div>

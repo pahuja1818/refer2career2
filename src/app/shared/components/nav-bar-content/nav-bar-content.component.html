@@ -1,16 +1,16 @@
 <div class="row shadow justify-content-center p-0 m-0">
-  <div class="col-sm-11">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 ">
-      <a class="nav-link" href="#"><img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
+  <div class="col-sm-12 shadow">
+    <nav class="navbar navbar-expand-lg col-sm-11 navbar-light bg-light w-100 ">
+      <a class="nav-link mr-1"><img src="../../../../assets/refer2carrierlogo.png" class="logo-header" alt="">
       </a>
       <button class="navbar-toggler collapsed" (click)="isCollapsed = !isCollapsed" type="button" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="ml-5 collapse navbar-collapse vertical-center justify-content-between" id="navbarNav"
+      <div class="ml-3 collapse navbar-collapse vertical-center justify-content-between" id="navbarNav"
         [collapse]="isCollapsed" [isAnimated]="true">
         <ul class="navbar-nav">
           <li class="nav-item mr-4" *ngFor="let item of navItems">
-            <a class="nav-link text-dark myfont-size text-link active-button"
+            <a class="nav-link text-dark myfont-size text-link active-button pl-3 pr-3"
               [ngClass]="url.includes(item.route) ? 'active-url' : ''" (click)="navigate(item.route)"> {{item.name}}</a>
           </li>
         </ul>
@@ -36,3 +36,4 @@
     </div>
   </div>
 </ng-template>
+

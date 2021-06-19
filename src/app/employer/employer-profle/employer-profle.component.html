@@ -64,96 +64,68 @@
         <div class="col-sm-8 my-3 not-clickable">
           <div class="bg-white border-8 w-100">
             <div class="row p-3 d-flex justify-content-center" [formGroup]="detailForm">
-              <div class="col-sm-10 my-3 mb-2">
+              <div class="col-sm-12 my-3 mb-2">
                 <h5 class="semi-bold text-center">Organization Details</h5>
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Organization name</mat-label>
-                  <input formControlName='organizationName' matInput placeholder="Enter Organization name" class="p-0">
-                  <mat-error>Enter valid name</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Organization name</div>
+                  <input class="form-control" placeholder="Enter Organization name"
+                  formControlName='organizationName'>
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Organization field</mat-label>
-                  <input formControlName='field' matInput placeholder="Enter Organization field" class="p-0">
-                  <mat-error>Enter valid field</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Organization field</div>
+                  <input class="form-control" formControlName='field' placeholder="Enter Organization field">
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Contact number</mat-label>
-                  <input formControlName='organizationMobile' matInput placeholder="Enter contact number" type="tel"
-                    class="p-0" value='psj'>
-                  <mat-error>Enter valid contact number*</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Contact number</div>
+                <input class="form-control" formControlName='organizationMobile' placeholder="Enter contact number">
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Organization email</mat-label>
-                  <input formControlName='organizationEmail' matInput placeholder="Enter email" class="p-0">
-                  <mat-error>Enter valid email</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Organization email</div>
+                <input class="form-control" formControlName='organizationEmail' placeholder="Enter email">
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Address line one</mat-label>
-                  <input formControlName='addressLineOne' matInput placeholder="Enter Address line one" class="p-0"
-                    value='psj'>
-                  <mat-error *ngIf="false">Enter valid details</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Address line one</div>
+                <input class="form-control" formControlName='addressLineOne' placeholder="Enter Address line one">
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Address line two</mat-label>
-                  <input formControlName='addressLineTwo' matInput placeholder="Address line two" class="p-0">
-                  <mat-error>Enter valid details</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Address line two</div>
+                <input class="form-control" formControlName='addressLineTwo' placeholder="Address line two">
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">City</mat-label>
-                  <input formControlName='city' matInput placeholder="Enter city" class="p-0">
-                  <mat-error>Enter valid city</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">City</div>
+                <input class="form-control" formControlName='city' placeholder="Enter city">
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Pincode</mat-label>
-                  <input formControlName='pincode' matInput type="number" placeholder="Enter email" class="p-0">
-                  <mat-error>Enter valid pincode</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Pincode</div>
+                <input class="form-control" formControlName='pincode' type="number" placeholder="Enter email">
               </div>
-              <div class="col-sm-10 my-3 mb-2">
+              <div class="col-sm-12 mb-2">
+                <div class="label-form">About Organization</div>
+                <input class="form-control" formControlName='organizationAboutUs' placeholder="Enter About us">
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border-8 w-100 mt-3">
+            <div class="row p-3 d-flex justify-content-center" [formGroup]="detailForm">
+              <div class="col-sm-12 my-3 mb-2">
                 <h5 class="semi-bold text-center">Personal Details</h5>
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Name</mat-label>
-                  <input matInput placeholder="Enter name" class="p-0" formControlName='name'>
-                  <mat-error>Enter valid name</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Name</div>
+                <input class="form-control"  placeholder="Enter name" formControlName='name'>
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Phone number</mat-label>
-                  <input matInput type="tel" placeholder="Enter email" class="p-0" formControlName='mobile'>
-                  <mat-error>Enter valid mobile number</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Phone number</div>
+                <input class="form-control" type="tel" placeholder="Enter email" formControlName='mobile'>
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Email</mat-label>
-                  <input matInput placeholder="Enter email" class="p-0" formControlName='email'>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Email</div>
+                <input class="form-control" placeholder="Enter email" formControlName='email'>
               </div>
-              <div class="col-sm-5 mx-3 mb-2">
-                <mat-form-field appearance="" class="p-0 w-100 mat-form-field">
-                  <mat-label class="p-0">Alternate contact number</mat-label>
-                  <input matInput placeholder="Enter email" class="p-0" formControlName='alternateNumber'>
-                  <mat-error>Enter valid email*</mat-error>
-                </mat-form-field>
+              <div class="col-12 col-sm-6 mb-2">
+                <div class="label-form">Alternate contact number</div>
+                <input class="form-control" placeholder="Enter email" formControlName='alternateNumber'>
               </div>
             </div>
           </div>
