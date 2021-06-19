@@ -135,7 +135,7 @@
     </div>
 
     <div class="col-sm-9 mx-0 mt-2 p-0">
-      <app-not-found *ngIf="filteredJobPosts.length === 0" message="No Jobs Avaiable with Given Data!" style="margin-top: 200px !important;" class="center-parent">
+      <app-not-found *ngIf="filteredJobPosts.length === 0" message="We couldn't find any results. Change selected filters or try later." style="margin-top: 6rem !important;" class="center-parent">
       </app-not-found>
 
       <div class="m-2 mr-2 mb-3 " *ngFor="let jobPost of filteredJobPosts" (click)="seeDetails(jobPost)">
