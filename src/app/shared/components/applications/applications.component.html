@@ -1,14 +1,6 @@
 <app-nav-bar-content [navItems]="navItems"></app-nav-bar-content>
 <div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
   <div class="h-100 w-100 bg-lightest-blue" style="overflow-y: auto;" *ngIf="!isServiceRunning">
-    <!-- <ion-header style="position: fixed; ">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Applications</ion-title>
-      </ion-toolbar>
-    </ion-header> -->
     <div class="bg-primary w-100 text-white"
       style="min-height: 240px; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;">
     </div>
@@ -109,7 +101,7 @@
                 </tbody>
               </table>
             </div>
-            <app-not-found *ngIf="filteredCandidates.length === 0"></app-not-found>
+            <app-not-found *ngIf="filteredCandidates.length === 0" message="No Application Available" ></app-not-found>
           </div>
         </div>
       </div>
