@@ -172,11 +172,11 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
         this.modalRef = this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
       }
       else {
-        // this.applyJob();
+        this.applyJob();
       }
     }
     else {
-      // this.applyJob();
+      this.applyJob();
     }
   }
 
@@ -228,14 +228,9 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
             this.modalRef.hide();
           }
         });
-
       }
     });
   }
-
-
-
-
 
   async referJobPost() {
     let resume;

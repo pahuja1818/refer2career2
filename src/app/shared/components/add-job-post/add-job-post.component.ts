@@ -208,7 +208,7 @@ export class AddJobPostComponent implements OnInit {
             this.uploadPost();
           }
         }
-        else { this.toastService.showToast('Please fill all mandatory fields', 'bg-danger'); }
+        else { this.toastService.showToast('Please fill all mandatory fields!', 'bg-danger'); }
       }
       else { this.toastService.showToast('Enter Job Details!', 'bg-danger'); }
     }
