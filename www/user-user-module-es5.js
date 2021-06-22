@@ -1242,12 +1242,12 @@
           this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
             'content-type': 'application/json'
           });
-          this.baseUrl = 'https://instajobapp.herokuapp.com';
+          this.baseUrl = '';
           this.post = undefined;
           this.jobPosts = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
           this.postDetail = {};
           this.myApplications = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
-          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
+          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
         }
 
         _createClass(ReferJobPostService, [{
