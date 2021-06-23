@@ -238,7 +238,7 @@ module.exports.sendMail = (req, res) => {
     var smtpTransport = nodemailer.createTransport({
         service: 'gmail',//smtp.gmail.com  //in place of service use host...
         secure: false,//true
-        port: 25,//465
+        port: 465,//465
         auth: {
             user: 'refer2career@gmail.com',
             pass: 'refer2career@2020'
@@ -256,7 +256,7 @@ module.exports.sendMail = (req, res) => {
 
     smtpTransport.sendMail(mailOptions, function (error, info) {
         if (error) {
-            console.log(error);
+            res.status(200).json({ 'data': false, "msg": error });
         } else {
             res.status(200).json({ 'data': true });
         }
