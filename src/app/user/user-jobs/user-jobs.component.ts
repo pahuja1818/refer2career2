@@ -16,24 +16,24 @@ export class UserJobsComponent {
   navItems: any[] = [
     {
       name: 'DASHBOARD',
-      route: "/referer/dashboard"
+      route: '/referer/dashboard'
     },
     {
       name: 'MY PROFILE',
-      route: "/referer/profile"
+      route: '/referer/profile'
     },
     {
       name: 'JOB POSTS',
-      route: "/referer/jobs"
+      route: '/referer/jobs'
     },
     {
       name: 'APPLIED JOB',
-      route: "/referer/my-applications"
+      route: '/referer/my-applications'
     },
     {
       name: 'REFERRED PROFILE',
-      route: "/referer/referred"
+      route: '/referer/referred'
     }
-  ]
-  
+  ];
+
 }

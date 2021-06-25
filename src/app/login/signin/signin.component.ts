@@ -60,7 +60,7 @@ export class SigninComponent implements OnInit {
     private modalService: BsModalService,
     private location: Location,
   ) {
-    
+
    }
 
   isScreenBig = false;

@@ -232,15 +232,15 @@ export class LogInComponent implements OnInit {
     }
     else {
       if (!this.signupForm.get('email').valid) {
-        this.toast.showToast("Enter valid email!", "bg-danger");
+        this.toast.showToast('Enter valid email!', 'bg-danger');
       }
 
       else if (!this.signupForm.get('name').valid) {
-        this.toast.showToast("Enter name!", "bg-danger");
+        this.toast.showToast('Enter name!', 'bg-danger');
       }
 
       else if (!this.signupForm.get('password').valid) {
-        this.toast.showToast("Password atleast contain 6 characters!", "bg-danger");
+        this.toast.showToast('Password atleast contain 6 characters!', 'bg-danger');
       }
     }
   }
@@ -346,7 +346,7 @@ export class LogInComponent implements OnInit {
         this.isServiceRunning = false;
       });
     }
-    else this.toast.showToast("Enter valid email", "bg-danger");
+    else { this.toast.showToast('Enter valid email', 'bg-danger'); }
   }
 
   restPassword() {

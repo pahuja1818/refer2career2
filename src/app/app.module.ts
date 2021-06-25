@@ -82,7 +82,7 @@ firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent,LogInComponent
+    AppComponent, LogInComponent
   ],
   entryComponents: [
   ],
@@ -92,7 +92,7 @@ firebase.initializeApp(environment.firebaseConfig);
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-   
+
     AppRoutingModule,
     SharedModule,
     NgbModule,

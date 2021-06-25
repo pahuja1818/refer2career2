@@ -20,7 +20,7 @@ export class JobPostServiceService {
 
   constructor(private http: HttpClient) {
   this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
-    this.getPosts();
+  this.getPosts();
   }
 
   getMyApplications() {

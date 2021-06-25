@@ -77,7 +77,7 @@ export class JobDetailsComponent implements OnInit {
 
   closeModal() {
     this.modalRef.hide();
-    this.jobPostService.post=undefined;
+    this.jobPostService.post = undefined;
   }
 
   editJobPost() {

@@ -14,36 +14,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReferedProfilesComponent implements OnInit {
 
-  allReferedProfiles: any[] = [];
-  isServiceRunning = false;
-  myForm: FormGroup;
-  hiredJobs=0;
-  shortlistedJobs=0;
-  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
-
-  navItems: any[] = [
-    {
-      name: 'DASHBOARD',
-      route: "/referer/dashboard"
-    },
-    {
-      name: 'MY PROFILE',
-      route: "/referer/profile"
-    },
-    {
-      name: 'JOB POSTS',
-      route: "/referer/jobs"
-    },
-    {
-      name: 'APPLIED JOB',
-      route: "/referer/my-applications"
-    },
-    {
-      name: 'REFERRED PROFILE',
-      route: "/referer/referred"
-    }
-  ]
-
   constructor(
     private referService: ReferJobPostService,
     private router: Router,
@@ -53,12 +23,44 @@ export class ReferedProfilesComponent implements OnInit {
     private toast: ToastService
   ) { }
 
+  allReferedProfiles: any[] = [];
+  isServiceRunning = false;
+  myForm: FormGroup;
+  hiredJobs = 0;
+  shortlistedJobs = 0;
+  user = JSON.parse(window.atob(window.localStorage.getItem('id')));
+
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: '/referer/dashboard'
+    },
+    {
+      name: 'MY PROFILE',
+      route: '/referer/profile'
+    },
+    {
+      name: 'JOB POSTS',
+      route: '/referer/jobs'
+    },
+    {
+      name: 'APPLIED JOB',
+      route: '/referer/my-applications'
+    },
+    {
+      name: 'REFERRED PROFILE',
+      route: '/referer/referred'
+    }
+  ];
+
+  currProfile;
+
   ngOnInit() {
     this.myForm = new FormGroup({
-      'bankName': new FormControl(null, Validators.required),
-      'IFSCCode': new FormControl(null, Validators.required),
-      'accountHolderName': new FormControl(null, Validators.required),
-      'accountNumber': new FormControl(null, Validators.required),
+      bankName: new FormControl(null, Validators.required),
+      IFSCCode: new FormControl(null, Validators.required),
+      accountHolderName: new FormControl(null, Validators.required),
+      accountNumber: new FormControl(null, Validators.required),
     });
     this.isServiceRunning = true;
     this.referService.getReferedJobPosts({
@@ -70,14 +72,14 @@ export class ReferedProfilesComponent implements OnInit {
           if (data.data.length > 0) {
             this.allReferedProfiles = data.data;
             data.data.forEach(element => {
-              if(element.status==='Shortlisted')
-              {this.shortlistedJobs++;}
-            if(element.status==='Hired')
-              {this.hiredJobs++;}
+              if (element.status === 'Shortlisted')
+              {this.shortlistedJobs++; }
+              if (element.status === 'Hired')
+              {this.hiredJobs++; }
             });
             this.allReferedProfiles.map((pr: any) => {
               pr.isStatus = true;
-              
+
             });
           }
         }
@@ -92,8 +94,6 @@ export class ReferedProfilesComponent implements OnInit {
   openResume(resume: any) {
     window.open(resume);
   }
-
-  currProfile;
   openModal(template: any, index: number) {
     this.currProfile = index,
       this.modalRef = this.modalService.show(template, { ignoreBackdropClick: true, animated: true });
@@ -124,32 +124,32 @@ export class ReferedProfilesComponent implements OnInit {
       this.dbService.sendMail(email).subscribe((jata: any) => {
         if (jata.data) {
 
-          let db: DbOperation = {
+          const db: DbOperation = {
             collection: 'encashment',
             data: {
-              'referenceNumber': time,
-              'name': this.user.name,
-              'email': this.user.email,
-              'referedName': this.allReferedProfiles[this.currProfile].name,
-              'referedEmail': this.allReferedProfiles[this.currProfile].email,
-              'jobTitle': this.allReferedProfiles[this.currProfile].jobTitle,
-              'jobId': this.allReferedProfiles[this.currProfile].jobId,
-              'refredProfileId': this.allReferedProfiles[this.currProfile]._id,
-              'companyName': this.allReferedProfiles[this.currProfile].companyName,
-              'referedOn': this.allReferedProfiles[this.currProfile].createdAt,
-              'createdAt': new Date(),
+              referenceNumber: time,
+              name: this.user.name,
+              email: this.user.email,
+              referedName: this.allReferedProfiles[this.currProfile].name,
+              referedEmail: this.allReferedProfiles[this.currProfile].email,
+              jobTitle: this.allReferedProfiles[this.currProfile].jobTitle,
+              jobId: this.allReferedProfiles[this.currProfile].jobId,
+              refredProfileId: this.allReferedProfiles[this.currProfile]._id,
+              companyName: this.allReferedProfiles[this.currProfile].companyName,
+              referedOn: this.allReferedProfiles[this.currProfile].createdAt,
+              createdAt: new Date(),
             }
-          }
+          };
           this.dbService.create(db).then((data: any) => {
             if (data.data) {
-              this.toast.showToast('Request Submitted Successfully!')
+              this.toast.showToast('Request Submitted Successfully!');
             }
             else {
               this.toast.showToast('Something went worng', 'bg-red');
             }
             this.close();
             this.isServiceRunning = false;
-          })
+          });
         }
         else {
           this.close();

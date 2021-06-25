@@ -15,31 +15,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class EmployerMenuComponent implements OnInit {
 
-  user: any = {};
-  allJobPost: any[] = [];
-  navItems: any[] = [
-    {
-      name: 'DASHBOARD',
-      route: "/recruiter/dashboard"
-    },
-    {
-      name: 'MY PROFILE',
-      route: "/recruiter/profile"
-    },
-    {
-      name: 'JOB POSTS',
-      route: "/recruiter/job-posts"
-    },
-    {
-      name: 'MANAGE APPLICANTS',
-      route: "/recruiter/applicants"
-    },
-    {
-      name: 'ADD JOB POST',
-      route: "/recruiter/create-job-posts"
-    }
-  ]
-
   constructor(
     private router: Router,
     private jobPostService: JobPostServiceService,
@@ -48,6 +23,34 @@ export class EmployerMenuComponent implements OnInit {
     private toast: ToastService,
     private dbService: AuthService,
   ) { }
+
+  user: any = {};
+  allJobPost: any[] = [];
+  navItems: any[] = [
+    {
+      name: 'DASHBOARD',
+      route: '/recruiter/dashboard'
+    },
+    {
+      name: 'MY PROFILE',
+      route: '/recruiter/profile'
+    },
+    {
+      name: 'JOB POSTS',
+      route: '/recruiter/job-posts'
+    },
+    {
+      name: 'MANAGE APPLICANTS',
+      route: '/recruiter/applicants'
+    },
+    {
+      name: 'ADD JOB POST',
+      route: '/recruiter/create-job-posts'
+    }
+  ];
+
+  type = null;
+  description = '';
 
   ngOnInit() {
     this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
@@ -71,9 +74,6 @@ export class EmployerMenuComponent implements OnInit {
   getName(name: string){
     return name.split(' ')[0];
   }
-
-  type = null;
-  description = '';
 
   openModal(template: any) {
     this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });

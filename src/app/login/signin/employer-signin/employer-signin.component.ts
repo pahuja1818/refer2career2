@@ -26,8 +26,8 @@ export class EmployerSigninComponent implements OnInit {
     private toast: ToastService,
     private modalService: BsModalService,
     private location: Location,
-  ) { 
-    
+  ) {
+
   }
 
   @Output() closeEmployer = new EventEmitter();

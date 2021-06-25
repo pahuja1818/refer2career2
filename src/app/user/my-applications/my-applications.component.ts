@@ -11,8 +11,8 @@ import { analytics } from 'firebase';
 export class MyApplicationsComponent implements OnInit {
 
   isServiceRunning = false;
-  hiredJobs=0;
-  shortlistedJobs=0;
+  hiredJobs = 0;
+  shortlistedJobs = 0;
   constructor(
     private jobService: JobPostServiceService,
     private router: Router
@@ -24,25 +24,25 @@ export class MyApplicationsComponent implements OnInit {
   navItems: any[] = [
     {
       name: 'DASHBOARD',
-      route: "/referer/dashboard"
+      route: '/referer/dashboard'
     },
     {
       name: 'MY PROFILE',
-      route: "/referer/profile"
+      route: '/referer/profile'
     },
     {
       name: 'JOB POSTS',
-      route: "/referer/jobs"
+      route: '/referer/jobs'
     },
     {
       name: 'APPLIED JOB',
-      route: "/referer/my-applications"
+      route: '/referer/my-applications'
     },
     {
       name: 'REFERRED PROFILE',
-      route: "/referer/referred"
+      route: '/referer/referred'
     }
-  ]
+  ];
 
   ngOnInit() {
     this.isServiceRunning = true;
@@ -64,10 +64,10 @@ export class MyApplicationsComponent implements OnInit {
         if (jobPost.data !== null && jobPost.data !== undefined) {
           jobPost.appliedDate = post.date;
           jobPost.status = post.status;
-          if(jobPost.status==='Hired')
-            {this.hiredJobs++;}
-            if(jobPost.status==='Shortlisted')
-            {this.shortlistedJobs++;}
+          if (jobPost.status === 'Hired')
+            {this.hiredJobs++; }
+          if (jobPost.status === 'Shortlisted')
+            {this.shortlistedJobs++; }
           jobPost.jobPost = jobPost.data.jobPost;
           jobPost.referReward = jobPost.data.referReward;
           this.allAppliedPosts.push(jobPost);

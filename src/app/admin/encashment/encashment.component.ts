@@ -22,9 +22,9 @@ export class EncashmentComponent implements OnInit {
 
   getRequests() {
     this.isServiceRunning = true;
-    let db: DbOperation = {
+    const db: DbOperation = {
       collection: 'encashment',
-    }
+    };
     this.dbService.find(db).subscribe((data: any) => {
       if (data.data) {
         if (data.data.length > 0) {

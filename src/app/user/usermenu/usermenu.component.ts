@@ -13,32 +13,47 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class UsermenuComponent implements OnInit {
 
+  constructor(
+    private menu: MenuController,
+    private modalService: BsModalService,
+    private toast: ToastService,
+    private dbService: AuthService,
+  ) {
+  }
+
   modalRef: BsModalRef;
-  user: any; 
+  user: any;
   isServiceRunning = false;
 
   navItems: any[] = [
     {
       name: 'DASHBOARD',
-      route: "/referer/dashboard"
+      route: '/referer/dashboard'
     },
     {
       name: 'MY PROFILE',
-      route: "/referer/profile"
+      route: '/referer/profile'
     },
     {
       name: 'JOB POSTS',
-      route: "/referer/jobs"
+      route: '/referer/jobs'
     },
     {
       name: 'APPLIED JOB',
-      route: "/referer/my-applications"
+      route: '/referer/my-applications'
     },
     {
       name: 'REFERRED PROFILE',
-      route: "/referer/referred"
+      route: '/referer/referred'
     }
-  ]
+  ];
+
+
+  // feedback------------------
+
+
+  type = null;
+  description = '';
 
 
   scrollToJobs() {
@@ -49,14 +64,6 @@ export class UsermenuComponent implements OnInit {
 
   getName(name: string) {
     return name.split(' ')[0];
-  }
-
-  constructor(
-    private menu: MenuController,
-    private modalService: BsModalService,
-    private toast: ToastService,
-    private dbService: AuthService,
-  ) {
   }
 
   ngOnInit() {
@@ -86,13 +93,6 @@ export class UsermenuComponent implements OnInit {
       }
     });
   }
-
-
-  //feedback------------------
-
-
-  type = null;
-  description = '';
 
   openModal(template: any) {
     this.modalRef = this.modalService.show(template, { class: 'half-modal', ignoreBackdropClick: true, animated: true });

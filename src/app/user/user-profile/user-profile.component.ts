@@ -27,6 +27,26 @@ export class UserProfileComponent implements OnInit {
     private toastService: ToastService) {
   }
 
+  get profileCompleted() {
+    let percent = 12;
+    if (this.cvHeadLine) { percent += 10; }
+    if (this.workExpArray) {
+      if (this.workExpArray.length > 0) { percent += 15; }
+    }
+    if (this.skillsArray) {
+      if (this.skillsArray.length > 0) { percent += 12; }
+    }
+    if (this.educationArray) {
+      if (this.educationArray.length > 0) { percent += 11; }
+    }
+    if (this.user.resume) { percent += 15; }
+    if (this.user.basicInfo) { percent += 15; }
+    if (this.user.photo) { percent += 10; }
+    document.getElementById('progress-bar').style.width = percent + '%';
+    this.percent = percent;
+    return percent;
+  }
+
 
 
   basePath = '/profile-resumes';
@@ -118,25 +138,27 @@ export class UserProfileComponent implements OnInit {
   navItems: any[] = [
     {
       name: 'DASHBOARD',
-      route: "/referer/dashboard"
+      route: '/referer/dashboard'
     },
     {
       name: 'MY PROFILE',
-      route: "/referer/profile"
+      route: '/referer/profile'
     },
     {
       name: 'JOB POSTS',
-      route: "/referer/jobs"
+      route: '/referer/jobs'
     },
     {
       name: 'APPLIED JOB',
-      route: "/referer/my-applications"
+      route: '/referer/my-applications'
     },
     {
       name: 'REFERRED PROFILE',
-      route: "/referer/referred"
+      route: '/referer/referred'
     }
-  ]
+  ];
+
+  percent = 12;
 
   openResume() {
     window.open(this.user.resume, '_blank');
@@ -573,25 +595,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   otpRequest() {
-  }
-
-  percent = 12;
-
-  get profileCompleted() {
-    let percent = 12;
-    if (this.cvHeadLine) { percent += 10; }
-    if (this.workExpArray)
-      if (this.workExpArray.length > 0) { percent += 15; }
-    if (this.skillsArray)
-      if (this.skillsArray.length > 0) { percent += 12; }
-    if (this.educationArray)
-      if (this.educationArray.length > 0) { percent += 11; }
-    if (this.user.resume) { percent += 15; }
-    if (this.user.basicInfo) { percent += 15; }
-    if (this.user.photo) { percent += 10; }
-    document.getElementById('progress-bar').style.width = percent + '%';
-    this.percent = percent;
-    return percent;
   }
 
   updateProfileCompletion() {
