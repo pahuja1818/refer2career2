@@ -587,7 +587,6 @@ export class UserProfileComponent implements OnInit {
         this.user = data.data[0];
         this.setBasicInfo();
         this.isServiceRunning = false;
-        this.profileCompleted;
         this.updateProfileCompletion();
         window.localStorage.setItem('id', window.btoa(JSON.stringify(this.user)));
       }

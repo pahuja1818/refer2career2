@@ -110,7 +110,8 @@ export class LogInComponent implements OnInit {
 
   resendOTP() {
     this.isServiceRunning = true;
-    this.authService.getOTP({ email: this.signupForm.get('email').value ? this.signupForm.get('email').value : this.email.value }).subscribe((data: any) => {
+    this.authService.getOTP({ email: this.signupForm.get('email').value ? this.signupForm.get('email').value : this.email.value })
+    .subscribe((data: any) => {
       if (data.data === true) {
         this.toast.showToast('Passcode Sent Successfully!');
         let counter = 30;
@@ -182,9 +183,8 @@ export class LogInComponent implements OnInit {
     this.isPasswordReset = false;
     this.message = '';
     this.isSignUp = false;
-
-    this.signupForm.reset;
-    this.loginForm.reset;
+    this.signupForm.reset();
+    this.loginForm.reset();
   }
 
   initializeSignupForm() {
