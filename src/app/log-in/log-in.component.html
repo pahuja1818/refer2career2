@@ -11,19 +11,19 @@
       <div class="ml-3 collapse navbar-collapse vertical-center justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark myfont-size text-link active-button" (click)="navigate(item.route)">
+            <a class="nav-link text-dark myfont-size text-link active-button">
               ABOUT US</a>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark myfont-size text-link active-button" (click)="navigate(item.route)">
+            <a class="nav-link text-dark myfont-size text-link active-button">
               JOB OPPORTUNITIES</a>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark myfont-size text-link active-button" (click)="navigate(item.route)">
+            <a class="nav-link text-dark myfont-size text-link active-button">
               PARTNERS</a>
           </li>
           <li class="nav-item mr-4">
-            <a class="nav-link text-dark myfont-size text-link active-button" (click)="navigate(item.route)">
+            <a class="nav-link text-dark myfont-size text-link active-button">
               CONTACT US</a>
           </li>
         </ul>
@@ -32,7 +32,7 @@
             <a (click)="goToSignUp()" *ngIf="isLogin || isForgotPassword || isVerifyOTP"><button class="btn btn-primary mr-2"><span class="vertical-center">
               <ion-icon name="lock-closed" class="mr-1"></ion-icon>SIGNUP
             </span></button></a>
-            <a (click)="openModal(logout)" *ngIf="isSignUp" (click)="goToLogin()"><button class="btn btn-primary"><span
+            <a *ngIf="isSignUp" (click)="goToLogin()"><button class="btn btn-primary"><span
                   class="vertical-center">
                   <ion-icon name="person" class="mr-1"></ion-icon>LOGIN
                 </span></button></a>
