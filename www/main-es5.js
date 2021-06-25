@@ -795,19 +795,19 @@
           this.jobPost = undefined;
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/recruiter/dashboard"
+            route: '/recruiter/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/recruiter/profile"
+            route: '/recruiter/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/recruiter/job-posts"
+            route: '/recruiter/job-posts'
           }, {
             name: 'MANAGE APPLICANTS',
-            route: "/recruiter/applicants"
+            route: '/recruiter/applicants'
           }, {
             name: 'ADD JOB POST',
-            route: "/recruiter/create-job-posts"
+            route: '/recruiter/create-job-posts'
           }];
           this.aboutUs = '';
           this.description = '';
@@ -995,7 +995,7 @@
             if (this.skillsArray.length > 0) {
               if (this.description) {
                 if (this.jobPostForm.valid) {
-                  if (this.jobPostForm.get('jobType').value === "In office") {
+                  if (this.jobPostForm.get('jobType').value === 'In office') {
                     if (this.jobPostForm.get('location').value) {
                       this.uploadPost();
                     } else {
@@ -1898,19 +1898,19 @@
           this.toastService = toastService;
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/recruiter/dashboard"
+            route: '/recruiter/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/recruiter/profile"
+            route: '/recruiter/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/recruiter/job-posts"
+            route: '/recruiter/job-posts'
           }, {
             name: 'MANAGE APPLICANTS',
-            route: "/recruiter/applicants"
+            route: '/recruiter/applicants'
           }, {
             name: 'ADD JOB POST',
-            route: "/recruiter/create-job-posts"
+            route: '/recruiter/create-job-posts'
           }];
           this.basePath = '/profile-resumes';
           this.user = {};
@@ -4855,11 +4855,11 @@
               });
             } else {
               if (!this.signupForm.get('email').valid) {
-                this.toast.showToast("Enter valid email!", "bg-danger");
+                this.toast.showToast('Enter valid email!', 'bg-danger');
               } else if (!this.signupForm.get('name').valid) {
-                this.toast.showToast("Enter name!", "bg-danger");
+                this.toast.showToast('Enter name!', 'bg-danger');
               } else if (!this.signupForm.get('password').valid) {
-                this.toast.showToast("Password atleast contain 6 characters!", "bg-danger");
+                this.toast.showToast('Password atleast contain 6 characters!', 'bg-danger');
               }
             }
           }
@@ -4985,7 +4985,9 @@
 
                 _this47.isServiceRunning = false;
               });
-            } else this.toast.showToast("Enter valid email", "bg-danger");
+            } else {
+              this.toast.showToast('Enter valid email', 'bg-danger');
+            }
           }
         }, {
           key: "restPassword",
@@ -5451,19 +5453,19 @@
           this.totalChecked = 0;
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/recruiter/dashboard"
+            route: '/recruiter/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/recruiter/profile"
+            route: '/recruiter/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/recruiter/job-posts"
+            route: '/recruiter/job-posts'
           }, {
             name: 'MANAGE APPLICANTS',
-            route: "/recruiter/applicants"
+            route: '/recruiter/applicants'
           }, {
             name: 'ADD JOB POST',
-            route: "/recruiter/create-job-posts"
+            route: '/recruiter/create-job-posts'
           }];
           this.isServiceRunning = false;
           this.skillName = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required);
@@ -5937,7 +5939,7 @@
             this.filteredCandidates.forEach(function (user, index) {
               if (user.isChecked === true) {
                 user.statusArray.push({
-                  'name': status,
+                  name: status,
                   date: new Date()
                 });
                 var db = {

@@ -882,7 +882,7 @@ let EncashmentComponent = class EncashmentComponent {
     }
     getRequests() {
         this.isServiceRunning = true;
-        let db = {
+        const db = {
             collection: 'encashment',
         };
         this.dbService.find(db).subscribe((data) => {

@@ -140,12 +140,12 @@ export class LogInComponent implements OnInit {
     this.isForgotPassword = true;
   }
 
-  goToLogin(){
+  goToLogin() {
     this.hideAll();
     this.isLogin = true;
   }
 
-  goToSignUp(){
+  goToSignUp() {
     this.hideAll();
     this.isSignUp = true;
   }
@@ -296,9 +296,9 @@ export class LogInComponent implements OnInit {
             this.message = 'Invalid email or password!';
           }
           else if (data.email) {
-              this.modalRef.hide();
-              window.location.reload();
-              window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
+            this.modalRef.hide();
+            window.location.reload();
+            window.localStorage.setItem('id', window.btoa(JSON.stringify(data)));
           }
           else { this.message = 'User not found!'; }
           this.isServiceRunning = false;

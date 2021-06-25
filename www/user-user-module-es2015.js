@@ -173,23 +173,23 @@ let UserJobsComponent = class UserJobsComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/referer/dashboard"
+                route: '/referer/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/referer/profile"
+                route: '/referer/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/referer/jobs"
+                route: '/referer/jobs'
             },
             {
                 name: 'APPLIED JOB',
-                route: "/referer/my-applications"
+                route: '/referer/my-applications'
             },
             {
                 name: 'REFERRED PROFILE',
-                route: "/referer/referred"
+                route: '/referer/referred'
             }
         ];
     }
@@ -891,32 +891,32 @@ let ReferedProfilesComponent = class ReferedProfilesComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/referer/dashboard"
+                route: '/referer/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/referer/profile"
+                route: '/referer/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/referer/jobs"
+                route: '/referer/jobs'
             },
             {
                 name: 'APPLIED JOB',
-                route: "/referer/my-applications"
+                route: '/referer/my-applications'
             },
             {
                 name: 'REFERRED PROFILE',
-                route: "/referer/referred"
+                route: '/referer/referred'
             }
         ];
     }
     ngOnInit() {
         this.myForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]({
-            'bankName': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
-            'IFSCCode': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
-            'accountHolderName': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
-            'accountNumber': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+            bankName: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+            IFSCCode: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+            accountHolderName: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+            accountNumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
         });
         this.isServiceRunning = true;
         this.referService.getReferedJobPosts({
@@ -974,20 +974,20 @@ let ReferedProfilesComponent = class ReferedProfilesComponent {
             };
             this.dbService.sendMail(email).subscribe((jata) => {
                 if (jata.data) {
-                    let db = {
+                    const db = {
                         collection: 'encashment',
                         data: {
-                            'referenceNumber': time,
-                            'name': this.user.name,
-                            'email': this.user.email,
-                            'referedName': this.allReferedProfiles[this.currProfile].name,
-                            'referedEmail': this.allReferedProfiles[this.currProfile].email,
-                            'jobTitle': this.allReferedProfiles[this.currProfile].jobTitle,
-                            'jobId': this.allReferedProfiles[this.currProfile].jobId,
-                            'refredProfileId': this.allReferedProfiles[this.currProfile]._id,
-                            'companyName': this.allReferedProfiles[this.currProfile].companyName,
-                            'referedOn': this.allReferedProfiles[this.currProfile].createdAt,
-                            'createdAt': new Date(),
+                            referenceNumber: time,
+                            name: this.user.name,
+                            email: this.user.email,
+                            referedName: this.allReferedProfiles[this.currProfile].name,
+                            referedEmail: this.allReferedProfiles[this.currProfile].email,
+                            jobTitle: this.allReferedProfiles[this.currProfile].jobTitle,
+                            jobId: this.allReferedProfiles[this.currProfile].jobId,
+                            refredProfileId: this.allReferedProfiles[this.currProfile]._id,
+                            companyName: this.allReferedProfiles[this.currProfile].companyName,
+                            referedOn: this.allReferedProfiles[this.currProfile].createdAt,
+                            createdAt: new Date(),
                         }
                     };
                     this.dbService.create(db).then((data) => {
@@ -1248,26 +1248,26 @@ let UsermenuComponent = class UsermenuComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/referer/dashboard"
+                route: '/referer/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/referer/profile"
+                route: '/referer/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/referer/jobs"
+                route: '/referer/jobs'
             },
             {
                 name: 'APPLIED JOB',
-                route: "/referer/my-applications"
+                route: '/referer/my-applications'
             },
             {
                 name: 'REFERRED PROFILE',
-                route: "/referer/referred"
+                route: '/referer/referred'
             }
         ];
-        //feedback------------------
+        // feedback------------------
         this.type = null;
         this.description = '';
     }
@@ -1401,23 +1401,23 @@ let MyApplicationsComponent = class MyApplicationsComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/referer/dashboard"
+                route: '/referer/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/referer/profile"
+                route: '/referer/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/referer/jobs"
+                route: '/referer/jobs'
             },
             {
                 name: 'APPLIED JOB',
-                route: "/referer/my-applications"
+                route: '/referer/my-applications'
             },
             {
                 name: 'REFERRED PROFILE',
-                route: "/referer/referred"
+                route: '/referer/referred'
             }
         ];
     }
@@ -1691,23 +1691,23 @@ let JobDetailComponent = class JobDetailComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/referer/dashboard"
+                route: '/referer/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/referer/profile"
+                route: '/referer/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/referer/jobs"
+                route: '/referer/jobs'
             },
             {
                 name: 'APPLIED JOB',
-                route: "/referer/my-applications"
+                route: '/referer/my-applications'
             },
             {
                 name: 'REFERRED PROFILE',
-                route: "/referer/referred"
+                route: '/referer/referred'
             }
         ];
     }
@@ -2071,26 +2071,59 @@ let UserProfileComponent = class UserProfileComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/referer/dashboard"
+                route: '/referer/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/referer/profile"
+                route: '/referer/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/referer/jobs"
+                route: '/referer/jobs'
             },
             {
                 name: 'APPLIED JOB',
-                route: "/referer/my-applications"
+                route: '/referer/my-applications'
             },
             {
                 name: 'REFERRED PROFILE',
-                route: "/referer/referred"
+                route: '/referer/referred'
             }
         ];
         this.percent = 12;
+    }
+    get profileCompleted() {
+        let percent = 12;
+        if (this.cvHeadLine) {
+            percent += 10;
+        }
+        if (this.workExpArray) {
+            if (this.workExpArray.length > 0) {
+                percent += 15;
+            }
+        }
+        if (this.skillsArray) {
+            if (this.skillsArray.length > 0) {
+                percent += 12;
+            }
+        }
+        if (this.educationArray) {
+            if (this.educationArray.length > 0) {
+                percent += 11;
+            }
+        }
+        if (this.user.resume) {
+            percent += 15;
+        }
+        if (this.user.basicInfo) {
+            percent += 15;
+        }
+        if (this.user.photo) {
+            percent += 10;
+        }
+        document.getElementById('progress-bar').style.width = percent + '%';
+        this.percent = percent;
+        return percent;
     }
     openResume() {
         window.open(this.user.resume, '_blank');
@@ -2490,36 +2523,6 @@ let UserProfileComponent = class UserProfileComponent {
         });
     }
     otpRequest() {
-    }
-    get profileCompleted() {
-        let percent = 12;
-        if (this.cvHeadLine) {
-            percent += 10;
-        }
-        if (this.workExpArray)
-            if (this.workExpArray.length > 0) {
-                percent += 15;
-            }
-        if (this.skillsArray)
-            if (this.skillsArray.length > 0) {
-                percent += 12;
-            }
-        if (this.educationArray)
-            if (this.educationArray.length > 0) {
-                percent += 11;
-            }
-        if (this.user.resume) {
-            percent += 15;
-        }
-        if (this.user.basicInfo) {
-            percent += 15;
-        }
-        if (this.user.photo) {
-            percent += 10;
-        }
-        document.getElementById('progress-bar').style.width = percent + '%';
-        this.percent = percent;
-        return percent;
     }
     updateProfileCompletion() {
         this.isServiceRunning = true;

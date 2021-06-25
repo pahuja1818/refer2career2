@@ -346,23 +346,23 @@ let ApplicantsComponent = class ApplicantsComponent {
         this.navItems = [
             {
                 name: 'DASHBOARD',
-                route: "/recruiter/dashboard"
+                route: '/recruiter/dashboard'
             },
             {
                 name: 'MY PROFILE',
-                route: "/recruiter/profile"
+                route: '/recruiter/profile'
             },
             {
                 name: 'JOB POSTS',
-                route: "/recruiter/job-posts"
+                route: '/recruiter/job-posts'
             },
             {
                 name: 'MANAGE APPLICANTS',
-                route: "/recruiter/applicants"
+                route: '/recruiter/applicants'
             },
             {
                 name: 'ADD JOB POST',
-                route: "/recruiter/create-job-posts"
+                route: '/recruiter/create-job-posts'
             }
         ];
     }

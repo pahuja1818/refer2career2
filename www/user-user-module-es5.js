@@ -309,19 +309,19 @@
 
         this.navItems = [{
           name: 'DASHBOARD',
-          route: "/referer/dashboard"
+          route: '/referer/dashboard'
         }, {
           name: 'MY PROFILE',
-          route: "/referer/profile"
+          route: '/referer/profile'
         }, {
           name: 'JOB POSTS',
-          route: "/referer/jobs"
+          route: '/referer/jobs'
         }, {
           name: 'APPLIED JOB',
-          route: "/referer/my-applications"
+          route: '/referer/my-applications'
         }, {
           name: 'REFERRED PROFILE',
-          route: "/referer/referred"
+          route: '/referer/referred'
         }];
       };
 
@@ -1473,19 +1473,19 @@
           this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/referer/dashboard"
+            route: '/referer/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/referer/profile"
+            route: '/referer/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/referer/jobs"
+            route: '/referer/jobs'
           }, {
             name: 'APPLIED JOB',
-            route: "/referer/my-applications"
+            route: '/referer/my-applications'
           }, {
             name: 'REFERRED PROFILE',
-            route: "/referer/referred"
+            route: '/referer/referred'
           }];
         }
 
@@ -1495,10 +1495,10 @@
             var _this3 = this;
 
             this.myForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]({
-              'bankName': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
-              'IFSCCode': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
-              'accountHolderName': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
-              'accountNumber': new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required)
+              bankName: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+              IFSCCode: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+              accountHolderName: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required),
+              accountNumber: new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required)
             });
             this.isServiceRunning = true;
             this.referService.getReferedJobPosts({
@@ -1569,17 +1569,17 @@
                   var db = {
                     collection: 'encashment',
                     data: {
-                      'referenceNumber': time,
-                      'name': _this4.user.name,
-                      'email': _this4.user.email,
-                      'referedName': _this4.allReferedProfiles[_this4.currProfile].name,
-                      'referedEmail': _this4.allReferedProfiles[_this4.currProfile].email,
-                      'jobTitle': _this4.allReferedProfiles[_this4.currProfile].jobTitle,
-                      'jobId': _this4.allReferedProfiles[_this4.currProfile].jobId,
-                      'refredProfileId': _this4.allReferedProfiles[_this4.currProfile]._id,
-                      'companyName': _this4.allReferedProfiles[_this4.currProfile].companyName,
-                      'referedOn': _this4.allReferedProfiles[_this4.currProfile].createdAt,
-                      'createdAt': new Date()
+                      referenceNumber: time,
+                      name: _this4.user.name,
+                      email: _this4.user.email,
+                      referedName: _this4.allReferedProfiles[_this4.currProfile].name,
+                      referedEmail: _this4.allReferedProfiles[_this4.currProfile].email,
+                      jobTitle: _this4.allReferedProfiles[_this4.currProfile].jobTitle,
+                      jobId: _this4.allReferedProfiles[_this4.currProfile].jobId,
+                      refredProfileId: _this4.allReferedProfiles[_this4.currProfile]._id,
+                      companyName: _this4.allReferedProfiles[_this4.currProfile].companyName,
+                      referedOn: _this4.allReferedProfiles[_this4.currProfile].createdAt,
+                      createdAt: new Date()
                     }
                   };
 
@@ -2040,20 +2040,20 @@
           this.isServiceRunning = false;
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/referer/dashboard"
+            route: '/referer/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/referer/profile"
+            route: '/referer/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/referer/jobs"
+            route: '/referer/jobs'
           }, {
             name: 'APPLIED JOB',
-            route: "/referer/my-applications"
+            route: '/referer/my-applications'
           }, {
             name: 'REFERRED PROFILE',
-            route: "/referer/referred"
-          }]; //feedback------------------
+            route: '/referer/referred'
+          }]; // feedback------------------
 
           this.type = null;
           this.description = '';
@@ -2256,19 +2256,19 @@
           this.allJobPosts = [];
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/referer/dashboard"
+            route: '/referer/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/referer/profile"
+            route: '/referer/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/referer/jobs"
+            route: '/referer/jobs'
           }, {
             name: 'APPLIED JOB',
-            route: "/referer/my-applications"
+            route: '/referer/my-applications'
           }, {
             name: 'REFERRED PROFILE',
-            route: "/referer/referred"
+            route: '/referer/referred'
           }];
         }
 
@@ -2720,19 +2720,19 @@
           this.questionsAnswers = [];
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/referer/dashboard"
+            route: '/referer/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/referer/profile"
+            route: '/referer/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/referer/jobs"
+            route: '/referer/jobs'
           }, {
             name: 'APPLIED JOB',
-            route: "/referer/my-applications"
+            route: '/referer/my-applications'
           }, {
             name: 'REFERRED PROFILE',
-            route: "/referer/referred"
+            route: '/referer/referred'
           }];
         }
 
@@ -3259,19 +3259,19 @@
           this.skillsOptions = ['Java', 'Event Management', 'Angular 10', 'HTML', 'CSS', 'Java Script', 'Type Script', 'Firebase', 'Management', 'Accounting'];
           this.navItems = [{
             name: 'DASHBOARD',
-            route: "/referer/dashboard"
+            route: '/referer/dashboard'
           }, {
             name: 'MY PROFILE',
-            route: "/referer/profile"
+            route: '/referer/profile'
           }, {
             name: 'JOB POSTS',
-            route: "/referer/jobs"
+            route: '/referer/jobs'
           }, {
             name: 'APPLIED JOB',
-            route: "/referer/my-applications"
+            route: '/referer/my-applications'
           }, {
             name: 'REFERRED PROFILE',
-            route: "/referer/referred"
+            route: '/referer/referred'
           }];
           this.percent = 12;
         }
@@ -3940,14 +3940,22 @@
               percent += 10;
             }
 
-            if (this.workExpArray) if (this.workExpArray.length > 0) {
-              percent += 15;
+            if (this.workExpArray) {
+              if (this.workExpArray.length > 0) {
+                percent += 15;
+              }
             }
-            if (this.skillsArray) if (this.skillsArray.length > 0) {
-              percent += 12;
+
+            if (this.skillsArray) {
+              if (this.skillsArray.length > 0) {
+                percent += 12;
+              }
             }
-            if (this.educationArray) if (this.educationArray.length > 0) {
-              percent += 11;
+
+            if (this.educationArray) {
+              if (this.educationArray.length > 0) {
+                percent += 11;
+              }
             }
 
             if (this.user.resume) {
