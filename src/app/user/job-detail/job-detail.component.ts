@@ -219,7 +219,9 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
         const mail = {
           email: this.user.email,
           subject: 'Applied Successfully!',
-          content: `<p>Hello ${this.user.name} </p><p>You have successfully applied for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+          content: `<p>Hello ${this.user.name} </p>
+          <p>You have successfully applied for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p>
+          <br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
         };
         this.dbService.sendMail(mail).subscribe((pata: any) => {
           if (pata.data) {
@@ -266,18 +268,35 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
               };
 
               this.referService.referJobPost(refer).subscribe((ele: any) => {
-                this.toastService.showToast('Refered successfully');
+                this.toastService.showToast('Referred successfully');
                 const mail = {
                   email: this.user.email,
-                  subject: 'Refered Successfully!',
-                  content: `<p>Hello ${this.user.name} </p><p>You have successfully refered ${refer.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+                  subject: 'Referred Successfully!',
+                  content: `<p>Hi ${this.user.name}, </p>
+                  Thank you for submitting the resume of ${refer.name} for ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.
+                  <br>
+                   Your submission has been received. Should your referral meet the employee referral policy they will be tracked
+                  as a referral. In addition should they meet the qualifications for the
+                  position, they will be contacted by the assigned Talent Acquisition Partner. If your
+                  referral does not meet the qualifications for the position they will not be contacted,
+                  however, they will remain valid as an employee referral for up to Six month for the said position.
+                  <br>Your efforts to bring talented, motivated individuals to refer2career are very
+                  important for the long-term success of our company and we greatly appreciate your support.
+                  <br><br>Thank you
+                  <br>Regards,
+                  <br>Team <a style="color: blue;" href="https://refer2career.com">refer2career</a>`
                 };
                 this.dbService.sendMail(mail).subscribe((pata: any) => {
                   if (pata.data) {
                     const email = {
                       email: refer.email,
-                      subject: `You have been refered by ${this.user.name}!`,
-                      content: `<p>Hello ${refer.name} </p><p>You have been refered by ${this.user.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p><br><p><a style="color: blue;" href="https://refer2career.com">Login to Refer2Career</a> and increase chance to get hired by completing your profile.</p><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
+                      subject: `You have been referred by ${this.user.name}!`,
+                      content: `<p>Hello ${refer.name} </p>
+                      <p>You have been refered by ${this.user.name} for the role of ${this.jobPost.jobPost.title} at ${this.jobPost.jobPost.companyName}.</p>
+                      <br><p><a style="color: blue;" href="https://refer2career.com">Login to Refer2Career</a> 
+                      and increase chance to get hired by completing your profile.</p>
+                      <br><br><br>Thanks and Regards!<br>
+                      <a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>`
                     };
                     this.dbService.sendMail(email).subscribe((jata: any) => {
                       if (jata.data) {

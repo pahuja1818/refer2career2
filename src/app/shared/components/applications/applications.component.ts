@@ -211,6 +211,7 @@ export class ApplicationsComponent implements OnInit {
                 status: cand.status ? cand.status : null,
                 statusArray: cand.statusArray ? cand.statusArray : [],
                 isChecked: false,
+                referedBy: cand.referedBy,
                 profileCompleted: a.profileCompleted ? a.profileCompleted : 20
               };
               if (!this.allCandidates.find(data => data.applyId === user.applyId)) {
@@ -230,6 +231,7 @@ export class ApplicationsComponent implements OnInit {
                 status: cand.status ? cand.status : null,
                 statusArray: cand.statusArray ? cand.statusArray : [],
                 isChecked: false,
+                referedBy: cand.referedBy,
                 profileCompleted: cand.profileCompleted ? a.profileCompleted : 20
               };
               if (!this.allCandidates.find(data => data.applyId === user.applyId)) {
@@ -421,6 +423,62 @@ export class ApplicationsComponent implements OnInit {
           }
           else { this.toast.showToast('Something went wrong!', 'bg-danger'); }
         });
+        if(status==='Rejected')
+        {
+            const email = {
+              email: user.email,
+              subject: `Thank you for your applying`,
+              content: `<p>Dear ${user.name},</p>
+              Thank you for your interest and application for the position of ${this.post.jobPost.title} 
+              at ${this.post.jobPost.companyName}. 
+              <br>We were impressed with the number of qualified candidates who
+              applied for this opening. We have completed the interviewing process and have filled the
+              position. Although you were not chosen for this position, we would recommend &amp;encourage you to
+              re-apply.
+              <br><br>Regards,
+              <br>Team
+              <br><a style="color: blue;" href="https://refer2career.com">Refer2career</a>`
+            };
+            this.dbService.sendMail(email).subscribe((data: any) => {
+              if (data.data) {
+              }
+            });
+        }
+        if(status==='Hired')
+        {
+          if(user.refered===true)
+          {
+            const db: DbOperation = {
+              collection: 'users',
+              selectedFields: { name: 1,_id: 0 },
+              query: { email: user.referedBy},
+            };
+            this.dbService.find(db).subscribe((thisData: any)=>{
+              if(thisData.data){
+                if(thisData.data.length>0){
+                  let userName=thisData.data[0].name;
+                  const email = {
+                    email: thisData.email,
+                    subject: `Thank you for the referral`,
+                    content: `<p>Hi ${userName},</p>
+                    Thank you for the referral of ${user.name} to Refer2Career. It give us immense pleasure to
+                    inform you he/she is shortlisted . Her/His start date is  and once he completes the
+                    90 day probation period , you will be paid the ${this.post.referReward}
+                    referral bonus (less taxes) on your paycheck.<br>
+                    Please let us know if you have any questions.
+                    <p>Thanks!          
+                    <br>Regards,
+                    <br>Team <a style="color: blue;" href="https://refer2career.com">Refer2career</a></p>`
+                  };
+                  this.dbService.sendMail(email).subscribe((data: any) => {
+                    if (data.data) {
+                    }
+                  });
+                }
+              }
+            })
+          }
+        }
       }
       if (index === this.filteredCandidates.length - 1) {
         this.isServiceRunning = false;
