@@ -307,7 +307,7 @@ export class LogInComponent implements OnInit {
   }
 
   linkedinLogin() {
-    window.open('https://instajobapp.herokuapp.com/linkedin', '_self');
+    window.open('https://refer2career.com/linkedin', '_self');
     // this.authService.linkedInLogin().subscribe(data => {
     // });
   }

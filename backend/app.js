@@ -53,7 +53,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new LinkedInStrategy({
     clientID: '78pijkn0197pgp',
     clientSecret: 'XL9shz8q217eF2BI',
-    callbackURL: "https://instajobapp.herokuapp.com/callback/",
+    callbackURL: "https://refer2career.com/callback/",
     scope: ['r_emailaddress', 'r_liteprofile'],
 }, function (accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...

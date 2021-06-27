@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'login/:code/:user',
-    component: SigninComponent
+    component: LogInComponent
   },
   {
     path: 'referer',
