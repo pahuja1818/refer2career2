@@ -1,4 +1,3 @@
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -13,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from './../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { firebaseConfig } from 'src/environments/environment';
 
 @NgModule({
@@ -28,7 +28,6 @@ import { firebaseConfig } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-
     AppRoutingModule,
     SharedModule,
     NgbModule,
