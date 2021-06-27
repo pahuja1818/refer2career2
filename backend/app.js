@@ -124,7 +124,7 @@ const GOOGLE_CLIENT_SECRET = 'HFe2JkRt8oZZfIqNHOHmI2XA';
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://instajobapp.herokuapp.com/google/callback/"
+    callbackURL: "https://refer2career.com/google/callback/"
 },
     function (accessToken, refreshToken, profile, done) {
         userProfile = profile;

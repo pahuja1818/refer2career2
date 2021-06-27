@@ -313,7 +313,7 @@ export class LogInComponent implements OnInit {
   }
 
   googleLogin() {
-    window.open('https://instajobapp.herokuapp.com/google', '_self');
+    window.open('https://refer2career.com/google', '_self');
     // this.authService.linkedInLogin().subscribe(data => {
     // });
   }
