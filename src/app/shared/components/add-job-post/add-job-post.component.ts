@@ -7,6 +7,7 @@ import { OnInit } from '@angular/core';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import {CommonCurrencyCodesService } from './../../services/common-currency-codes.service';
 
 @Component({
   selector: 'app-add-job-post',
@@ -40,6 +41,8 @@ export class AddJobPostComponent implements OnInit {
       route: "/recruiter/create-job-posts"
     }
   ]
+
+  currencyArray:any=[];
 
   jobPostForm: FormGroup;
   aboutUs = '';
@@ -78,6 +81,7 @@ export class AddJobPostComponent implements OnInit {
     public modalRef: BsModalRef,
     private modalService: BsModalService,
     private router: Router,
+    private currencyService:CommonCurrencyCodesService,
   ) { }
 
   addQuestion() {
@@ -128,6 +132,10 @@ export class AddJobPostComponent implements OnInit {
       this.questionsArray = this.jobPost.jobPost.question;
     }
     this.jobPostService.post = undefined;
+
+    this.currencyArray=this.currencyService.allCurrency;
+    // console.log(this.currencyArray);
+
   }
 
   closeModal() {

@@ -15,7 +15,7 @@
     </div>
     <div class="col-sm-8 mx-2 bg-white"
       style="border-radius: 7px; overflow-y: auto !important; overflow-x: hidden !important;">
-      <div class="mt-4 row d-flex vertical-center justify-content-center" [formGroup]="jobPostForm">
+      <div class="mt-4 row d-flex align-items-top justify-content-center" [formGroup]="jobPostForm">
         <div class="col-sm-5 m-3">
           <label for="title" class="label-form">Job Title/Designation<span class="text-primary">*</span></label>
           <mat-form-field appearance="fill" class="p-0 w-100 mat-form-field">
@@ -53,11 +53,19 @@
         <div class="col-sm-5 m-3">
           <label for="salary" class="label-form">{{ jobPostForm.get('jobInternship').value === "Internship" ? 'Stipend': 'Salary'}} <span
             class="text-primary">*</span></label>
-          <mat-form-field class="w-100 mat-form-field" appearance="fill">
-            <input matInput formControlName='salary' id="salary" name="salary" type="number" class="p-0">
-            <span matPrefix>&#8377;&nbsp;</span>
-            <span matSuffix>.00</span>
+              <mat-form-field  class="w-100 p-0 " appearance="fill">
+                <mat-select id="salaryType" formControlName='salaryType'>
+                  <mat-option *ngFor="let currency of currencyArray" value="{{currency.code}}">{{currency.code}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="row col-sm-12 justify-content-between vertical-center m-0 p-0">
+          <mat-form-field class="col-sm-5 mr-1" appearance="fill">
+            <input matInput placeholder="Minimum" formControlName='salary' id="salary" name="salary" type="number" class="p-0">
           </mat-form-field>
+          <mat-form-field class="col-sm-5" appearance="fill">
+            <input matInput placeholder="Maximum" formControlName='salary' id="salary" name="salary" type="number" class="p-0">
+          </mat-form-field>
+        </div>
         </div>
         <div class="col-sm-5 m-3">
           <label for="salaryType" class="label-form">Salary type <span class="text-primary">*</span></label>
