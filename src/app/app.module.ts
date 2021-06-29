@@ -9,11 +9,6 @@ import { IonicRouteStrategy } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from './../environments/environment';
-
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { firebaseConfig } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,8 +17,6 @@ import { firebaseConfig } from 'src/environments/environment';
   entryComponents: [
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireStorageModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

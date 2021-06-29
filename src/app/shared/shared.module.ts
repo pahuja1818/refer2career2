@@ -74,6 +74,10 @@ import {NavBarContentComponent} from './components/nav-bar-content/nav-bar-conte
 import {RecentJobsComponent} from './components/recent-jobs/recent-jobs.component';
 import {EmpRecentJobPostsComponent} from './components/emp-recent-job-posts/emp-recent-job-posts.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { firebaseConfig } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     SpinnerComponentComponent,
@@ -95,6 +99,8 @@ import {EmpRecentJobPostsComponent} from './components/emp-recent-job-posts/emp-
     ManageApplicantsComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireStorageModule,
     NgSelectModule,
     CommonModule,
     AlertModule.forRoot(),
