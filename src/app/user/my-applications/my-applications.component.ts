@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { JobPostServiceService } from 'src/app/shared/services/job-post-service.service';
-import { analytics } from 'firebase';
 
 @Component({
   selector: 'app-my-applications',

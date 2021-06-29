@@ -10,8 +10,7 @@ import { JobPostServiceService } from './../../shared/services/job-post-service.
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Status } from 'src/app/shared/models/enums';
-import * as firebase from 'firebase';
-import { Db } from 'mongodb';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-job-detail',

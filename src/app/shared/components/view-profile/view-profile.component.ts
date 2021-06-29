@@ -9,7 +9,7 @@ import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-view-profile',
