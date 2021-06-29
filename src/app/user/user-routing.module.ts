@@ -17,29 +17,29 @@ const routes: Routes = [
     path: '', component: UserDashboardComponent, children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: 'dashboard', component: UsermenuComponent
+        path: 'dashboard', component: UsermenuComponent, data: { animation: 'isRight'}
       },
       {
         path: 'profile', component: UserProfileComponent, data: { animation: 'isRight'}
       },
       {
-        path: 'organizations', component: UserPageComponent
+        path: 'organizations', component: UserPageComponent, data: { animation: 'isRight'}
       },
       {
-        path: 'jobs', component: UserJobsComponent
+        path: 'jobs', component: UserJobsComponent, data: { animation: 'isRight'}
       },
 
       {
-        path: 'jobs/job-detail/:id', component: JobDetailComponent
+        path: 'jobs/job-detail/:id', component: JobDetailComponent, data: { animation: 'isRight'}
       },
       {
-        path: 'my-applications', component: MyApplicationsComponent
+        path: 'my-applications', component: MyApplicationsComponent, data: { animation: 'isRight'}
       },
       {
-        path: 'referred', component: ReferedProfilesComponent
+        path: 'referred', component: ReferedProfilesComponent, data: { animation: 'isRight'}
       },
       {
-        path: 'messages', component: UserMessagesComponent
+        path: 'messages', component: UserMessagesComponent, data: { animation: 'isRight'}
       },
     ]
   },

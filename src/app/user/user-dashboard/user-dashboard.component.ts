@@ -1,3 +1,5 @@
+import { slider } from './../../animations';
+import { RouterOutlet } from '@angular/router';
 import { UserRole } from 'src/app/shared/models/enums';
 import { AuthService } from './../../shared/services/auth.service';
 import { DbOperation } from './../../shared/models/dbOperation';
@@ -10,6 +12,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.scss'],
+  animations: [ slider ]
 })
 export class UserDashboardComponent implements OnInit {
   modalRef: BsModalRef;
@@ -25,6 +28,10 @@ export class UserDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']
   }
 
   toggle() {

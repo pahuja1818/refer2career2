@@ -52,19 +52,19 @@ function slideTo(direction) {
     ], optional),
     query(':enter', [
       style({ [direction]: '-100%'})
-    ]),
+    ], optional),
     group([
       query(':leave', [
         animate('600ms ease', style({ [direction]: '100%'}))
       ], optional),
       query(':enter', [
         animate('600ms ease', style({ [direction]: '0%'}))
-      ])
+      ], optional)
     ]),
     // Normalize the page style... Might not be necessary
 
     // Required only if you have child animations on the page
-    // query(':leave', animateChild()),
-    // query(':enter', animateChild()),
+    query(':leave', animateChild(), {optional: true}),
+    query(':enter', animateChild(), {optional: true}),
   ];
 }

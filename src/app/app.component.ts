@@ -13,12 +13,11 @@ import { Location } from '@angular/common';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  animations: [ slider ]
 })
 export class AppComponent implements OnInit {
 
-  prepareRoute(outlet: IonRouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']
   }
   role = UserRole;
 
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit {
     }
     else {
       if (!(this.location.path().includes('login'))){
-        this.router.navigateByUrl('/login');
+        //this.router.navigateByUrl('/login');
       }
     }
   }
