@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'dashboard', component: UsermenuComponent
       },
       {
-        path: 'profile', component: UserProfileComponent
+        path: 'profile', component: UserProfileComponent, data: { animation: 'isRight'}
       },
       {
         path: 'organizations', component: UserPageComponent
