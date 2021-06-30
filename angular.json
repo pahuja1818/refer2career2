@@ -58,8 +58,9 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
+              "deleteOutputPath": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -67,9 +68,6 @@
                   "maximumError": "5mb"
                 }
               ]
-            },
-            "ci": {
-              "progress": false
             }
           }
         },
