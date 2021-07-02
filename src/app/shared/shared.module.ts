@@ -77,6 +77,7 @@ import {EmpRecentJobPostsComponent} from './components/emp-recent-job-posts/emp-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { firebaseConfig } from 'src/environments/environment';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { firebaseConfig } from 'src/environments/environment';
     NavBarContentComponent,
     RecentJobsComponent,
     EmpRecentJobPostsComponent,
+    FooterComponent
   ],
   entryComponents: [
     AddJobPostComponent,
@@ -226,6 +228,7 @@ import { firebaseConfig } from 'src/environments/environment';
     NavBarContentComponent,
     RecentJobsComponent,
     EmpRecentJobPostsComponent,
+    FooterComponent
   ],
   providers: [
     StatusBar,

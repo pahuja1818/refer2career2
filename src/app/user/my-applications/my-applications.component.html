@@ -2,18 +2,18 @@
 <div class="wh-100" style="overflow-y: auto; overflow-x: hidden;">
   <div class="w-100 h-100 m-0 p-0 justify-content-center" *ngIf="!isServiceRunning" style="background-color: #f8f8f8">
     <div class="col-sm-10 row p-0 mx-auto vertical-center justify-content-around">
-        <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
-          <span class="text-black text-lg">{{allAppliedPosts.length}}</span>
-          <h6 class="text-dark thin-font text-ssmd">Applied Jobs</h6>
-        </div>
-        <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
-          <span class="text-black text-lg">{{shortlistedJobs}}</span>
-          <h6 class="text-dark thin-font text-ssmd">Shortlisted Jobs</h6>
-        </div>
-        <div class="d-flex flex-column semi-bold m-0 p-0 ">
-          <span class="text-black text-lg">{{hiredJobs}}</span>
-          <h6 class="text-dark thin-font text-ssmd">Hired</h6>
-        </div>
+      <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
+        <span class="text-black text-lg">{{allAppliedPosts.length}}</span>
+        <h6 class="text-dark thin-font text-ssmd">Applied Jobs</h6>
+      </div>
+      <div class="d-flex flex-column semi-bold  m-0 p-0 mr-3">
+        <span class="text-black text-lg">{{shortlistedJobs}}</span>
+        <h6 class="text-dark thin-font text-ssmd">Shortlisted Jobs</h6>
+      </div>
+      <div class="d-flex flex-column semi-bold m-0 p-0 ">
+        <span class="text-black text-lg">{{hiredJobs}}</span>
+        <h6 class="text-dark thin-font text-ssmd">Hired</h6>
+      </div>
     </div>
 
     <div class="row justify-content-center p-2 bg-lightest-blue">
@@ -46,7 +46,7 @@
                             }}
                             years</span>
                         </div>
-    
+
                         <div class="vertical-center justify-content-start mr-3">
                           <span class="material-icons  mr-2 text-primary">business</span>
                           <span class=" text-lato text-primary d-inline">Company : </span>
@@ -59,20 +59,20 @@
                           <span class="material-icons-outlined text-md  mr-2 text-primary">location_on</span>
                           <span class=" text-lato text-smd text-primary">&nbsp;{{jobPost.jobPost.location}}</span>
                         </div>
-    
+
                         <div *ngIf="jobPost.jobPost.jobType !== 'In office'"
                           class=" vertical-center justify-content-start mr-2">
                           <span class="material-icons-outlined text-md  mr-2 text-primary">home</span>
                           <span class=" text-lato text-smd text-primary d-inline">Work from home</span>
                         </div>
-    
+
                         <div class="vertical-center justify-content-start mr-2">
                           <span class="material-icons text-md  mr-2 text-primary">
                             schedule
                           </span>
-                            <span class="text-smd text-lato text-primary">Submitted on {{jobPost.appliedDate | date: 'dd
-                              MMMM
-                              yyyy'}}</span>
+                          <span class="text-smd text-lato text-primary">Submitted on {{jobPost.appliedDate | date: 'dd
+                            MMMM
+                            yyyy'}}</span>
                         </div>
                       </div>
                     </div>
@@ -86,7 +86,7 @@
               </div>
               <div class="d-flex justify-content-between flex-wrap vertical-center">
                 <div class="my-2 d-flex vertical-center flex-wrap" *ngIf="jobPost.jobPost.skills.length > 0">
-    
+
                   <div class="px-2 py-1 text-primary bg-lightest-blue mr-2 border-6 text-lato text-sm">
                     {{jobPost.jobPost.skills[0].skillName }}
                   </div>
@@ -95,7 +95,7 @@
                     {{jobPost.jobPost.skills[1].skillName }}
                   </div>
                 </div>
-    
+
                 <div class="d-flex vertical-center flex-wrap justify-content-between">
                   <div class="justify-content-between vertical-center mr-2">
                     <div class="btn btn-primary px-2 py-1 mr-2 border-6 text-white text-lato text-sm">REWARD :
@@ -103,7 +103,7 @@
                   </div>
                   <div class="my-2 vertical-center justify-content-start">
                     <span class="text-black text-slmd">&nbsp; ₹ {{jobPost.jobPost.salary}}</span>
-                    <div class="d-flex ml-1 align-self-end" >
+                    <div class="d-flex ml-1 align-self-end">
                       <span class="text-fluid ">{{jobPost.jobPost.salaryType}}</span>
                     </div>
                   </div>
@@ -177,12 +177,8 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom bg-primary ">
-      <div class="text-center text-white py-3 px-2">© 2021 Refer 2 Career. All Rights Reserved.
-      </div>
-    </div>
   </div>
-  
+
 </div>
 
 
