@@ -1,11 +1,9 @@
 const express = require('express');
 var mongoUtil = require('./db');
-var nodemailer = require('nodemailer');
-const ResumeParser = require('resume-parser');
-
 var passport = require('passport');
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var mongo;
+
 mongoUtil.connectToServer(function (err, client) {
     if (err) console.log(err);
     // start the rest of your app here
