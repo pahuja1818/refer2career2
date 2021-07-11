@@ -53,7 +53,7 @@
 }
 
 // mat-label error style
-::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+::ng-deep .mat-form-field .mat-form-field-invalid .mat-form-field-label {
     color: rgb(255, 255, 255)!important;
 }
 

@@ -1,4 +1,3 @@
-import { TestComponent } from './test/test.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -15,7 +14,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     LogInComponent,
-    TestComponent
   ],
   entryComponents: [
   ],

@@ -1,5 +1,4 @@
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
-import { EmployerSigninComponent } from './../login/signin/employer-signin/employer-signin.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { ManageApplicantsComponent } from './components/manage-applicants/manage-applicants.component';
@@ -67,7 +66,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { JobDetailsComponent } from './components/add-job-post/job-details/job-details.component';
 import { SpinnerComponentComponent } from './components/spinner-component/spinner-component.component';
 import { AllJobPostsComponent } from './components/all-job-posts/all-job-posts.component';
-import { SigninComponent } from '../login/signin/signin.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import {NavBarContentComponent} from './components/nav-bar-content/nav-bar-content.component';
@@ -87,9 +85,7 @@ import { FooterComponent } from './components/footer/footer.component';
     AllJobPostsComponent,
     ManageApplicantsComponent,
     ApplicationsComponent,
-    SigninComponent,
     NotFoundComponent,
-    EmployerSigninComponent,
     ViewProfileComponent,
     NavBarContentComponent,
     RecentJobsComponent,
@@ -163,7 +159,6 @@ import { FooterComponent } from './components/footer/footer.component';
   exports: [
     NotFoundComponent,
     SpinnerComponentComponent,
-    EmployerSigninComponent,
     ViewProfileComponent,
     MatProgressSpinnerModule,
     AlertModule,
@@ -222,7 +217,6 @@ import { FooterComponent } from './components/footer/footer.component';
     AllJobPostsComponent,
     ManageApplicantsComponent,
     ApplicationsComponent,
-    SigninComponent,
     NgSelectModule,
     CollapseModule,
     NavBarContentComponent,
