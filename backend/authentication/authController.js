@@ -137,6 +137,48 @@ module.exports.find = (req, res) => {
     });
 }
 
+module.exports.getMails = (res) => {
+    result = [
+        {
+          "id": 1,
+          "name": "Tushar",
+          "email": "Pahuja@gmail.com",
+          "date": new Date(),
+          "status": 0
+        },
+        {
+          "id": 2,
+          "name": "Rohit",
+          "email": "rohit@gmail.com",
+          "date": new Date(),
+          "status": 1
+        },
+        {
+          "id": 3,
+          "name": "Tushar",
+          "email": "Pahuja@gmail.com",
+          "date": new Date(),
+          "status": 1
+        },
+        {
+          "id": 3,
+          "name": "Tushar",
+          "email": "Pahuja@gmail.com",
+          "date": new Date(),
+          "status": 3
+        },
+        {
+          "id": 3,
+          "name": "Tushar",
+          "email": "Pahuja@gmail.com",
+          "date": new Date(),
+          "status": 2
+        },
+    
+      ];
+    return res.status(200).json({ 'data': result });
+}
+
 module.exports.update = (req, res) => {
     const data = req.body.data;
     const collection = req.body.collection;
