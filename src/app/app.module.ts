@@ -1,3 +1,5 @@
+import { firebaseConfig } from 'src/environments/environment';
+import { environment } from './../environments/environment.prod';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -9,6 +11,10 @@ import { IonicRouteStrategy } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import * as firebase from 'firebase';
+
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
