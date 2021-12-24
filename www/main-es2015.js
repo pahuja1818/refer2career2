@@ -1177,7 +1177,7 @@ let AuthService = class AuthService {
         this.currentUser = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'content-type': 'application/json' });
         this.baseUrl = '';
-        this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
+        this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com:8084';
         this.getCurrentUser();
         if (window.screen.width > 1150) {
             this.isScreenBig = true;
