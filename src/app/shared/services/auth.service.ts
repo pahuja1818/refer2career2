@@ -19,7 +19,7 @@ export class AuthService {
   public baseUrl = '';
 
   constructor(private http: HttpClient) {
-    this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
+    this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com:8084';
     this.getCurrentUser();
     if (window.screen.width > 1150) {
       this.isScreenBig = true;
