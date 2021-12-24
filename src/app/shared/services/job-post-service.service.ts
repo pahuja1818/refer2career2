@@ -19,7 +19,7 @@ export class JobPostServiceService {
   myApplications: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
-  this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
+  this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
   this.getPosts();
   }
 
