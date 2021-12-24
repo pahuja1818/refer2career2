@@ -1783,7 +1783,7 @@
             'content-type': 'application/json'
           });
           this.baseUrl = '';
-          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com:8084';
+          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
           this.getCurrentUser();
 
           if (window.screen.width > 1150) {
@@ -4376,7 +4376,7 @@
           this.jobPosts = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
           this.postDetail = {};
           this.myApplications = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
-          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
+          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
           this.getPosts();
         }
 

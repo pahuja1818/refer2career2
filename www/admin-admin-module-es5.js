@@ -892,7 +892,7 @@
             'content-type': 'application/json'
           });
           this.baseUrl = '';
-          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : '';
+          this.baseUrl = window.location.host.includes('localhost') ? 'http://localhost:8084' : 'https://instajobapp.herokuapp.com';
         }
 
         _createClass(OrganizationsService, [{
