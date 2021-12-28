@@ -79589,7 +79589,7 @@
           value: function loggedOut() {
             this.modalRef.hide();
             window.localStorage.removeItem('id');
-            window.location.reload();
+            this.router.navigateByUrl("login");
           }
         }, {
           key: "send",
@@ -79889,9 +79889,15 @@
       var src_app_shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! src/app/shared/services/toast.service */
       "3WbM");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
 
       var EmployerDashboardComponent = /*#__PURE__*/function () {
-        function EmployerDashboardComponent(menu, modalService, csc, dbService, toast) {
+        function EmployerDashboardComponent(menu, modalService, csc, dbService, toast, router) {
           _classCallCheck(this, EmployerDashboardComponent);
 
           this.menu = menu;
@@ -79899,6 +79905,7 @@
           this.csc = csc;
           this.dbService = dbService;
           this.toast = toast;
+          this.router = router;
           this.type = null;
           this.description = '';
           this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
@@ -79934,6 +79941,7 @@
           value: function loggedOut() {
             this.modalRef.hide();
             window.localStorage.removeItem('id');
+            this.router.navigateByUrl("login");
             window.location.reload();
           }
         }, {
@@ -79988,6 +79996,8 @@
           type: src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"]
         }, {
           type: src_app_shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"]
         }];
       };
 

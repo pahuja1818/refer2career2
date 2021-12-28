@@ -49,8 +49,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_admin_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./admin-dashboard.component.html */ "Bz0P");
 /* harmony import */ var _admin_dashboard_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-dashboard.component.scss */ "ZEEn");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+
 
 
 
@@ -58,9 +60,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AdminDashboardComponent = class AdminDashboardComponent {
-    constructor(menu, modalService) {
+    constructor(menu, modalService, router) {
         this.menu = menu;
         this.modalService = modalService;
+        this.router = router;
     }
     ngOnInit() { }
     toggle() {
@@ -76,12 +79,13 @@ let AdminDashboardComponent = class AdminDashboardComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
-        window.location.reload();
+        this.router.navigateByUrl("login");
     }
 };
 AdminDashboardComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["MenuController"] },
-    { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__["BsModalService"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] },
+    { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__["BsModalService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 AdminDashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({

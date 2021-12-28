@@ -26838,7 +26838,7 @@ let EmployerMenuComponent = class EmployerMenuComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
-        window.location.reload();
+        this.router.navigateByUrl("login");
     }
     send() {
         if (this.type) {
@@ -27007,6 +27007,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/shared/services/auth.service */ "IYfF");
 /* harmony import */ var src_app_shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/shared/services/toast.service */ "3WbM");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
@@ -27018,12 +27020,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EmployerDashboardComponent = class EmployerDashboardComponent {
-    constructor(menu, modalService, csc, dbService, toast) {
+    constructor(menu, modalService, csc, dbService, toast, router) {
         this.menu = menu;
         this.modalService = modalService;
         this.csc = csc;
         this.dbService = dbService;
         this.toast = toast;
+        this.router = router;
         this.type = null;
         this.description = '';
         this.user = JSON.parse(window.atob(window.localStorage.getItem('id')));
@@ -27044,6 +27047,7 @@ let EmployerDashboardComponent = class EmployerDashboardComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
+        this.router.navigateByUrl("login");
         window.location.reload();
     }
     send() {
@@ -27085,7 +27089,8 @@ EmployerDashboardComponent.ctorParameters = () => [
     { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__["BsModalService"] },
     { type: _shared_services_country_state_city_service__WEBPACK_IMPORTED_MODULE_4__["CountryStateCityService"] },
     { type: src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"] },
-    { type: src_app_shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"] }
+    { type: src_app_shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"] }
 ];
 EmployerDashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_7__["Component"])({

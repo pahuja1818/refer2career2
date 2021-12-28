@@ -2584,6 +2584,12 @@
       var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(
       /*! ./components/footer/footer.component */
       "aF9I");
+      /* harmony import */
+
+
+      var _auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(
+      /*! ./auth-guard/auth-guard */
+      "fJ1W");
 
       var SharedModule = function SharedModule() {
         _classCallCheck(this, SharedModule);
@@ -2594,7 +2600,7 @@
         entryComponents: [_components_add_job_post_add_job_post_component__WEBPACK_IMPORTED_MODULE_5__["AddJobPostComponent"], _components_manage_applicants_manage_applicants_component__WEBPACK_IMPORTED_MODULE_4__["ManageApplicantsComponent"]],
         imports: [_angular_fire__WEBPACK_IMPORTED_MODULE_68__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_70__["firebaseConfig"]), _angular_fire_storage__WEBPACK_IMPORTED_MODULE_69__["AngularFireStorageModule"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_63__["NgSelectModule"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["CommonModule"], ngx_bootstrap_alert__WEBPACK_IMPORTED_MODULE_58__["AlertModule"].forRoot(), ngx_bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_59__["BsDatepickerModule"].forRoot(), ng_otp_input__WEBPACK_IMPORTED_MODULE_57__["NgOtpInputModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"], _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_40__["MatProgressSpinnerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatFormFieldModule"], _angular_cdk_clipboard__WEBPACK_IMPORTED_MODULE_12__["ClipboardModule"], _angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_16__["CdkStepperModule"], _angular_cdk_table__WEBPACK_IMPORTED_MODULE_17__["CdkTableModule"], _angular_cdk_tree__WEBPACK_IMPORTED_MODULE_18__["CdkTreeModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_13__["DragDropModule"], _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_19__["MatAutocompleteModule"], _angular_material_badge__WEBPACK_IMPORTED_MODULE_20__["MatBadgeModule"], _angular_material_bottom_sheet__WEBPACK_IMPORTED_MODULE_21__["MatBottomSheetModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_22__["MatButtonModule"], _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_23__["MatButtonToggleModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_24__["MatCardModule"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_25__["MatCheckboxModule"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_26__["MatChipsModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_27__["MatStepperModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_28__["MatDatepickerModule"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_29__["MatDialogModule"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_30__["MatDividerModule"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_31__["MatExpansionModule"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_32__["MatGridListModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_33__["MatIconModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_34__["MatInputModule"], _angular_material_list__WEBPACK_IMPORTED_MODULE_35__["MatListModule"], _angular_material_menu__WEBPACK_IMPORTED_MODULE_36__["MatMenuModule"], _angular_material_core__WEBPACK_IMPORTED_MODULE_37__["MatNativeDateModule"], _angular_material_paginator__WEBPACK_IMPORTED_MODULE_38__["MatPaginatorModule"], _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_39__["MatProgressBarModule"], _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_40__["MatProgressSpinnerModule"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_41__["MatRadioModule"], _angular_material_core__WEBPACK_IMPORTED_MODULE_37__["MatRippleModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"], _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_43__["MatSidenavModule"], _angular_material_slider__WEBPACK_IMPORTED_MODULE_44__["MatSliderModule"], _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_45__["MatSlideToggleModule"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_46__["MatSnackBarModule"], _angular_material_sort__WEBPACK_IMPORTED_MODULE_47__["MatSortModule"], _angular_material_table__WEBPACK_IMPORTED_MODULE_48__["MatTableModule"], _angular_material_tabs__WEBPACK_IMPORTED_MODULE_49__["MatTabsModule"], _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_50__["MatToolbarModule"], _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_51__["MatTooltipModule"], _angular_material_tree__WEBPACK_IMPORTED_MODULE_52__["MatTreeModule"], _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_53__["OverlayModule"], _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_14__["PortalModule"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_15__["ScrollingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_54__["IonicModule"].forRoot(), ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["ModalModule"].forRoot(), ngx_bootstrap_collapse__WEBPACK_IMPORTED_MODULE_64__["CollapseModule"].forRoot()],
         exports: [_components_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_2__["NotFoundComponent"], _components_spinner_component_spinner_component_component__WEBPACK_IMPORTED_MODULE_61__["SpinnerComponentComponent"], _components_view_profile_view_profile_component__WEBPACK_IMPORTED_MODULE_1__["ViewProfileComponent"], _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_40__["MatProgressSpinnerModule"], ngx_bootstrap_alert__WEBPACK_IMPORTED_MODULE_58__["AlertModule"], ng_otp_input__WEBPACK_IMPORTED_MODULE_57__["NgOtpInputModule"], ngx_bootstrap_datepicker__WEBPACK_IMPORTED_MODULE_59__["BsDatepickerModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatFormFieldModule"], _angular_cdk_clipboard__WEBPACK_IMPORTED_MODULE_12__["ClipboardModule"], _angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_16__["CdkStepperModule"], _angular_cdk_table__WEBPACK_IMPORTED_MODULE_17__["CdkTableModule"], _angular_cdk_tree__WEBPACK_IMPORTED_MODULE_18__["CdkTreeModule"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_13__["DragDropModule"], _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_19__["MatAutocompleteModule"], _angular_material_badge__WEBPACK_IMPORTED_MODULE_20__["MatBadgeModule"], _angular_material_bottom_sheet__WEBPACK_IMPORTED_MODULE_21__["MatBottomSheetModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_22__["MatButtonModule"], _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_23__["MatButtonToggleModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_24__["MatCardModule"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_25__["MatCheckboxModule"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_26__["MatChipsModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_27__["MatStepperModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_28__["MatDatepickerModule"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_29__["MatDialogModule"], _angular_material_divider__WEBPACK_IMPORTED_MODULE_30__["MatDividerModule"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_31__["MatExpansionModule"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_32__["MatGridListModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_33__["MatIconModule"], _angular_material_input__WEBPACK_IMPORTED_MODULE_34__["MatInputModule"], _angular_material_list__WEBPACK_IMPORTED_MODULE_35__["MatListModule"], _angular_material_menu__WEBPACK_IMPORTED_MODULE_36__["MatMenuModule"], _angular_material_core__WEBPACK_IMPORTED_MODULE_37__["MatNativeDateModule"], _angular_material_paginator__WEBPACK_IMPORTED_MODULE_38__["MatPaginatorModule"], _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_39__["MatProgressBarModule"], _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_40__["MatProgressSpinnerModule"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_41__["MatRadioModule"], _angular_material_core__WEBPACK_IMPORTED_MODULE_37__["MatRippleModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_42__["MatSelectModule"], _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_43__["MatSidenavModule"], _angular_material_slider__WEBPACK_IMPORTED_MODULE_44__["MatSliderModule"], _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_45__["MatSlideToggleModule"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_46__["MatSnackBarModule"], _angular_material_sort__WEBPACK_IMPORTED_MODULE_47__["MatSortModule"], _angular_material_table__WEBPACK_IMPORTED_MODULE_48__["MatTableModule"], _angular_material_tabs__WEBPACK_IMPORTED_MODULE_49__["MatTabsModule"], _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_50__["MatToolbarModule"], _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_51__["MatTooltipModule"], _angular_material_tree__WEBPACK_IMPORTED_MODULE_52__["MatTreeModule"], _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_53__["OverlayModule"], _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_14__["PortalModule"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_15__["ScrollingModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_54__["IonicModule"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["ModalModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _components_add_job_post_job_details_job_details_component__WEBPACK_IMPORTED_MODULE_60__["JobDetailsComponent"], _components_all_job_posts_all_job_posts_component__WEBPACK_IMPORTED_MODULE_62__["AllJobPostsComponent"], _components_manage_applicants_manage_applicants_component__WEBPACK_IMPORTED_MODULE_4__["ManageApplicantsComponent"], _components_applications_applications_component__WEBPACK_IMPORTED_MODULE_3__["ApplicationsComponent"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_63__["NgSelectModule"], ngx_bootstrap_collapse__WEBPACK_IMPORTED_MODULE_64__["CollapseModule"], _components_nav_bar_content_nav_bar_content_component__WEBPACK_IMPORTED_MODULE_65__["NavBarContentComponent"], _components_recent_jobs_recent_jobs_component__WEBPACK_IMPORTED_MODULE_66__["RecentJobsComponent"], _components_emp_recent_job_posts_emp_recent_job_posts_component__WEBPACK_IMPORTED_MODULE_67__["EmpRecentJobPostsComponent"], _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_71__["FooterComponent"]],
-        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_56__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_55__["SplashScreen"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["BsModalRef"]],
+        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_56__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_55__["SplashScreen"], ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["BsModalRef"], _auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_72__["RouteGuard"]],
         schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_6__["CUSTOM_ELEMENTS_SCHEMA"]]
       })], SharedModule);
       /***/
@@ -4320,6 +4326,98 @@
     },
 
     /***/
+    "fJ1W":
+    /*!*************************************************!*\
+      !*** ./src/app/shared/auth-guard/auth-guard.ts ***!
+      \*************************************************/
+
+    /*! exports provided: RouteGuard */
+
+    /***/
+    function fJ1W(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "RouteGuard", function () {
+        return RouteGuard;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+
+      var RouteGuard = /*#__PURE__*/function () {
+        function RouteGuard(router) {
+          _classCallCheck(this, RouteGuard);
+
+          this.router = router;
+        }
+
+        _createClass(RouteGuard, [{
+          key: "canActivate",
+          value: function canActivate(route, state) {
+            var role = route.data.role;
+            {
+              var id = window.localStorage.getItem("id");
+              var user;
+
+              if (id) {
+                user = JSON.parse(window.atob(id));
+              }
+
+              if (user != null && user != undefined) {
+                if (user.role == 0 || user.role == 1 || user.role == 2) {
+                  return true;
+                }
+
+                if (user.role === 0) {
+                  this.router.navigateByUrl('/admin');
+                } else if (user.role === 1) {
+                  this.router.navigateByUrl('/recruiter');
+                } else if (user.role === 2) {
+                  this.router.navigateByUrl('/referer');
+                }
+
+                return false;
+              }
+
+              this.router.navigateByUrl('/login');
+              return false;
+            }
+          }
+        }]);
+
+        return RouteGuard;
+      }();
+
+      RouteGuard.ctorParameters = function () {
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }];
+      };
+
+      RouteGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], RouteGuard);
+      /***/
+    },
+
+    /***/
     "hLKV":
     /*!*************************************************************!*\
       !*** ./src/app/shared/services/job-post-service.service.ts ***!
@@ -5697,6 +5795,12 @@
       var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
       "tyNb");
+      /* harmony import */
+
+
+      var _shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./shared/auth-guard/auth-guard */
+      "fJ1W");
 
       var routes = [{
         path: 'login',
@@ -5718,7 +5822,8 @@
           "7UCR")).then(function (m) {
             return m.UserModule;
           });
-        }
+        },
+        canActivate: [_shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["RouteGuard"]]
       }, {
         path: 'admin',
         loadChildren: function loadChildren() {
@@ -5729,7 +5834,8 @@
           "jkDv")).then(function (m) {
             return m.AdminModule;
           });
-        }
+        },
+        canActivate: [_shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["RouteGuard"]]
       }, {
         path: 'recruiter',
         loadChildren: function loadChildren() {
@@ -5740,7 +5846,11 @@
           "mXZA")).then(function (m) {
             return m.EmployerModule;
           });
-        }
+        },
+        canActivate: [_shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["RouteGuard"]]
+      }, {
+        path: '**',
+        redirectTo: 'login'
       }];
 
       var AppRoutingModule = function AppRoutingModule() {

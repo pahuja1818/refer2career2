@@ -1465,6 +1465,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! @angular/fire/storage */ "g1va");
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! src/environments/environment */ "AytR");
 /* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/footer/footer.component */ "aF9I");
+/* harmony import */ var _auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./auth-guard/auth-guard */ "fJ1W");
+
 
 
 
@@ -1691,6 +1693,7 @@ SharedModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_56__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_55__["SplashScreen"],
             ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["BsModalRef"],
+            _auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_72__["RouteGuard"]
         ],
         schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_6__["CUSTOM_ELEMENTS_SCHEMA"]]
     })
@@ -2815,6 +2818,65 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "fJ1W":
+/*!*************************************************!*\
+  !*** ./src/app/shared/auth-guard/auth-guard.ts ***!
+  \*************************************************/
+/*! exports provided: RouteGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RouteGuard", function() { return RouteGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
+let RouteGuard = class RouteGuard {
+    constructor(router) {
+        this.router = router;
+    }
+    canActivate(route, state) {
+        const role = route.data.role;
+        {
+            let id = window.localStorage.getItem("id");
+            let user;
+            if (id) {
+                user = JSON.parse(window.atob(id));
+            }
+            if (user != null && user != undefined) {
+                if (user.role == 0 || user.role == 1 || user.role == 2) {
+                    return true;
+                }
+                if (user.role === 0) {
+                    this.router.navigateByUrl('/admin');
+                }
+                else if (user.role === 1) {
+                    this.router.navigateByUrl('/recruiter');
+                }
+                else if (user.role === 2) {
+                    this.router.navigateByUrl('/referer');
+                }
+                return false;
+            }
+            this.router.navigateByUrl('/login');
+            return false;
+        }
+    }
+};
+RouteGuard.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+RouteGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+], RouteGuard);
+
+
+
+/***/ }),
+
 /***/ "hLKV":
 /*!*************************************************************!*\
   !*** ./src/app/shared/services/job-post-service.service.ts ***!
@@ -3837,6 +3899,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _log_in_log_in_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./log-in/log-in.component */ "br8r");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/auth-guard/auth-guard */ "fJ1W");
+
 
 
 
@@ -3857,16 +3921,20 @@ const routes = [
     },
     {
         path: 'referer',
-        loadChildren: () => __webpack_require__.e(/*! import() | user-user-module */ "user-user-module").then(__webpack_require__.bind(null, /*! ./user/user.module */ "7UCR")).then(m => m.UserModule)
+        loadChildren: () => __webpack_require__.e(/*! import() | user-user-module */ "user-user-module").then(__webpack_require__.bind(null, /*! ./user/user.module */ "7UCR")).then(m => m.UserModule),
+        canActivate: [_shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["RouteGuard"]],
     },
     {
         path: 'admin',
-        loadChildren: () => Promise.all(/*! import() | admin-admin-module */[__webpack_require__.e("common"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "jkDv")).then(m => m.AdminModule)
+        loadChildren: () => Promise.all(/*! import() | admin-admin-module */[__webpack_require__.e("common"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "jkDv")).then(m => m.AdminModule),
+        canActivate: [_shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["RouteGuard"]],
     },
     {
         path: 'recruiter',
-        loadChildren: () => Promise.all(/*! import() | employer-employer-module */[__webpack_require__.e("common"), __webpack_require__.e("employer-employer-module")]).then(__webpack_require__.bind(null, /*! ./employer/employer.module */ "mXZA")).then(m => m.EmployerModule)
+        loadChildren: () => Promise.all(/*! import() | employer-employer-module */[__webpack_require__.e("common"), __webpack_require__.e("employer-employer-module")]).then(__webpack_require__.bind(null, /*! ./employer/employer.module */ "mXZA")).then(m => m.EmployerModule),
+        canActivate: [_shared_auth_guard_auth_guard__WEBPACK_IMPORTED_MODULE_4__["RouteGuard"]],
     },
+    { path: '**', redirectTo: 'login' },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

@@ -1298,6 +1298,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
@@ -1308,11 +1310,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UsermenuComponent = class UsermenuComponent {
-    constructor(menu, modalService, toast, dbService) {
+    constructor(menu, modalService, toast, dbService, router) {
         this.menu = menu;
         this.modalService = modalService;
         this.toast = toast;
         this.dbService = dbService;
+        this.router = router;
         this.isServiceRunning = false;
         this.navItems = [
             {
@@ -1382,7 +1385,7 @@ let UsermenuComponent = class UsermenuComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
-        window.location.reload();
+        this.router.navigateByUrl("login");
     }
     send() {
         if (this.type) {
@@ -1422,7 +1425,8 @@ UsermenuComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["MenuController"] },
     { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__["BsModalService"] },
     { type: src_app_shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] },
-    { type: src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] }
+    { type: src_app_shared_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] }
 ];
 UsermenuComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_6__["Component"])({
@@ -1574,12 +1578,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_user_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./user-dashboard.component.html */ "6nqn");
 /* harmony import */ var _user_dashboard_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-dashboard.component.scss */ "0TkN");
 /* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../animations */ "J1Ni");
-/* harmony import */ var src_app_shared_models_enums__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/shared/models/enums */ "pzb0");
-/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../shared/services/auth.service */ "IYfF");
-/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../shared/services/toast.service */ "3WbM");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var src_app_shared_models_enums__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/models/enums */ "pzb0");
+/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../shared/services/auth.service */ "IYfF");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../shared/services/toast.service */ "3WbM");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+
 
 
 
@@ -1591,11 +1597,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UserDashboardComponent = class UserDashboardComponent {
-    constructor(menu, modalService, toast, dbService) {
+    constructor(menu, modalService, toast, dbService, router) {
         this.menu = menu;
         this.modalService = modalService;
         this.toast = toast;
         this.dbService = dbService;
+        this.router = router;
         this.type = null;
         this.description = '';
     }
@@ -1617,6 +1624,7 @@ let UserDashboardComponent = class UserDashboardComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
+        this.router.navigateByUrl("login");
         window.location.reload();
     }
     send() {
@@ -1631,7 +1639,7 @@ let UserDashboardComponent = class UserDashboardComponent {
                         type: this.type,
                         description: this.description,
                         createdAt: new Date(),
-                        from: src_app_shared_models_enums__WEBPACK_IMPORTED_MODULE_4__["UserRole"].CANDIDATE
+                        from: src_app_shared_models_enums__WEBPACK_IMPORTED_MODULE_5__["UserRole"].CANDIDATE
                     }
                 };
                 this.dbService.create(db).then((data) => {
@@ -1654,13 +1662,14 @@ let UserDashboardComponent = class UserDashboardComponent {
     }
 };
 UserDashboardComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["MenuController"] },
-    { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["BsModalService"] },
-    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"] },
-    { type: _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["MenuController"] },
+    { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_10__["BsModalService"] },
+    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_7__["ToastService"] },
+    { type: _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 UserDashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_7__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_8__["Component"])({
         selector: 'app-user-dashboard',
         template: _raw_loader_user_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         animations: [_animations__WEBPACK_IMPORTED_MODULE_3__["slider"]],

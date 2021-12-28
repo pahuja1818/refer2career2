@@ -121,22 +121,29 @@
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @ionic/angular */
       "TEn/");
       /* harmony import */
 
 
-      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ngx-bootstrap/modal */
       "K3ix");
 
       var AdminDashboardComponent = /*#__PURE__*/function () {
-        function AdminDashboardComponent(menu, modalService) {
+        function AdminDashboardComponent(menu, modalService, router) {
           _classCallCheck(this, AdminDashboardComponent);
 
           this.menu = menu;
           this.modalService = modalService;
+          this.router = router;
         }
 
         _createClass(AdminDashboardComponent, [{
@@ -167,7 +174,7 @@
           value: function loggedOut() {
             this.modalRef.hide();
             window.localStorage.removeItem('id');
-            window.location.reload();
+            this.router.navigateByUrl("login");
           }
         }]);
 
@@ -176,9 +183,11 @@
 
       AdminDashboardComponent.ctorParameters = function () {
         return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["MenuController"]
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"]
         }, {
-          type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__["BsModalService"]
+          type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__["BsModalService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
         }];
       };
 
