@@ -1,5 +1,5 @@
 import { slider } from './../../animations';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { UserRole } from 'src/app/shared/models/enums';
 import { AuthService } from './../../shared/services/auth.service';
 import { DbOperation } from './../../shared/models/dbOperation';
@@ -25,6 +25,7 @@ export class UserDashboardComponent implements OnInit {
     private modalService: BsModalService,
     private toast: ToastService,
     private dbService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -50,6 +51,7 @@ export class UserDashboardComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
+    this.router.navigateByUrl("login");
     window.location.reload();
   }
 

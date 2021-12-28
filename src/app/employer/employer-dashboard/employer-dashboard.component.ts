@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employer-dashboard',
@@ -27,6 +28,7 @@ export class EmployerDashboardComponent implements OnInit {
     private csc: CountryStateCityService,
     private dbService: AuthService,
     private toast: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,7 @@ export class EmployerDashboardComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
+    this.router.navigateByUrl("login");
     window.location.reload();
   }
 

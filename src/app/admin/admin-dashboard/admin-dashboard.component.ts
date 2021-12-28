@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -13,6 +14,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private menu: MenuController,
     private modalService: BsModalService,
+    private router: Router
   ) { }
 
   ngOnInit() { }
@@ -33,7 +35,7 @@ export class AdminDashboardComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
-    window.location.reload();
+    this.router.navigateByUrl("login");
   }
 
 

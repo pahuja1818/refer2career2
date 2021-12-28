@@ -86,7 +86,7 @@ export class EmployerMenuComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
-    window.location.reload();
+    this.router.navigateByUrl("login");
   }
 
   send() {

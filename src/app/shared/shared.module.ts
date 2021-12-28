@@ -76,6 +76,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { firebaseConfig } from 'src/environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
+import { RouteGuard } from './auth-guard/auth-guard';
 
 @NgModule({
   declarations: [
@@ -228,6 +229,7 @@ import { FooterComponent } from './components/footer/footer.component';
     StatusBar,
     SplashScreen,
     BsModalRef,
+    RouteGuard
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

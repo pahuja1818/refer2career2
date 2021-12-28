@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usermenu',
@@ -18,6 +19,7 @@ export class UsermenuComponent implements OnInit {
     private modalService: BsModalService,
     private toast: ToastService,
     private dbService: AuthService,
+    private router: Router
   ) {
   }
 
@@ -105,7 +107,7 @@ export class UsermenuComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
-    window.location.reload();
+    this.router.navigateByUrl("login");
   }
 
   send() {
