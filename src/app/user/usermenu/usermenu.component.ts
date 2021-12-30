@@ -107,7 +107,7 @@ export class UsermenuComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
-    this.router.navigateByUrl("login");
+    this.router.navigateByUrl("/login");
   }
 
   send() {
