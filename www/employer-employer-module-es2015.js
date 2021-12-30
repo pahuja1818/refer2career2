@@ -26838,7 +26838,7 @@ let EmployerMenuComponent = class EmployerMenuComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
-        this.router.navigateByUrl("login");
+        this.router.navigateByUrl("/login");
     }
     send() {
         if (this.type) {
@@ -27105,4 +27105,3 @@ EmployerDashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 /***/ })
 
 }]);
-//# sourceMappingURL=employer-employer-module-es2015.js.map

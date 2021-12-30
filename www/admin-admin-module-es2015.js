@@ -79,7 +79,7 @@ let AdminDashboardComponent = class AdminDashboardComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
-        this.router.navigateByUrl("login");
+        this.router.navigateByUrl("/login");
     }
 };
 AdminDashboardComponent.ctorParameters = () => [
