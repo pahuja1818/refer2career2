@@ -15,7 +15,7 @@ export class OrganizationsService {
   public baseUrl = '';
 
   constructor(private http: HttpClient) {
-  this.baseUrl = window.location.host.includes('localhost') ?  'http://localhost:8084' :  'https://instajobapp.herokuapp.com' ;
+  this.baseUrl = window.location.host.includes('localhost') ?  'http://localhost:8084' :  '' ;
 
    }
 
