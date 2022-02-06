@@ -174,7 +174,7 @@
           value: function loggedOut() {
             this.modalRef.hide();
             window.localStorage.removeItem('id');
-            this.router.navigateByUrl("/login");
+            window.open("https://refer2career.com/login", "_self");
           }
         }]);
 

@@ -2222,7 +2222,7 @@ let NavBarContentComponent = class NavBarContentComponent {
     loggedOut() {
         this.modalRef.hide();
         window.localStorage.removeItem('id');
-        window.location.reload();
+        window.open("https://refer2career.com/login", "_self");
     }
 };
 NavBarContentComponent.ctorParameters = () => [
