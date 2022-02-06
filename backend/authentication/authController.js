@@ -23,7 +23,7 @@ module.exports.registerUser = (req, res) => {
             let otp = Math.floor(100000 + Math.random() * 900000);
             mongoUtil.collection("verify").deleteMany({ 'email': user.email }, function (err, obj) {
                 if (err) throw err;
-                mongoUtil.collection("verify").insertOne({ 'email': user.email, 'otp': otp, 'time': new Date() }, function (err, res) {
+                mongoUtil.collection("verify").insertOne({ 'email': user.email, 'otp': otp, 'time': new Date() }, function (err, result) {
                     if (err) throw err;
                     mongoUtil.collection("users").deleteMany({ 'email': user.email }, function (err, obj) {
                         if (err) throw err;
@@ -34,15 +34,15 @@ module.exports.registerUser = (req, res) => {
                                 secure: false,//true
                                 port: 25,//465
                                 auth: {
-                                    user: 'refer2career@gmail.com',
-                                    pass: 'refer2career@2020'
+                                    user: 'tusharpahuja510@gmail.com',
+                                    pass: '1357902468@Aa'
                                 }, tls: {
                                     rejectUnauthorized: false
                                 }
                             });
 
                             var mailOptions = {
-                                from: 'refer2career@gmail.com',
+                                from: 'tusharpahuja510@gmail.com',
                                 to: user.email,
                                 subject: 'Verification code for Refer2Career',
                                 html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'
@@ -65,9 +65,11 @@ module.exports.registerUser = (req, res) => {
 
 module.exports.verifyOTP = (req, res) => {
     const data = req.body;
+    console.log("yy");
     mongoUtil.collection("verify").findOne({ 'email': data.email }, function (err, result) {
         if (err) throw err;
         let date = new Date();
+        console.log(result);
         let time = result.time;
         let msDifference = date - time;
         let minutes = Math.floor(msDifference / 1000 / 60);
@@ -222,15 +224,15 @@ module.exports.insertOTP = (req, res) => {
                 secure: false,//true
                 port: 25,//465
                 auth: {
-                    user: 'refer2career@gmail.com',
-                    pass: 'refer2career@2020'
+                    user: 'tusharpahuja510@gmail.com',
+                    pass: '1357902468@Aa'
                 }, tls: {
                     rejectUnauthorized: false
                 }
             });
 
             var mailOptions = {
-                from: 'refer2career@gmail.com',
+                from: 'tusharpahuja510@gmail.com',
                 to: user.email,
 
                 subject: 'Verification code for Refer2Career',
@@ -253,6 +255,7 @@ module.exports.verify = (req, res) => {
     mongoUtil.collection("verify").findOne({ 'email': data.email }, function (err, result) {
         if (err) throw err;
         let date = new Date();
+        console.log(result);
         let time = result.time;
         let msDifference = date - time;
         let minutes = Math.floor(msDifference / 1000 / 60);
@@ -282,15 +285,15 @@ module.exports.sendMail = (req, res) => {
         secure: false,//true
         port: 465,//465
         auth: {
-            user: 'refer2career@gmail.com',
-            pass: 'refer2career@2020'
+            user: 'tusharpahuja510@gmail.com',
+            pass: '1357902468@Aa'
         }, tls: {
             rejectUnauthorized: false
         }
     });
 
     var mailOptions = {
-        from: 'refer2career@gmail.com',
+        from: 'tusharpahuja510@gmail.com',
         to: user,
         subject: subject,
         html: content
