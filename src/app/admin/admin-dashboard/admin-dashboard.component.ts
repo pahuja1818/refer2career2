@@ -33,8 +33,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   loggedOut() {
-    this.modalRef.hide();
-    window.localStorage.removeItem('id');
+    //this.modalRef.hide();
+    //window.localStorage.removeItem('id');
     console.log("logout called!");
     window.open('https://dukaan.tk/login', "_self");
     console.log("urllll");
