@@ -1,3 +1,21 @@
+Requirements-------------
+1. Node
+2. Angular
+3. Ionic
+
+How to Run?
+1. Clone the repository in local machine.
+2. Run "npm intsall" to install the required dependencies.
+3. Run "ng serve" to start the app on localhost on port 4200.
+4. Run "npm start" to start the server on port 8084.
+
+How to edit?
+ -Make your seperate branch and push there not in master!
+
+
+
+
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
