@@ -28,19 +28,19 @@ module.exports.registerUser = (req, res) => {
                         mongoUtil.collection("users").insertOne(user, function (err, res) {
                             if (err) throw err;
                             var smtpTransport = nodemailer.createTransport({
-                                service: 'gmail',//smtp.gmail.com  //in place of service use host...
-                                secure: false,//true
-                                port: 25,//465
+                                service: 'smtp.gmail.com',//smtp.gmail.com  //in place of service use host...
+                                secure: true,//true
+                                port: 465,//465
                                 auth: {
-                                    user: 'tusharpahuja824@gmail.com',
-                                    pass: '1357902468@Aa'
+                                    user: 'refer2careertest@gmail.com',
+                                    pass: 'sxlnrycexdgzdhda'
                                 }, tls: {
                                     rejectUnauthorized: false
                                 }
                             });
 
                             var mailOptions = {
-                                from: 'tusharpahuja824@gmail.com',
+                                from: 'refer2careertest@gmail.com',
                                 to: user.email,
                                 subject: 'Verification code for Insta Jobs',
                                 html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Insta jobs<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!'
