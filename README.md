@@ -5,7 +5,7 @@ Requirements-------------
 
 How to Run?
 1. Clone the repository in local machine.
-2. Run "npm intsall" to install the required dependencies.
+2. Run "npm install" to install the required dependencies.
 3. Run "ng serve" to start the app on localhost on port 4200.
 4. Run "npm start" to start the server on port 8084.
 

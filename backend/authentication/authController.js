@@ -31,18 +31,18 @@ module.exports.registerUser = (req, res) => {
                             if (err) throw err;
                             var smtpTransport = nodemailer.createTransport({
                                 service: 'gmail',//smtp.gmail.com  //in place of service use host...
-                                secure: false,//true
-                                port: 25,//465
+                                secure: true,//true
+                                port: 465,//465
                                 auth: {
-                                    user: 'tusharpahuja510@gmail.com',
-                                    pass: '1357902468@Aa'
+                                    user: 'refer2careertest@gmail.com',
+                                    pass: 'sxlnrycexdgzdhda'
                                 }, tls: {
                                     rejectUnauthorized: false
                                 }
                             });
 
                             var mailOptions = {
-                                from: 'tusharpahuja510@gmail.com',
+                                from: 'refer2careertest@gmail.com',
                                 to: user.email,
                                 subject: 'Verification code for Refer2Career',
                                 html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'
@@ -221,18 +221,18 @@ module.exports.insertOTP = (req, res) => {
             if (err) throw err;
             var smtpTransport = nodemailer.createTransport({
                 service: 'gmail',//smtp.gmail.com  //in place of service use host...
-                secure: false,//true
-                port: 25,//465
+                secure: true,//true
+                port: 465,//465
                 auth: {
-                    user: 'tusharpahuja510@gmail.com',
-                    pass: '1357902468@Aa'
+                    user: 'refer2careertest@gmail.com',
+                    pass: 'sxlnrycexdgzdhda'
                 }, tls: {
                     rejectUnauthorized: false
                 }
             });
 
             var mailOptions = {
-                from: 'tusharpahuja510@gmail.com',
+                from: 'refer2careertest@gmail.com',
                 to: user.email,
 
                 subject: 'Verification code for Refer2Career',
@@ -282,18 +282,18 @@ module.exports.sendMail = (req, res) => {
     let content = req.body.content;
     var smtpTransport = nodemailer.createTransport({
         service: 'gmail',//smtp.gmail.com  //in place of service use host...
-        secure: false,//true
+        secure: true,//true
         port: 465,//465
         auth: {
-            user: 'tusharpahuja510@gmail.com',
-            pass: '1357902468@Aa'
+            user: 'refer2careertest@gmail.com',
+            pass: 'sxlnrycexdgzdhda'
         }, tls: {
             rejectUnauthorized: false
         }
     });
 
     var mailOptions = {
-        from: 'tusharpahuja510@gmail.com',
+        from: 'refer2careertest@gmail.com',
         to: user,
         subject: subject,
         html: content
