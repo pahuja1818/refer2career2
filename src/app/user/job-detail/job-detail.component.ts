@@ -208,6 +208,8 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
   }
 
   applyJob() {
+    this.modalRef.hide();
+    this.isServiceRunning = true;
     const obj = {
       candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
       jobPostId: this.jobPost._id,
@@ -224,10 +226,10 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           if (pata.data) {
             this.toastService.showToast('Applied successfully!');
             this.jobPostService.getMyApplications();
-            this.modalRef.hide();
           }
         });
       }
+    this.isServiceRunning = false;
     });
   }
 
@@ -236,6 +238,9 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     // const file: any;
     this.referJobPostForm.markAllAsTouched();
     if (this.referJobPostForm.valid) {
+      this.modalService.hide();
+    this.isServiceRunning = true;
+
       const db: DbOperation = {
         collection: 'referedProfiles',
         query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
@@ -285,14 +290,13 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
                     });
                   }
                 });
-                this.modalService.hide();
               });
             }
           });
 
         }
         else { this.toastService.showToast('This profile is already refered for this job post!', 'bg-danger'); }
-
+        this.isServiceRunning = false;
       });
     }
   }
