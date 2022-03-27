@@ -1898,6 +1898,8 @@ let JobDetailComponent = class JobDetailComponent {
         this.modalService.show(template, { id: 0, class: 'min-overlay', ignoreBackdropClick: true, animated: true });
     }
     applyJob() {
+        this.modalRef.hide();
+        this.isServiceRunning = true;
         const obj = {
             candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
             jobPostId: this.jobPost._id,
@@ -1914,10 +1916,10 @@ let JobDetailComponent = class JobDetailComponent {
                     if (pata.data) {
                         this.toastService.showToast('Applied successfully!');
                         this.jobPostService.getMyApplications();
-                        this.modalRef.hide();
                     }
                 });
             }
+            this.isServiceRunning = false;
         });
     }
     referJobPost() {
@@ -1926,6 +1928,8 @@ let JobDetailComponent = class JobDetailComponent {
             // const file: any;
             this.referJobPostForm.markAllAsTouched();
             if (this.referJobPostForm.valid) {
+                this.modalService.hide();
+                this.isServiceRunning = true;
                 const db = {
                     collection: 'referedProfiles',
                     query: { email: this.referJobPostForm.get('email').value, jobId: this.jobPost.jobPostId, }
@@ -1974,7 +1978,6 @@ let JobDetailComponent = class JobDetailComponent {
                                             });
                                         }
                                     });
-                                    this.modalService.hide();
                                 });
                             }
                         }));
@@ -1982,6 +1985,7 @@ let JobDetailComponent = class JobDetailComponent {
                     else {
                         this.toastService.showToast('This profile is already refered for this job post!', 'bg-danger');
                     }
+                    this.isServiceRunning = false;
                 }));
             }
         });

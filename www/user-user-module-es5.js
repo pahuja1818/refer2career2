@@ -3017,6 +3017,8 @@
           value: function applyJob() {
             var _this13 = this;
 
+            this.modalRef.hide();
+            this.isServiceRunning = true;
             var obj = {
               candidateId: JSON.parse(window.atob(window.localStorage.getItem('id')))._id,
               jobPostId: this.jobPost._id,
@@ -3035,11 +3037,11 @@
                     _this13.toastService.showToast('Applied successfully!');
 
                     _this13.jobPostService.getMyApplications();
-
-                    _this13.modalRef.hide();
                   }
                 });
               }
+
+              _this13.isServiceRunning = false;
             });
           }
         }, {
@@ -3057,6 +3059,8 @@
                       this.referJobPostForm.markAllAsTouched();
 
                       if (this.referJobPostForm.valid) {
+                        this.modalService.hide();
+                        this.isServiceRunning = true;
                         db = {
                           collection: 'referedProfiles',
                           query: {
@@ -3133,8 +3137,6 @@
                                                         });
                                                       }
                                                     });
-
-                                                    _this16.modalService.hide();
                                                   });
                                                 }
 
@@ -3153,6 +3155,9 @@
                                     this.toastService.showToast('This profile is already refered for this job post!', 'bg-danger');
 
                                   case 9:
+                                    this.isServiceRunning = false;
+
+                                  case 10:
                                   case "end":
                                     return _context2.stop();
                                 }
