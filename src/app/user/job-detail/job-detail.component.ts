@@ -229,7 +229,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
           }
         });
       }
-    this.isServiceRunning = false;
+      this.isServiceRunning = false;
     });
   }
 
@@ -239,7 +239,7 @@ export class JobDetailComponent implements OnInit, AfterViewInit {
     this.referJobPostForm.markAllAsTouched();
     if (this.referJobPostForm.valid) {
       this.modalService.hide();
-    this.isServiceRunning = true;
+      this.isServiceRunning = true;
 
       const db: DbOperation = {
         collection: 'referedProfiles',

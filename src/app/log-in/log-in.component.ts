@@ -369,6 +369,6 @@ export class LogInComponent implements OnInit {
   }
 
   navigate(){
-    
+
   }
 }

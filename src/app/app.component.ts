@@ -16,11 +16,6 @@ import { Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
 
-  prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']
-  }
-  role = UserRole;
-
   constructor(
     private location: Location,
     private platform: Platform,
@@ -52,6 +47,11 @@ export class AppComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     }
+  }
+  role = UserRole;
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
   initializeApp() {

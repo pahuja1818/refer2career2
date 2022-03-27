@@ -107,7 +107,7 @@ export class UsermenuComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
-    window.open("https://refer2career.com/login", "_self");
+    window.open('https://refer2career.com/login', '_self');
   }
 
   send() {

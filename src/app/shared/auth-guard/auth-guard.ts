@@ -16,14 +16,14 @@ export class RouteGuard implements CanActivate {
         Promise<boolean | import('@angular/router').UrlTree> {
         const role: UserRole = route.data.role;
         {
-            let id = window.localStorage.getItem("id");
+            const id = window.localStorage.getItem('id');
             let user: any;
             if (id) {
                 user = JSON.parse(window.atob(id));
             }
-            if (user != null && user != undefined) {
+            if (user !== null && user !== undefined) {
 
-                if (user.role == 0 || user.role == 1 || user.role == 2) {
+                if (user.role === 0 || user.role === 1 || user.role === 2) {
                     return true;
                 }
                 if (user.role === 0){

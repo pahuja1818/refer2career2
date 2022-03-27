@@ -32,7 +32,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
   toggle() {
@@ -51,7 +51,7 @@ export class UserDashboardComponent implements OnInit {
   loggedOut() {
     this.modalRef.hide();
     window.localStorage.removeItem('id');
-    window.open("https://refer2career.com/login", "_self");
+    window.open('https://refer2career.com/login', '_self');
   }
 
   send() {
