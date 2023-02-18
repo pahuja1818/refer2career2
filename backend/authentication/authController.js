@@ -34,15 +34,15 @@ module.exports.registerUser = (req, res) => {
                                 secure: true,//true
                                 port: 465,//465
                                 auth: {
-                                    user: 'refer2careertest@gmail.com',
-                                    pass: 'sxlnrycexdgzdhda'
+                                    user: 'tusharpahuja824@gmail.com',
+                                    pass: '1357902468@Aa'
                                 }, tls: {
                                     rejectUnauthorized: false
                                 }
                             });
-
+                            console.log(user)
                             var mailOptions = {
-                                from: 'refer2careertest@gmail.com',
+                                from: 'tusharpahuja824@gmail.com',
                                 to: user.email,
                                 subject: 'Verification code for Refer2Career',
                                 html: '<p>Hello ' + user.name + '</p><p>Here is your verification code for Refer2Career<br><br><h1>' + otp + '</h1><br><br><br><br><br><br>Thanks and Regards!<br><a style="color: blue;" href="https://refer2career.com">Refer2Career.com</a>'

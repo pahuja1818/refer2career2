@@ -24,6 +24,7 @@ export class LogInComponent implements OnInit {
 
   isSignUp = false;
   isLoginCard = true;
+  emaill= '';
 
   otp = '';
   isOTPCorrect = true;
@@ -110,6 +111,7 @@ export class LogInComponent implements OnInit {
 
   resendOTP() {
     this.isServiceRunning = true;
+    console.log(this.signupForm.get('email').value);
     this.authService.getOTP({ email: this.signupForm.get('email').value ? this.signupForm.get('email').value : this.email.value })
     .subscribe((data: any) => {
       if (data.data === true) {
@@ -196,6 +198,7 @@ export class LogInComponent implements OnInit {
   }
 
   registerCandidate() {
+    this.emaill = (this.signupForm.get('email').value).toLowerCase();
     this.signupForm.markAllAsTouched();
     if (this.signupForm.valid) {
       this.isServiceRunning = true;
@@ -247,9 +250,10 @@ export class LogInComponent implements OnInit {
 
   verifyOTP() {
     this.isServiceRunning = true;
-    if (this.isForgotPassOTP) {
+    console.log(this.isSignUp);
+    if (!this.isVerifyOTP || this.isForgotPassOTP) {
       const data = {
-        email: this.email.value,
+        email: this.signupForm.get('email').value ? this.signupForm.get('email').value : this.email.value,
         otp: this.otp
       };
       this.authService.verify(data).subscribe((res: any) => {
@@ -264,7 +268,7 @@ export class LogInComponent implements OnInit {
     }
     else {
       const data = {
-        email: this.signupForm.get('email').value,
+        email: this.emaill,
         otp: this.otp
       };
       this.authService.verifyOTP(data).then((res: any) => {
